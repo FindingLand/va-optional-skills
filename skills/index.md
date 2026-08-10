@@ -7,6 +7,19 @@ One folder per skill under `skills/<name>/`, holding `SKILL.md` plus any referen
 needs. Every `SKILL.md` carries a `Version` line near the top, and that line is what the sync
 compares against.
 
+### Your team
+
+Vera loads first in every session and routes work to the other three.
+
+| Folder | Version | Last update | What it does |
+|---|---|---|---|
+| `vera/` | 1.0 | 2026-08-10 | Your chief of staff. Loaded first every session. Keeps your skills in sync, holds the operating rules, routes work to the specialists, and runs your daily routines |
+| `tessa/` | 1.0 | 2026-08-10 | Tenant relations: leads, applications, leases, notices, renewals, move-out, listings, and tenant communication |
+| `fiona/` | 1.0 | 2026-08-10 | Finance and compliance: rent, late payments, deposits, proration, charges, insurance compliance, rent increases |
+| `owen/` | 1.0 | 2026-08-10 | Property operations: maintenance triage, vendor compliance and coordination, derived seasonal plans, turnovers, mail, access codes, document filing |
+
+### Everything else
+
 | Folder | Version | Last update | What it does |
 |---|---|---|---|
 | `landlord-inbox-handler/` | 1.0 | 2026-08-10 | Reads your email once a day, gives you a short priority brief, and drafts tenant and vendor replies you send yourself |
@@ -16,7 +29,6 @@ compares against.
 | `prompt-architect/` | 1.0 | 2026-08-10 | Turns a vague request into a reusable, properly structured prompt |
 | `landing-page-copywriter/` | 1.0 | 2026-08-10 | Writes conversion-focused copy for a landing or sales page |
 | `linkedin-writer/` | 1.0 | 2026-08-10 | Turns an idea, a story, or existing writing into a LinkedIn post |
-| `owen/` | 1.0 | 2026-08-10 | Property operations: maintenance triage, vendor compliance and coordination, derived seasonal plans, turnovers, mail, access codes, document filing |
 
 ## Notes for whoever maintains this repo
 

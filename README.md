@@ -17,7 +17,24 @@ anything you personalized, and anything that changed on both sides gets shown to
 
 We never see your repo. What you build on top of these templates is yours.
 
-## What is in here
+## Your team
+
+Four agents. You talk to Vera, and Vera decides who does the work.
+
+| Agent | What they handle |
+|---|---|
+| **Vera** | Your chief of staff. She loads first every session, keeps your skills up to date, runs your daily routines, and routes everything to the right specialist |
+| **Tessa** | Tenants: leads, applications, leases, notices, renewals, move-out, listings |
+| **Fiona** | Money: rent, arrears, deposits, proration, charges, insurance renewals, rent increases |
+| **Owen** | Properties: repairs, vendors, turnovers, seasonal work, mail, access codes, filing |
+
+Three things they all do, and they matter more than the feature list. **They read freely and ask
+before they write anything or contact anybody.** **They never tell you what the law is**, because it
+differs by state and city and it changes, so they read the rules you have recorded and tell you to
+confirm anything legal with your own attorney. And **they never assume where your data lives**, so
+you can rename a table later without breaking them.
+
+## The rest of the library
 
 | Skill | What it does for you |
 |---|---|

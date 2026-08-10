@@ -16,6 +16,7 @@ compares against.
 | `prompt-architect/` | 1.0 | 2026-08-10 | Turns a vague request into a reusable, properly structured prompt |
 | `landing-page-copywriter/` | 1.0 | 2026-08-10 | Writes conversion-focused copy for a landing or sales page |
 | `linkedin-writer/` | 1.0 | 2026-08-10 | Turns an idea, a story, or existing writing into a LinkedIn post |
+| `owen/` | 1.0 | 2026-08-10 | Property operations: maintenance triage, vendor compliance and coordination, derived seasonal plans, turnovers, mail, access codes, document filing |
 
 ## Notes for whoever maintains this repo
 

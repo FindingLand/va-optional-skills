@@ -7,20 +7,8 @@ One folder per skill under `skills/<name>/`, holding `SKILL.md` plus any referen
 needs. Every `SKILL.md` carries a `Version` line near the top, and that line is what the sync
 compares against.
 
-### Your team
-
-Vera loads first in every session and routes work to the other three.
-
-| Folder | Version | Last update | What it does |
-|---|---|---|---|
-| `vera/` | 2.0 | 2026-08-10 | Your chief of staff. Loaded first every session. Keeps your skills in sync, holds the operating rules, routes work to the specialists, and runs your daily routines |
-| `tessa/` | 2.0 | 2026-08-10 | Tenants: leads, applications, leases, notices, renewals, move-out, listings, and tenant communication |
-| `fiona/` | 2.0 | 2026-08-10 | Money: rent, arrears, deposits, proration, charges, insurance renewals, rent increases |
-| `owen/` | 2.0 | 2026-08-10 | Properties: maintenance triage, vendor compliance and coordination, seasonal plans derived from your own climate and equipment, turnovers, mail, access codes, filing |
-
-All four carry the same house rules block from `reference/house-rules.md`, unchanged. If that block
-needs to change, it changes in the reference file and in all four agents in the same commit, never in
-one of them.
+> **The four agents are withdrawn pending rework.** Two independent reviews, neither cleared them.
+> Their history is in git and they return when they pass.
 
 ### Everything else
 

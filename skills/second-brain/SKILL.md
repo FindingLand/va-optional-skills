@@ -720,7 +720,7 @@ EOF
 
 Trigger when: user says "set up scheduled tasks," "automate my second brain," or said yes at the end of Flow 1A.
 
-Say: "Let's set up three automated tasks that run your AI Second Brain on autopilot. You'll need the Claude desktop app with Cowork and Scheduled Tasks enabled.
+Say: "Let's set up three automated tasks that run your AI Second Brain on autopilot. You'll need Claude running on your own computer, with access to your files.
 
 These tasks use capture files. today.md for daily drops and this-week.md for weekly notes. You jot things down during the day or week, and Claude files everything automatically.
 
@@ -859,8 +859,8 @@ One more thing: want me to create the auto-save script so GitHub syncs every 60 
 
 If yes, walk them through auto-save from references/setup-guide.md (Part 5B for Mac, Part 5C for PC).
 
-**Note on Scheduled Tasks vs. Claude Code Routines:**
-Cowork Scheduled Tasks run while your computer is awake and Claude Desktop is open. Claude Code Routines run in the cloud 24/7. For most Second Brain users: use Cowork Scheduled Tasks.
+**Note on scheduling, and it matters more than it looks:**
+Scheduled runs are capped per day by your Claude plan, and the cap is low enough that one schedule per job runs out fast. So do not create a schedule for each of these. **Add them as rows to your routines table instead**, and your assistant runs them as part of the one daily pass. One schedule, many jobs. A run on your own machine can reach your files; a run in the cloud cannot, so anything touching the vault belongs in a session on your computer.
 
 ---
 

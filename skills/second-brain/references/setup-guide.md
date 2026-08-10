@@ -45,7 +45,7 @@ No re-explaining. No uploading. Just continuity.
 
 - A Mac or PC (both supported -- auto-save setup differs slightly, both covered in this guide)
 - Obsidian (free at obsidian.md)
-- Claude Code access (via the Claude Cowork app OR Terminal -- see Part 2)
+- Claude Code access, either in the Claude desktop app or in a terminal (see Part 2)
 - GitHub Desktop (free at desktop.github.com) -- must be installed and logged in at least once so your credentials are cached
 - A free GitHub account at github.com
 - About 60 to 90 minutes for first-time setup
@@ -105,7 +105,7 @@ You have two ways to run Claude Code. Choose whichever feels most comfortable.
 
 ---
 
-### Option 1: Use the Claude Cowork App (Easier for Most People)
+### Option 1: Use the Claude desktop app (easier for most people)
 
 This is the most comfortable option if you are already using Claude in the browser or desktop app.
 
@@ -114,7 +114,7 @@ You do not need to open Terminal at all.
 **How to get started:**
 
 1. Open Claude at claude.ai or in the Claude desktop app
-2. Make sure you are in a **Cowork** session (Claude Code must be enabled -- you will see a file/folder icon or computer use indicator)
+2. Make sure Claude Code is enabled in that session (you will see a file/folder icon or computer use indicator)
 3. Tell Claude where your vault is by saying:
 
 *"My Obsidian vault is located at [paste your vault path here]. Please set up my Second Brain."*
@@ -129,7 +129,7 @@ Claude will navigate to your vault folder, scan what exists, and walk you throug
 
 If Claude says it cannot find the folder, double-check your path using the find command above and try again with the exact path it returns.
 
-If Cowork does not seem to have file access, check that Computer Use is enabled in your Claude settings.
+If Claude does not seem to have file access, check that Computer Use is enabled in your Claude settings.
 
 ---
 
@@ -465,8 +465,8 @@ launchctl load ~/Library/LaunchAgents/com.hae.secondbrain.autosave.plist
 
 ### Starting a Session
 
-**In the Cowork app:**
-Open a new Cowork session and say: "Open my Second Brain vault at [your path] and load my brain files."
+**In the Claude desktop app:**
+Open a new session and say: "Open my Second Brain vault at [your path] and load my brain files."
 
 **In Terminal:**
 ```bash
@@ -550,7 +550,7 @@ No more scrambling to remember where you left off.
 - [ ] Cancel Obsidian Sync if you have it (saves $8/month)
 - [ ] Create your vault and name it
 - [ ] Find and copy your exact vault path
-- [ ] Choose your launch method: Cowork app OR Terminal
+- [ ] Choose your launch method: the Claude desktop app or a terminal
 - [ ] Tell Claude your vault path and say "Set up my Second Brain"
 - [ ] Let Claude create your files (Path A) OR create them manually first (Path B)
 - [ ] Connect your vault to a private GitHub repository

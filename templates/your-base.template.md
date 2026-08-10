@@ -1,6 +1,6 @@
 # Your base
 
-**Version: 4.0 - 2026-08-10**
+**Version: 4.1 - 2026-08-10**
 
 **Vera writes this file into your own repo and keeps it current. You never fill it in by hand,
 though you can correct anything she gets wrong.**
@@ -36,6 +36,8 @@ holds the truth when two look similar, what a status value means, or a conventio
 
 | Note | |
 |---|---|
+| Which table holds your routines | |
+| Which table holds your tasks | |
 | Your timezone | |
 | Your currency | |
 | How you prorate a partial month | |

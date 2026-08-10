@@ -7,8 +7,8 @@ Two files outside `skills/` are part of the system and are versioned the same wa
 
 | File | Version | What it is |
 |---|---|---|
-| `reference/how-we-work.md` | 4.0 | **The rulebook. The only copy.** Vera reads it every session; the specialists carry a five-line floor from it and nothing else |
-| `templates/your-base.template.md` | 4.0 | The empty snapshot Vera copies into your own repo and fills in from your base |
+| `reference/how-we-work.md` | 4.1 | **The rulebook. The only copy.** Vera reads it every session; the specialists carry a five-line floor from it and nothing else |
+| `templates/your-base.template.md` | 4.1 | The empty snapshot Vera copies into your own repo and fills in from your base |
 
 ## Your team
 
@@ -16,10 +16,10 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.0 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
-| `tessa/` | 4.0 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
-| `fiona/` | 4.0 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
-| `owen/` | 4.0 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |
+| `vera/` | 4.1 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
+| `tessa/` | 4.1 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
+| `fiona/` | 4.1 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
+| `owen/` | 4.1 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |
 
 ## Everything else
 

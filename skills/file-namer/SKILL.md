@@ -93,12 +93,12 @@ Apps Script that does it for them, in place.
    b. Click into `Code.gs`, select all, delete, then **PASTE** the filled script (Ctrl/Cmd+V).
       PASTE, never type it: the editor auto-closes brackets/quotes and corrupts typed code.
    c. Save (Ctrl/Cmd+S). Confirm the function dropdown shows `organizeDrive`.
-   d. **Run directly to apply** (the script ships with `DRY_RUN = false`). Do NOT force a dry-run
+   d. **Run directly to apply** (the script ships with `DRY_RUN = true`, so the first run always previews). After the preview, set `DRY_RUN = false` and run again to apply. Do NOT force a further dry-run
       preview: you already showed the plan in step 3, and the memory index in the next section is
       the real revert net. Offer a `DRY_RUN = true` preview only if the user asks or for a large,
       high-risk run.
    e. **The one user step:** approve Google's popup: *Review permissions -> their account ->
-      "Google hasn't verified this app" -> Advanced -> Go to <project> (unsafe) -> Allow.*
+      "Google hasn't verified this app". This appears because YOU are the author of this script and Google has not reviewed it. Read the screen, confirm the project is the one you just created, then Advanced -> Go to <project> -> Allow.*
    f. **After Allow, the script RUNS AUTOMATICALLY.** Do not click Run again or click it yourself.
       Wait a few seconds, then read the log until it says **Finished**.
    g. **Verify, and tell the user first WHY.** Say something like "I'll re-list the folder to

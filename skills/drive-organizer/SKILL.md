@@ -132,7 +132,7 @@ b. Click into the `Code.gs` editor, select all, delete, then **PASTE** the fille
    clipboard (Ctrl/Cmd+V). PASTE, never type it: the editor auto-closes brackets and quotes and
    will corrupt typed code.
 c. Save (Ctrl/Cmd+S). Confirm the function dropdown shows `organizeDrive`.
-d. **Run directly to apply** (the script ships with `DRY_RUN = false`). The skill does NOT force a
+d. **Run directly to apply** (the script ships with `DRY_RUN = true`, so the first run always previews). After the preview, set `DRY_RUN = false` and run again to apply. The skill does NOT force a second
    dry-run preview step, because the real safety net is the memory index in Step 6: it logs every
    old name, new name, file ID, and original parent, so any wrong move can be reverted. You already
    showed the plan table in Step 4 and the user approved it, so apply for real. Offer a `DRY_RUN =
@@ -140,7 +140,7 @@ d. **Run directly to apply** (the script ships with `DRY_RUN = false`). The skil
    worth the extra step.
 e. **The one user step:** the first Run shows Google's authorization popup (the script touches
    their Drive). Pause and give them the exact clicks: *Review permissions -> choose your Google
-   account -> "Google hasn't verified this app" -> Advanced -> Go to <project> (unsafe) ->
+   account -> "Google hasn't verified this app". This appears because YOU are the author of this script and Google has not reviewed it. Read the screen, confirm the project is the one you just created, then Advanced -> Go to <project> ->
    Allow.* It is safe; the app is their own script. Wait for them to finish.
 f. **After the user clicks Allow, the script RUNS AUTOMATICALLY** (the authorized run fires on
    its own). Do NOT wait for them to click Run again, and do not click it yourself. Give it a few

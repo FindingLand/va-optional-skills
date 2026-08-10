@@ -14,14 +14,14 @@ Write LinkedIn posts that build authority, drive engagement, and generate leads.
 
 When user wants to create LinkedIn content without source material:
 
-1. **Gather direction** — Ask 1-2 questions:
+1. **Gather direction**, Ask 1-2 questions:
    - "What's something surprising you've learned about your industry or audience?"
    - "Have you had a personal or client story with a powerful lesson?"
    - "What's a hot take or opinion you hold that not everyone agrees with?"
 
-2. **Confirm angle** — Before writing, confirm the post direction
+2. **Confirm angle**, Before writing, confirm the post direction
 
-3. **Write the post** — Follow Hook → Story → Lesson → CTA structure
+3. **Write the post**, Follow Hook → Story → Lesson → CTA structure
 
 4. **Deliver complete package:**
    - Finished post (ready to paste)
@@ -32,19 +32,19 @@ When user wants to create LinkedIn content without source material:
 
 When user provides transcript, email, article, or video:
 
-1. **Extract key elements** — Pull themes, personal stories, teachable moments
-2. **Convert to LinkedIn format** — Create 1-3 posts using Hook → Story → Lesson → CTA
-3. **Optimize for algorithm** — Apply formatting and length best practices
+1. **Extract key elements**, Pull themes, personal stories, teachable moments
+2. **Convert to LinkedIn format**, Create 1-3 posts using Hook → Story → Lesson → CTA
+3. **Optimize for algorithm**, Apply formatting and length best practices
 4. **Deliver complete package** for each post
 
 ### 3. Optimizing Existing Drafts
 
 When user has a draft post:
 
-1. **Strengthen the hook** — First 3 lines are critical (before "see more")
-2. **Improve structure** — Apply proper formatting for mobile readability
-3. **Tighten copy** — Target 800-1100 characters (max 1300)
-4. **Refine CTA** — Ensure it drives easy engagement
+1. **Strengthen the hook**, First 3 lines are critical (before "see more")
+2. **Improve structure**, Apply proper formatting for mobile readability
+3. **Tighten copy**, Target 800-1100 characters (max 1300)
+4. **Refine CTA**, Ensure it drives easy engagement
 
 ## Post Structure
 
@@ -76,7 +76,7 @@ CTA (Close): Question or invitation that prompts easy response
 - **Achievement + humility:** Result followed by the real story
 - **Intriguing question:** Opens a loop the reader wants closed
 
-**Critical:** First 3 lines must hook — they show before "see more."
+**Critical:** First 3 lines must hook, they show before "see more."
 
 ## CTA Strategies
 

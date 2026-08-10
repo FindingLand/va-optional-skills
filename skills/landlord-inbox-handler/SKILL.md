@@ -24,8 +24,7 @@ This skill uses YOUR email account through YOUR connector. Claude never holds yo
 1. **Connect your email provider.** In Claude's connector settings, connect **Gmail** (Google Workspace connector) or **Outlook / Microsoft 365** (Microsoft connector) and sign in through the provider's own login screen. Claude only needs read and draft-create access; do not grant send permissions if your provider offers granular scopes.
 2. **Tell Claude your setup** the first time you run the skill. It will ask for and remember:
    - Which mailbox to watch (your main inbox, or a dedicated folder/label like "Rentals" if you already filter).
-   - Your properties and units, in one line each (address + nickname), so tenant mail can be matched to the right property.
-   - Your tenants' names and emails if you have them handy (optional but makes matching much better).
+   - Where your properties, units and tenants are recorded, so mail can be matched to the right place. If Vera has written your base file, read that instead of keeping a second list here, because two lists drift apart.
    - Your preferred vendors (plumber, electrician, handyman) so vendor mail is recognized.
    - Your emergency line: what YOU consider drop-everything urgent (default list is in the Urgent category below).
 3. **Optional: a "Landlord" label/folder.** If you want Claude to also label triaged mail (Gmail labels or Outlook categories/folders), say so during setup. Labeling is off by default; the brief works without it.
@@ -55,16 +54,16 @@ Every new email in the watch window gets exactly one primary category. When two 
 
 ## Fair Housing / FCRA guardrail (non-negotiable)
 
-Rental housing decisions are regulated. This skill is an inbox assistant, not a screening or decision tool, and it draws a hard line:
+This skill is an inbox assistant, not a screening or decision tool, and it draws a hard line:
 
 - **Claude never makes, recommends, or implies a rental decision.** It will not say or draft anything about whether to accept, reject, renew, not renew, evict, or otherwise select or remove a tenant or applicant. Those decisions are yours, made outside this skill.
 - **Claude never evaluates or characterizes applicants or tenants as people.** No scoring, ranking, "good tenant / red flag" commentary, and no inferences about anyone's protected characteristics. Which characteristics are protected is a matter of federal, state and city law, and this skill does not state them: Vera holds that, and your attorney settles it.
 - **Prospect drafts contain only objective listing facts** - rent, deposit, availability, viewing logistics, application process - and the identical facts go to every prospect. Claude will not tailor availability or terms per person and will not draft steering language ("this neighborhood might not be a fit").
-- **Consumer reports are out of scope.** Claude does not order, summarize, or act on credit reports, background checks, or eviction histories through this skill, and does not draft adverse-action messages. If FCRA-covered material shows up in the inbox, the brief flags that the item exists and stops there.
-- **Reasonable-accommodation and discrimination-related messages are handled with care:** if a tenant raises a disability accommodation, service/assistance animal, or a discrimination concern, Claude flags it prominently in the brief, drafts at most a neutral "received, I will respond shortly" acknowledgment, and recommends you respond personally (and, when it is legally weighty, with advice from a local attorney).
+- **Reports about applicants are out of scope.** Claude does not order, summarize, or act on credit reports, background checks, or eviction histories here, and does not draft the message that communicates a decision resting on one. If such material shows up, the brief flags that it exists and stops. Ask Vera, and your attorney, what that message has to contain.
+- **Reasonable-accommodation and discrimination-related messages are handled with care:** if a tenant raises a disability accommodation, service/assistance animal, or a discrimination concern, Claude flags it prominently in the brief, drafts at most a neutral "received, I will respond shortly" acknowledgment, and recommends you respond personally, with your attorney where it matters.
 - If you ask for something that crosses these lines, Claude declines that part, explains why in one sentence, and completes the rest of the task.
 
-None of this is legal advice; landlord-tenant law is local. The guardrail exists so this skill never becomes the reason you have a problem.
+None of this is legal advice. This skill never states what the law requires: ask Vera, who reads what you have recorded, and confirm anything that matters with your own attorney.
 
 ---
 
@@ -133,7 +132,7 @@ separate schedule for each job you will run out within a week.
 3. Choose where the brief lands: the run itself, which you read with coffee, or a draft addressed to you titled "Inbox Brief YYYY-MM-DD" that sits in Drafts unsent. Keep it to ONE delivery channel.
 4. Leave the row paused, run it manually once ("run my inbox brief now") to confirm the connector works and the categories match your mail, then set it active.
 
-**Nothing here ever sends.** Replies are drafted and left for you. That holds whether you run it by hand or as part of the daily pass, and it does not change if the routine row is later approved for outward sending, because these drafts are addressed to tenants and vendors and they are yours to read first.
+**Nothing here ever sends.** Replies are drafted and left for you. That holds whether you run it by hand or as part of the daily pass, and there is no setting anywhere that changes it. Nothing this system produces reaches a tenant or a vendor without you reading it first.
 
 **If you are not running routines yet:** say "run my inbox" each morning. The skill behaves identically and you lose nothing but the automation.
 

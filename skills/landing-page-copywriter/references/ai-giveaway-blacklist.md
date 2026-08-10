@@ -223,18 +223,18 @@ Hedging that weakens the message:
 
 - Excessive exclamation points!!!
 - Overuse of ellipses for "dramatic" effect...
-- Em-dashes used constantly—like this—in every sentence
+- Em-dashes used constantly, like this, in every sentence
 
 ---
 
 ## What to Do Instead
 
-1. **Be specific** — Replace "comprehensive solution" with what it actually does
-2. **Use concrete examples** — Instead of "transform your business," describe the actual change
-3. **Cut the setup** — Delete "In today's fast-paced world" and start with your point
-4. **Read it out loud** — If you'd never say it in conversation, don't write it
-5. **Ask "so what?"** — If a phrase could apply to any business, it's meaningless
-6. **Show, don't tell** — Replace "innovative" with the innovation itself
+1. **Be specific**, Replace "comprehensive solution" with what it actually does
+2. **Use concrete examples**, Instead of "transform your business," describe the actual change
+3. **Cut the setup**, Delete "In today's fast-paced world" and start with your point
+4. **Read it out loud**, If you'd never say it in conversation, don't write it
+5. **Ask "so what?"**, If a phrase could apply to any business, it's meaningless
+6. **Show, don't tell**, Replace "innovative" with the innovation itself
 
 ---
 

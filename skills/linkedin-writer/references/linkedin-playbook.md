@@ -199,4 +199,4 @@ LinkedIn posts can become:
 - Podcast talking points
 - Social proof for sales pages
 
-And vice versa — repurpose your other content into LinkedIn posts.
+And vice versa, repurpose your other content into LinkedIn posts.

@@ -73,7 +73,7 @@ Before finalizing:
 - [ ] No competing links or distractions
 - [ ] Language matches audience's own words
 
-Consult `references/ai-giveaway-blacklist.md` — never use banned words/phrases.
+Consult `references/ai-giveaway-blacklist.md`, never use banned words/phrases.
 
 ## Page Types
 

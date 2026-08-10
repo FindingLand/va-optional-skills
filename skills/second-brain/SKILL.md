@@ -10,7 +10,7 @@ description: >
   file management. Trigger when anyone says "AI Second Brain," "Second Brain," "brain update," "set up my second
   brain," "weekly update," "add to my story bank," "add to best content," "run end of
   session," "update my brain files," "brain check-in," "check my brain files," "ingest this,"
-  "set up scheduled tasks," "automate my second brain," or any time a session opens and
+  "set up scheduled tasks," "automate my second brain," or when asked. Vera loads first in every session, so this skill loads after her, when
   CLAUDE.md is present in the current directory.
 ---
 # AI Second Brain Skill
@@ -231,9 +231,9 @@ cat > log.md << 'EOF'
 Append-only. One entry per ingest, query, or lint pass.
 
 Format:
-- [INGEST] YYYY-MM-DD — source title — pages touched
-- [QUERY] YYYY-MM-DD — question — answer saved to
-- [LINT] YYYY-MM-DD — issues found/fixed
+- [INGEST] YYYY-MM-DD, source title, pages touched
+- [QUERY] YYYY-MM-DD, question, answer saved to
+- [LINT] YYYY-MM-DD, issues found/fixed
 
 ---
 EOF
@@ -674,7 +674,7 @@ If a topic deserves its own wiki page, create it and add it to index.md.
 
 ```bash
 cat >> log.md << 'EOF'
-[INGEST] YYYY-MM-DD — [source title] — pages touched: [list]
+[INGEST] YYYY-MM-DD, [source title], pages touched: [list]
 EOF
 
 git add -A && git commit -m "Ingest: [source title]" && git push origin main
@@ -710,7 +710,7 @@ Check for:
 Report findings. Fix what you can. Append to log.md:
 ```bash
 cat >> log.md << 'EOF'
-[LINT] YYYY-MM-DD — [X] issues found, [Y] fixed: [description]
+[LINT] YYYY-MM-DD, [X] issues found, [Y] fixed: [description]
 EOF
 ```
 
@@ -720,7 +720,9 @@ EOF
 
 Trigger when: user says "set up scheduled tasks," "automate my second brain," or said yes at the end of Flow 1A.
 
-Say: "Let's set up three automated tasks that run your AI Second Brain on autopilot. You'll need Claude running on your own computer, with access to your files.
+First, say this, because it changes what you are about to set up: "Scheduled runs are capped per day by your Claude plan, and one schedule per job runs out fast. So we will not make a schedule for each of these. We will add them as rows to your routines table, and your assistant runs them as part of the one daily pass."
+
+Then: "Let's set up three pieces of automatic housekeeping for your Second Brain. You'll need Claude running on your own computer, with access to your files."
 
 These tasks use capture files. today.md for daily drops and this-week.md for weekly notes. You jot things down during the day or week, and Claude files everything automatically.
 
@@ -902,7 +904,7 @@ Triggered when a URL is pasted or user says "ingest [source]."
 2. Extract key ideas, quotes, positioning insights, stories, competitor intel.
 3. Update 3-15 wiki pages touched by this source.
 4. Update index.md if a new wiki page was created.
-5. Append to log.md: [INGEST] YYYY-MM-DD — source title — pages touched: list
+5. Append to log.md: [INGEST] YYYY-MM-DD, source title, pages touched: list
 6. Auto-commit.
 
 Do not just summarize the source. Integrate it. The wiki should be smarter after every ingest.
@@ -914,14 +916,14 @@ Triggered when a question requires synthesizing across wiki pages.
 2. Read those pages.
 3. Synthesize with citations.
 4. If the answer is substantial, save as a new wiki page.
-5. Append to log.md: [QUERY] YYYY-MM-DD — question — saved to: file
+5. Append to log.md: [QUERY] YYYY-MM-DD, question, saved to: file
 
 ### LINT
 Triggered when user says "lint" or "health check."
 
 Check for contradictions, stale claims, orphan pages, missing cross-references,
 and missing top-level folders. Fix what you can.
-Log: [LINT] YYYY-MM-DD — X issues found, Y fixed.
+Log: [LINT] YYYY-MM-DD, X issues found, Y fixed.
 
 ## Session End
 

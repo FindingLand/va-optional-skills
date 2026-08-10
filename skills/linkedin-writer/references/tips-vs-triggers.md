@@ -90,11 +90,11 @@ Nobody wakes up thinking "I need 12 video modules." They wake up thinking "I nee
 
 ### The Bridge Framework
 
-1. **WHO** — Specific avatar with painful circumstances
-2. **BEFORE** — Painful present (visceral and specific)
-3. **AFTER** — Clear, measurable outcome
-4. **HOW** — The method (simple, not comprehensive)
-5. **WHEN** — Timeline that creates urgency
+1. **WHO**, Specific avatar with painful circumstances
+2. **BEFORE**, Painful present (visceral and specific)
+3. **AFTER**, Clear, measurable outcome
+4. **HOW**, The method (simple, not comprehensive)
+5. **WHEN**, Timeline that creates urgency
 
 ## The Specificity Principle
 
@@ -108,7 +108,7 @@ Vague triggers don't convert. Specific ones do.
 
 ## The Nervousness Test
 
-Good trigger content should make you slightly uncomfortable before publishing. If it feels too safe, too helpful, too nice — it's not a trigger.
+Good trigger content should make you slightly uncomfortable before publishing. If it feels too safe, too helpful, too nice, it's not a trigger.
 
 You should feel a small pit in your stomach thinking "is this too direct?" That's the sweet spot.
 

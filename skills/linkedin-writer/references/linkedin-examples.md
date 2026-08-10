@@ -101,7 +101,7 @@ But after two days of process mapping, we discovered their real issue: inconsist
 The hard truth about artificial intelligence in 2025:
 
 • AI amplifies your existing systems (good or bad) 
-• It can't fix broken processes—it will actually make them worse 
+• It can't fix broken processes, it will actually make them worse 
 • The ROI comes from asking better questions, not just implementing smarter answers
 
 The companies seeing 300%+ returns aren't starting with AI capabilities.
@@ -131,7 +131,7 @@ Not exactly the entrepreneurial success story you typically see on LinkedIn.
 
 After 12 years teaching high school English, I had naively assumed my educational expertise would translate immediately to business success.
 
-But there I was—highly educated, deeply passionate, and completely broke.
+But there I was, highly educated, deeply passionate, and completely broke.
 
 The turning point came when I finally admitted something crucial:
 
@@ -189,7 +189,7 @@ The role checked all the conventional boxes:
 
 What it didn't offer was alignment with my core values and strengths.
 
-This experience fundamentally changed how I approach career transitions—both for myself and the 300+ professionals I've coached since then.
+This experience fundamentally changed how I approach career transitions, both for myself and the 300+ professionals I've coached since then.
 
 True career satisfaction comes from the intersection of three key elements:
 • Strengths that energize rather than drain you 
@@ -217,9 +217,9 @@ What's one career decision you've made that seemed risky but ultimately proved v
 
 All high-converting posts share these elements:
 
-1. **Hooks that stop scrolling** — Surprising, counterintuitive, or vulnerable opening
-2. **Specific details** — Numbers, timeframes, dollar amounts, percentages
-3. **Story arc** — Situation → tension → resolution → lesson
-4. **Frameworks** — Actionable takeaways in digestible format (often 3 items)
-5. **CTAs that invite sharing** — Questions that prompt personal stories or opinions
-6. **Strategic hashtags** — 3 relevant, targeted tags
+1. **Hooks that stop scrolling**, Surprising, counterintuitive, or vulnerable opening
+2. **Specific details**, Numbers, timeframes, dollar amounts, percentages
+3. **Story arc**, Situation → tension → resolution → lesson
+4. **Frameworks**, Actionable takeaways in digestible format (often 3 items)
+5. **CTAs that invite sharing**, Questions that prompt personal stories or opinions
+6. **Strategic hashtags**, 3 relevant, targeted tags

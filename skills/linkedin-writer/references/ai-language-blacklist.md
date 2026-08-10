@@ -1,6 +1,6 @@
 # AI Language Blacklist
 
-Words and phrases that make Threads content sound generic, robotic, or inauthentic. Never use any of them — rewrite the sentence entirely.
+Words and phrases that make Threads content sound generic, robotic, or inauthentic. Never use any of them, rewrite the sentence entirely.
 
 ## Overused Connectors & Transitions
 
@@ -126,15 +126,15 @@ Words that sound impressive but say nothing:
 
 - Excessive exclamation points
 - Overuse of ellipses for "dramatic" effect...
-- Em-dash overuse (—)
+- Em-dash overuse (, )
 
 ## What to Do Instead
 
-1. **Be specific** — Replace "comprehensive solution" with what it actually does
-2. **Use concrete examples** — Instead of "transform your business," describe the actual change
-3. **Cut the setup** — Delete "In today's fast-paced world" and start with your point
-4. **Read it out loud** — If you'd never say it in conversation, don't write it
-5. **Ask "so what?"** — If a phrase could apply to any business, it's meaningless
-6. **Show, don't tell** — Replace "innovative" with the innovation itself
+1. **Be specific**, Replace "comprehensive solution" with what it actually does
+2. **Use concrete examples**, Instead of "transform your business," describe the actual change
+3. **Cut the setup**, Delete "In today's fast-paced world" and start with your point
+4. **Read it out loud**, If you'd never say it in conversation, don't write it
+5. **Ask "so what?"**, If a phrase could apply to any business, it's meaningless
+6. **Show, don't tell**, Replace "innovative" with the innovation itself
 
 *When in doubt: if it sounds like LinkedIn in 2019, kill it.*

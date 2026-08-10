@@ -46,7 +46,7 @@ People are 2-3x more motivated to avoid losses than pursue gains.
 Limited availability prompts quicker decisions.
 - "Only 20 spots available"
 - "$197 today, $497 tomorrow"
-- Only use when TRUE — fake scarcity destroys trust
+- Only use when TRUE, fake scarcity destroys trust
 
 ### 9. Fresh Starts
 Associating with new beginnings is motivating.
@@ -79,7 +79,7 @@ Questions provoke curiosity and encourage self-reflection.
 3. **Solution:** Present your offer as the relief
 
 Example:
-> Launching a course only to hear crickets on cart open — it's gut-wrenching. You pour weeks into creation, write the sales page, send the emails... and then nothing. I know that feeling. But what if your next launch had a waitlist before you even finished recording?
+> Launching a course only to hear crickets on cart open, it's gut-wrenching. You pour weeks into creation, write the sales page, send the emails... and then nothing. I know that feeling. But what if your next launch had a waitlist before you even finished recording?
 
 ### AIDA (Attention-Interest-Desire-Action)
 
@@ -103,7 +103,7 @@ Connect current state to desired state:
 
 Use the exact words your audience uses to describe their problems.
 
-If they say "I'm drowning in tech" — use that phrase, not "I lack an automation solution."
+If they say "I'm drowning in tech", use that phrase, not "I lack an automation solution."
 
 **How to gather VOC:**
 - Survey your audience
@@ -126,7 +126,7 @@ Anticipate hesitations and address them proactively.
 **How to address:**
 - Empathize first: "I know investing in another program feels risky..."
 - Counter with story/proof: "Let me share how Sarah recouped her investment in 2 weeks..."
-- Reframe: "Think you don't have time? Most of my busiest clients felt the same — until they realized this actually saves time..."
+- Reframe: "Think you don't have time? Most of my busiest clients felt the same, until they realized this actually saves time..."
 
 ---
 

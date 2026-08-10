@@ -114,21 +114,28 @@ Rules for the brief: urgent always first; every item names the property and pers
 
 ---
 
-## Daily cloud routine (how to schedule it)
+## Running this every morning
 
-The skill shines when it runs every morning without you asking. Set it up once:
+The skill shines when it runs every morning without you asking.
 
-**If your Claude has scheduled tasks / cloud routines** (Claude Code scheduled agents, Claude cloud "scheduled tasks", or your team's equivalent):
+**⛔ Do NOT create a scheduled task for this.** Scheduled runs are capped per day by your plan, and
+that budget is spent by the one schedule that runs everything. **Add a ROW to your routines table
+instead**, and Vera will run this as part of the daily pass. One schedule, many jobs. If you create a
+separate schedule for each job you will run out within a week.
 
-1. Create a schedule, e.g. every day at 7:30am your time. In Claude Code: use the `schedule` capability or ask Claude "schedule a daily task"; in other Claude surfaces use the scheduled-tasks feature in settings.
-2. Set the task prompt to exactly this (adjust the mailbox/time window if you customized setup):
+**What to put in the row:**
+
+1. Frequency daily, and a priority that puts it where you want it in the morning order.
+2. Set its instructions to exactly this (adjust the mailbox or time window if you customized setup):
 
    > Use the landlord-inbox-handler skill. Read my connected inbox for everything new since the last run (default: the past 24 hours), triage per the skill, create the reply drafts in my Drafts folder, and deliver the daily brief. Do not send anything. If there is at least one URGENT item, put URGENT and the property in the first line.
 
-3. Choose where the brief lands: the scheduled session itself (you open it with coffee), or email-to-self (Claude creates a draft addressed to you titled "Inbox Brief YYYY-MM-DD" that you can read in Drafts without sending), whichever your setup supports. Keep it to ONE delivery channel.
-4. Run it manually once first ("run my inbox brief now") to confirm the connector works and the categories match your mail, then turn the schedule on.
+3. Choose where the brief lands: the run itself, which you read with coffee, or a draft addressed to you titled "Inbox Brief YYYY-MM-DD" that sits in Drafts unsent. Keep it to ONE delivery channel.
+4. Leave the row paused, run it manually once ("run my inbox brief now") to confirm the connector works and the categories match your mail, then set it active.
 
-**If you have no scheduling feature:** make it a habit trigger instead. Say "run my inbox" each morning; the skill behaves identically. You lose nothing but the automation.
+**Nothing here ever sends.** Replies are drafted and left for you. That holds whether you run it by hand or as part of the daily pass, and it does not change if the routine row is later approved for outward sending, because these drafts are addressed to tenants and vendors and they are yours to read first.
+
+**If you are not running routines yet:** say "run my inbox" each morning. The skill behaves identically and you lose nothing but the automation.
 
 **Routine hygiene:**
 - One run per day is the sweet spot. Urgent items do not wait for the routine anyway once real-time triage exists (see roadmap below); until then, the daily run plus your phone's normal notifications cover it.

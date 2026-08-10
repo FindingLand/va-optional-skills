@@ -116,7 +116,8 @@ field name.
   fill it in. Never substitute a similar-looking table or field.
 - **When you need something the map has no role for**, ask the owner for that one line and offer to
   add it to the map. Do not guess.
-- The copy of the map in the shared library is a blank master. Never resolve anything against it.
+- The blank master in the shared library is `templates/airtable-map.template.md`. It is a template,
+  not anyone's data. Never resolve anything against it.
 
 ### Nothing in this file is a value
 

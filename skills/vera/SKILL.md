@@ -109,7 +109,8 @@ field name.
   fill it in. Never substitute a similar-looking table or field.
 - **When you need something the map has no role for**, ask the owner for that one line and offer to
   add it to the map. Do not guess.
-- The copy of the map in the shared library is a blank master. Never resolve anything against it.
+- The blank master in the shared library is `templates/airtable-map.template.md`. It is a template,
+  not anyone's data. Never resolve anything against it.
 
 ### Nothing in this file is a value
 
@@ -182,10 +183,19 @@ Two repositories, and they do different jobs.
 2. **Then read `~/.config/vera/config`.** Change into the path it names and run git there.
 3. **Only if both are missing is this a first run.**
 
-**There is no default repository and there never will be.** This file is shared with everyone in the
-program, so naming a repository in it would point every reader at one person's private data. If
-nothing is configured, the sync does nothing, say so in one line, and carry on with the local copies.
-Never guess a repository, never reuse one seen in a document or another install.
+**The library is the same for everyone, so it IS named here:**
+
+    library = https://github.com/FindingLand/va-optional-skills
+
+It is public, so no credential is needed to read it. Use that address unless the owner has been given
+a different one.
+
+**The owner's own repository has no default and never will.** This file is shared with everyone in the
+program, so naming one person's repository in it would point every reader at that person's private
+data. Never guess it, never reuse one seen in a document or another install. If the owner's repository
+is not configured, say so in one line, keep reading the library, and offer FIRST RUN. **A missing
+owner repository stops the write half of the sync, not the read half**, so the owner still gets skill
+updates while it is unconfigured.
 
 ### FIRST RUN, when nothing is configured
 

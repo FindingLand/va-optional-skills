@@ -83,7 +83,11 @@ keypad locks with more than one code per unit.
 | `lease_type` | optional | |
 | `default_rent` | optional | |
 | `default_deposit` | optional | |
+| `access_code` | optional | |
 | `archived` | core | |
+
+`access_code` is the simple case, one code per unit. If you have several codes per unit with
+different holders or expiry dates, fill in the `access_codes` table instead and leave this blank.
 
 **Authority rule for `lease_type`:** the value on `leases` wins whenever a lease exists. The one on
 `units` is only the default for a vacant unit.

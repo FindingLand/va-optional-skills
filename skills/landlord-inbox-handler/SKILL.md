@@ -1,0 +1,146 @@
+---
+name: landlord-inbox-handler
+description: "Read a self-managing landlord's email inbox and triage the landlord mail: produce a prioritized daily brief, draft replies for routine items (drafts only, never auto-send), and flag anything urgent. Covers tenant requests, maintenance reports, lease questions, payment and utility notices, and vendor mail. Trigger when the user says 'check my inbox', 'run my inbox', 'triage my email', 'daily brief', 'anything urgent in my email', 'handle my landlord mail', or when a scheduled daily routine invokes this skill. Works with Gmail or Outlook through the user's own email connector. Never sends email and never makes rental decisions about applicants or tenants."
+---
+
+# Landlord Inbox Handler
+
+**Version: 1.0 - Last Updated 2026-07-16**
+
+Your inbox is where your rental business actually happens: tenants report leaks, ask about their lease, vendors send quotes, banks and utilities send notices. This skill makes Claude your inbox first-responder. Once a day (or whenever you ask), Claude reads the new mail, sorts the landlord items from the noise, writes you a short prioritized brief, drafts replies for the routine stuff, and flags anything that cannot wait.
+
+**Three hard promises this skill keeps, always:**
+
+1. **Drafts only, never auto-send.** Every reply Claude writes lands in your Drafts folder or in the chat for you to review. You are the only one who ever hits Send.
+2. **No rental decisions.** Claude never decides, recommends, or implies who should get, keep, or lose a rental (see the Fair Housing / FCRA guardrail below).
+3. **Read and draft, nothing destructive.** Claude never deletes, archives, or forwards your mail unless you explicitly ask in the moment.
+
+---
+
+## Setup (once)
+
+This skill uses YOUR email account through YOUR connector. Claude never holds your password.
+
+1. **Connect your email provider.** In Claude's connector settings, connect **Gmail** (Google Workspace connector) or **Outlook / Microsoft 365** (Microsoft connector) and sign in through the provider's own login screen. Claude only needs read and draft-create access; do not grant send permissions if your provider offers granular scopes.
+2. **Tell Claude your setup** the first time you run the skill. It will ask for and remember:
+   - Which mailbox to watch (your main inbox, or a dedicated folder/label like "Rentals" if you already filter).
+   - Your properties and units, in one line each (address + nickname), so tenant mail can be matched to the right property.
+   - Your tenants' names and emails if you have them handy (optional but makes matching much better).
+   - Your preferred vendors (plumber, electrician, handyman) so vendor mail is recognized.
+   - Your emergency line: what YOU consider drop-everything urgent (default list is in the Urgent category below).
+3. **Optional: a "Landlord" label/folder.** If you want Claude to also label triaged mail (Gmail labels or Outlook categories/folders), say so during setup. Labeling is off by default; the brief works without it.
+
+No properties list yet? The skill still works. Claude will infer property context from the emails themselves and ask you when it cannot tell.
+
+---
+
+## Triage categories and rules
+
+Every new email in the watch window gets exactly one primary category. When two could apply, the higher row in this table wins (it is ordered by priority).
+
+| # | Category | What belongs here | What Claude does |
+|---|----------|-------------------|------------------|
+| 1 | **URGENT - flag now** | Anything threatening safety, habitability, or the property: active leaks or flooding, no heat in winter / no AC in extreme heat, no hot water, gas smell, electrical hazard, break-in or lock failure, fire, sewage backup. Also: any legal service (court notice, attorney letter, government/code-enforcement notice) and any tenant message that reads as an emergency even if vaguely worded. | Top of the brief, bolded, with the one next action. NO draft that could delay action ("we'll look into it"); instead a short acknowledgment draft that tells the tenant help is being arranged, plus a suggested vendor to call from your list. When in doubt between urgent and routine, choose urgent. |
+| 2 | **Maintenance - routine** | Repair requests that are real but not emergencies: dripping faucet, appliance acting up, pest sighting, door sticking, light fixture out. | Draft an acknowledgment to the tenant (received, what happens next, asks for photos/access windows if missing) and, if you have a matching vendor, a separate draft to the vendor requesting availability and a quote. Both drafts, you send. |
+| 3 | **Tenant requests - non-maintenance** | Anything a tenant asks that is not a repair: guest or parking questions, adding an occupant or pet, early move-out or transfer asks, complaint about a neighbor, request for a document copy. | Summarize the ask in the brief. Draft a reply ONLY if the answer is factual and already established (in the lease, in your stated policies, or in something you told Claude before). If the answer requires a decision you have not made, the brief presents the question to YOU with the relevant lease/policy language if known - no draft that commits you. |
+| 4 | **Lease questions** | Renewal timing, notice periods, security deposit questions, lease term clarifications, requests to review or sign documents. | Brief item with the key dates pulled from the email. Draft a reply only for pure factual questions where you have given Claude the answer (e.g. your standard notice period). Anything about CHANGING lease terms, rent amount, or renewal decisions goes to you undrafted - those are your calls. |
+| 5 | **Payment and money notices** | Rent received/failed notices from your payment platform, tenant messages about paying late, bank and mortgage notices, utility bills, insurance notices, tax documents. | Brief item with the amount and due date extracted. For a tenant writing about a late payment: a neutral acknowledgment draft that confirms receipt of their message and states you will follow up - never a draft that waives, threatens, or negotiates. Platform/bank/utility notices are summarized only (no reply needed). |
+| 6 | **Vendor mail** | Quotes, invoices, scheduling confirmations, follow-ups from contractors and service companies. | Brief item with the number that matters (quote amount, invoice total, appointment time). Draft simple logistics replies (confirm a time, request an itemized quote, ask for COI/W-9). Approving a quote or paying an invoice is always yours - Claude drafts the acceptance only after you say yes in the brief conversation. |
+| 7 | **Prospective tenants / listing inquiries** | Someone asking about an advertised unit: availability, viewing, application questions. | Brief item only, plus (if you have given Claude your listing facts) a draft that shares ONLY objective listing information: rent, deposit, availability date, viewing process, how to apply. See the Fair Housing guardrail - these drafts never comment on the person, never pre-screen, never discourage or encourage anyone. |
+| 8 | **Everything else** | Newsletters, promotions, personal mail, anything not landlord business. | One collapsed line at the bottom of the brief ("14 other emails, nothing landlord-related") unless you asked Claude to handle your whole inbox. |
+
+**Matching rules:** match sender addresses against your tenant/vendor lists first, then property mentions in the subject/body, then context. If Claude cannot tell which property or tenant an email belongs to, it says so in the brief and asks - it never guesses silently.
+
+---
+
+## Fair Housing / FCRA guardrail (non-negotiable)
+
+Rental housing decisions are regulated. This skill is an inbox assistant, not a screening or decision tool, and it draws a hard line:
+
+- **Claude never makes, recommends, or implies a rental decision.** It will not say or draft anything about whether to accept, reject, renew, not renew, evict, or otherwise select or remove a tenant or applicant. Those decisions are yours, made outside this skill.
+- **Claude never evaluates or characterizes applicants or tenants as people.** No scoring, ranking, "good tenant / red flag" commentary, and no inferences about anyone's protected characteristics (race, color, religion, national origin, sex, familial status, disability, and any additional classes protected in your state or city).
+- **Prospect drafts contain only objective listing facts** - rent, deposit, availability, viewing logistics, application process - and the identical facts go to every prospect. Claude will not tailor availability or terms per person and will not draft steering language ("this neighborhood might not be a fit").
+- **Consumer reports are out of scope.** Claude does not order, summarize, or act on credit reports, background checks, or eviction histories through this skill, and does not draft adverse-action messages. If FCRA-covered material shows up in the inbox, the brief flags that the item exists and stops there.
+- **Reasonable-accommodation and discrimination-related messages are handled with care:** if a tenant raises a disability accommodation, service/assistance animal, or a discrimination concern, Claude flags it prominently in the brief, drafts at most a neutral "received, I will respond shortly" acknowledgment, and recommends you respond personally (and, when it is legally weighty, with advice from a local attorney).
+- If you ask for something that crosses these lines, Claude declines that part, explains why in one sentence, and completes the rest of the task.
+
+None of this is legal advice; landlord-tenant law is local. The guardrail exists so this skill never becomes the reason you have a problem.
+
+---
+
+## Draft-tone rules
+
+Every draft Claude writes follows these:
+
+1. **Sound like a professional landlord, not a bot.** Warm, plain English, short sentences. No corporate filler ("per my last email"), no legalese unless quoting the lease.
+2. **First person, your voice.** Drafts are written as you. If you have a preferred sign-off, Claude uses it; otherwise drafts end on the last content line and you add your own signature.
+3. **Acknowledge, state the next step, give a time expectation you control.** The skeleton of almost every tenant draft: "Got your message about X. Here's what happens next: Y. You'll hear from me/the plumber by Z." Claude only writes a time expectation you have approved as standard.
+4. **Never commit money, terms, or decisions.** No draft agrees to a price, waives a fee, changes a lease term, or promises an outcome unless you already made that decision in the conversation.
+5. **One topic per draft.** If a tenant email raises three issues, the draft addresses all three briefly or Claude tells you it split them - but it never leaves an issue silently unanswered.
+6. **Empathy where it belongs.** Repairs are disruptions in someone's home. A line of acknowledgment ("sorry you're dealing with this") costs nothing and de-escalates.
+7. **No em dashes. No jargon.** And nothing in a draft you would not want read aloud in small-claims court.
+
+---
+
+## The daily brief (output format)
+
+The brief is one message, scannable in under a minute:
+
+```
+INBOX BRIEF - Tue Jul 16 - 9 landlord emails since yesterday
+
+URGENT (1)
+1. [123 Main, Unit 2 - Dana R.] Water heater leaking into closet, sent 7:42am.
+   -> Draft ack ready. Suggest calling Reyes Plumbing (your water-heater vendor). Say "approve 1" to keep the ack draft ready in your Drafts.
+
+NEEDS YOUR DECISION (2)
+2. [456 Oak - Marcus T.] Asks to add a roommate to the lease. Lease sec. 14 requires your written approval. Your call - want me to draft a yes-with-application reply or a follow-up question?
+3. [Vendor - ACME Roofing] Quote came in: $2,850 for the flat-roof patch. Approve, negotiate, or get a second quote?
+
+HANDLED - DRAFTS WAITING (3)
+4. [123 Main, Unit 1 - Priya S.] Dishwasher not draining -> tenant ack draft + availability request to Reyes Plumbing.
+5. [789 Pine - prospect] Viewing request -> listing-facts reply drafted.
+6. [456 Oak - Marcus T.] Asked for a copy of his lease -> reply drafted pointing to the attached copy (attach before sending).
+
+FYI - NO ACTION (3)
+7. Rent received: 123 Main Unit 1, $1,650 (RentRedi).
+8. City water bill, 456 Oak: $118.40 due Aug 1.
+9. Insurance renewal notice, policy ending Sep 30 - flagging again 30 days out.
+
+(11 other emails, nothing landlord-related.)
+```
+
+Rules for the brief: urgent always first; every item names the property and person; every draft is announced, never silently created; "needs your decision" items ask a clear either/or question; money items always show the amount and date. After the brief, you reply in plain English ("approve 1 and 4, hold 5, get a second roof quote") and Claude executes - still creating drafts, never sending.
+
+---
+
+## Daily cloud routine (how to schedule it)
+
+The skill shines when it runs every morning without you asking. Set it up once:
+
+**If your Claude has scheduled tasks / cloud routines** (Claude Code scheduled agents, Claude cloud "scheduled tasks", or your team's equivalent):
+
+1. Create a schedule, e.g. every day at 7:30am your time. In Claude Code: use the `schedule` capability or ask Claude "schedule a daily task"; in other Claude surfaces use the scheduled-tasks feature in settings.
+2. Set the task prompt to exactly this (adjust the mailbox/time window if you customized setup):
+
+   > Use the landlord-inbox-handler skill. Read my connected inbox for everything new since the last run (default: the past 24 hours), triage per the skill, create the reply drafts in my Drafts folder, and deliver the daily brief. Do not send anything. If there is at least one URGENT item, put URGENT and the property in the first line.
+
+3. Choose where the brief lands: the scheduled session itself (you open it with coffee), or email-to-self (Claude creates a draft addressed to you titled "Inbox Brief YYYY-MM-DD" that you can read in Drafts without sending), whichever your setup supports. Keep it to ONE delivery channel.
+4. Run it manually once first ("run my inbox brief now") to confirm the connector works and the categories match your mail, then turn the schedule on.
+
+**If you have no scheduling feature:** make it a habit trigger instead. Say "run my inbox" each morning; the skill behaves identically. You lose nothing but the automation.
+
+**Routine hygiene:**
+- One run per day is the sweet spot. Urgent items do not wait for the routine anyway once real-time triage exists (see roadmap below); until then, the daily run plus your phone's normal notifications cover it.
+- The routine must run with the SAME connector permissions as an interactive session: read + create-draft, no send.
+- If a run finds zero landlord mail, the brief is one line ("Nothing today - 6 emails, none landlord-related"). No news is a valid brief.
+
+---
+
+## What this skill deliberately does NOT do (v1)
+
+- **No sending.** Not even "safe" ones. Version 1 has no auto-send and no send-after-timeout.
+- **No real-time monitoring.** It runs when scheduled or asked. Instant triage of incoming mail (n8n watching the mailbox) and instant pings (Slack/SMS "URGENT: leak at 123 Main") are the planned v2, built on the same categories and guardrails in this file.
+- **No tenant screening, no applications processing, no consumer reports** (guardrail above).
+- **No payment actions.** It reads money notices; it never pays, charges, or moves money.
+- **No calendar writes, no CRM writes.** Logging maintenance items into your property tracker is a natural v2 hook once this skill and your tracker are both in place.

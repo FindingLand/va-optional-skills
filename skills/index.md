@@ -7,16 +7,10 @@ One folder per skill under `skills/<name>/`, holding `SKILL.md` plus any referen
 needs. Every `SKILL.md` carries a `Version` line near the top, and that line is what the sync
 compares against.
 
-### Your team
-
-Vera loads first in every session and routes work to the other three.
-
-| Folder | Version | Last update | What it does |
-|---|---|---|---|
-| `vera/` | 1.0 | 2026-08-10 | Your chief of staff. Loaded first every session. Keeps your skills in sync, holds the operating rules, routes work to the specialists, and runs your daily routines |
-| `tessa/` | 1.0 | 2026-08-10 | Tenant relations: leads, applications, leases, notices, renewals, move-out, listings, and tenant communication |
-| `fiona/` | 1.0 | 2026-08-10 | Finance and compliance: rent, late payments, deposits, proration, charges, insurance compliance, rent increases |
-| `owen/` | 1.0 | 2026-08-10 | Property operations: maintenance triage, vendor compliance and coordination, derived seasonal plans, turnovers, mail, access codes, document filing |
+> **The four agents (Vera, Tessa, Fiona, Owen) are being rewritten and are deliberately not in this
+> repo yet.** A first draft was written and then failed an independent review on approval boundaries,
+> schema coverage and legal wording, so it was withdrawn rather than shipped. It returns once it
+> passes.
 
 ### Everything else
 

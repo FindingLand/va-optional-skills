@@ -13,8 +13,9 @@ description: >
   "set up scheduled tasks," "automate my second brain," or any time a session opens and
   CLAUDE.md is present in the current directory.
 ---
-
 # AI Second Brain Skill
+
+**Version: 1.0 - 2026-08-10**
 
 ## What This Skill Does
 

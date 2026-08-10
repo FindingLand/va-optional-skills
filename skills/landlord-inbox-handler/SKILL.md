@@ -5,7 +5,7 @@ description: "Read a self-managing landlord's email inbox and triage the landlor
 
 # Landlord Inbox Handler
 
-**Version: 1.0 - Last Updated 2026-07-16**
+**Version: 1.1 - 2026-08-10**
 
 Your inbox is where your rental business actually happens: tenants report leaks, ask about their lease, vendors send quotes, banks and utilities send notices. This skill makes Claude your inbox first-responder. Once a day (or whenever you ask), Claude reads the new mail, sorts the landlord items from the noise, writes you a short prioritized brief, drafts replies for the routine stuff, and flags anything that cannot wait.
 
@@ -58,7 +58,7 @@ Every new email in the watch window gets exactly one primary category. When two 
 Rental housing decisions are regulated. This skill is an inbox assistant, not a screening or decision tool, and it draws a hard line:
 
 - **Claude never makes, recommends, or implies a rental decision.** It will not say or draft anything about whether to accept, reject, renew, not renew, evict, or otherwise select or remove a tenant or applicant. Those decisions are yours, made outside this skill.
-- **Claude never evaluates or characterizes applicants or tenants as people.** No scoring, ranking, "good tenant / red flag" commentary, and no inferences about anyone's protected characteristics (race, color, religion, national origin, sex, familial status, disability, and any additional classes protected in your state or city).
+- **Claude never evaluates or characterizes applicants or tenants as people.** No scoring, ranking, "good tenant / red flag" commentary, and no inferences about anyone's protected characteristics. Which characteristics are protected is a matter of federal, state and city law, and this skill does not state them: Vera holds that, and your attorney settles it.
 - **Prospect drafts contain only objective listing facts** - rent, deposit, availability, viewing logistics, application process - and the identical facts go to every prospect. Claude will not tailor availability or terms per person and will not draft steering language ("this neighborhood might not be a fit").
 - **Consumer reports are out of scope.** Claude does not order, summarize, or act on credit reports, background checks, or eviction histories through this skill, and does not draft adverse-action messages. If FCRA-covered material shows up in the inbox, the brief flags that the item exists and stops there.
 - **Reasonable-accommodation and discrimination-related messages are handled with care:** if a tenant raises a disability accommodation, service/assistance animal, or a discrimination concern, Claude flags it prominently in the brief, drafts at most a neutral "received, I will respond shortly" acknowledgment, and recommends you respond personally (and, when it is legally weighty, with advice from a local attorney).

@@ -5,7 +5,7 @@ description: "One-time cleanup that takes ANY messy Google Drive folder and rebu
 
 # Drive Organizer (general purpose, any use case)
 
-**Version: 1.0 - July 14 2026**
+**Version: 1.0 - 2026-07-14**
 
 This is the big first cleanup for a Google Drive folder. Point it at a folder where files are
 dumped with names like `Scan_0423.pdf`, `raw file.xlsx`, or `final FINAL v2`, and it builds a

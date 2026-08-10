@@ -2,8 +2,9 @@
 name: landing-page-copywriter
 description: Write high-converting landing page copy for opt-in pages, sales pages, and lead magnets. Use when creating landing page headlines, subheadlines, body copy, CTAs, bullet points, or full page copy. Also use when optimizing existing landing pages for higher conversions, writing opt-in page copy, or creating sales page sections.
 ---
-
 # Landing Page Copywriter
+
+**Version: 1.0 - 2026-08-10**
 
 Write conversion-focused landing page copy that turns visitors into leads and buyers.
 

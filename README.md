@@ -17,10 +17,32 @@ anything you personalized, and anything that changed on both sides gets shown to
 
 We never see your repo. What you build on top of these templates is yours.
 
-> **The four agents are not in this library yet.** Vera, Tessa, Fiona and Owen were written, reviewed
-> twice by an independent reviewer, and withdrawn both times. They return when they pass.
+## Before you start
 
-## What is in here
+- **This is built for landlords in the United States.** Your state and city rules are read from
+  settings you fill in yourself rather than assumed, but the shape of the system and its vocabulary
+  are American. Elsewhere, most of it works and the legal parts will not.
+- **These agents never give legal advice**, and they will tell you to confirm anything legal with
+  your own attorney. City and county rules are a known gap: settings are recorded by state, so
+  anywhere with local rent, deposit or notice rules is not covered.
+- **Nothing is ever sent for you.** Every message to a tenant, applicant, vendor or agency is
+  prepared and held for you to read. That holds even when a routine is running overnight.
+- **You will need** a GitHub account and a token so your assistant can keep your own copies in sync,
+  an Airtable base for your data, and a Claude that can run commands on your machine. Your assistant
+  walks you through all of it.
+
+## Your team
+
+You talk to Vera. Vera decides who does the work.
+
+| Agent | Handles |
+|---|---|
+| **Vera** | Your chief of staff. Loads first every session, keeps your skills current, runs your daily pass, routes everything, and holds anything legal |
+| **Tessa** | Tenants: leads, applications, leases, notices, renewals, move-out, listings |
+| **Fiona** | Money: rent, arrears, deposits, proration, charges, insurance renewals |
+| **Owen** | Property: repairs, vendors, turnovers, seasonal work, mail, access codes, filing |
+
+## The rest of the library
 
 | Skill | What it does for you |
 |---|---|

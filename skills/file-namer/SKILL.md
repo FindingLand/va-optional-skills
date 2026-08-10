@@ -5,7 +5,7 @@ description: "Name, rename, audit, and file documents in Google Drive with total
 
 # File Namer (general purpose, any use case)
 
-**Version: 1.0 - July 14 2026**
+**Version: 1.0 - 2026-07-14**
 
 > ## ⛔ HARD RULE: renames and moves are ALWAYS executed via the Apps Script
 > The Google Drive connector CANNOT rename or move an existing file. The ONLY execution

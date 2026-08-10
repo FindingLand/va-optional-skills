@@ -2,8 +2,9 @@
 name: linkedin-writer
 description: Write high-performing LinkedIn posts optimized for reach, engagement, and lead generation. Use when creating LinkedIn content from scratch, repurposing long-form content (podcasts, emails, articles) into LinkedIn posts, or optimizing existing drafts. Handles hook writing, storytelling, CTAs, hashtag strategy, and algorithm optimization for coaches, course creators, and personal brand entrepreneurs.
 ---
-
 # LinkedIn Content Writer
+
+**Version: 1.0 - 2026-08-10**
 
 Write LinkedIn posts that build authority, drive engagement, and generate leads.
 

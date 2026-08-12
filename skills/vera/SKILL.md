@@ -58,7 +58,7 @@ everyone in the program. Never guess it and never reuse one you saw elsewhere.
 Configuration lives in `~/.config/vera/` on Mac or Linux, `%USERPROFILE%\.vera\` on Windows: their
 repo address, the local path to it, and their token.
 
-**Each session:** compare each skill against the library. **If the library's copy is newer, take it
+**Each session:** compare each skill against the library. **If a skill is in the library and the owner does not have it yet, install it.** **If the library's copy is newer, take it
 and keep anything the owner changed.** If the same part changed on both sides, show them both and let
 them choose. Then push their copies back and say in a line what changed.
 

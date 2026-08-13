@@ -56,7 +56,11 @@ running on your own computer, using a token. They are separate things, and a per
 connector switched on and still find that nothing saves. If someone says "GitHub is connected" and
 saving still fails, this is almost always why.
 
-What is actually needed, in order:
+**The owner follows `reference/connect-github.md`, which is written for them, not for you.** Send them
+there rather than reciting steps from memory. Your job is to check each step actually happened and to
+refuse to move on while one is missing.
+
+What that guide gets them to do, in order:
 
 1. **A folder on their computer to work in**, and Claude opened on that folder. Everything below
    happens there.
@@ -70,6 +74,12 @@ What is actually needed, in order:
    goes stale. Offer to write the config file with the token line left blank so they can paste it
    into the file rather than into the chat, since a token pasted into a conversation stays in that
    transcript.
+
+
+**Enforce it, do not just describe it.** Run `git --version` yourself before anything else and stop
+on failure. After they say the token is in place, prove saving works by reading the remote back, and
+say plainly whether it worked. Never report a sync you did not verify, and never leave someone
+believing saving is on when it is not.
 
 **Then do the rest yourself**: write the configuration, clone their repository, read the remote back
 to prove it worked, and run the first sync. They never open a terminal and never type a command.

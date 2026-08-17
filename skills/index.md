@@ -9,7 +9,7 @@ Two files outside `skills/` are part of the system and are versioned the same wa
 |---|---|---|
 | `reference/how-we-work.md` | 4.2 | **The rulebook. The only copy.** Vera reads it every session; the specialists carry a five-line floor from it and nothing else |
 | `templates/your-base.template.md` | 4.1 | The empty snapshot Vera copies into your own repo and fills in from your base |
-| `templates/repo-layout.template.md` | 1.0 | The standard folder layout and naming for your second brain. Vera copies it into your repo as `reference/repo-layout.md`; you may change it and she follows your copy |
+| `templates/repo-layout.template.md` | 1.1 | The standard folder layout and naming for your second brain. Vera copies it into your repo as `reference/repo-layout.md`; you may change it and she follows your copy |
 
 ## Your team
 
@@ -17,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.8 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
+| `vera/` | 4.9 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
 | `tessa/` | 4.1 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.1 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.1 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |
@@ -30,6 +30,7 @@ You talk to Vera. She loads first and hands work to the other three.
 | `drive-organizer/` | 1.0 | Turns a messy Google Drive into a clear structure, previewing before it moves anything |
 | `file-namer/` | 1.0 | Gives every document one consistent name and one correct home |
 | `second-brain/` | 1.0 | Builds a written memory of your business your assistant reads at the start of every session |
+| `daily-brain-feed/` | 1.0 | OPTIONAL. Feeds your Memory Vault every day from your emails and meeting transcripts, as one routine row. Vera offers it once; heavy on reading, so only for owners with many conversations |
 | `prompt-architect/` | 1.0 | Turns a vague request into a reusable, properly built prompt |
 | `landing-page-copywriter/` | 1.0 | Writes the words for a page that gets people to sign up or buy |
 | `linkedin-writer/` | 1.0 | Turns an idea or a story into a LinkedIn post |

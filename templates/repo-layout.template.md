@@ -1,6 +1,6 @@
 # How your second brain is organized
 
-**Version: 1.0 - 2026-08-17**
+**Version: 1.1 - 2026-08-17**
 
 **This is the standard layout. Vera set it up for you and follows it. It is yours: rename or add
 folders whenever you like, and edit this file to match. Vera reads THIS copy, in your repo, not the
@@ -25,6 +25,12 @@ puts it where this file says, or proposes a new place and writes it here.
 | `notes/` | Weekly reviews, meeting notes, ideas. The thinking that is not a rule yet. | `notes/2026-08-15_weekly-review.md` |
 | `reference/` | Maps and lookups Vera keeps for herself: where your data lives, this layout file. | `reference/your-base.md`, `reference/repo-layout.md` |
 | `log.md` (a file, at the top) | The running log. Vera appends a line whenever something worth remembering happened. You never edit it. | |
+
+The course calls this whole repo your **Memory Vault**. Same thing.
+
+If you also use the Second Brain skill (the wiki for your thinking and content), its folders `wiki/`,
+`sources/`, `stories/`, `my-content/` live right alongside these. There is only ever one `CLAUDE.md`,
+one `log.md` and one `decisions/` folder, shared by both.
 
 Your actual records, properties, tenants, leases, money, live in **Airtable**, not here. This repo
 holds how you think and how you work. Airtable holds what is true right now.

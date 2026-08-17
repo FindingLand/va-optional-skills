@@ -3,7 +3,7 @@
 **Give this file to Vera in your first chat. Drag it into the chat, or paste it in.**
 
 If you followed the Week 1 walkthrough, GitHub is already connected and Vera simply confirms it in one
-line. If something is not connected yet, she walks you through the steps below, one step at a time.
+line and pulls your Memory Vault onto your computer. If something is not connected yet, she walks you through the steps below, one step at a time.
 You never type a command. Vera does that part.
 
 You only need this file once.
@@ -55,13 +55,19 @@ steps for that one thing, and only that one.
 7. Click **Install** (or "Save").
 8. Go back to Claude Desktop.
 
-### Step 4. Open Claude on your Memory Vault
+### Step 4. Open Claude on your computer (Local)
 
-1. In Claude Desktop, in the **Code** tab, find the box where you choose a repository.
-2. Choose **second-brain**.
+1. In Claude Desktop, in the **Code** tab, choose **Local**.
+2. Click **Select folder** and pick the folder you made in pre-work (for example **My Claude Code
+   Work**). If you do not have one, make an empty folder anywhere and pick it.
 3. Type **Hey Vera** and press Enter.
 
-That is it. Vera checks the connection herself and tells you in one line whether saving is on.
+Vera brings your Memory Vault into that folder herself. **The first time, a GitHub window may pop
+up asking you to sign in: click "Sign in with your browser", then "Authorize", and come back.** That
+is all. She then tells you in one line whether saving is on.
+
+You start on Local for all of setup. Later, when you know what Cloud can and cannot do, you may switch
+to Cloud for everyday work.
 
 ---
 
@@ -95,8 +101,10 @@ Airtable token. Steps, one at a time:
 
 - **Vera says your Memory Vault is not connected.** Do Part A, Step 3 again. The most common miss is
   Step 6, the folder was not ticked when Claude was let in.
-- **Vera cannot see the repository.** Do Part A, Step 4 again and make sure **second-brain** is the
-  one chosen.
+- **A GitHub sign-in window popped up and you closed it.** Tell Vera "try again" and this time click
+  "Sign in with your browser", then "Authorize".
+- **Vera cannot find Git (Windows).** Install it from **https://git-scm.com/downloads/win**, click Next
+  through every screen, then fully quit Claude and open it again.
 - **You named your folder something else.** That is fine. Use that name wherever this guide says
   second-brain.
 - **Vera says Airtable is not connected.** Do Part B, Steps 1 to 3 again, and remember to fully quit
@@ -110,17 +118,22 @@ This file is the setup playbook and is kept out of your skill so your instructio
 lives at `https://raw.githubusercontent.com/FindingLand/va-optional-skills/main/download/vera-setup.md`
 and you can fetch it any time.
 
-**Check, do not lecture.** On a first session:
+**Check, do not lecture.** On a first session (Local, a folder on their computer):
 
-1. Run `git remote -v` and `git ls-remote --heads origin`. Both working means the Memory Vault is
-   connected.
-2. Prove saving: add one line to `log.md` (create it if missing), commit, push, then read the remote
-   back with `git ls-remote origin` and confirm the new commit is there. If the push landed on a
-   branch named `claude/...`, that still counts as saved. Say which branch.
-3. Say in ONE line whether saving is on or off.
-4. Then bring the team home (your skill says how): ask which repository is their Memory Vault, copy
-   every library skill into it under `.claude/skills/`, push, read back, and say it in two lines.
-5. Then Airtable: try the connector first. Only when the connector cannot do a specific thing you
+1. Run `git --version`. No version on Windows means Git for Windows is missing: send them to the
+   "cannot find Git" line above, then they quit and reopen Claude. Stop until it passes.
+2. Is the working folder already a clone of their Memory Vault? Run `git remote -v`. If not, ask
+   which repository is their vault (usually `second-brain`), then clone it into the working folder:
+   `git clone https://github.com/<user>/second-brain`. On Windows a GitHub sign-in window opens the
+   first time (Git Credential Manager): tell them, in one line, to click "Sign in with your browser"
+   and "Authorize". If git instead asks for a username and password in the output, that is the token
+   path in the last section: guide it, one step at a time.
+3. Prove saving: add one line to `log.md` (create it if missing), commit, push, then read the remote
+   back with `git ls-remote origin` and confirm the new commit is there.
+4. Say in ONE line whether saving is on or off.
+5. Then bring the team home (your skill says how): copy every library skill into the vault under
+   `.claude/skills/`, push, read back, and say it in two lines.
+6. Then Airtable: try the connector first. Only when the connector cannot do a specific thing you
    need do you walk them through the token steps in Part B, and you say which thing it could not do.
 
 **Only if a check fails**, walk them through the matching step above, in these plain words, ONE step at
@@ -128,8 +141,14 @@ a time. Give one numbered step, wait for them to say done, then give the next. N
 list, never explain why, never use the words repository, remote, clone, branch, commit or token unless
 they use them first. Say "your Memory Vault" for the repository.
 
-**Working locally on their own computer without the app connection:** git must be installed
-(`git --version`), and saving needs a fine-grained GitHub token for that one repository with Contents
-set to Read and write, stored in `~/.config/vera/` on Mac or `%USERPROFILE%\.vera\` on Windows. Offer
-to write that file with the token line blank so they paste the token into the file, not into the
-chat. This is the exception, not the normal path.
+**If they later switch to Cloud** (a session opened on the repo at claude.ai/code or in the Code tab):
+nothing to configure, the working folder IS the vault; a push may land on a `claude/...` branch, which
+still counts as saved. Say which branch.
+
+**Token path (only when git asks for a password, typically Mac):** a fine-grained GitHub token for
+that one repository with Contents set to Read and write, stored in `~/.config/vera/` on Mac or
+`%USERPROFILE%\.vera\` on Windows. Offer to write that file with the token line blank so they paste
+the token into the file, not into the chat. Baby steps: github.com, profile picture, Settings,
+Developer settings, Personal access tokens, Fine-grained tokens, Generate new token, name it vera,
+longest expiration, only select repositories, pick second-brain, Repository permissions, Contents,
+Read and write, Generate, copy it once.

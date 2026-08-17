@@ -69,8 +69,9 @@ That is it. Vera checks the connection herself and tells you in one line whether
 2. Create a base, or open the one you already use for your properties.
 3. Tell Vera: **"My Airtable is ready."**
 
-She checks whether the two small tables she needs are there, and offers to build them for you if not.
-You do not design anything.
+She checks whether the three small tables she needs are there (routines, tasks, skills) and builds
+them for you if not. Then she fills the skills table with your team, so you can see in Airtable every
+skill you have and what each one does. You do not design anything.
 
 ---
 

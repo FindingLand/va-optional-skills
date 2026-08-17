@@ -13,8 +13,9 @@ You only need this file once.
 ## What Vera checks first
 
 1. **Is GitHub connected?** That is where Vera saves your work so it is still there tomorrow.
-2. **Is your team in your folder?** On the first chat Vera copies Vera, Tessa, Fiona, Owen and the
-   tool skills from the course library into your own GitHub folder. From then on those copies are
+2. **Is your team in your folder?** Vera asks which GitHub folder is yours (you made it earlier in
+   the course), then copies Vera, Tessa, Fiona, Owen and the tool skills from the course library into
+   it. From then on those copies are
    yours: you customize them, and that is your second brain.
 3. **Is Airtable connected?** That is where your properties, leases and tasks live.
 
@@ -30,7 +31,9 @@ steps for that one thing, and only that one.
 1. Go to **https://github.com**.
 2. Click **Sign up** and create a free account. If you already have one, sign in.
 
-### Step 2. A private folder for your work (called a repository)
+### Step 2. Your private folder on GitHub (called a repository)
+
+**You made this earlier in the course. Skip to Step 3 if you have it.** If not:
 
 1. Sign in at **https://github.com**.
 2. Click the **+** in the top right corner.
@@ -95,8 +98,8 @@ and you can fetch it any time.
    back with `git ls-remote origin` and confirm the new commit is there. If the push landed on a
    branch named `claude/...`, that still counts as saved. Say which branch.
 3. Say in ONE line whether saving is on or off.
-4. Then bring the team home (your skill says how): copy every library skill into their repo under
-   `.claude/skills/`, push, read back, and say it in two lines. Only then move on to Airtable.
+4. Then bring the team home (your skill says how): ask which repository is theirs, copy every library
+   skill into it under `.claude/skills/`, push, read back, and say it in two lines. Only then move on to Airtable.
 
 **Only if a check fails**, walk them through the matching step above, in these plain words, ONE step at
 a time. Give one numbered step, wait for them to say done, then give the next. Never paste the whole

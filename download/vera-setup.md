@@ -13,10 +13,13 @@ You only need this file once.
 ## What Vera checks first
 
 1. **Is GitHub connected?** That is where Vera saves your work so it is still there tomorrow.
-2. **Is Airtable connected?** That is where your properties, leases and tasks live.
+2. **Is your team in your folder?** On the first chat Vera copies Vera, Tessa, Fiona, Owen and the
+   tool skills from the course library into your own GitHub folder. From then on those copies are
+   yours: you customize them, and that is your second brain.
+3. **Is Airtable connected?** That is where your properties, leases and tasks live.
 
-If both are fine, she says so and you start working. If one is not, she takes you through the steps
-for that one, and only that one.
+If all is fine, she says so and you start working. If something is not, she takes you through the
+steps for that one thing, and only that one.
 
 ---
 
@@ -91,7 +94,9 @@ and you can fetch it any time.
 2. Prove saving: add one line to `log.md` (create it if missing), commit, push, then read the remote
    back with `git ls-remote origin` and confirm the new commit is there. If the push landed on a
    branch named `claude/...`, that still counts as saved. Say which branch.
-3. Say in ONE line whether saving is on or off. Then move on.
+3. Say in ONE line whether saving is on or off.
+4. Then bring the team home (your skill says how): copy every library skill into their repo under
+   `.claude/skills/`, push, read back, and say it in two lines. Only then move on to Airtable.
 
 **Only if a check fails**, walk them through the matching step above, in these plain words, ONE step at
 a time. Give one numbered step, wait for them to say done, then give the next. Never paste the whole

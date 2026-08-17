@@ -1,140 +1,105 @@
 # Vera setup guide
 
-**Give this file to Vera at the start of your first session and she will run the setup with you.**
-Download it, then drag it into the chat, or paste it in. You only need it once. After that Vera works
-without it and comes back to it only if something needs re-checking.
+**Give this file to Vera in your first chat. Drag it into the chat, or paste it in.**
 
-If you are reading this yourself, everything here is written for you, not for a technician. You will
-not type a single command. Vera does that part.
+If you followed the video, GitHub is already connected and Vera will simply confirm it in one line.
+If something is not connected yet, she walks you through the steps below, one step at a time. You never
+type a command. Vera does that part.
 
----
-
-## What you are setting up, and why
-
-Four things, about twenty minutes total.
-
-1. **Git**, the tool that does the saving.
-2. **A repository**, a private folder of your own on GitHub where your work lives.
-3. **A token**, a password for that one folder so Vera can save into it.
-4. **Airtable**, where your properties, leases and tasks live.
-
-Without 1 to 3 Vera still works, she just forgets everything between sessions. Without 4 she has
-nowhere to read or write your actual business data. Neither is fatal on day one, and she will tell
-you which situation you are in rather than pretending.
-
-**⛔ One warning that saves an hour.** Claude has a GitHub setting of its own, under Settings and
-then Connectors. **That is not this, and switching it on does not help.** It lets Claude read code
-inside a chat. Saving your work is a different mechanism that runs on your own computer. People
-switch that on, see the word "Connected", and then find nothing ever saves. If that already happened
-to you, nothing is broken. Just do the steps below.
+You only need this file once.
 
 ---
 
-## Step 1. Git
+## What Vera checks first
 
-Git is what actually saves. Claude runs fine without it, which is precisely why this gets missed:
-everything looks healthy while nothing is being kept.
+1. **Is GitHub connected?** That is where Vera saves your work so it is still there tomorrow.
+2. **Is Airtable connected?** That is where your properties, leases and tasks live.
 
-**Check before installing.** Ask Vera:
-
-> Run `git --version` and tell me what it says.
-
-- A version number, like `git version 2.43.0`, means you are done. Go to Step 2.
-- `command not found` or `not recognized` means install it:
-  - **Windows:** get it from **https://git-scm.com/downloads/win**, run the installer, and click Next
-    through every screen. The defaults are right. Change nothing.
-  - **Mac:** open the Terminal app, type `git --version`, press Enter, and Mac offers to install the
-    developer tools. Click Install and wait.
-- **Close Claude completely and reopen it** after installing, or it will not see Git yet. Then ask
-  Vera to check the version again and confirm you get a number.
+If both are fine, she says so and you start working. If one is not, she takes you through the steps
+for that one, and only that one.
 
 ---
 
-## Step 2. Your repository
+## Part A. Connect GitHub (Vera guides you through this if needed)
+
+### Step 1. A GitHub account
+
+1. Go to **https://github.com**.
+2. Click **Sign up** and create a free account. If you already have one, sign in.
+
+### Step 2. A private folder for your work (called a repository)
 
 1. Sign in at **https://github.com**.
-2. Click **+** in the top right, then **New repository**.
-3. **Repository name:** `my-back-office` unless you prefer another.
-4. Choose **Private**. This is your business data.
-5. Tick **Add a README file**. A completely empty repository behaves oddly, and this avoids it.
-6. Click **Create repository**.
-7. **Copy the address from the browser bar**, like `https://github.com/yourname/my-back-office`.
+2. Click the **+** in the top right corner.
+3. Click **New repository**.
+4. In the name box type: **my-back-office**
+5. Click **Private**.
+6. Tick the box **Add a README file**.
+7. Click the green **Create repository** button.
+
+### Step 3. Let Claude into that folder
+
+1. Go to **https://claude.ai/code**.
+2. Click the button to **connect GitHub** (it may say "Connect GitHub" or "Install GitHub app").
+3. A GitHub page opens. Click **Install** (or "Install & Authorize").
+4. Choose **Only select repositories**.
+5. Pick **my-back-office** from the list.
+6. Click **Install** (or "Save").
+7. You are sent back to Claude. If not, go to **https://claude.ai/code** again.
+
+### Step 4. Open Claude on your folder
+
+1. At **https://claude.ai/code**, find the box where you choose a repository.
+2. Choose **my-back-office**.
+3. Type **Hey Vera** and press Enter.
+
+That is it. Vera checks the connection herself and tells you in one line whether saving is on.
 
 ---
 
-## Step 3. Your token
+## Part B. Connect Airtable
 
-A token is a password that works for this one repository and nothing else.
-
-1. Click your **profile picture**, top right, then **Settings**.
-2. At the very bottom of the left sidebar, click **Developer settings**.
-3. Click **Personal access tokens**, then **Fine-grained tokens**.
-4. Click **Generate new token**.
-5. Fill it in:
-   - **Token name:** `vera`
-   - **Expiration:** the longest offered. When it expires saving stops, so a long life saves you a
-     surprise months from now.
-   - **Resource owner:** your own account.
-   - **Repository access:** **Only select repositories**, then choose the one from Step 2.
-   - **Permissions:** open **Repository permissions**, find **Contents**, set it to **Read and
-     write**. That single line is the whole point of this step. Leave everything else alone.
-6. Click **Generate token**.
-7. **Copy it now.** It is shown once. Lose it and you simply make another, which costs nothing.
-
----
-
-## Step 4. Airtable
-
-Vera reads and writes your business data here.
-
-1. Create a free account at **https://airtable.com** if you do not have one.
+1. Go to **https://airtable.com** and create a free account, or sign in.
 2. Create a base, or open the one you already use for your properties.
-3. Tell Vera you have it. **She will check whether the two tables she needs exist, and offer to build
-   them for you if not.** One holds her recurring routines, the other holds tasks. You do not need to
-   design anything.
+3. Tell Vera: **"My Airtable is ready."**
 
-If your property data already lives somewhere else, say a rental platform, tell her that too. She
-would rather pull from where the data already is than have you retype it.
+She checks whether the two small tables she needs are there, and offers to build them for you if not.
+You do not design anything.
 
 ---
 
-## Step 5. Hand it over
+## If something does not work
 
-Open Claude on the folder you work in and say **Hey Vera**, then:
-
-> I want to set up saving. My repo is https://github.com/yourname/my-back-office
-
-She will ask where to put the token. **Prefer writing it into the file she offers over pasting it
-into the chat**, because anything typed in a conversation stays in that conversation.
-
-From there she does the rest: writes her own settings, copies the repository to your computer, reads
-it back to prove it worked, and saves for the first time.
-
-**You are finished when she tells you in one line that saving is on and what she just saved.** If she
-cannot confirm it, she will say so rather than pretend, and tell you which step to revisit.
-
----
-
-## When something does not work
-
-- **"It says GitHub is connected but nothing saves."** That is the Settings connector, not this. Do
-  Steps 1 to 3.
-- **"She cannot find Git."** Step 1, and remember to fully close and reopen Claude after installing.
-- **"The token is not allowed."** It is almost always missing **Contents: Read and write**, or it was
-  made for the wrong repository. Make a new one.
-- **"I lost the token."** Delete it on GitHub and generate another. Tokens are disposable.
-- **"I would rather not do any of this."** That is allowed. Vera works without it and will tell you
-  each session that saving is off.
+- **Vera says GitHub is not connected.** Do Part A, Step 3 again. The most common miss is Step 5,
+  the folder was not ticked when Claude was let in.
+- **Vera cannot see the repository.** Do Part A, Step 4 again and make sure **my-back-office** is
+  the one chosen.
+- **You made the folder with a different name.** That is fine. Use that name wherever this guide says
+  my-back-office.
 
 ---
 
 ## For Vera
 
-This file is the setup playbook and is deliberately kept out of your skill so your instructions stay
-short. It lives at
-`https://raw.githubusercontent.com/FindingLand/va-optional-skills/main/download/vera-setup.md`
-and you can fetch it again any time you need to re-check a step.
+This file is the setup playbook and is kept out of your skill so your instructions stay short. It
+lives at `https://raw.githubusercontent.com/FindingLand/va-optional-skills/main/download/vera-setup.md`
+and you can fetch it any time.
 
-Enforce it rather than describing it. Run `git --version` yourself before anything else and stop on
-failure. Never claim a sync you have not verified by reading the remote back. State plainly, in one
-line, whether saving is on or off before moving on to real work.
+**Check, do not lecture.** On a first session:
+
+1. Run `git remote -v` and `git ls-remote --heads origin`. Both working means GitHub is connected.
+2. Prove saving: add one line to `log.md` (create it if missing), commit, push, then read the remote
+   back with `git ls-remote origin` and confirm the new commit is there. If the push landed on a
+   branch named `claude/...`, that still counts as saved. Say which branch.
+3. Say in ONE line whether saving is on or off. Then move on.
+
+**Only if a check fails**, walk them through the matching step above, in these plain words, ONE step at
+a time. Give one numbered step, wait for them to say done, then give the next. Never paste the whole
+list, never explain why, never use the words repository, remote, clone, branch, commit or token unless
+they use them first. Say "your folder on GitHub" instead of "repository".
+
+**Working on their own computer instead of claude.ai/code:** git must be installed (`git --version`),
+and saving needs a fine-grained GitHub token for that one repository with Contents set to Read and
+write, stored in `~/.config/vera/` on Mac or `%USERPROFILE%\.vera\` on Windows. Offer to write that
+file with the token line blank so they paste the token into the file, not into the chat. This is the
+exception, not the normal path.

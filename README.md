@@ -15,9 +15,9 @@ Everything here is a template. You do not work in this repo. Your own assistant 
 - **Nothing is ever sent for you.** Every message to a tenant, applicant, contractor or agency is
   prepared and held for you to read. That holds even when a routine runs overnight, and there is no
   setting that changes it.
-- **You will need** a GitHub account and a token so your assistant can keep your own copies, an
-  Airtable base for your data, and Claude running on your own computer with access to your files. Your
-  assistant walks you through all of it.
+- **You will need** a GitHub account with one private repository connected to Claude (the course video
+  shows the clicks), and an Airtable base for your data. Vera checks both on your first chat and walks
+  you through anything missing, one step at a time.
 
 ## Your team
 

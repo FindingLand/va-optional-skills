@@ -1,6 +1,6 @@
 # How the agents work
 
-**Version: 4.1 - 2026-08-10**
+**Version: 4.2 - 2026-08-17**
 
 **The rules live here and nowhere else.** Vera reads this at the start of every session. Tessa, Fiona
 and Owen carry the five-line floor at the bottom and nothing more, so there is no second copy to drift.
@@ -87,6 +87,11 @@ period is a legal right or a lease term.
 Read `reference/your-base.md` in the owner's own repo before touching data. If something is not there,
 re-read the base and update the file. **If it genuinely does not exist, say so and stop rather than
 writing into the closest-looking alternative.**
+
+**Their repo is organized by `reference/repo-layout.md`, in their own repo.** It says which folder
+holds policies, procedures, templates, business facts, decisions and notes, and how files are named.
+The owner may change it; whatever it says is the rule. Every file an agent creates or moves goes
+where that file says, never somewhere convenient.
 
 ## 7. No numbers come from a skill file
 

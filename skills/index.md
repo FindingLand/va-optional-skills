@@ -7,8 +7,9 @@ Two files outside `skills/` are part of the system and are versioned the same wa
 
 | File | Version | What it is |
 |---|---|---|
-| `reference/how-we-work.md` | 4.1 | **The rulebook. The only copy.** Vera reads it every session; the specialists carry a five-line floor from it and nothing else |
+| `reference/how-we-work.md` | 4.2 | **The rulebook. The only copy.** Vera reads it every session; the specialists carry a five-line floor from it and nothing else |
 | `templates/your-base.template.md` | 4.1 | The empty snapshot Vera copies into your own repo and fills in from your base |
+| `templates/repo-layout.template.md` | 1.0 | The standard folder layout and naming for your second brain. Vera copies it into your repo as `reference/repo-layout.md`; you may change it and she follows your copy |
 
 ## Your team
 
@@ -16,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.6 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
+| `vera/` | 4.7 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
 | `tessa/` | 4.1 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.1 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.1 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |

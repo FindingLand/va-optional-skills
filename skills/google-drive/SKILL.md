@@ -5,7 +5,7 @@ description: "How this system works with Google Drive, and the rules that stop D
 
 # Google Drive
 
-**Version: 1.1 - 2026-08-19**
+**Version: 1.2 - 2026-08-19**
 
 This skill is the rules. The work itself lives in two other skills:
 
@@ -33,33 +33,34 @@ The same applies to the skills. If the owner does not yet have their own copies 
 and `file-namer`, they are relying on whatever happens to be loaded right now, which is exactly how
 inconsistent results appear.
 
-## 2. The Cloud-or-Local question, settled by testing rather than by belief
+## 2. What the connector can actually do, and the Cloud question that is still open
 
-**The connector renames and moves files and folders on its own, in one call, and it works the same in
-a Cloud session and a Local one. The dividing line is VOLUME, not Cloud versus Local.**
+**Load the `cloud-vs-local` skill for the general rule.** It holds the Cloud versus Local decision for
+every kind of job and it is the only place that rule lives. This section holds only the Drive-specific
+part.
 
-| Drive job | Where it runs |
-|---|---|
-| Search, read a file, list a folder, answer "where is X" | Cloud or Local, either is fine |
-| Create a folder or a document | Cloud or Local, either is fine |
-| **Rename a file or folder. Move a file or folder. One at a time or a handful** | **Cloud or Local, either is fine.** The connector does it directly |
-| **A whole-drive sweep: hundreds of files, recursive, one pass** | **Local**, because the Apps Script that does it in one run needs a browser and a permission grant |
+**MEASURED 2026-08-19, in a LOCAL session: the Drive connector renames AND moves files, and folders,
+on its own.** One call sets a new title and a new parent folder. **The file id and the share link
+survive**, so nothing pointing at the item breaks. Folders behave exactly like files. No browser, no
+Apps Script, no permission popup. Read back from the destination with a separate search to confirm,
+and the test fixtures were deleted afterwards.
 
-**Verified against the live connector on 2026-08-19**, not assumed: a document was renamed and moved
-into a different folder in a single call, then read back from the destination to confirm it; a folder
-was renamed and moved the same way; **the file id and the share link were unchanged**, so nothing
-that pointed at the file broke. No browser, no Apps Script, no permission popup.
+**⚠️ PENDING MEASUREMENT: whether the same works in a CLOUD session.** It is being tested properly.
+**Until the result is written here, do not claim it either way.** If the job matters, use Local and
+say why. Do not tell an owner "it works the same in the cloud" on the strength of how connectors
+probably work, which is exactly the reasoning that produced the wrong rule in the first place.
 
-**⛔ The old rule was wrong and it was taught out loud, so expect to meet it.** Until this was tested,
-these skills said the connector could not rename or move at all and that only the Apps Script could,
-and that a Cloud session therefore could not do Drive work. **That is not true.** If an owner tells
-you they were taught to switch to Local before filing a document, they were told that in good faith
-and it is simply out of date. Say so in one line and get on with the job.
+**⛔ The old rule was wrong and it was taught out loud, so expect to meet it.** Until 2026-08-19 these
+skills said the connector could not rename or move AT ALL and that only the Apps Script could. **That
+part is definitively false.** If an owner tells you they were taught to switch to Local before they
+can rename one document, they were told that in good faith and it is out of date. Say so in one line
+and get on with the job.
 
-**Why the bulk case still goes Local, and this part was always right:** a whole messy drive means
-hundreds of individual calls, and the bundled Apps Script does the same work in one run. That script
-needs a browser and a one-time Google permission grant, and **a Cloud session has neither.** So the
-`drive-organizer` bulk flow is a Local job. Filing one document is not.
+**What was always right: a whole-drive sweep is a Local job.** Hundreds of files means hundreds of
+individual calls, and the bundled Apps Script does the same work in one run. That script needs a
+browser and a one-time Google permission grant, which a Cloud session does not have. So the
+`drive-organizer` bulk flow is Local. Filing one document is a much smaller question, and it is the
+one still being measured.
 
 ## 3. Never report a move or a rename you have not read back
 

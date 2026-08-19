@@ -17,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.13 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
+| `vera/` | 4.14 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
 | `tessa/` | 4.2 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.2 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.2 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |
@@ -27,7 +27,8 @@ You talk to Vera. She loads first and hands work to the other three.
 | Folder | Version | What it does |
 |---|---|---|
 | `landlord-inbox-handler/` | 1.1 | Reads your email, gives you a short priority brief, and drafts replies you send yourself |
-| `google-drive/` | 1.1 | **Load before ANY Drive work.** The rules: Drive changes run Local not Cloud, the Memory Vault must be set up first, sharing so files are visible, and never reporting a move you have not read back |
+| `cloud-vs-local/` | 1.0 | **Load before answering any "can Cloud do X" question.** Which jobs belong in a Cloud session and which need Local, what Cloud genuinely cannot do, and the rule that these are settled by testing rather than by reasoning. Every claim carries an evidence label |
+| `google-drive/` | 1.2 | **Load before ANY Drive work.** The rules: the connector really does rename and move (measured), the Memory Vault must be set up first, sharing so files are visible, and never reporting a move you have not read back |
 | `drive-organizer/` | 1.1 | Turns a messy Google Drive into a clear structure, previewing before it moves anything |
 | `file-namer/` | 1.2 | Gives every document one consistent name and one correct home |
 | `second-brain/` | 1.0 | Builds a written memory of your business your assistant reads at the start of every session |

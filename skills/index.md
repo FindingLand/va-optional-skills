@@ -17,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.12 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
+| `vera/` | 4.13 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
 | `tessa/` | 4.2 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.2 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.2 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |
@@ -27,9 +27,9 @@ You talk to Vera. She loads first and hands work to the other three.
 | Folder | Version | What it does |
 |---|---|---|
 | `landlord-inbox-handler/` | 1.1 | Reads your email, gives you a short priority brief, and drafts replies you send yourself |
-| `google-drive/` | 1.0 | **Load before ANY Drive work.** The rules: Drive changes run Local not Cloud, the Memory Vault must be set up first, sharing so files are visible, and never reporting a move you have not read back |
+| `google-drive/` | 1.1 | **Load before ANY Drive work.** The rules: Drive changes run Local not Cloud, the Memory Vault must be set up first, sharing so files are visible, and never reporting a move you have not read back |
 | `drive-organizer/` | 1.1 | Turns a messy Google Drive into a clear structure, previewing before it moves anything |
-| `file-namer/` | 1.1 | Gives every document one consistent name and one correct home |
+| `file-namer/` | 1.2 | Gives every document one consistent name and one correct home |
 | `second-brain/` | 1.0 | Builds a written memory of your business your assistant reads at the start of every session |
 | `daily-brain-feed/` | 1.0 | OPTIONAL. Feeds your Memory Vault every day from your emails and meeting transcripts, as one routine row. Vera offers it once; heavy on reading, so only for owners with many conversations |
 | `prompt-architect/` | 1.0 | Turns a vague request into a reusable, properly built prompt |

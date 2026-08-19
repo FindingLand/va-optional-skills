@@ -1,11 +1,11 @@
 ---
 name: google-drive
-description: "How this system works with Google Drive, and the rules that stop Drive jobs failing quietly. Load this BEFORE any Drive work: moving a file, renaming one, building a folder structure, filing a document, sharing something, or answering where did you put X. Covers what a Cloud session cannot do to Drive and why every Drive change runs Local, what must be set up before Drive work is attempted at all, sharing so the assistant can actually see a file, and never reporting a move or rename without reading the destination back. The two skills that do the work are drive-organizer for a whole messy folder and file-namer for one or a few files. Trigger on: google drive, my drive, move this file, rename this file, file this, organize my drive, set up my folders, share this document, where did you put this, shared drive, folder structure."
+description: "How this system works with Google Drive, and the rules that stop Drive jobs failing quietly. Load this BEFORE any Drive work: moving a file, renaming one, building a folder structure, filing a document, sharing something, or answering where did you put X. Covers which Drive jobs work in a Cloud session and which need Local (it is about volume, not about Cloud), what must be set up before Drive work is attempted at all, sharing so the assistant can actually see a file, and never reporting a move or rename without reading the destination back. The two skills that do the work are drive-organizer for a whole messy folder and file-namer for one or a few files. Trigger on: google drive, my drive, move this file, rename this file, file this, organize my drive, set up my folders, share this document, where did you put this, shared drive, folder structure."
 ---
 
 # Google Drive
 
-**Version: 1.0 - 2026-08-19**
+**Version: 1.1 - 2026-08-19**
 
 This skill is the rules. The work itself lives in two other skills:
 
@@ -33,39 +33,44 @@ The same applies to the skills. If the owner does not yet have their own copies 
 and `file-namer`, they are relying on whatever happens to be loaded right now, which is exactly how
 inconsistent results appear.
 
-## 2. ⛔ Drive changes run LOCAL. Advise against Cloud for Drive work, every time.
+## 2. The Cloud-or-Local question, settled by testing rather than by belief
 
-**Reading Drive is fine anywhere. Changing Drive runs on a Local session.**
+**The connector renames and moves files and folders on its own, in one call, and it works the same in
+a Cloud session and a Local one. The dividing line is VOLUME, not Cloud versus Local.**
 
 | Drive job | Where it runs |
 |---|---|
 | Search, read a file, list a folder, answer "where is X" | Cloud or Local, either is fine |
-| Create a new folder, create a new document | Cloud or Local, either is fine |
-| **Move an existing file, rename an existing file, restructure a folder** | **Local, always** |
+| Create a folder or a document | Cloud or Local, either is fine |
+| **Rename a file or folder. Move a file or folder. One at a time or a handful** | **Cloud or Local, either is fine.** The connector does it directly |
+| **A whole-drive sweep: hundreds of files, recursive, one pass** | **Local**, because the Apps Script that does it in one run needs a browser and a permission grant |
 
-**Why.** The Drive connector on its own does not move or rename an existing file. Doing it properly
-needs the browser or an Apps Script, and **neither of those runs cleanly in a Cloud session**, which
-has no browser of the owner's and no reliable way to complete a Google permission prompt. A Cloud
-session attempting it is working without the tools the job needs.
+**Verified against the live connector on 2026-08-19**, not assumed: a document was renamed and moved
+into a different folder in a single call, then read back from the destination to confirm it; a folder
+was renamed and moved the same way; **the file id and the share link were unchanged**, so nothing
+that pointed at the file broke. No browser, no Apps Script, no permission popup.
 
-**What to say, in one line, rather than just refusing:** "Moving and renaming files needs a Local
-session, so start a new chat with Local selected and I will do it there." Then stop, rather than
-trying it anyway.
+**⛔ The old rule was wrong and it was taught out loud, so expect to meet it.** Until this was tested,
+these skills said the connector could not rename or move at all and that only the Apps Script could,
+and that a Cloud session therefore could not do Drive work. **That is not true.** If an owner tells
+you they were taught to switch to Local before filing a document, they were told that in good faith
+and it is simply out of date. Say so in one line and get on with the job.
 
-**⚠️ A Cloud session may APPEAR to succeed at a move or rename. Do not trust that.** This has already
-happened in front of a room: a Cloud session reported that it had moved and renamed a document, in a
-session where the owner had just been told that was not possible, and nobody checked the destination.
-Reporting success is not evidence, and the failure modes here are quiet ones, a copy left behind
-instead of a move, or nothing happening at all. **Advise Local even when Cloud claims it worked.**
+**Why the bulk case still goes Local, and this part was always right:** a whole messy drive means
+hundreds of individual calls, and the bundled Apps Script does the same work in one run. That script
+needs a browser and a one-time Google permission grant, and **a Cloud session has neither.** So the
+`drive-organizer` bulk flow is a Local job. Filing one document is not.
 
 ## 3. Never report a move or a rename you have not read back
 
-After any change, **re-list the destination folder and confirm the file is there under its new
-name.** Say what you verified, in one line. If you cannot verify it, say the change is unconfirmed
-rather than done.
+**Do not trust the response to the write.** After any change, **re-list the destination folder with a
+separate search and confirm the file is there under its new name.** Say what you verified, in one
+line. If you cannot verify it, say the change is unconfirmed rather than done.
 
 This matters more in Drive than almost anywhere else, because a misfiled document is not visibly
-broken. It is simply lost, and nobody notices for months.
+broken. It is simply lost, and nobody notices for months. It is also the check that would have
+settled the Cloud argument above months earlier: someone reported a move, nobody looked at the
+destination, and a true report got treated as a false one for want of one search.
 
 ## 4. The assistant cannot see a private file
 

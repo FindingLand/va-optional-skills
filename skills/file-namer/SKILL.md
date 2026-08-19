@@ -5,16 +5,21 @@ description: "Name, rename, audit, and file documents in Google Drive with total
 
 # File Namer (general purpose, any use case)
 
-**Version: 1.1 - 2026-08-19**
+**Version: 1.2 - 2026-08-19**
 
-> ## ⛔ HARD RULE: renames and moves are ALWAYS executed via the Apps Script
-> The Google Drive connector CANNOT rename or move an existing file. The ONLY execution
-> mechanism for this skill is the bundled Apps Script (`scripts/drive_rename_move.gs`), run FOR
-> the user in the browser per "Executing the Rename" below. NEVER rename files one-by-one
-> through the Drive UI or connector, NEVER just suggest names without offering to execute, and
-> NEVER hand a non-technical user the script with written steps. If you catch yourself doing a
-> rename any other way, stop: you are using this skill wrong (or running an outdated copy of
-> it, so check for a newer version of the skill).
+> ## ⛔ HARD RULE: never just suggest a name. Execute the rename and the move.
+> **A few files: use the Drive connector directly.** It renames and moves files AND folders in a
+> single call, keeping the file id and every existing link, with no browser and no permission
+> grant. Verified against the live connector on 2026-08-19.
+> **A whole-drive sweep, hundreds of files at once: use the bundled Apps Script**
+> (`scripts/drive_rename_move.gs`) per "Executing the Rename" below, because one script run beats
+> hundreds of calls. Run it FOR the user in the browser; **NEVER hand a non-technical user the
+> script with written steps.**
+> Either way, **NEVER hand back a list of suggested names without carrying out the change.**
+>
+> ⚠️ **This rule was WRONG until 2026-08-19 and said the connector could not rename or move at
+> all.** That was never tested and it is false. If you are reading a copy that still says the
+> Apps Script is the only mechanism, it is out of date: check the library for a newer version.
 
 Give documents one consistent name and one correct home, every time, and then actually carry
 out the rename and the move in Google Drive. This is the single-file / few-file tool; for a
@@ -106,9 +111,16 @@ siblings. Apply these:
 
 ## Executing the Rename (the part that actually changes Drive)
 
-This is what makes the skill more than advice. The Google Drive connection can read, search, and
-create files, but it CANNOT rename or move an existing file. So you produce and run a one-time
-Apps Script that does it for them, in place.
+This is what makes the skill more than advice.
+
+**For one file, or a handful, do NOT reach for the script.** The Drive connector updates a file's
+title and its parent folder in a single call, for files and folders alike, keeping the file id so
+every existing link survives. Change it, then re-list the destination to confirm, then say what you
+verified. That is the whole job and it works in a Cloud session or a Local one.
+
+**The steps below are for BULK: a whole folder tree, hundreds of items in one pass.** There the Apps
+Script wins, because it does in one run what would otherwise be hundreds of calls. It needs a browser
+and a one-time permission grant, so it is a Local job.
 
 1. **Identify the item(s).** Use Drive search to get each file/folder **ID**, current name, and
    location. Never guess an ID.

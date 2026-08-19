@@ -5,7 +5,7 @@ description: "Name, rename, audit, and file documents in Google Drive with total
 
 # File Namer (general purpose, any use case)
 
-**Version: 1.0 - 2026-07-14**
+**Version: 1.1 - 2026-08-19**
 
 > ## ⛔ HARD RULE: renames and moves are ALWAYS executed via the Apps Script
 > The Google Drive connector CANNOT rename or move an existing file. The ONLY execution
@@ -47,6 +47,39 @@ Before naming anything, get what you need. If it is already in the conversation,
    for a general use case; clean human-readable names are enough.
 
 ---
+
+## ⛔ Pick the right convention FIRST, and the property one is NOT the default
+
+**The general rules below are the default. The real-estate template in the appendix applies ONLY when
+the owner's own business profile says they run property.** Getting this backwards is a real failure,
+not a theoretical one: two of the first three owners to use this ran no rental property at all, and
+both were handed a property-manager convention full of property shortcodes and unit codes that meant
+nothing in their business. One of them had to say *"the current naming convention is real
+estate property manager specific, how would you suggest we update it to reflect my business model?"*
+That question should never have to be asked.
+
+**So, in order, every time:**
+
+1. **Read the owner's business profile** (`business/profile.md` in their repo) before proposing any
+   convention. If there is no profile, ask one line: what are these documents and what is the
+   business.
+2. **Property business: use the appendix.** Anything else: use the general rules below, and derive
+   the parts that need their vocabulary (client code, matter, engagement, campaign) from what they
+   actually call things, never from `[PROPERTY]` and `[UNIT]`.
+3. **When they have no client or party for a file, do not drop the slot silently.** Use their company
+   or business-line code instead, because an intentional code reads differently from an omission. One
+   owner asked for exactly this: most of her files are firm-level templates, and she wanted the firm
+   code present rather than the field left blank.
+4. **⭐ Write the agreed convention into their repo the moment it is agreed** (`reference/repo-layout.md`,
+   or the file their layout names for conventions) **and push it in the same turn.** A convention that
+   lives only in the conversation is gone when they open the next thread, which is exactly how one
+   owner lost hers.
+5. **⛔ Once a convention is agreed, apply it to every file, with no exceptions of your own
+   invention.** If it produces a name you think is wrong for a particular document, **apply it anyway
+   and say in one line why you think it is wrong.** The real case: minutes after agreeing a new
+   convention, a document was left under its old name because a dated name "would be misleading" for
+   that one file. The owner's ruling: even if the title is wrong, the formula should have been
+   applied. **Deciding a rule does not fit a case is the owner's call, never yours.**
 
 ## Naming Best Practices (use these unless the user has their own convention)
 

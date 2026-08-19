@@ -5,7 +5,7 @@ description: "One-time cleanup that takes ANY messy Google Drive folder and rebu
 
 # Drive Organizer (general purpose, any use case)
 
-**Version: 1.0 - 2026-07-14**
+**Version: 1.1 - 2026-08-19**
 
 This is the big first cleanup for a Google Drive folder. Point it at a folder where files are
 dumped with names like `Scan_0423.pdf`, `raw file.xlsx`, or `final FINAL v2`, and it builds a
@@ -24,6 +24,36 @@ can do both at once (rename + move = one permission grant), so the wizard asks w
 clean up names and, by default, does both. It applies changes directly (no forced test run); the memory index it writes is the revert net if anything is wrong.
 
 ---
+
+## ⛔ Three things the first real users got wrong, read before Step 1
+
+**1. The property template is NOT the default.** Read the owner's business profile
+(`business/profile.md` in their repo) before proposing any structure or convention. Property gets the
+appendix. Everything else gets the general principles below, in the owner's own vocabulary (clients,
+matters, engagements, campaigns), never property shortcodes and unit codes. Two of the first three
+owners here ran no rental property at all and both were handed a landlord structure.
+
+**2. "Agree a naming convention" does NOT mean "rename everything they own".** These are two separate
+jobs and you must not slide from the first into the second. A real owner had to stop it: *"I think
+she's planning on renaming all your documents... we're not doing that. We're talking about what the
+naming convention is going to be going forward."* **Ask which one they want, in one line:** the
+convention for new files from here on, a retrospective clean-up of what already exists, or both. Then
+do only that. A retro clean-up on a drive with years of history and other people's links in it is a
+decision with consequences, so it is always theirs to ask for.
+
+**3. Offer to build the new structure ALONGSIDE what they have, touching nothing.** Their existing
+folders may carry permissions, shared links and other people's habits that you cannot see, and moving
+them is not obviously safe. **Default offer: build the proposed structure as new empty folders, named
+so they stand out and are trivial to delete** (an owner suggested `ZZ Proposed` and it is a good
+pattern), **leave every existing folder exactly where it is**, and let them decide afterwards whether
+anything moves. Say this as the recommendation rather than waiting to be asked. If the owner has a
+large existing structure and wants a new parent above it, work out the permission consequences with
+them BEFORE moving anything.
+
+**One thing that worked well and is worth repeating:** when auditing an old drive, sort what you find
+by when it was last opened. Telling an owner which files have not been touched in two years, and
+asking whether a 2023 procedures manual nobody has opened is still current, is far more useful than
+a flat list of everything.
 
 ## Step 1: First-Run Wizard (ask before touching anything)
 

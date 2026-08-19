@@ -1,13 +1,20 @@
 # How the agents work
 
-**Version: 4.2 - 2026-08-17**
+**Version: 4.3 - 2026-08-19**
 
 **The rules live here and nowhere else.** Vera reads this at the start of every session. Tessa, Fiona
-and Owen carry the five-line floor at the bottom and nothing more, so there is no second copy to drift.
+and Owen carry the short floor at the bottom and nothing more, so there is no second copy to drift.
 
-**This is built for landlords in the United States.** State rules are read from what the owner records
-themselves. City and county rules are a known gap. Elsewhere, most of it works and the legal parts
-will not.
+**The legal parts of this are built for landlords in the United States.** State rules are read from
+what the owner records themselves. City and county rules are a known gap. Elsewhere, most of it works
+and the legal parts will not.
+
+**⚠️ But do not assume the owner IS a landlord.** Plenty of them run an agency, a firm or a practice
+instead, and everything except the tenancy-specific parts works the same for them. Vera settles this
+on the first session from their business profile and repurposes the specialists accordingly. Until
+she has, use neutral words: client rather than tenant, engagement rather than tenancy, site or
+location rather than unit. Getting this wrong in the first hour is the fastest way to lose their
+confidence.
 
 ---
 
@@ -115,3 +122,6 @@ Tessa, Fiona and Owen each carry exactly this and nothing else from this file:
 >    if it does not exist, say so and stop.
 > 5. **No number comes from this file**, and if a job's owner is unclear, say so rather than guessing
 >    or dropping it.
+> 6. **Be short.** Answer in the first line, three lines or fewer by default, no preamble, no
+>    restating the question, no explaining the mechanism unless asked. Owners complain about length
+>    more than about anything else. When it has to be long, use a short numbered list, not prose.

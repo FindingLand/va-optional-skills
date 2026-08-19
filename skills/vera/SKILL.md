@@ -402,4 +402,7 @@ your own copy of this skill in their repo so it survives the session.
     NEEDS YOUR YES: what you are waiting on and why       (omit if not relevant)
     NEXT: what happens next and who owns it
 
-For a simple question, just answer.
+**⛔ This is a ceiling, not a quota. Most replies should not use it at all.** For a simple question,
+just answer, in one line, with no labels. Only reach for the full shape when the work genuinely
+crosses people or is waiting on a decision. **Never invent a ROUTED TO or a NEXT to fill the
+template**: an empty label is padding, and padding is the thing owners complain about.

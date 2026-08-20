@@ -1,134 +1,167 @@
 ---
 name: cloud-vs-local
-description: "Answers the recurring question of whether a job should run in a Cloud session or a Local one, and what each genuinely cannot do. Load this whenever someone asks can Cloud do X, why did this work locally but not in the cloud, do I need my computer on, which one should I pick, why can it not see my file, why did it not save, or when a routine or a skill has to be designed to run unattended. Also load it before ANSWERING any capability question of that shape, because the rule in here is that these are settled by testing and not by reasoning. Every claim carries an evidence label and a date. Trigger on: cloud, local, cloud session, local session, cloud vs local, which environment, does my computer need to be on, run overnight, routine, unattended, headless, it worked locally but not in the cloud, select repo, connector in the cloud."
+description: "Decides whether a piece of work should run in a Cloud session or a Local one, and answers any 'can a Cloud session do X' question without re-testing from scratch. Load it when someone asks which to use, whether their computer has to be on, why a login or 2FA failed in a session, why something worked locally but not in the cloud, how many sessions can run at once, whether many sessions will slow their machine, or how to hand work from one session to another. Also load it BEFORE answering any capability question of that shape, because the rule in here is that these are settled by testing and never by reasoning, and every claim carries an evidence label and a date. Trigger on: cloud, local, cloud session, local session, cloud vs local, which environment, Claude Code on the web, from my phone, does my computer need to be on, run overnight, routine, unattended, headless, 2FA, verification code, trusted device, it worked locally but not in the cloud, running many sessions at once, machine slowdown."
 ---
 
 # Cloud or Local
 
-**Version: 1.0 - 2026-08-19**
+**Version: 2.0 - 2026-08-19**
 
-Claude can run in two places and they are not equally capable. Picking the wrong one is the single
-most common cause of "it said it worked and nothing happened".
+Claude can run in two places and they are not equally capable. Picking the wrong one is the most
+common cause of "it said it worked and nothing happened", and of a session burning an hour
+rediscovering a limit somebody already mapped.
 
-- **Local** means the work runs **on your own computer**. It can see your files and drive your
-  browser, and it only runs while your computer is on and awake.
-- **Cloud** means the work runs **on Anthropic's servers**. It runs whether your computer is on or
-  not, and it cannot see your machine at all.
+- **Local** runs **on your own computer**. It can reach your files and **your real browser, already
+  signed in to everything you use**. It only runs while your computer is on and awake.
+- **Cloud** runs **on a server**. It runs whether your computer is on or not, and it cannot see your
+  machine at all. It gets its own fresh container every time.
 
 ---
 
-## ⛔ Read this first: how a "can Cloud do X?" question gets answered
+## The decision, in one pass
 
-**By testing it. Never by reasoning about it.** This skill exists because that rule was broken and it
-cost real time and real credibility.
+**Cloud** for anything reached through a connection or an API: your database and CRM work, your
+automation platform, your website and deploys, writing documents, anything in your repo. Also the
+right answer whenever your own machine is loaded, because a cloud session costs it nothing.
 
-**The rule:** if someone asks whether Cloud can do something and this file does not already say,
-**the answer is "I do not know yet, let me test it"**, followed by an actual test. Not an inference
-from how the technology probably works. An inference is not an answer, and stating one as if it were
-a finding is worse than saying nothing.
+**Local** for anything that needs **your browser identity**: a site you have to be logged into as
+you, anything with SMS two-factor, anything that trusts your device. Also anything touching files on
+your computer, and anything that must save straight to the main copy of your work.
 
-**The standard test, which is cheap enough that there is no excuse:**
+**Split it deliberately** when a job has both halves. Build in the cloud, push, then open a local
+session on the same branch and do only the browser steps there. **Deciding that up front beats
+discovering it halfway through**, because a cloud session cannot hand over to a local one mid-flight.
 
-1. **Create a throwaway fixture** to act on, named so it is obviously disposable (`ZZ TEST ... DELETE ME`).
-2. **Run the exact operation in the environment being questioned**, not a similar one somewhere else.
-3. **Read the result back from somewhere independent** of the thing that did the work. A tool's own
-   success message is not evidence.
+---
+
+## ⛔ How a "can Cloud do X?" question gets answered
+
+**By testing it. Never by reasoning about it.** This skill exists because that rule was broken twice
+in one day and it cost real time and real credibility.
+
+If this file does not already answer it, **the honest answer is "I do not know yet, let me test it"**,
+followed by an actual test. An inference is not an answer, and stating one as though it were a finding
+is worse than saying nothing.
+
+**The standard test, cheap enough that there is no excuse:**
+
+1. **Create a throwaway fixture** named so it is obviously disposable (`ZZ TEST ... DELETE ME`).
+2. **Run the exact operation in the environment actually in question.** Not a similar one somewhere
+   else. This is the step that got skipped: a Local test was run to answer a question about Cloud.
+3. **Read the result back from somewhere independent.** A tool's own success message is not evidence.
 4. **Delete the fixture** and confirm it is gone.
-5. **Write the answer into this file with the date and the word MEASURED**, so nobody re-derives it.
+5. **Write the answer in here with the date and the word MEASURED.**
 
-**The case that earned this rule, 2026-08-19.** A skill had asserted since July that the Google Drive
-connector could not rename or move a file and that only an Apps Script could. Nobody ever tested it.
-It got taught out loud on a live training call. When a session then DID move and rename a file, the
-report was explained away instead of checked. When the claim was finally questioned, the fix was to
-test it Locally and then reason that Cloud would behave the same way, **which answered a question
-nobody had asked.** One search of the destination folder, months earlier, would have settled all of
-it.
-
-**So every claim in this file carries a label:**
-
-- **MEASURED** — we ran it and read the result back. The date says when.
-- **DOCUMENTED** — it comes from the vendor's own documentation, not from us running it.
-- **UNVERIFIED** — believed, never tested. **Treat as unknown, and say so out loud when you use it.**
+**Every claim below is labelled.** **MEASURED** means we ran it, and the date says when.
+**DOCUMENTED** means it comes from vendor documentation rather than from us. **UNVERIFIED** means
+believed but never tested: **treat it as unknown and say so out loud.**
 
 ---
+
+## The real fault line is browser IDENTITY, not "UI versus API"
+
+**MEASURED 2026-08-19, from inside a live cloud session.** This is the correction that matters most,
+because the usual mental model is wrong.
+
+**A cloud container HAS a browser.** Chromium and Playwright are preinstalled, so UI automation is
+possible there. What it does not have is **you**:
+
+| | Local | Cloud |
+|---|---|---|
+| Browser | Your real profile | Fresh, anonymous |
+| Logins | Already signed in | Signed in to nothing |
+| Two-factor | Trusted device, no prompt | Untrusted device, prompts every time |
+| Network address | Your home connection | A datacentre, different each session |
+
+So a site fails in the cloud not because there is no browser, but because the container looks like a
+brand new device on a strange connection, which is exactly what triggers device verification. Any
+tool that runs **its own** persistent cloud browsers is the exception and works fine from a cloud
+session, because the identity lives with that tool rather than with the container.
+
+**Two-factor, specifically:** a code sent to **email** is solvable, because a session with the Gmail
+connection can read its own code and finish the login. A code sent by **SMS** is a hard stop. Route
+that job Local.
+
+## What Cloud CAN do, contrary to what people assume
+
+**MEASURED 2026-08-19:**
+
+- **Connections work.** Google Drive, Gmail, Calendar, Slack, Airtable, GitHub and others were all
+  available inside a cloud session and fully functional. **The Google Drive connection performed
+  search, create folder, rename and move from a cloud container.** So filing and organising documents
+  does not need a local session.
+- **Anything reached by API behaves identically to local.** Same calls, same results, no
+  cloud-specific degradation.
+- **Why this works at all:** the skills live in the shared repository rather than on one computer, so
+  any session on any machine loads them. If they lived only on a desktop, a cloud session would start
+  blank.
 
 ## What Cloud genuinely cannot do
 
-All **DOCUMENTED**, from Claude Code's own documentation, checked 2026-08-10:
+- **It cannot see your computer.** No files on your disk, nothing you have installed. **DOCUMENTED.**
+- **It cannot be you in a browser.** See the identity table above. **MEASURED.**
+- **It cannot receive an SMS code.** **MEASURED.**
+- **It does not remember anything between runs.** Containers are reclaimed after inactivity and
+  **unpushed work is lost.** Anything worth keeping gets pushed. **MEASURED.**
+- **It cannot save straight to the main copy.** It saves to a side branch that then needs merging.
+  The work is not lost, but it is not in main until somebody merges it. **DOCUMENTED.**
+- **It cannot hand over to a local session mid-flight.** There is no bridge between the two.
+  **MEASURED: a cloud container asked for reachable local agents and got none.**
 
-1. **It cannot see your computer.** No files on your disk, no folders, no programs, nothing you have
-   installed. If a job needs a file that lives on your machine, it is Local.
-2. **It cannot use your browser.** Anything that means clicking through a website, signing in, or
-   working in an app that has no proper connection available, is Local.
-3. **It cannot finish a login that needs you to click.** Any sign-in popup, any "allow this app"
-   screen, any two-factor code. This is the limit that bites most often, and it is why a job that
-   depends on one is Local even when everything else about it would suit Cloud.
-4. **It does not remember anything between runs.** Every run starts fresh. Anything worth keeping has
-   to be written somewhere that persists, which in this system means the Memory Vault.
-5. **It cannot save straight to the main copy of your Memory Vault.** It saves onto a side copy that
-   then has to be merged in. The work is not lost, but it is not in the main copy until someone
-   merges it.
+## Handing work between the two: the handoff is git
 
-## What each one is for
+A cloud session cannot pass the baton to your desktop. **Push from the cloud session, then open a
+local session on the same branch and carry on there** with your real browser available. That is the
+whole mechanism, and it is also why "build in the cloud, finish locally" is a plan rather than a
+compromise.
 
-**Use Local when:**
+## Running many sessions at once
 
-- the job touches files on your computer
-- the job needs your browser, or a login you have to click through
-- you are setting things up for the first time, or running something for the first time
-- the job has to write straight into the main copy of your Memory Vault
-- you are doing a big one-pass sweep that runs a script in your browser
+**MEASURED 2026-08-19.** Useful when the question is "will this slow my machine down".
 
-**Use Cloud when:**
+- **Every cloud session gets its own container**, around 4 processors and 15 GB of memory, with about
+  30 GB of disk. **Twenty cloud sessions is twenty separate machines and your own computer
+  contributes nothing.** That is the real fix for a slow machine, not closing tabs.
+- **Fanning out helpers INSIDE one session is small.** The limit is processors minus two, so on a
+  cloud container that is **two helpers running at once**. Queue more and they all finish, but only
+  two run in parallel. **Real parallelism comes from more sessions, not more helpers in one session.**
+- **The bottleneck moves, it does not vanish.** Locally you run out of processor and memory. In the
+  cloud you run out of your account's usage allowance, and every session draws on the same one, so
+  many parallel sessions spend it fast.
+- **Give every session its own branch and a self-contained brief.** Sessions cannot see each other's
+  work until it is pushed, so twenty on one branch collide and twenty on twenty branches is an
+  ordinary merge.
+- **If the disk fills**, the symptom is confusing: it reports low usage but no space available. That
+  means delete files, not that the machine is broken.
 
-- it has to run while your computer is off, overnight or early morning
-- it is a scheduled routine
-- the job only reads and writes through connections to online services, with no browser and no file
-  on your machine involved
+## Still unverified. Say so, do not guess
 
-**The habit worth building:** start Local until you know where the edges are, then move the jobs that
-genuinely do not need your machine over to Cloud. You cannot switch an open conversation from one to
-the other, so open a new one and carry on there.
-
-## The grey area, and it is the one people actually hit: connections
-
-A **connection** (Google Drive, Airtable, Gmail, Slack, GitHub) is not your computer talking to that
-service. It is Anthropic's servers talking to it. So in principle a connection works the same in
-Cloud as it does Locally, and a job built only on connections should not care which one it is in.
-
-**In principle. Which is exactly the kind of sentence this skill exists to distrust.**
-
-| Question | Status |
-|---|---|
-| Can the Google Drive connection rename and move files AND folders, keeping the link, with no browser and no script? | **MEASURED 2026-08-19: yes, in a LOCAL session.** One call renames and moves; the id and the share link survive; folders behave the same as files. Test fixtures created and deleted. |
-| Does that same thing work in a CLOUD session? | ⚠️ **PENDING MEASUREMENT.** Being tested properly. **Until the result is written here, do not claim either way.** Say it is unmeasured, and use Local if the job matters. |
-| Are all connections available inside every Cloud context, including scheduled runs? | **UNVERIFIED.** There is reason to think a connection that needed an interactive sign-in may be missing in an unattended run. Nobody has measured it. **Design around it: if an unattended job depends on a connection, prove the connection is there in that exact context before relying on it.** |
-
-**The practical consequence, which holds regardless of how the pending answer lands:** the more a job
-depends on plain online services rather than on your machine, the more portable it is. When something
-must run unattended, prefer the path with no browser and no local file in it.
+- **Whether an account caps how many cloud sessions run at once, and at what number.** Cannot be
+  determined from inside a container. Needs a real test.
+- **Whether connections survive a SCHEDULED cloud run.** The measurement above came from an
+  interactive session. The documented caveat is that connections needing an interactive sign-in may
+  be absent in an unattended run, so **prove the connection is there in that exact context before
+  building an unattended job on it.**
 
 ## Scheduled routines
 
-- **A scheduled run is a Cloud-or-Local decision made in advance**, and it is the decision that
-  matters most, because nobody is watching when it fires.
-- **A Local routine only runs while the computer is on and awake.** If the machine is off at 3am, the
-  routine does not run. There is no queue and no catch-up.
-- **There is a daily cap on how many scheduled runs an account gets**, and it is low enough that one
-  schedule per job runs out quickly. **DOCUMENTED 2026-08-10.** So the shape that works is **one
-  schedule whose only job is to read a list of work and do everything that is due**, with new
-  recurring work added as a row on that list rather than as a new schedule.
-- **Anything that cannot run unattended should say so on its row** rather than failing quietly at
-  three in the morning.
+- **A Local routine only runs while the computer is on and awake.** If the machine is off at 3am, it
+  does not run, and there is no catch-up queue.
+- **There is a daily cap on scheduled runs per account, low enough that one schedule per job runs out
+  fast. DOCUMENTED 2026-08-10.** So the shape that works is **one schedule whose only job is to read
+  a list of work and do everything due**, with new recurring work added as a row rather than as a new
+  schedule.
+- **Anything that cannot run unattended should say so on its row**, rather than failing quietly
+  overnight.
 
-## When something fails in Cloud, check these four before anything else
+## When something fails in Cloud, check these four first
 
-1. **Does it need a file on your computer?** Then it was never going to work. Local.
-2. **Does it need your browser, or a login you click?** Same. Local.
-3. **Did it save, really?** Cloud saves to a side copy that needs merging. Read the destination back
-   rather than believing the report.
-4. **Did it lose something from last time?** Cloud starts fresh every run. If it needed to remember,
-   the memory has to be written somewhere that persists.
+1. **Does it need a file on your computer?** Then Local, and it was never going to work.
+2. **Does it need to be signed in as you, or an SMS code?** Local.
+3. **Did it actually save?** Cloud saves to a side branch. Read the destination back rather than
+   believing the report.
+4. **Did it lose something from last time?** Every run starts fresh. Anything it must remember has to
+   have been written somewhere that persists.
 
 If none of those explain it, **stop guessing and run the test at the top of this file.**
 
@@ -137,7 +170,7 @@ If none of those explain it, **stop guessing and run the test at the top of this
 Three sentences, in this order, and nothing more:
 
 1. **Which one to use, and the one reason.**
-2. **What they would lose by choosing the other.**
+2. **What they lose by choosing the other.**
 3. **If you do not actually know, say you do not know and that you will test it.** Never fill the gap
-   with a plausible explanation. A confident wrong answer here sends someone off to rebuild something
-   that was never broken.
+   with a plausible explanation. A confident wrong answer here sends somebody off to rebuild
+   something that was never broken.

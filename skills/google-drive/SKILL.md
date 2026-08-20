@@ -1,11 +1,11 @@
 ---
 name: google-drive
-description: "How this system works with Google Drive, and the rules that stop Drive jobs failing quietly. Load this BEFORE any Drive work: moving a file, renaming one, building a folder structure, filing a document, sharing something, or answering where did you put X. Covers which Drive jobs work in a Cloud session and which need Local (it is about volume, not about Cloud), what must be set up before Drive work is attempted at all, sharing so the assistant can actually see a file, and never reporting a move or rename without reading the destination back. The two skills that do the work are drive-organizer for a whole messy folder and file-namer for one or a few files. Trigger on: google drive, my drive, move this file, rename this file, file this, organize my drive, set up my folders, share this document, where did you put this, shared drive, folder structure."
+description: "How this system works with Google Drive, and the rules that stop Drive jobs failing quietly. Load this BEFORE any Drive work: moving a file, renaming one, building a folder structure, filing a document, sharing something, or answering where did you put X. Covers what the connector can really do (it renames and moves, in Cloud or Local), which Drive jobs need Local anyway, what must be set up before Drive work is attempted at all, sharing so the assistant can actually see a file, and never reporting a move or rename without reading the destination back. The two skills that do the work are drive-organizer for a whole messy folder and file-namer for one or a few files. Trigger on: google drive, my drive, move this file, rename this file, file this, organize my drive, set up my folders, share this document, where did you put this, shared drive, folder structure."
 ---
 
 # Google Drive
 
-**Version: 1.2 - 2026-08-19**
+**Version: 1.3 - 2026-08-19**
 
 This skill is the rules. The work itself lives in two other skills:
 
@@ -33,34 +33,31 @@ The same applies to the skills. If the owner does not yet have their own copies 
 and `file-namer`, they are relying on whatever happens to be loaded right now, which is exactly how
 inconsistent results appear.
 
-## 2. What the connector can actually do, and the Cloud question that is still open
+## 2. What the connector can actually do, in either kind of session
 
 **Load the `cloud-vs-local` skill for the general rule.** It holds the Cloud versus Local decision for
 every kind of job and it is the only place that rule lives. This section holds only the Drive-specific
 part.
 
-**MEASURED 2026-08-19, in a LOCAL session: the Drive connector renames AND moves files, and folders,
-on its own.** One call sets a new title and a new parent folder. **The file id and the share link
-survive**, so nothing pointing at the item breaks. Folders behave exactly like files. No browser, no
-Apps Script, no permission popup. Read back from the destination with a separate search to confirm,
-and the test fixtures were deleted afterwards.
+**MEASURED 2026-08-19, in BOTH a Local and a Cloud session: the Drive connector renames AND moves
+files, and folders, on its own.** One call sets a new title and a new parent folder. **The item's id
+and its share link survive**, so nothing pointing at it breaks: existing links, bookmarks and any
+script that refers to it by id all keep working. Only somewhere that stores the literal old NAME as
+text needs updating. Folders behave exactly like files. No browser, no script, no permission popup.
 
-**⚠️ PENDING MEASUREMENT: whether the same works in a CLOUD session.** It is being tested properly.
-**Until the result is written here, do not claim it either way.** If the job matters, use Local and
-say why. Do not tell an owner "it works the same in the cloud" on the strength of how connectors
-probably work, which is exactly the reasoning that produced the wrong rule in the first place.
+**So filing a document is not a Local job.** It works the same in a Cloud session, which was tested
+from inside one rather than assumed.
 
 **⛔ The old rule was wrong and it was taught out loud, so expect to meet it.** Until 2026-08-19 these
-skills said the connector could not rename or move AT ALL and that only the Apps Script could. **That
-part is definitively false.** If an owner tells you they were taught to switch to Local before they
-can rename one document, they were told that in good faith and it is out of date. Say so in one line
-and get on with the job.
+skills said the connector could not rename or move AT ALL and that only an Apps Script could. **That
+is false.** If an owner tells you they were taught to switch to Local before they can rename one
+document, they were told that in good faith and it is out of date. Say so in one line and get on with
+the job.
 
-**What was always right: a whole-drive sweep is a Local job.** Hundreds of files means hundreds of
-individual calls, and the bundled Apps Script does the same work in one run. That script needs a
-browser and a one-time Google permission grant, which a Cloud session does not have. So the
-`drive-organizer` bulk flow is Local. Filing one document is a much smaller question, and it is the
-one still being measured.
+**What was always right: a whole-drive sweep of hundreds of items is still a Local job.** Not because
+the cloud cannot do the operations, but because doing them one at a time means hundreds of calls,
+while the bundled Apps Script does the same work in one run, and that script needs a browser and a
+one-time permission grant. So the `drive-organizer` bulk flow is Local. Filing one document is not.
 
 ## 3. Never report a move or a rename you have not read back
 

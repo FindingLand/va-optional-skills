@@ -26,11 +26,11 @@ test run, the person whose setup worked had done it and the person whose setup b
 ### 2. Have your Central Hub link to hand
 
 Your pre-work email includes a link to the **TLL Central Hub**, the starter Airtable base for the
-course. **You are not asked to do anything with it yet.** Later in the week Vera prompts you to copy
-it into your own Airtable, and that copy becomes your central hub.
+course, **and the password that opens it**. Have both to hand before your first session. You are not
+asked to do anything with them yet, and you will be told when to use them.
 
-**If it is not in your pre-work email, ask in the group channel now.** Hunting for it in the middle of
-a live session is exactly what this line exists to prevent.
+**If either is missing from your pre-work email, ask in the group channel now.** Hunting for it in the
+middle of a live session is exactly what this line exists to prevent.
 
 ### 3. Your Memory Vault and your working folder
 
@@ -200,8 +200,8 @@ again. Drop documents in as they arrive, then tell Vera to file them.
   Connect that one in **Settings**, then **Connectors**, then fully quit Claude and open it again.
 - **Vera cannot find a document that is open on your screen.** It is not shared with her. Share it as
   **anyone with the link can view**, or drop it into your **To File** folder, then ask her again.
-- **You do not have the Central Hub link.** Ask in the group channel. Do not save it for the live
-  session.
+- **You do not have the Central Hub link, or its password.** Ask in the group channel. Do not save it
+  for the live session.
 - **Claude is behaving oddly and nothing above fixes it.** Quit the app completely and open it again,
   and take **Relaunch to update** if it is offered.
 

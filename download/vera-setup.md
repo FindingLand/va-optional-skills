@@ -10,6 +10,35 @@ You only need this file once.
 
 ---
 
+## Before you start: three things from your pre-work
+
+These take a couple of minutes each, and every one of them has stalled a session before.
+
+### 1. Update Claude Desktop and relaunch it
+
+Open the Claude Desktop app. If it offers **Relaunch to update** anywhere, a small banner or a line in
+the menu, click it and let it restart. If it offers nothing, quit the app completely and open it again
+anyway.
+
+Do this before your first session with Vera, and again on the morning of your live session. On our
+test run, the person whose setup worked had done it and the person whose setup broke had not.
+
+### 2. Have your Central Hub link to hand
+
+Your pre-work email includes a link to the **TLL Central Hub**, the starter Airtable base for the
+course. **You are not asked to do anything with it yet.** Later in the week Vera prompts you to copy
+it into your own Airtable, and that copy becomes your central hub.
+
+**If it is not in your pre-work email, ask in the group channel now.** Hunting for it in the middle of
+a live session is exactly what this line exists to prevent.
+
+### 3. Your Memory Vault and your working folder
+
+You made both in pre-work: a private GitHub folder called **second-brain**, and an empty folder on
+your own computer for Claude to work in. If either is missing, Part A below has the steps.
+
+---
+
 ## What Vera checks first
 
 1. **Is your Memory Vault connected?** That is your GitHub folder, where Vera saves your work so it
@@ -19,6 +48,10 @@ You only need this file once.
    it. From then on those copies are yours: you customize them, and that is your second brain.
 3. **Is your central hub connected?** That is your Airtable, where your properties, leases and tasks
    live.
+4. **Can she see your files?** That is Google Drive, and anything else you have connected.
+
+She answers all of it in **one line**, saying what she can see and what she cannot. Read that line. It
+is the cheapest moment in the whole setup to catch something missing.
 
 If all is fine, she says so and you start working. If something is not, she takes you through the
 steps for that one thing, and only that one.
@@ -74,16 +107,36 @@ to Cloud for everyday work.
 ## Part B. Your central hub on Airtable
 
 1. In Claude Desktop, click your name at the bottom left, then **Settings**, then **Connectors**.
-2. Find **Airtable** and click **Connect**. Sign in to Airtable when it asks and allow access.
-3. Fully quit Claude and open it again, so it sees the new connection.
-4. Tell Vera: **"My Airtable is connected."**
+2. Find **Airtable** and click **Connect**. Sign in to Airtable when it asks.
+3. **Airtable then asks which bases Claude may use. Choose all of them.** There is an option along the
+   lines of **All current and future bases**. Pick that one, then allow access.
+4. Fully quit Claude and open it again, so it sees the new connection.
+5. Tell Vera: **"My Airtable is connected."**
+
+### Why step 3 matters more than it looks
+
+**That choice is made once, at the moment you connect, and it cannot be widened afterwards.** Pick one
+base and Vera can only ever see that one base, however many you own. On our test run somebody
+connected this way, and the restriction did not surface until three steps later, when things stopped
+working and nobody could see why.
+
+**So check it straight away.** When you tell Vera your Airtable is connected, she answers in one line
+with what she can and cannot see. If a base you expected is missing from that line, fix it now: see
+**"Vera can only see one of your Airtable bases"** below.
+
+The same is true of every other connection you make, Google Drive and Slack included. The access is
+set at the moment you connect, so that one line from Vera is your check on all of them at once.
+
+### What Vera does next
 
 She checks whether the three small tables she needs are there (routines, tasks, skills) and builds
 them for you if not. Then she fills the skills table with your team, so you can see in Airtable every
 skill you have and what each one does. You do not design anything.
 
-**Only if Vera says the connector cannot do something** (she will name it), she asks you for an
-Airtable token. Steps, one at a time:
+### If Vera asks you for an Airtable token
+
+**Only if she says the connector cannot do something** (she will name it), she asks you for a token.
+Steps, one at a time:
 
 1. Go to **https://airtable.com/create/tokens**.
 2. Click **Create new token**.
@@ -97,6 +150,36 @@ Airtable token. Steps, one at a time:
 
 ---
 
+## Part C. Your files on Google Drive
+
+Vera reads, names and files your documents, but only the ones she can actually see.
+
+1. In Claude Desktop, click your name at the bottom left, then **Settings**, then **Connectors**.
+2. Find **Google Drive** and click **Connect**. Sign in and allow access.
+3. Fully quit Claude and open it again.
+
+### The one rule that catches everyone
+
+**Vera cannot see a private file.** A file or folder has to be shared as **anyone with the link can
+view** before she can read it, rename it or move it. View is enough. She never needs edit.
+
+The symptom is confusing when it happens: you are looking straight at a document on your screen and
+Vera tells you she cannot find it.
+
+### Set it up once and stop thinking about it
+
+Make one catch-all folder and share the folder rather than the files:
+
+1. In Google Drive, click **New**, then **New folder**, and name it **To File**.
+2. Right click the folder and click **Share**.
+3. Under **General access**, change **Restricted** to **Anyone with the link**.
+4. Leave the role as **Viewer**. Click **Done**.
+
+**Everything you drop into that folder inherits the setting**, so you never share anything by hand
+again. Drop documents in as they arrive, then tell Vera to file them.
+
+---
+
 ## If something does not work
 
 - **Vera says your Memory Vault is not connected.** Do Part A, Step 3 again. The most common miss is
@@ -107,8 +190,20 @@ Airtable token. Steps, one at a time:
   through every screen, then fully quit Claude and open it again.
 - **You named your folder something else.** That is fine. Use that name wherever this guide says
   second-brain.
-- **Vera says Airtable is not connected.** Do Part B, Steps 1 to 3 again, and remember to fully quit
+- **Vera says Airtable is not connected.** Do Part B, Steps 1 to 4 again, and remember to fully quit
   Claude and reopen it.
+- **Vera can only see one of your Airtable bases.** The access was set at the moment you connected, so
+  it cannot be widened from Vera's side. In **Settings**, then **Connectors**, disconnect **Airtable**,
+  connect it again, and this time choose **all** bases on the Airtable screen. Then fully quit Claude,
+  open it again, and ask Vera what she can see.
+- **Vera says she cannot see Google Drive, or Slack, or something else you connected.** Same cause.
+  Connect that one in **Settings**, then **Connectors**, then fully quit Claude and open it again.
+- **Vera cannot find a document that is open on your screen.** It is not shared with her. Share it as
+  **anyone with the link can view**, or drop it into your **To File** folder, then ask her again.
+- **You do not have the Central Hub link.** Ask in the group channel. Do not save it for the live
+  session.
+- **Claude is behaving oddly and nothing above fixes it.** Quit the app completely and open it again,
+  and take **Relaunch to update** if it is offered.
 
 ---
 
@@ -117,6 +212,11 @@ Airtable token. Steps, one at a time:
 This file is the setup playbook and is kept out of your skill so your instructions stay short. It
 lives at `https://raw.githubusercontent.com/FindingLand/va-optional-skills/main/download/vera-setup.md`
 and you can fetch it any time.
+
+**Three pre-work items go missing more often than anything else, and each one stalls a session: Claude
+Desktop not updated and relaunched, the Central Hub link never received, and Airtable connected to one
+base instead of all.** Surface all three in the one line you open with, rather than letting them
+appear halfway through a task.
 
 **Check, do not lecture.** On a first session (Local, a folder on their computer):
 
@@ -133,8 +233,16 @@ and you can fetch it any time.
 4. Say in ONE line whether saving is on or off.
 5. Then bring the team home (your skill says how): copy every library skill into the vault under
    `.claude/skills/`, push, read back, and say it in two lines.
-6. Then Airtable: try the connector first. Only when the connector cannot do a specific thing you
-   need do you walk them through the token steps in Part B, and you say which thing it could not do.
+6. **Then Airtable, and name what you can see rather than only saying connected.** Try the connector
+   first. **List the bases you can actually reach, and say whether Google Drive and Slack are there
+   too.** If a base they expected is missing, that is the connector's access scope, fixed at the
+   moment they connected it: send them to the "can only see one of your Airtable bases" line above,
+   which means disconnecting Airtable and connecting it again with all bases chosen. Only when the
+   connector cannot do a specific thing you need do you walk them through the token steps in Part B,
+   and you say which thing it could not do.
+7. **Drive, when filing comes up.** A document they can see and you cannot is a sharing problem, not a
+   missing document. Send them to Part C and get the **To File** folder shared once, rather than
+   sharing files one at a time for the rest of the course.
 
 **Only if a check fails**, walk them through the matching step above, in these plain words, ONE step at
 a time. Give one numbered step, wait for them to say done, then give the next. Never paste the whole

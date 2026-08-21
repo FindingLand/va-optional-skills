@@ -79,6 +79,12 @@ steps for that one thing, and only that one.
 
 ### Step 3. Let Claude into your Memory Vault
 
+**⚠️ On a Claude Team or Enterprise account, do this part first.** The GitHub connector does not
+appear anywhere until someone switches it on for the organisation. Go to **Organization Settings**,
+then **Connectors**, and enable GitHub there. Then switch it on again in your own personal settings.
+Two passes, in that order. On a personal Pro or Max account there is no organisation, so skip this and
+start at step 1.
+
 1. Open the **Claude Desktop** app.
 2. Click **Code** at the top.
 3. Click **Connect GitHub** (it may say "Install GitHub app").
@@ -184,6 +190,14 @@ again. Drop documents in as they arrive, then tell Vera to file them.
 
 - **Vera says your Memory Vault is not connected.** Do Part A, Step 3 again. The most common miss is
   Step 6, the folder was not ticked when Claude was let in.
+- **You cannot find the GitHub connector at all.** You are on a Claude **Team or Enterprise** account,
+  where it stays hidden until someone enables it for the organisation. Go to **Organization Settings**,
+  then **Connectors**, switch GitHub on there, then switch it on again in your own settings. It has to
+  be both, in that order.
+- **You saw "You don't have access to organization settings", and the GitHub connection never
+  finished.** This is not a real permission limit, and pressing Connect again does not clear it. One
+  thing fixes it: **uninstall** the Claude GitHub App completely, install it again from
+  **https://github.com/apps/claude**, and then click **Finish connecting GitHub** back in Claude.
 - **A GitHub sign-in window popped up and you closed it.** Tell Vera "try again" and this time click
   "Sign in with your browser", then "Authorize".
 - **Vera cannot find Git (Windows).** Install it from **https://git-scm.com/downloads/win**, click Next
@@ -222,6 +236,13 @@ appear halfway through a task.
 
 1. Run `git --version`. No version on Windows means Git for Windows is missing: send them to the
    "cannot find Git" line above, then they quit and reopen Claude. Stop until it passes.
+1b. **If GitHub is not connected at all, find out which of the two known causes it is before guiding
+   anything.** If they cannot see the GitHub connector in the first place, they are on a Team or
+   Enterprise account and it has to be enabled at the organisation level first, then personally. If
+   they saw "You don't have access to organization settings" and the connection hung, the only fix is
+   uninstall the GitHub App, reinstall from github.com/apps/claude, then "Finish connecting GitHub".
+   Both are in the troubleshooting list above. **Neither clears by retrying**, so do not let them sit
+   pressing Connect.
 2. Is the working folder already a clone of their Memory Vault? Run `git remote -v`. If not, ask
    which repository is their vault (usually `second-brain`), then clone it into the working folder:
    `git clone https://github.com/<user>/second-brain`. On Windows a GitHub sign-in window opens the

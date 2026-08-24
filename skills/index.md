@@ -34,6 +34,9 @@ You talk to Vera. She loads first and hands work to the other three.
 | `second-brain/` | 1.0 | Builds a written memory of your business your assistant reads at the start of every session |
 | `daily-brain-feed/` | 1.0 | OPTIONAL. Feeds your Memory Vault every day from your emails and meeting transcripts, as one routine row. Vera offers it once; heavy on reading, so only for owners with many conversations |
 | `prompt-architect/` | 1.0 | Turns a vague request into a reusable, properly built prompt |
+| `skyvern/` | 1.0 | **Load before driving a site that has no connector.** When to use it versus a connector versus your own browser, what it costs, writing goals it can follow, the two kinds of two-factor, and keeping runs cheap |
+| `furnished-finder/` | 1.0 | **Load before touching a Furnished Finder inbox.** Why the notification email is nearly empty, the message box that sends on its own, the two names one listing has, and what must stay on the platform |
+| `quickbooks/` | 1.0 | **Load before touching the books.** Reading reports and drafting entries the owner posts themselves, tracking money per property, and the bank feed trap that double counts |
 | `landing-page-copywriter/` | 1.0 | Writes the words for a page that gets people to sign up or buy |
 | `linkedin-writer/` | 1.0 | Turns an idea or a story into a LinkedIn post |
 

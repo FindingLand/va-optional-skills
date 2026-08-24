@@ -32,7 +32,7 @@ placeholder is filled in the first time you actually work with that tool. See `s
 | Folder | Version | What it does |
 |---|---|---|
 | `airtable/` | 1.0 | **Load before ANY work on the hub.** Reading your own schema instead of assuming one, fields you cannot write, linked records, the dropdown that silently invents junk options, deleting safely, and when a job belongs to an automation inside the base instead of to your assistant |
-| `google-drive/` | 1.3 | **Load before ANY Drive work.** The connector really does rename and move, the Memory Vault must be set up first, sharing so files are visible, and never reporting a move you have not read back |
+| `google-drive/` | 1.4 | **Load before ANY Drive work.** The connector really does rename and move, but it CANNOT change the contents of a document that already exists, which is why people get sent to a terminal for what feels like a small edit. Also: the Memory Vault must be set up first, sharing so files are visible, and never reporting a move you have not read back |
 | `gmail/` | 1.0 | **Load before ANY work in your mailbox.** Drafts only and never sends, replying inside a thread, searching properly, labels as a queue rather than decoration, and getting what matters out of the mailbox and into the hub |
 | `turbotenant/` | 1.0 | **Load before ANY work on the rent platform.** No connector exists and what that means, the device check at sign-in that cannot be switched off, how charges actually reach a tenant, and what to do when the platform and the hub disagree about money |
 | `quickbooks/` | 1.0 | **Load before touching the books.** Reading reports and drafting entries you post yourself, tracking money per property, and the bank feed trap that double counts |

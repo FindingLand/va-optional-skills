@@ -5,7 +5,7 @@ description: "How this system works with Google Drive, and the rules that stop D
 
 # Google Drive
 
-**Version: 1.3 - 2026-08-19**
+**Version: 1.4 - 2026-08-24**
 
 This skill is the rules. The work itself lives in two other skills:
 
@@ -58,6 +58,61 @@ the job.
 the cloud cannot do the operations, but because doing them one at a time means hundreds of calls,
 while the bundled Apps Script does the same work in one run, and that script needs a browser and a
 one-time permission grant. So the `drive-organizer` bulk flow is Local. Filing one document is not.
+
+## 2b. ⛔ The connector CANNOT change the contents of a document that already exists
+
+**MEASURED 2026-08-24 on a real Google Doc, and this is the single most confusing gap in the whole
+connector**, because everything around it works so well that people assume this must too.
+
+What was actually tested, in order:
+
+- **Creating a document WITH its content: works.** One call, the text lands, reading it back returns
+  exactly what was written.
+- **Reading an existing document's content: works.** Docs, Sheets, Slides, PDFs and Word files.
+- **Renaming it or moving it: works**, as section 2 says.
+- **Changing what is INSIDE an existing document: does not work at all.** The update call accepts a
+  new title and a new folder and nothing else. It has no way to take content, and asking it to
+  simply fails.
+
+**So "open my document and change this paragraph" has no connector path.** Not a permissions problem,
+not a Local versus Cloud problem, not something a different phrasing gets round.
+
+**This is why an owner gets sent to a terminal.** An assistant that finds no connector route reaches
+for the next thing that could work, which is a script talking to Google directly, and that needs a
+terminal and a one-time credential setup. It does work, and the owner ends up somewhere they never
+wanted to be for what felt like a small edit. **If that has already happened to them, say plainly
+that it was the tool's limit and not their mistake.**
+
+### What to do instead
+
+**The everyday answer: read it, rewrite it, create it fresh, then bin the old one.** Entirely inside
+the connector, no terminal, and it is genuinely quick.
+
+1. Read the current content.
+2. Produce the full new version, with the change made.
+3. Create a new document with the same title and the new content.
+4. Show them both, and only then move the old one to the bin.
+
+**⚠️ Say the cost out loud before doing it, because it is not obvious and it is sometimes
+unacceptable.** The replacement is a NEW document, so it has a new link, and it does not carry the
+old one's comments, suggestions or version history. **Anything that pointed at the old document now
+points at the wrong one.**
+
+**So do NOT do it when the document has a life of its own:** anything with comments on it, anything
+out for review, anything linked from elsewhere, anything somebody else is working in, or anything
+that has been sent to a tenant or a contractor. **For those, the honest answer is that they make the
+edit themselves.** It takes them ten seconds and it keeps the document intact. Prepare the exact
+wording and hand it over. That is not a failure, it is the cheaper path.
+
+### The real fix is upstream
+
+**Anything that gets edited repeatedly should not live only as a Google Doc.** Keep the real version
+in their Memory Vault as an ordinary text file, where changing it is trivial and every change is
+recorded, and generate a Google Doc from it whenever somebody actually needs a Doc. Then editing is
+easy, and the Doc is just the copy that gets shared.
+
+**Reserve Google Docs for what they are good at**, which is a finished thing that people read,
+comment on and sign.
 
 ## 3. Never report a move or a rename you have not read back
 

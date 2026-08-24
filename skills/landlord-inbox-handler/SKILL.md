@@ -5,7 +5,31 @@ description: "Read a self-managing landlord's email inbox and triage the landlor
 
 # Landlord Inbox Handler
 
-**Version: 1.1 - 2026-08-10**
+**Version: 1.2 - 2026-08-24**
+
+## Where this sits, and the two skills it is confused with
+
+**This skill is the ACTION lane. It reads today's mail and turns it into things to do today.** That is
+its whole job, and everything below serves it.
+
+It gets confused with `daily-brain-feed`, because both read the same mailbox once a day as a routine
+row. **They are not the same job and neither replaces the other:**
+
+- **This skill keeps what needs doing.** A leak, a quote, a question, a decision. Its output is
+  short-lived and it is thrown away once acted on.
+- **`daily-brain-feed` keeps what changes how the business runs**, and throws away everything
+  actionable. Its output is permanent and it goes into the Memory Vault.
+
+They are opposites, which is exactly why one file cannot do both: each one's output is the other's
+rubbish. **They also stay separate because this one is core and that one is optional and heavy.**
+An owner should be able to run this and never turn that on.
+
+**What they DO share is the reading, and reading the same mailbox twice in one morning is pure
+waste.** So: **this skill runs first in the pass and does the reading. `daily-brain-feed` runs later
+and works from what this pass already read, rather than going back to the mailbox.** It only reaches
+the mailbox directly for sources this skill does not cover, such as meeting transcripts.
+
+**And the brief does not go to the owner as its own message.** See "Running this every morning".
 
 Your inbox is where your rental business actually happens: tenants report leaks, ask about their lease, vendors send quotes, banks and utilities send notices. This skill makes Claude your inbox first-responder. Once a day (or whenever you ask), Claude reads the new mail, sorts the landlord items from the noise, writes you a short prioritized brief, drafts replies for the routine stuff, and flags anything that cannot wait.
 
@@ -129,7 +153,20 @@ separate schedule for each job you will run out within a week.
 
    > Use the landlord-inbox-handler skill. Read my connected inbox for everything new since the last run (default: the past 24 hours), triage per the skill, create the reply drafts in my Drafts folder, and deliver the daily brief. Do not send anything. If there is at least one URGENT item, put URGENT and the property in the first line.
 
-3. Choose where the brief lands: the run itself, which you read with coffee, or a draft addressed to you titled "Inbox Brief YYYY-MM-DD" that sits in Drafts unsent. Keep it to ONE delivery channel.
+3. **The brief is NOT a separate thing you read. It folds into Vera's day plan.** This is the part
+   people get wrong, and it is worth being blunt about: if the morning produces a day plan AND an
+   inbox brief AND a feed report, you have three things to read and you will read one of them. **One
+   surface, every morning: the day plan.**
+
+   So the row's output goes into the pass, not around it:
+   - **URGENT items go to the top of the day plan**, marked as needing you, with the one next action.
+   - **Decision items become items in the day plan** that need you, phrased as the actual question.
+   - **Drafts that are ready say so in one line each**, not as a separate list to go and find.
+   - **Everything with no action gets one collapsed line**, or nothing at all.
+
+   The full categorised brief in the format below is still how you THINK. It is a working format, and
+   it is worth writing out when you are asked for the inbox specifically, or when something is
+   complicated enough to need laying out. It is not the daily delivery.
 4. Leave the row paused, run it manually once ("run my inbox brief now") to confirm the connector works and the categories match your mail, then set it active.
 
 **Nothing here ever sends.** Replies are drafted and left for you. That holds whether you run it by hand or as part of the daily pass, and there is no setting anywhere that changes it. Nothing this system produces reaches a tenant or a vendor without you reading it first.

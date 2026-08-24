@@ -5,7 +5,29 @@ description: "OPTIONAL. Feeds the owner's Memory Vault every day from what happe
 
 # Daily brain feed (optional)
 
-**Version: 1.0 - 2026-08-17**
+**Version: 1.1 - 2026-08-24**
+
+## Where this sits, and why it is not the inbox handler
+
+**This skill is the MEMORY lane. It keeps what changes how the business runs, and throws away
+everything that merely needs doing today.**
+
+`landlord-inbox-handler` is the opposite: it keeps what needs doing and throws away everything else.
+**Each one's output is the other's rubbish, which is exactly why they are two files.** They also stay
+separate because that one is core and this one is optional and heavy: an owner should be able to run
+their inbox every day and never turn this on.
+
+**They do share the reading, and reading the same mailbox twice in one morning is pure waste.**
+
+- **The inbox handler runs first in the pass and does the reading.**
+- **This runs later and works from what that pass already read**, rather than going back to the
+  mailbox. It goes to a source directly only for things the inbox pass does not cover, which in
+  practice means meeting transcripts.
+- **If the inbox handler is not installed or did not run**, this reads the mailbox itself, exactly as
+  described below. It never depends on the other skill being there.
+
+**Neither of them produces its own morning report.** Everything reaches the owner through the day
+plan. Three morning messages means one gets read.
 
 **What it is.** Once a day, Vera reads what happened yesterday (emails, meeting transcripts), keeps
 only what changes how the business runs, and writes it into the Memory Vault. The vault stops being a
@@ -64,9 +86,13 @@ the skill's row to the skills table.
 ## The daily run
 
 1. Read `config.md`. Read `log.md` for the last feed timestamp.
-2. **Collect** everything new from each source since then, capped at the lookback. Read subject and
-   body, or the transcript summary first and the full transcript only when the summary shows a
-   decision, a rule, a number or a name that matters.
+2. **Collect** everything new from each source since then, capped at the lookback.
+   - **If the inbox pass already ran this morning, take the mail from what it read. Do not read the
+     mailbox again.** That pass has already been through every message and knows which ones carry
+     anything. Re-reading them is the single biggest avoidable cost in this skill.
+   - For sources the inbox pass does not cover, read them here: the transcript summary first, and the
+     full transcript only when the summary shows a decision, a rule, a number or a name that matters.
+   - **If the inbox pass did not run**, read the mailbox yourself: subject and body.
 3. **Reduce, hard.** Keep only: decisions made, rules stated, facts that changed, lessons learned,
    commitments with a date, and open threads that need a person. Drop pleasantries, newsletters,
    notifications, anything already in the vault (check before writing), and anything that is only a

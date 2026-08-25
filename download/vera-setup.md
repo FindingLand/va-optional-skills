@@ -219,6 +219,20 @@ again. Drop documents in as they arrive, then tell Vera to file them.
   Memory Vault is not connected yet, so she stops asking.
 - **Vera cannot find Git (Windows).** Install it from **https://git-scm.com/downloads/win**, click Next
   through every screen, then fully quit Claude and open it again.
+- **Mac: it wants to install "command line developer tools", and the download is taking forever.** That
+  popup is normal and you do want it. It is macOS installing the tools that include Git. Nothing has
+  gone wrong.
+  1. **Click Install in the popup. Do not click "Get Xcode".** Get Xcode sends you to the App Store for
+     the full developer app, which is many times larger and is the usual reason this takes forever.
+  2. Expect roughly 5 to 20 minutes depending on your connection, longer on an older Mac. Leave it
+     running and do not cancel it.
+  3. If it stalls, close the popup, open **Terminal** (Command and Space, type Terminal, press Enter),
+     type `xcode-select --install` and press Enter, then click **Install**.
+  4. If it still will not go through, download it by hand from **https://developer.apple.com/download/all**,
+     sign in with a free Apple ID, search for **Command Line Tools for Xcode**, take the newest one, and
+     run the installer inside the file you downloaded. This is often faster than the popup.
+  **While you wait, keep going.** Part B and Part C do not need Git, so connect Airtable and Google
+  Drive in the meantime.
 - **You named your folder something else.** That is fine. Use that name wherever this guide says
   second-brain.
 - **Vera says Airtable is not connected.** Do Part B, Steps 1 to 4 again, and remember to fully quit

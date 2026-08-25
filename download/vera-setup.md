@@ -200,6 +200,23 @@ again. Drop documents in as they arrive, then tell Vera to file them.
   **https://github.com/apps/claude**, and then click **Finish connecting GitHub** back in Claude.
 - **A GitHub sign-in window popped up and you closed it.** Tell Vera "try again" and this time click
   "Sign in with your browser", then "Authorize".
+- **GitHub says your account is flagged or marked as spam, and pages will not open.** GitHub does this
+  automatically to some brand new accounts. It is not something you did and it is not something you or
+  anyone helping you can undo from your side. Only GitHub Support can lift it.
+  1. Go to **https://support.github.com/contact/reinstatement**. It works even when you cannot sign
+     in.
+  2. Ask for reinstatement. Say your account is new, that you believe it was flagged by mistake, and
+     what you are using GitHub for, which is storing your own working notes for a course. A couple of
+     plain sentences is enough.
+  3. **Do not create a second account while you wait.** That reliably makes it worse and can get the
+     new one flagged too.
+  4. Expect anything from a few hours to a few weeks. GitHub quotes 2 to 3 days. If nothing has
+     happened after 7 to 10 working days, reply politely on the same email thread rather than opening
+     a new request.
+  **Meanwhile, carry on.** Nothing else in this setup needs GitHub: installing Vera, connecting
+  Airtable and building out your hub all work without it. What you lose until it clears is Vera saving
+  your work between sessions, so keep anything important in your own files for now and tell Vera your
+  Memory Vault is not connected yet, so she stops asking.
 - **Vera cannot find Git (Windows).** Install it from **https://git-scm.com/downloads/win**, click Next
   through every screen, then fully quit Claude and open it again.
 - **You named your folder something else.** That is fine. Use that name wherever this guide says

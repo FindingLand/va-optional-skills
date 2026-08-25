@@ -5,7 +5,7 @@ description: "Load before ANY work that reads from or writes to the hub: looking
 
 # Airtable
 
-**Version: 1.0 - 2026-08-24**
+**Version: 1.1 - 2026-08-25**
 
 Airtable is the hub. It holds the properties, the units, the leases, the tenants, the tasks and the
 routines. Almost everything else in this system either reads from it or writes to it, so a mistake
@@ -126,6 +126,51 @@ and nobody knows why, check them before assuming a bug.
   check that number is what you expected.** A filter that is slightly wrong does not fail. It just
   updates the wrong two hundred rows.
 
+## Getting a base someone shared, and giving one away
+
+This comes up twice: when the owner receives a starter base from somebody else, and when they hand a
+base to a partner, an assistant or a client of their own.
+
+**The thing everyone gets wrong: automations do not travel through a share link.** Clicking **Copy
+base** on a public share link copies the tables, the views and the interfaces, and leaves every
+automation behind. The shared page has no Automations tab on it at all. Airtable does that on purpose,
+because an automation can hold a webhook address or an email address belonging to whoever shared the
+base. So a base that arrives with no automations is not broken and nothing was forgotten. It came the
+wrong way.
+
+### Receiving a base properly
+
+1. The owner needs an Airtable account and **a workspace of their own already created**. Airtable will
+   tell them if they have none. A blank one is fine and it does not need a name.
+2. They open the invitation email and then the shared base.
+3. **In the shared base they click Duplicate, and choose THEIR OWN workspace as the destination.**
+4. **Working inside the shared base instead is a real mistake, not a shortcut.** Whoever shared it can
+   see everything put into it, and a hub like this ends up holding the whole business.
+5. **The automations arrive switched OFF.** Open the **Automations** tab and turn on the ones they
+   want. That is normal Airtable behaviour, not a fault in the base. Say this out loud to the owner,
+   because nobody thinks to look.
+6. Anything using a connected account, such as Gmail, Slack or a calendar, has to be reconnected under
+   their own login.
+
+### Giving a base to someone else
+
+1. **Duplicate the base first, name the copy after that one recipient, and share the duplicate. Never
+   share the master.** A Creator on the master can change it, and everyone invited afterwards inherits
+   the change. One copy per recipient also means recipients never see each other.
+2. Open that duplicate and click **Share** at the **top right of the base**.
+3. Type the recipient's email address.
+4. **Grant them Creator permission.** This is the level that carries the ability to duplicate a base.
+   Grant anything lower and they have no way to take their own copy, and the whole thing stalls there.
+5. Delete the intermediate copy once they have theirs.
+
+### Audit a base before handing it to anyone
+
+Whatever sits in it ships to the recipient, switched off but one click away from running. Go through
+the **Automations** tab and look for anything that points at the SENDER'S systems rather than the
+recipient's: webhooks, scripts, connected accounts, and anything whose name is really an internal
+note. An automation the recipient innocently switches on can start sending their own records somewhere
+they never chose.
+
 ## Diagnosis
 
 | What you see | What it usually is | What to do |
@@ -138,3 +183,4 @@ and nobody knows why, check them before assuming a bug.
 | A value looks right in the grid but arrives as gibberish elsewhere | It is a lookup showing a friendly label while passing along an identity | Add a lookup of the value you actually want |
 | Records changed and nobody did it | An automation inside the base | List the base's automations before assuming a bug |
 | The result came back cut off | Too many rows, or too many columns asked for | Filter on the Airtable side and name the fields you need |
+| A base someone shared has no automations in it | It was taken through a share link, which never carries them | Ask them to invite you to a duplicate by email with Creator permission, then duplicate that into your own workspace |

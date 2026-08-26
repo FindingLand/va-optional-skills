@@ -113,6 +113,27 @@ to Cloud for everyday work.
 
 ## Part B. Your central hub on Airtable
 
+### First, getting your own copy of the starter base
+
+**You do not share anything with us and you do not create a share link. You give us one email address
+and we send the base to you.**
+
+1. **Tell us the email you use with Airtable.** That is the only thing we need from you.
+2. **We share the starter base with you**, and Airtable emails you to say so.
+3. **Open the base from that email.**
+4. **If you do not have an Airtable workspace yet, create one.** Any empty workspace is fine and it
+   does not need a name. Airtable will tell you if you have none.
+5. **In the shared base, click Duplicate and choose YOUR OWN workspace as the destination.**
+6. **That copy is yours alone and nobody else can see it.** That is the whole reason for step 5
+   rather than working in the base we shared: this is where your whole business ends up living.
+7. **The automations come across with it, switched OFF.** Open the **Automations** tab in your copy
+   and turn on the ones you want. That is normal Airtable behaviour, not a fault in the base.
+
+**If a step does not match what you are seeing, say so rather than guessing.** The base only needs
+handing over once, so it is worth getting right.
+
+### Then connect it to Claude
+
 1. In Claude Desktop, click your name at the bottom left, then **Settings**, then **Connectors**.
 2. Find **Airtable** and click **Connect**. Sign in to Airtable when it asks.
 3. **Airtable then asks which bases Claude may use. Choose all of them.** There is an option along the

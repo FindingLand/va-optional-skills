@@ -1,6 +1,7 @@
 # Vera setup guide
 
-**Give this file to Vera in your first chat. Drag it into the chat, or paste it in.**
+**You do not need to do anything with this file. Vera fetches it herself.** It is here so you can read
+it if you get stuck, and there is a friendlier version to read at the link in your course materials.
 
 If you followed the Week 1 walkthrough, GitHub is already connected and Vera simply confirms it in one
 line and pulls your Memory Vault onto your computer. If something is not connected yet, she walks you through the steps below, one step at a time.

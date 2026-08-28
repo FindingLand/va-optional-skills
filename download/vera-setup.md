@@ -222,6 +222,21 @@ know:
   and in your routines table in Airtable. When you want her to do something new every day, tell her
   and she adds a row there, never a second schedule.
 
+## Saving from a Cloud session (your phone, or claude.ai in a browser)
+
+Vera saves your work the same way in a Cloud session, with one difference worth understanding:
+
+- **The cloud can never write to your MAIN.** That is a safety feature, not a bug: the cloud's key
+  has no permission to overwrite the main copy of your Memory Vault, so an unattended agent can
+  never damage it.
+- **Cloud saves land on a side branch instead.** That still counts as saved. Nothing is lost, and
+  any later session can read it.
+- **Main is the live memory. A side branch is a saved draft of memory.** Vera answers from main, so
+  what sits on a branch starts shaping her answers only after your next local morning run, when she
+  sweeps the side branches and merges the real work into main. You can also just tell her
+  "Vera, merge it". Work cloud-only for a week and nothing is lost: the drafts pile up safely and
+  all land in main the first time she runs on your computer again.
+
 ---
 
 ## If something does not work

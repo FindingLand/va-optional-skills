@@ -208,6 +208,22 @@ again. Drop documents in as they arrive, then tell Vera to file them.
 
 ---
 
+## Part D. Your one daily routine
+
+Once Vera is set up, she runs your mornings from a single scheduled task whose whole prompt is
+"Good morning, Vera". You do not create it. She offers, and she creates it herself. Three things to
+know:
+
+- It runs while Claude is open on your computer. If your machine was off at that hour, the run
+  simply happens when you next open Claude.
+- The first time, click **Run now** on the task (in the **Scheduled** section of the sidebar) and
+  approve what it asks. That is a one-time step. After it, mornings run on their own.
+- There is only ever this one scheduled task. Everything Vera does each morning lives in her skill
+  and in your routines table in Airtable. When you want her to do something new every day, tell her
+  and she adds a row there, never a second schedule.
+
+---
+
 ## If something does not work
 
 - **Vera says your Memory Vault is not connected.** Do Part A, Step 3 again. The most common miss is
@@ -317,6 +333,11 @@ appear halfway through a task.
 7. **Drive, when filing comes up.** A document they can see and you cannot is a sharing problem, not a
    missing document. Send them to Part C and get the **To File** folder shared once, rather than
    sharing files one at a time for the rest of the course.
+8. **When setup is done, create their one daily routine yourself**: a scheduled task named
+   `good-morning-vera`, every morning at 9 their local time (or the hour they name), whose prompt is
+   exactly "Good morning, Vera" and nothing more. Then have them click **Run now** once and approve
+   the tool prompts, so no future morning stalls. Your skill's "The one routine on their machine"
+   section carries the full shape; never put instructions in the schedule itself.
 
 **Only if a check fails**, walk them through the matching step above, in these plain words, ONE step at
 a time. Give one numbered step, wait for them to say done, then give the next. Never paste the whole

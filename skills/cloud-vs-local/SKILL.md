@@ -5,7 +5,7 @@ description: "Decides whether a piece of work should run in a Cloud session or a
 
 # Cloud or Local
 
-**Version: 2.0 - 2026-08-19**
+**Version: 2.1 - 2026-08-28**
 
 Claude can run in two places and they are not equally capable. Picking the wrong one is the most
 common cause of "it said it worked and nothing happened", and of a session burning an hour
@@ -92,13 +92,24 @@ that job Local.
   does not need a local session.
 - **Anything reached by API behaves identically to local.** Same calls, same results, no
   cloud-specific degradation.
+- **Connections survive a SCHEDULED, unattended run. MEASURED 2026-08-28** with a one-shot cloud
+  routine running headless: Gmail, Google Calendar, Google Drive, Airtable, Supabase, Slack and
+  GitHub all answered real reads with no person present. **The ones that fail are the ones whose
+  stored sign-in is dead or that demand an interactive sign-in** - three connectors raised
+  sign-in-required in that same run. A headless run cannot open a sign-in window, so a connector
+  that fails this way stays dead until someone reconnects it in a browser (claude.ai settings,
+  Connectors), and it fails silently from the routine's point of view. So before building an
+  unattended job on a connector, run one throwaway scheduled run that does a single read on it and
+  read the result back. Token health is per-account and changes without notice.
 - **Why this works at all:** the skills live in the shared repository rather than on one computer, so
   any session on any machine loads them. If they lived only on a desktop, a cloud session would start
   blank.
 
 ## What Cloud genuinely cannot do
 
-- **It cannot see your computer.** No files on your disk, nothing you have installed. **DOCUMENTED.**
+- **It cannot see your computer.** No files on your disk, nothing you have installed, and none of
+  the tools that live ON your machine: a local MCP server, the Chrome browser extension, your
+  scheduled tasks. **DOCUMENTED.**
 - **It cannot be you in a browser.** See the identity table above. **MEASURED.**
 - **It cannot receive an SMS code.** **MEASURED.**
 - **It does not remember anything between runs.** Containers are reclaimed after inactivity and
@@ -138,10 +149,6 @@ compromise.
 
 - **Whether an account caps how many cloud sessions run at once, and at what number.** Cannot be
   determined from inside a container. Needs a real test.
-- **Whether connections survive a SCHEDULED cloud run.** The measurement above came from an
-  interactive session. The documented caveat is that connections needing an interactive sign-in may
-  be absent in an unattended run, so **prove the connection is there in that exact context before
-  building an unattended job on it.**
 
 ## Scheduled routines
 

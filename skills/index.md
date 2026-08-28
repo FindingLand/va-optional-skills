@@ -17,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.36 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
+| `vera/` | 4.37 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal |
 | `tessa/` | 4.2 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.2 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.2 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |
@@ -49,7 +49,7 @@ placeholder is filled in the first time you actually work with that tool. See `s
 
 | Folder | Version | What it does |
 |---|---|---|
-| `cloud-vs-local/` | 2.0 | **Load before answering any "can Cloud do X" question.** Which jobs belong in a Cloud session and which need Local, what Cloud genuinely cannot do, and the rule that these are settled by testing rather than by reasoning. Every claim carries an evidence label |
+| `cloud-vs-local/` | 2.1 | **Load before answering any "can Cloud do X" question.** Which jobs belong in a Cloud session and which need Local, what Cloud genuinely cannot do, and the rule that these are settled by testing rather than by reasoning. Every claim carries an evidence label |
 | `second-brain/` | 1.0 | Builds a written memory of your business your assistant reads at the start of every session |
 | `landlord-inbox-handler/` | 1.2 | Reads your email and turns it into what needs doing today, drafting replies you send yourself. Feeds the day plan rather than producing a second thing to read |
 | `daily-brain-feed/` | 1.1 | OPTIONAL. Feeds your Memory Vault every day from your emails and meeting transcripts. The opposite of the inbox handler: it keeps what changes how the business runs and throws away what merely needs doing. Heavy on reading, so only for owners with many conversations |

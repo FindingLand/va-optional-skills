@@ -5,7 +5,7 @@ description: "Load before building, changing or debugging anything in n8n, and B
 
 # n8n
 
-**Version: 1.1 - 2026-08-29**
+**Version: 1.2 - 2026-08-29**
 
 n8n runs automations on a schedule or on an event, with nobody watching. It is the right tool for a
 narrow band of jobs and the wrong tool for most of what an owner will ask for, so the first section
@@ -98,6 +98,10 @@ This sounds obvious and it is the rule most often broken, because the alternativ
   the destination pointed somewhere safe, and switched over afterwards.
 - **A green tick with zero items is a failure wearing a success badge.** The step ran and found
   nothing. Always look at how many items each step actually handled.
+- **A rehearsal proves the flow you set up, not the flow you have.** If you test a step against a
+  stand-in for what feeds it, that stand-in is a copy of the wiring as you believe it to be. Change
+  the wiring and the rehearsal keeps passing while the real thing has already moved on. After any
+  rewiring, rebuild the stand-in from the flow as it is now, not from memory.
 
 **Anything that sends to a tenant gets a quiet period first**, where it runs for real but delivers to
 the owner instead. That is what catches the wrong name, the wrong date and the empty gap where a
@@ -132,6 +136,16 @@ two disagree.
   somebody real.
 - **A flow that reacts to a change it also causes will run forever.** Anything writing back to what it
   watches needs a guard that stops it when nothing actually differs.
+- **Adding a step in the middle quietly changes what the next step receives.** Most steps read
+  "whatever the previous step produced". Insert a step and that phrase now means something else, all
+  the way down the chain, with no error and nothing turning red. **Whenever you insert or reorder a
+  step, check every step after it for what it is actually reading**, and where a step needs a
+  specific earlier one, have it name that step rather than take whatever is nearest. Naming survives
+  insertion; "the previous step" does not.
+- **The dangerous version of that is the one with a sensible fallback.** A step that cannot find what
+  it expected and quietly substitutes a default does not look broken - it looks fine, and it stays
+  looking fine until the one place the default differs shows up in front of a real person. Prefer a
+  loud failure over a tidy default for anything a tenant will read.
 - **When something goes wrong at three in the morning, nobody is told unless you built the telling.**
   Send failures somewhere a person looks.
 
@@ -158,6 +172,7 @@ outside. Use it for diagnosis. Keep building in your own hands.
 | It works in a test and not for real | The test skipped the real trigger | Make the real event happen and watch it |
 | Two flows give different answers to the same question | The logic was copied instead of shared | Build it once, have both call it |
 | It runs over and over | It reacts to a change it makes itself | Add a guard so it only writes when something actually differs |
+| A step started using default or blank values after an unrelated edit | A step was inserted above it, so "the previous step" now means something else | Have it name the step it needs instead of taking whatever is nearest |
 | Something went out that should not have | It was switched on before a quiet period | Point it at the owner, run it for real, then switch over |
 | The list says live, but nobody ever receives anything | It is still in its quiet period and the row was never moved across | Check where the flow actually delivers, then correct the row |
 | A flow that should be quiet reaches a real person | The recipient was switched over before anyone meant it to go live | Point it back at the owner, then move the row to match |

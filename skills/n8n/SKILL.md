@@ -5,7 +5,7 @@ description: "Load before building, changing or debugging anything in n8n, and B
 
 # n8n
 
-**Version: 1.0 - 2026-08-24**
+**Version: 1.1 - 2026-08-29**
 
 n8n runs automations on a schedule or on an event, with nobody watching. It is the right tool for a
 narrow band of jobs and the wrong tool for most of what an owner will ask for, so the first section
@@ -63,9 +63,10 @@ thing that makes it navigable is the names.
   A test flow that survives the day becomes permanent by accident.
 
 **Every flow that exists gets a row in the owner's automations list**, saying what it does in plain
-words, what triggers it, and whether it is on. A flow nobody has written down is a flow nobody can
-maintain, and it will be rediscovered a year later by whoever is trying to work out why an email went
-out.
+words, what triggers it, whether it is on, and **whether it is actually reaching real people**. Those
+last two are different facts and one of them cannot stand in for the other. A flow nobody has written
+down is a flow nobody can maintain, and it will be rediscovered a year later by whoever is trying to
+work out why an email went out.
 
 ## Credentials
 
@@ -101,6 +102,22 @@ This sounds obvious and it is the rule most often broken, because the alternativ
 **Anything that sends to a tenant gets a quiet period first**, where it runs for real but delivers to
 the owner instead. That is what catches the wrong name, the wrong date and the empty gap where a
 value should have been.
+
+**Which is why the list needs two live statuses, not one.** A flow in its quiet period is switched on,
+runs on schedule and reports success every day, and reaches nobody. Recording that as simply "live"
+is a false claim: it says the work is done and the owner is covered, when in fact not one message has
+left the building. Keep a separate status for running-but-delivering-to-the-owner.
+
+**Ending the quiet period is two changes, and the second one gets forgotten.** Repointing the flow at
+the real recipient is the first. Moving its row from the quiet-period status to live is the second,
+and it happens in the same sitting, as the last step of the same change - not "later", because later
+is how a list stops being trusted. A row left on the quiet-period status understates what is now
+running, and every future reader will assume that flow is still safe to ignore.
+
+**A status nobody can check by hand goes stale.** Where the flow delivers is a fact about the flow
+itself, not a note somebody remembers to keep. Prefer reading it back off the flow - is the recipient
+a real address or the owner's - over trusting what the row claims, and correct the row whenever the
+two disagree.
 
 ## Failure modes worth knowing before they cost a day
 
@@ -142,4 +159,6 @@ outside. Use it for diagnosis. Keep building in your own hands.
 | Two flows give different answers to the same question | The logic was copied instead of shared | Build it once, have both call it |
 | It runs over and over | It reacts to a change it makes itself | Add a guard so it only writes when something actually differs |
 | Something went out that should not have | It was switched on before a quiet period | Point it at the owner, run it for real, then switch over |
+| The list says live, but nobody ever receives anything | It is still in its quiet period and the row was never moved across | Check where the flow actually delivers, then correct the row |
+| A flow that should be quiet reaches a real person | The recipient was switched over before anyone meant it to go live | Point it back at the owner, then move the row to match |
 | Nobody knows what a flow does | It has no row in the automations list | Write the row. A flow nobody wrote down cannot be maintained |

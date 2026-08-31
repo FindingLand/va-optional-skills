@@ -5,7 +5,7 @@ description: "Load before building, changing or debugging anything in n8n, and B
 
 # n8n
 
-**Version: 1.2 - 2026-08-29**
+**Version: 1.3 - 2026-08-31**
 
 n8n runs automations on a schedule or on an event, with nobody watching. It is the right tool for a
 narrow band of jobs and the wrong tool for most of what an owner will ask for, so the first section
@@ -149,6 +149,86 @@ two disagree.
 - **When something goes wrong at three in the morning, nobody is told unless you built the telling.**
   Send failures somewhere a person looks.
 
+## A run history full of ticks is not evidence it works
+
+This is the one that lets a flow stay broken for weeks, and it is invisible unless you go looking.
+
+**A flow that only acts when it finds something does nothing on most days, and reports doing nothing
+as success.** A daily flow that looks for "anyone moving in today" finds nobody on a normal Tuesday,
+finishes in half a second, and shows a green tick. Thirteen of those in a row look like a healthy
+automation. They are thirteen days it was never asked to do anything.
+
+A real case: a daily flow showed green on thirteen days and failed on two. The two red days were the
+only two days it had anything to send. **It had failed on 100% of the occasions that mattered, and
+its success rate was 87%.** Both sentences are true, and only one of them is useful.
+
+**So when you want to know whether a flow works:**
+
+- **Look at how many items the first real step found**, not at the status of the run. Green with zero
+  items found means "nothing to do today", which tells you nothing at all.
+- **Look at how long the run took.** A run that found nothing finishes almost instantly. A run that
+  actually did the work takes noticeably longer. Scanning the durations is the fastest way to find
+  the runs worth opening.
+- **Never quote a success rate for a flow that only fires when it finds a match.** Say how many times
+  it actually had work to do, and how many of those it completed.
+
+## Fixing one step is when you break the next one
+
+The riskiest moment for a working flow is somebody repairing a different part of it.
+
+**Most steps take their input from "whatever ran immediately before".** So the moment you add a step,
+replace a step, or reorder anything, every step below your edit is now being handed something
+different, and nothing warns you. The flow saves fine. The run goes green up to the point it breaks.
+
+A real case worth remembering: a flow's lookup step was broken and got replaced. The replacement was
+correct. But it left a different kind of step sitting directly above the one that sends the email,
+so the email step - which had been told to take the address from "the previous step" - started
+reading the wrong thing and sent to an empty address. **The repair was right and it still broke the
+flow**, because it changed the shape of the chain rather than the logic.
+
+**Two habits that prevent it:**
+
+1. **Have every step name the step it needs, instead of taking whatever is nearest.** This costs
+   nothing while building and it survives any amount of rearranging later. Make it the default on
+   anything that sends, not a repair you apply after a break.
+2. **After any edit that changes the ORDER of steps, check every step below it**, not just the one
+   you touched. Especially the recipient, the subject, and anything that decides yes or no.
+
+**And read the error for what it is.** "The email address '' is not valid" reads like a missing
+address on the record. It was not - the address was correct and sitting right there one step up. An
+empty value almost always means the step is reading from the wrong place, not that the data is
+missing. Check what feeds the step before you go hunting through records.
+
+## After a fix, say whether it is fixed or only changed
+
+A flow that runs on a schedule and only acts when it finds a match **cannot be tested whenever you
+feel like it.** There may be nothing for it to find until next week.
+
+That leaves an honest gap, and the gap is where trust gets lost. **Say "fixed, not yet proved" and
+name what will prove it** - the next real event, and roughly when that is. Do not report a fix as
+done because the change is saved and the flow looks right, which is the exact mistake that let the
+original break survive a month of green ticks.
+
+Write the same thing into the row on your automations list, because that is where the next person
+looks, and a row that says live when the flow has never once delivered is worse than no row.
+
+## When a send fails, finish BOTH halves by hand
+
+A flow that dies while sending has already done everything above that point and none of what comes
+after. People remember to resend the message and forget the rest.
+
+- **Everything above the failure already happened.** Do not redo it; check first, or you write the
+  same thing twice.
+- **Send the message the flow actually produced**, which is sitting in the failed run. Do not retype
+  it from memory - a re-written message contains differences nobody reviewed.
+- **Everything below the failure never happened**, and it is usually the bookkeeping: statuses moved
+  on, records marked done, something archived. Read those off the steps themselves rather than
+  guessing what should have happened.
+
+**If the message grants someone access to something, check the real thing before resending.** A
+record saying a code was created is a claim about the past. The lock, the account, the door is the
+only thing that actually knows.
+
 ## Debugging
 
 Reading a broken run through the interface is slow. Be systematic instead of clicking around.
@@ -173,6 +253,9 @@ outside. Use it for diagnosis. Keep building in your own hands.
 | Two flows give different answers to the same question | The logic was copied instead of shared | Build it once, have both call it |
 | It runs over and over | It reacts to a change it makes itself | Add a guard so it only writes when something actually differs |
 | A step started using default or blank values after an unrelated edit | A step was inserted above it, so "the previous step" now means something else | Have it name the step it needs instead of taking whatever is nearest |
+| Almost every run is green, yet it has never actually delivered anything | The green runs are days it found nothing to do; it failed on the days that mattered | Count the items the first real step found, not the runs that succeeded |
+| A message went out with an empty recipient, subject or body | The sending step is reading from whatever ran before it, and something new was put there | Check what feeds the step before hunting through records; the value is usually correct one step up |
+| It broke right after somebody fixed something else in it | The repair changed the ORDER of the steps, not just the logic | Check every step below the edit, especially recipients and yes/no decisions |
 | Something went out that should not have | It was switched on before a quiet period | Point it at the owner, run it for real, then switch over |
 | The list says live, but nobody ever receives anything | It is still in its quiet period and the row was never moved across | Check where the flow actually delivers, then correct the row |
 | A flow that should be quiet reaches a real person | The recipient was switched over before anyone meant it to go live | Point it back at the owner, then move the row to match |

@@ -5,7 +5,7 @@ description: "Decides whether a piece of work should run in a Cloud session or a
 
 # Cloud or Local
 
-**Version: 2.1 - 2026-08-28**
+**Version: 2.2 - 2026-08-31**
 
 Claude can run in two places and they are not equally capable. Picking the wrong one is the most
 common cause of "it said it worked and nothing happened", and of a session burning an hour
@@ -26,7 +26,8 @@ right answer whenever your own machine is loaded, because a cloud session costs 
 
 **Local** for anything that needs **your browser identity**: a site you have to be logged into as
 you, anything with SMS two-factor, anything that trusts your device. Also anything touching files on
-your computer, and anything that must save straight to the main copy of your work.
+your computer. Landing repository work in main is not on this list - a cloud session does that
+itself.
 
 **Split it deliberately** when a job has both halves. Build in the cloud, push, then open a local
 session on the same branch and do only the browser steps there. **Deciding that up front beats
@@ -114,8 +115,11 @@ that job Local.
 - **It cannot receive an SMS code.** **MEASURED.**
 - **It does not remember anything between runs.** Containers are reclaimed after inactivity and
   **unpushed work is lost.** Anything worth keeping gets pushed. **MEASURED.**
-- **It cannot save straight to the main copy.** It saves to a side branch that then needs merging.
-  The work is not lost, but it is not in main until somebody merges it. **DOCUMENTED.**
+- ~~It cannot save straight to the main copy.~~ **WRONG - corrected 2026-08-31, MEASURED.** A cloud
+  session can push straight to main, and it can open a pull request and merge that itself, including
+  resolving a conflict first. The old claim was worse than wrong: sessions that read it stopped at
+  the push and stranded finished work on branches. If a session leaves work on a side branch, that
+  is a session that stopped early, not a platform limit - ask it to finish the merge.
 - **It cannot hand over to a local session mid-flight.** There is no bridge between the two.
   **MEASURED: a cloud container asked for reachable local agents and got none.**
 
@@ -165,8 +169,8 @@ compromise.
 
 1. **Does it need a file on your computer?** Then Local, and it was never going to work.
 2. **Does it need to be signed in as you, or an SMS code?** Local.
-3. **Did it actually save?** Cloud saves to a side branch. Read the destination back rather than
-   believing the report.
+3. **Did it actually save?** Read the destination back rather than believing the report, and check
+   whether it landed on main or on a side branch - a session can and should finish the merge itself.
 4. **Did it lose something from last time?** Every run starts fresh. Anything it must remember has to
    have been written somewhere that persists.
 

@@ -1,8 +1,8 @@
 ---
-name: prompt-architect
-description: Turn vague requests into engineered, role-based prompts ready to copy into any LLM. Use when the user wants a prompt generated for them to use elsewhere, not when they want Claude to do a task directly. Triggers on the slash command "/prompt" and on phrases like "write me a prompt for...", "engineer a prompt that...", "help me prompt Claude to...", "I need a prompt for...", "generate/build/draft/craft a prompt...". Do NOT trigger when the user is asking Claude to do the task itself, when "prompt" appears in a non-LLM context (login prompt, command prompt, modal prompt), when the user wants existing non-prompt copy rewritten, or when asking a conceptual question about prompt engineering.
+name: prompt-writer
+description: Turn vague requests into engineered, role-based prompts ready to copy into any LLM. Use when the user wants a prompt generated for them to use elsewhere, not when they want Claude to do a task directly. Triggers on the slash command "/prompt" and on phrases like "write a prompt", "write me a prompt for...", "i need a prompt", "I need a prompt for...", "engineer a prompt that...", "help me prompt Claude to...", "generate/build/draft/craft a prompt...". Do NOT trigger when the user is asking Claude to do the task itself, when "prompt" appears in a non-LLM context (login prompt, command prompt, modal prompt), when the user wants existing non-prompt copy rewritten, or when asking a conceptual question about prompt engineering.
 ---
-# Prompt Architect
+# Prompt Writer
 
 **Version: 1.0 - 2026-08-10**
 

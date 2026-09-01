@@ -17,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.40 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal. 4.40: Cloud sessions name their bound repo (public or private) before the first commit, and they CAN merge and push to main, so work lands instead of stranding on branches |
+| `vera/` | 4.41 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal. 4.41: naming the daily thread is only done when the SESSION is renamed - setting a chapter marker feels like it and is not, which is how the step gets skipped even when the rule is written down |
 | `tessa/` | 4.2 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.2 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.2 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |

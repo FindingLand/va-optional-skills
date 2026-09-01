@@ -38,7 +38,8 @@ You talk to Vera. She decides who does the work.
 | `drive-organizer` | Turns a messy Google Drive into a clear structure, previewing before it moves anything |
 | `file-namer` | Gives every document one consistent name and one correct home |
 | `second-brain` | Builds a written memory of your business your assistant reads at the start of every session |
-| `prompt-architect` | Turns a vague request into a reusable, properly built prompt |
+| `prompt-writer` | Turns a vague request into a reusable, properly built prompt |
+| `prompt-architect` | Renamed to `prompt-writer` on 08-31-2026. Delete your old `prompt-architect` folder if you still have one |
 | `landing-page-copywriter` | Writes the words for a page that gets people to sign up or buy |
 | `linkedin-writer` | Turns an idea or a story into a LinkedIn post |
 

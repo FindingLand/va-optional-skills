@@ -57,7 +57,8 @@ placeholder is filled in the first time you actually work with that tool. See `s
 | `drive-organizer/` | 1.1 | Turns a messy Google Drive into a clear structure, previewing before it moves anything |
 | `file-namer/` | 1.2 | Gives every document one consistent name and one correct home |
 | `skill-creator/` | 1.0 | Turning a repeatable process into a skill, the placeholder pattern for a tool you have not started using yet, and filling that placeholder in while the work is actually happening |
-| `prompt-architect/` | 1.0 | Turns a vague request into a reusable, properly built prompt |
+| `prompt-writer/` | 1.0 | Turns a vague request into a reusable, properly built prompt |
+| `prompt-architect/` | RENAMED | Renamed to `prompt-writer/` on 08-31-2026. If you already have a `prompt-architect/` folder from an earlier pull, delete it so it does not compete with the new one |
 
 ## Building things for yourself
 

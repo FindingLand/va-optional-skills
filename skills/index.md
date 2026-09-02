@@ -17,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.41 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal. 4.41: naming the daily thread is only done when the SESSION is renamed - setting a chapter marker feels like it and is not, which is how the step gets skipped even when the rule is written down |
+| `vera/` | 4.42 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal. 4.42: a repo that will not show in the Cloud picker has an ordered check to walk, the org-settings error after connecting GitHub means it WORKED, and git steps run one at a time because a chained command is what gets refused |
 | `tessa/` | 4.2 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.2 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.2 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |

@@ -17,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.42 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal. 4.42: a repo that will not show in the Cloud picker has an ordered check to walk, the org-settings error after connecting GitHub means it WORKED, and git steps run one at a time because a chained command is what gets refused |
+| `vera/` | 4.43 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal. 4.43: a refused git push is urgent on Cloud and harmless on Local, because a Cloud container is reclaimed and unpushed work in it is gone. 4.42 added the ordered check for a repo that will not show in the Cloud picker |
 | `tessa/` | 4.2 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.2 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.2 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |
@@ -51,7 +51,7 @@ placeholder is filled in the first time you actually work with that tool. See `s
 | Folder | Version | What it does |
 |---|---|---|
 | `cloud-vs-local/` | 2.1 | **Load before answering any "can Cloud do X" question.** Which jobs belong in a Cloud session and which need Local, what Cloud genuinely cannot do, and the rule that these are settled by testing rather than by reasoning. Every claim carries an evidence label |
-| `second-brain/` | 1.0 | Builds a written memory of your business your assistant reads at the start of every session |
+| `second-brain/` | 1.1 | Builds a written memory of your business your assistant reads at the start of every session (1.1: git steps run one at a time, a joined `&&` command is what gets refused) |
 | `landlord-inbox-handler/` | 1.2 | Reads your email and turns it into what needs doing today, drafting replies you send yourself. Feeds the day plan rather than producing a second thing to read |
 | `daily-brain-feed/` | 1.1 | OPTIONAL. Feeds your Memory Vault every day from your emails and meeting transcripts. The opposite of the inbox handler: it keeps what changes how the business runs and throws away what merely needs doing. Heavy on reading, so only for owners with many conversations |
 | `drive-organizer/` | 1.1 | Turns a messy Google Drive into a clear structure, previewing before it moves anything |

@@ -80,6 +80,16 @@ steps for that one thing, and only that one.
 
 ### Step 3. Let Claude into your Memory Vault
 
+**Answer this before you touch anything: which GitHub account owns your second-brain folder, and is
+it the same account you are signed in to right now?** If you have two GitHub accounts, one personal
+and one for work, this is the question that decides whether the rest of the setup works. Open
+**https://github.com** and look at the picture in the top right corner: that is who you are signed in
+as. Check the folder is on that account at **https://github.com/YOUR-USERNAME?tab=repositories**. If
+it is on the other account, sign out and sign back in as the owner before you go on.
+
+Getting this wrong does not produce an error. It produces an empty list later, with nothing anywhere
+saying why.
+
 **⚠️ On a Claude Team or Enterprise account, do this part first.** The GitHub connector does not
 appear anywhere until someone switches it on for the organisation. Go to **Organization Settings**,
 then **Connectors**, and enable GitHub there. Then switch it on again in your own personal settings.
@@ -94,6 +104,14 @@ start at step 1.
 6. Pick **second-brain** from the list.
 7. Click **Install** (or "Save").
 8. Go back to Claude Desktop.
+
+**If the Configure button gives you a 404 page**, skip it. Open
+**https://github.com/apps/claude/installations/new** instead, which always works: pick your account,
+choose **Only select repositories**, tick **second-brain**, and Save.
+
+**And the page you land on next is not an error.** Claude often finishes by sending you to a page
+that reads **"You don't have access to organization settings"**. That message means the connection
+worked. Click **Go to chat** and carry on with Step 4.
 
 ### Step 4. Open Claude on your computer (Local)
 
@@ -247,10 +265,24 @@ Vera saves your work the same way in a Cloud session, with one difference worth 
   where it stays hidden until someone enables it for the organisation. Go to **Organization Settings**,
   then **Connectors**, switch GitHub on there, then switch it on again in your own settings. It has to
   be both, in that order.
-- **You saw "You don't have access to organization settings", and the GitHub connection never
-  finished.** This is not a real permission limit, and pressing Connect again does not clear it. One
-  thing fixes it: **uninstall** the Claude GitHub App completely, install it again from
-  **https://github.com/apps/claude**, and then click **Finish connecting GitHub** back in Claude.
+- **You saw "You don't have access to organization settings", or a page about Team and Enterprise
+  plans.** **Your connection worked.** Claude finishes the GitHub handshake and then sends you to a
+  settings page your account was never meant to open, so a success arrives looking like a failure.
+  **Do not uninstall anything and do not start the connection again.** Click **Go to chat** on that
+  page, quit Claude completely and open it again, start a new session, and your Memory Vault is
+  there.
+- **The Configure button on the Claude app in GitHub gives a 404.** Skip it and use
+  **https://github.com/apps/claude/installations/new**, which always works: pick your account,
+  **Only select repositories**, tick **second-brain**, Save. A 404 on Configure often means the app
+  is installed on a different GitHub account from the one you are looking at, so check the picture
+  in the top right corner while you are there.
+- **The list of folders is empty, and nothing anywhere says there is a problem.** You have two
+  GitHub accounts and Claude is connected to the one that does not own second-brain. This is the
+  quietest failure in the whole setup, which is why it costs people an afternoon. Open
+  **https://github.com**, read the picture in the top right corner, and check your folders at
+  **https://github.com/YOUR-USERNAME?tab=repositories**. Then in Claude go to **Settings**, then
+  **Connectors**, disconnect **GitHub**, and connect it again while signed in as the account that
+  owns the folder.
 - **A GitHub sign-in window popped up and you closed it.** Tell Vera "try again" and this time click
   "Sign in with your browser", then "Authorize".
 - **GitHub says your account is flagged or marked as spam, and pages will not open.** GitHub does this
@@ -320,13 +352,23 @@ appear halfway through a task.
 
 1. Run `git --version`. No version on Windows means Git for Windows is missing: send them to the
    "cannot find Git" line above, then they quit and reopen Claude. Stop until it passes.
-1b. **If GitHub is not connected at all, find out which of the two known causes it is before guiding
-   anything.** If they cannot see the GitHub connector in the first place, they are on a Team or
-   Enterprise account and it has to be enabled at the organisation level first, then personally. If
-   they saw "You don't have access to organization settings" and the connection hung, the only fix is
-   uninstall the GitHub App, reinstall from github.com/apps/claude, then "Finish connecting GitHub".
-   Both are in the troubleshooting list above. **Neither clears by retrying**, so do not let them sit
-   pressing Connect.
+1a. **⭐ Ask the identity question before you guide a single GitHub step: which GitHub account owns
+   their Memory Vault, and is it the account they are signed in to right now?** Two accounts, one
+   personal and one for work, is the commonest cause of a folder list that comes back empty with no
+   error anywhere. Have them open github.com, read the picture in the top right corner, and confirm
+   the folder sits on that account (github.com/THEIR-USERNAME?tab=repositories). If it does not, they
+   disconnect GitHub in Settings, then Connectors, and connect again signed in as the owner. Ask this
+   first, every time. Every step after it is wasted if the answer is wrong.
+1b. **If GitHub is not connected at all, find out which of the three known causes it is before
+   guiding anything.** If they cannot see the GitHub connector in the first place, they are on a Team
+   or Enterprise account and it has to be enabled at the organisation level first, then personally.
+   If the folder list is empty with no error, it is the two-accounts trap in 1a. And **if they saw
+   "You don't have access to organization settings", the connection has already succeeded**: tell
+   them to click "Go to chat", quit and reopen Claude, and start a new session. **⛔ Never send
+   anyone to uninstall and reinstall the GitHub App over that message.** It tears down a connection
+   that is already working, and it is what this guide used to say. If GitHub's own **Configure**
+   button 404s, send them to github.com/apps/claude/installations/new instead. All of it is in the
+   troubleshooting list above.
 2. Is the working folder already a clone of their Memory Vault? Run `git remote -v`. If not, ask
    which repository is their vault (usually `second-brain`), then clone it into the working folder:
    `git clone https://github.com/<user>/second-brain`. On Windows a GitHub sign-in window opens the

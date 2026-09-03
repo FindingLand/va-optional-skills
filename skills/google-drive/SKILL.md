@@ -5,9 +5,9 @@ description: "How this system works with Google Drive, and the rules that stop D
 
 # Google Drive
 
-**Version: 1.5 - 2026-09-03 (Drive holds the files, the vault holds an index pointing at them).
+**Version: 1.6 - 2026-09-03 (Drive holds the files, the vault holds an index pointing at them).
 Adds the document index, so the assistant can answer "where is the signed lease" without the repo
-ever carrying the file.**
+ever carrying the file. 1.6: index from now on, never a retroactive sweep.**
 
 This skill is the rules. The work itself lives in two other skills:
 
@@ -198,6 +198,12 @@ finding it costs a search every time, which is the state most owners are already
 **Write the row in the same pass that files the document, never as a tidy-up later.** An index that
 lags behind Drive is one nobody trusts, and an untrusted index gets bypassed, which puts everyone back
 to searching.
+
+**⛔ Start from now, never go back and index everything already in Drive.** A retroactive sweep of a
+Drive that has been filling up for years is a big job with no owner, and it is the reason an index
+like this usually never gets started at all. **The index earns its keep from the first row.** Index
+what you file from today onward, and add an older document the moment somebody actually asks for it,
+which is the only proof it was worth a row.
 
 **Moving a file keeps its link** (section 5), so a later reorganisation of Drive does not break the
 index. That is what makes this safe to maintain.

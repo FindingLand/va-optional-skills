@@ -5,9 +5,9 @@ description: "Load before ANY question about how the owner's repositories are or
 
 # GitHub
 
-**Version: 1.1 - 2026-09-03 (files and images live in Drive, the repo holds an index that points at
+**Version: 1.2 - 2026-09-03 (files and images live in Drive, the repo holds an index that points at
 them). Adds the size limits, the reason paying GitHub does not solve a big-files problem, and the
-document index pattern.**
+document index pattern. 1.2: index from now on, never a retroactive sweep of an existing Drive.**
 
 GitHub holds the Memory Vault. It is where every skill, decision, policy and note about the business
 lives, and it is the one thing that makes tomorrow's session know what today's session learned.
@@ -134,6 +134,12 @@ carrying the bytes.** Asked where the signed lease for a unit is, she reads one 
 answers with the link, instead of hunting through Drive or being unable to answer at all. **Add the
 row in the same moment the file goes into Drive**, never as a tidy-up later, because an index that
 lags is one nobody trusts.
+
+**⛔ Start from now, never go back and index everything already in Drive.** A retroactive sweep of a
+Drive that has been filling up for years is a big job with no owner, and it is the reason an index
+like this usually never gets started at all. **The index earns its keep from the first row.** Index
+what you file from today onward, and add an older document the moment somebody actually asks for it,
+which is the only proof it was worth a row.
 
 **The honest exception:** a few small images that are genuinely part of a note, a diagram or a
 screenshot inside a document, are fine in the repo. This rule is about scans, photos and volume.

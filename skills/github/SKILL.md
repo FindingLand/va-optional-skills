@@ -5,7 +5,7 @@ description: "Load before ANY question about how the owner's repositories are or
 
 # GitHub
 
-**Version: 1.1 - 2026-09-02 (files and images live in Drive, the repo holds an index that points at
+**Version: 1.1 - 2026-09-03 (files and images live in Drive, the repo holds an index that points at
 them). Adds the size limits, the reason paying GitHub does not solve a big-files problem, and the
 document index pattern.**
 

@@ -5,7 +5,7 @@ description: "How this system works with Google Drive, and the rules that stop D
 
 # Google Drive
 
-**Version: 1.5 - 2026-09-02 (Drive holds the files, the vault holds an index pointing at them).
+**Version: 1.5 - 2026-09-03 (Drive holds the files, the vault holds an index pointing at them).
 Adds the document index, so the assistant can answer "where is the signed lease" without the repo
 ever carrying the file.**
 

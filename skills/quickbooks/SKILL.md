@@ -5,7 +5,7 @@ description: "Load before ANY work touching QuickBooks: reading the profit and l
 
 # QuickBooks
 
-**Version: 1.2 - 2026-09-07**
+**Version: 1.3 - 2026-09-07**
 
 QuickBooks is where the money story of the business is written down. Everything else can be rebuilt.
 This cannot, and it is what the owner's accountant, their lender and their tax filing all read.
@@ -44,8 +44,13 @@ problem and the rest of this block does not apply.
 - **Rule out the two dead ends first**, because both look identical from the owner's chair: it is
   **QuickBooks Online only** (an installed QuickBooks Desktop company file will never connect, and
   "my QuickBooks file" is the phrase that gives it away), and it is **US only**.
-- The other route in is a developer app plus n8n. That is a real build, gated on Intuit's own review
-  taking several days, so load `connect-quickbooks-to-n8n` before promising it is quick.
+- **The other route in is a developer app plus the Intuit API, and it does work.** It is what an owner
+  needs anyway the moment an automation has to reach the books with nobody present. Be straight about
+  the price: **roughly two hours of forms, then several days waiting on Intuit's review**, plus a
+  published privacy policy and terms page, plus several steps only they can do. **Only worth it if the
+  automations it unlocks save them many hours every month, every month.** If they just want to read
+  reports and draft entries, this connector is the right tool and that road is a waste of their
+  afternoon. Load `connect-quickbooks-to-n8n` before saying another word about it.
 - **⭐ It is NOT broken for everyone, and that matters when you answer someone.** A reference build on
   2026-09-04 connected it normally and read a full profit and loss out of it. So the honest line is
   "this specific failure is a known bug", never "the connector does not work".

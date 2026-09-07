@@ -5,16 +5,50 @@ description: "Load before connecting QuickBooks to n8n, before creating an Intui
 
 # Connect QuickBooks to n8n
 
-**Version: 1.1 - 2026-09-07**
+**Version: 1.2 - 2026-09-07**
 
 This is one job and one job only: get the owner's own n8n instance talking to the owner's own
 QuickBooks Online company, starting from nothing and finishing at a credential that provably works.
 It does not build any automation on top of that. It gets you a connection you have proven is real, so
 the next skill can use it.
 
+## ⛔ FIRST, DECIDE WHETHER IT IS WORTH DOING AT ALL
+
+**This connection is genuinely possible and it is genuinely a chore. Both halves are true and the
+owner deserves to hear both before they start.** It is not a few clicks, it cannot be finished in one
+sitting, and no amount of help removes the parts only they can do.
+
+**What it actually costs them, and plan on the high end:**
+
+- **About two hours of forms**, spread over the developer portal. Some people move faster. Plan on two.
+- **Then several days of waiting** on Intuit's review, with nothing to do and nobody to call.
+- **Published legal pages.** The form will not accept a privacy policy or terms link that does not
+  resolve to a real page, so if they have none, that is part of the job too.
+- **Their own hands on several steps.** The compliance answers, the client secret and the sign-in are
+  theirs and cannot be delegated.
+
+**⭐ THE TEST, and give them the honest answer rather than the encouraging one: this is only worth it
+if the automations it unlocks will save them MANY HOURS EVERY MONTH, every month, forever.** The
+setup cost is paid once. An automation that saves twenty minutes a month never repays it, and they
+will resent the afternoon. Categorising every receipt that arrives by email, month after month, does
+repay it comfortably.
+
+**So ask what they actually want automated, and estimate the recurring hours BEFORE anyone opens the
+developer portal.** If the honest answer is "a couple of hours a month", say so and point them at the
+QuickBooks connector instead, which is a few clicks and needs none of this. See the `quickbooks/`
+skill.
+
+**And if they only need to READ the books, stop here.** Reports, lookups, drafting an entry they post
+themselves: the connector does all of that with no developer app, no questionnaire and no wait. This
+whole road exists for one thing, an automation that must reach the books with **nobody present**.
+
+**What is genuinely easier now than it used to be:** every trap on this road is written down, so the
+work is following a known path rather than discovering it. That changes the frustration, not the
+clock. The forms still take what they take and Intuit still reviews for as long as it reviews.
+
 ## Read this before anyone starts: the wall is Intuit's review, not the build
 
-**The forms and the setup are under an hour of work. The waiting is the cost.** An Intuit developer
+**The forms are a couple of hours. The waiting is the real cost.** An Intuit developer
 app is born "in development" and hands out sandbox keys only. Production keys, the ones that reach the
 owner's real books, unlock only after two things are done in the developer portal, App details and a
 Compliance questionnaire, and then Intuit reviews what was submitted. That review takes **several
@@ -36,8 +70,8 @@ days".
 **⭐ And the part worth telling the owner up front, because it is the good news: once the keys landed,
 the credential connected on the FIRST attempt.** Not because that owner was lucky, but because every
 trap below had already been read before the forms were touched. **The whole cost of this job is the
-waiting plus about an hour of forms.** The failures people report are almost always someone meeting
-these traps live rather than reading them first.
+waiting plus roughly two hours of forms.** The failures people report are almost always someone
+meeting these traps live rather than reading them first.
 
 ## Go straight to production. The sandbox is a trap for this use
 

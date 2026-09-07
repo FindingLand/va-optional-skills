@@ -5,7 +5,7 @@ description: "Load before ANY work touching QuickBooks: reading the profit and l
 
 # QuickBooks
 
-**Version: 1.3 - 2026-09-07**
+**Version: 1.4 - 2026-09-07**
 
 QuickBooks is where the money story of the business is written down. Everything else can be rebuilt.
 This cannot, and it is what the owner's accountant, their lender and their tax filing all read.
@@ -17,7 +17,9 @@ to WRITE.**
 
 There is an official QuickBooks connector for Claude, and it is the way in. The owner turns it on the
 same way they turned on the others: settings, connectors, find QuickBooks, connect, and sign in to
-QuickBooks itself to authorise it. It works from the desktop app, the web, and Claude Code.
+QuickBooks itself to authorise it. Once connected it is reachable from the desktop app, the web and
+Claude Code alike. **⛔ "Connect" is the step that fails for some owners, so read the block below
+before you tell anyone this is a few clicks.**
 
 **⛔ Check availability before promising it.** The connector has not been available everywhere at
 once, and owners outside the United States have hit a flat refusal to connect rather than a helpful
@@ -32,8 +34,10 @@ problem and the rest of this block does not apply.
 
 - **It is not their machine and it is not a setting.** Disconnecting and reconnecting, restarting the
   app, signing out of QuickBooks first, a different browser and clearing cookies have all been tried
-  by other owners and none of them fixes it. Anthropic has it logged as an open bug (issue 334 on
-  `anthropics/claude-ai-mcp`, labelled `auth` and `bug`), with no confirmed workaround.
+  by other owners and none of them fixes it. **A user filed it on `anthropics/claude-ai-mcp` as issue
+  334, opened 2026-05-21**, labelled `auth`, `bug` and **`user-report`**. ⛔ **Nobody from Anthropic
+  has responded, there is no assignee and no fix commitment**, so say "a reported bug", never
+  "Anthropic has logged it", which implies an acknowledgment that does not exist.
 - **The reported cause, and it is the reporter's reading rather than a vendor statement, so say it
   that way:** the connector is registered as not requiring authentication, because it also supports
   an owner with no subscription who just pastes their numbers in. That flag short-circuits the sign-in
@@ -54,8 +58,10 @@ problem and the rest of this block does not apply.
 - **⭐ It is NOT broken for everyone, and that matters when you answer someone.** A reference build on
   2026-09-04 connected it normally and read a full profit and loss out of it. So the honest line is
   "this specific failure is a known bug", never "the connector does not work".
-- **Re-check before repeating this.** It is an open bug with a fix expected, so try the connect once
-  yourself; if the sign-in screen now appears, delete this block and date the correction.
+- **⏰ Re-check before repeating this, and do NOT tell anyone a fix is coming.** The report has sat
+  with no vendor reply since 2026-05-21, which is evidence against a quick fix rather than for one.
+  Try one connect yourself before quoting any of this; if the sign-in screen now appears, delete this
+  block and date the correction.
 
 ## Two things that bite AFTER it connects, and both look like your mistake
 
@@ -69,11 +75,12 @@ offered, and tell them what you set.**
 
 **⛔⛔ THE CONNECTOR'S OWN TOTALS ARE WRONG. READ THE NAMED ROWS, NEVER THE COMPUTED FIELDS (measured
 2026-09-04 on a real company).** Account-level detail comes back correct and the rollups on top of it
-do not. What was actually seen: top-level `totalExpenses` returned `0` for a period holding about
-$170k of real expenses; a month's `totalIncome` returned `582.49` while that same month's
-`incomeAccounts` showed `1 - Rental Income = 33004.04`; `grossProfit` and `netIncome` inherit the
-error because they are derived from those. The balance sheet and the profit and loss disagreed with
-each other on net income for the same books over the same period.
+do not. What was actually seen: top-level `totalExpenses` returned **exactly `0`** for a period
+holding six figures of real expenses; a month's `totalIncome` came back **roughly two orders of
+magnitude below** that same month's own rental-income account row; `grossProfit` and `netIncome`
+inherit the error because they are derived from those. The balance sheet and the profit and loss
+**reported different net income for the same books over the same period**, which is the cheapest
+single check that something is wrong.
 
 - **Read instead, inside `monthlyBreakdown["<start> - <end>"]`:** money in is
   `incomeAccountsAggregated["Income"]`, cost of goods sold is
@@ -93,10 +100,11 @@ and it is invisible to every report. Money collected in a rent platform and neve
 invisible too. **The connector cannot see the For Review queue at all**, so that check happens on
 QuickBooks' own Banking screen, by the owner.
 
-This is not hypothetical. On a real portfolio at full occupancy with about $40k a month of rent, the
-profit and loss read $33k, $36k, $36k and $30k for January to April and then **$0 for June, July and
-August**, because roughly four months of income had never been categorised. Reported without the
-check, that is a confident, completely wrong number.
+This is not hypothetical. On a real portfolio that was fully occupied and collecting rent every
+month, the profit and loss showed a normal, steady income figure through the first months of the year
+and then **exactly zero for each of the three most recent months**, because months of income had
+never been categorised. Reported without the check, that is a confident and completely wrong number,
+and the zero reads like a real business result rather than a gap.
 
 **Two diagnostics that narrow it without leaving the connector:** accounts receivable aging empty AND
 income zero means they are not invoicing in QuickBooks at all, so income can only be arriving through
@@ -108,8 +116,10 @@ abandoned and it is income categorisation specifically.
 top of the gap and do not quietly render the zero.
 
 **⭐ On the first session, ask it what it can do rather than assuming.** This connector is new and
-what it exposes has been changing. Read a small report, then try the smallest possible write, and
-find out. **Then write what you learned into this file with the date**, because the next session
+what it exposes has been changing. Read a small report and learn it that way. **⛔ Do NOT probe its
+write side by writing to the owner's real books**, not even a small one: the rule below is that they
+post and you draft, and a test entry is still an entry on a real ledger. If you need to know whether
+a write is supported, ask the connector what tools it has. **Then write what you learned into this file with the date**, because the next session
 should not have to discover it again. Do not tell the owner a capability exists until you have seen
 it work.
 

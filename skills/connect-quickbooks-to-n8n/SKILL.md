@@ -5,7 +5,7 @@ description: "Load before connecting QuickBooks to n8n, before creating an Intui
 
 # Connect QuickBooks to n8n
 
-**Version: 1.2 - 2026-09-07**
+**Version: 1.3 - 2026-09-07**
 
 This is one job and one job only: get the owner's own n8n instance talking to the owner's own
 QuickBooks Online company, starting from nothing and finishing at a credential that provably works.
@@ -69,9 +69,10 @@ days".
 
 **⭐ And the part worth telling the owner up front, because it is the good news: once the keys landed,
 the credential connected on the FIRST attempt.** Not because that owner was lucky, but because every
-trap below had already been read before the forms were touched. **The whole cost of this job is the
-waiting plus roughly two hours of forms.** The failures people report are almost always someone
-meeting these traps live rather than reading them first.
+trap below had already been read before the forms were touched. **Nothing here is hard once you know
+it: the cost is the waiting, the forms, the published legal pages and the handful of steps only the
+owner can take.** The failures people report are almost always someone meeting these traps live
+rather than reading them first.
 
 ## Go straight to production. The sandbox is a trap for this use
 

@@ -17,7 +17,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 4.44 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal. 4.43: a refused git push is urgent on Cloud and harmless on Local, because a Cloud container is reclaimed and unpushed work in it is gone. 4.42 added the ordered check for a repo that will not show in the Cloud picker. 4.44: "set this up as a routine" means a row in the routines table, never a second schedule and never a scheduled cloud agent, which cannot reach their connectors anyway |
+| `vera/` | 4.45 | Chief of staff. Keeps your skills current, runs the daily pass, routes everything, holds anything legal. 4.43: a refused git push is urgent on Cloud and harmless on Local, because a Cloud container is reclaimed and unpushed work in it is gone. 4.42 added the ordered check for a repo that will not show in the Cloud picker. 4.44: "set this up as a routine" means a row in the routines table, never a second schedule and never a scheduled cloud agent, which cannot reach their connectors anyway. 4.45: the good-morning thread is named by passing "self" as the session id, which renames the session you are in without looking anything up and cannot touch your other open threads |
 | `tessa/` | 4.2 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings |
 | `fiona/` | 4.2 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.2 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |

@@ -1,6 +1,6 @@
 # Troubleshooting
 
-**Version: 1.1 - 2026-09-07**
+**Version: 1.2 - 2026-09-07**
 
 Things that go wrong, in the words you would use to describe them. Find the one that sounds like your
 problem and work down from there.
@@ -183,6 +183,79 @@ on top, push, then show me from GitHub that both sets of changes are on main"*
 
 **#tech-help if:** she reports a conflict, or the check at the end shows something missing. Say what
 you changed in each place.
+
+---
+
+## The morning routine
+
+### There is no way to set up my morning routine on the routines page
+
+**Usually:** two completely different things share the name "routine", and the page you found only
+makes the wrong one.
+
+The **routines page on the website** makes routines that run on Anthropic's computers, not yours.
+They start from a fresh copy of a code repository, they cannot see your machine, your files, or
+anything you are signed into, and a connection you added on your own computer rather than on
+claude.ai is not there either. That is a good fit for work that lives entirely inside a repository. It
+is the wrong engine for your morning, because everything your morning touches, your vault, your
+files, your signed-in browser, is on your computer.
+
+**The one you want runs on your computer, and it is made somewhere else.** In the Claude app on your
+machine: the **Code** tab, **Routines** in the sidebar, **New routine**, then choose **Local** rather
+than Cloud. It asks you for a folder and asks you to trust that folder before it will save, and the
+schedule is whichever preset it offers you.
+
+**Easier, and what we would do:** do not build it by hand at all. Ask her, in a session on your own
+computer.
+
+**Ask your Claude:** *"Set up a scheduled task on this computer, every weekday at 9am my time, whose
+whole prompt is 'Good morning, Vera' and nothing else. Make it a local task on my machine, not a
+cloud routine. Then tell me where it lives so I can find it again"*
+
+**If you already made one on the website:** delete it there and make the local one instead. It was
+never going to reach your machine, so nothing is lost by removing it.
+
+**#tech-help if:** the app on your computer has no Routines option anywhere. That usually means the
+app is too old, so update it first and say which version you are on.
+
+### My morning did not run
+
+**Usually:** the computer was asleep, switched off, or the app was closed at that hour. A task on
+your machine only fires while the machine is awake and Claude is open, and a run that lands on a
+sleeping computer is skipped rather than queued up.
+
+**You do get one catch-up, not a backlog.** When you next open the app or wake the machine, it starts
+a single run for the most recently missed time and discards the older ones, and only from the last
+seven days. A week away gives you one morning, not seven.
+
+**Try:** if you want it to survive an idle machine, turn on **Keep computer awake** in Settings under
+Desktop app, General. Closing the lid still puts it to sleep, so a laptop that gets shut needs the app
+opened rather than a setting changed.
+
+**Worth knowing:** because a 9am run can arrive at 11pm, tell her in the prompt what to do about that,
+for example *"if it is already the afternoon, tell me what was missed instead of working the morning
+list"*.
+
+**#tech-help if:** the machine was awake, the app was open, and it still did not fire.
+
+### It started and then just sat there doing nothing
+
+**Usually:** it is waiting for you, not broken. The run asked to use something it had no standing
+permission for and stopped at the prompt. Nothing errors and nothing tells you, so it reads as a
+morning that quietly did not happen.
+
+**Try:** open it under **Scheduled** in the sidebar. The prompt is sitting there. Answer it, and
+choose **Always allow** rather than Allow, so the same thing does not stop you again tomorrow.
+
+**Do this once, when you first create it:** click **Run now**, sit with it, and always-allow
+everything it asks for. That one supervised run is what stops every future morning stalling, and it is
+the step people skip.
+
+**Ask your Claude:** *"My morning task stalled on a permission prompt. Show me everything it is
+already allowed to do, and tell me what else it is likely to need, so I can approve those now instead
+of one morning at a time"*
+
+**#tech-help if:** you chose Always allow and it asks for the same thing again the next morning.
 
 ---
 

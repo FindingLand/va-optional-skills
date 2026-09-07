@@ -1,6 +1,6 @@
 # Troubleshooting
 
-**Version: 1.2 - 2026-09-07**
+**Version: 1.3 - 2026-09-07**
 
 Things that go wrong, in the words you would use to describe them. Find the one that sounds like your
 problem and work down from there.
@@ -120,6 +120,34 @@ you there.
 ---
 
 ## Working in the cloud
+
+### I asked for a routine and ended up on a Cloud screen, or it says there are no connectors
+
+**Usually:** you were working on claude.ai in a browser, or on your phone, rather than in the Claude
+app on your computer. Ask for a routine there and Cloud is the only kind on offer, because that is the
+only kind that place can make.
+
+**What Cloud genuinely cannot do:** open a file on your own computer, or use a website you are signed
+in to in your own browser. Every run starts from a fresh copy of a code repository and nothing of
+yours is on that machine.
+
+**What Cloud CAN do, and this catches people out in the other direction:** use the connections you
+linked on claude.ai, like Google Drive, Gmail and Calendar. Those live on your account, not on your
+computer, so a Cloud routine can reach them. What it cannot see is a connection you added on your own
+machine rather than on claude.ai. If a session tells you connectors could not be loaded at all, that
+is about that session, not about your account.
+
+**So the question that decides it:**
+
+- Does it need a file on your computer, or a site you are signed in to? **Local.**
+- Does it only need your claude.ai connections and your repository? Cloud can do it in principle,
+  though **we would still say Local**, because nobody has yet proven those connections behave the same
+  way on an unattended scheduled Cloud run, and Local is known to work.
+
+**The fix is the same either way: open the Claude app on your computer and ask her again there.**
+
+**If she still offers you Cloud:** *"make this a local scheduled task on this machine, not a cloud
+routine"*
 
 ### My Memory Vault doesn't appear when I choose Cloud
 

@@ -239,6 +239,13 @@ know:
 - There is only ever this one scheduled task. Everything Vera does each morning lives in her skill
   and in your routines table in Airtable. When you want her to do something new every day, tell her
   and she adds a row there, never a second schedule.
+- **It has to be a Local task, not a Cloud routine, and asking in the wrong place is the one way this
+  goes wrong.** Two different things share the name "routine". Ask on claude.ai in a browser or on
+  your phone and you only get the Cloud kind, which runs on Anthropic's computers from a fresh copy of
+  your repository and can never open a file on your machine or use a site you are signed in to. **Ask
+  in the Claude app on your own computer and you get the right one.** If you ever land on a Cloud
+  screen, say *"make this a local scheduled task on this machine, not a cloud routine"*. More on this,
+  including what Cloud CAN still reach, in `reference/troubleshooting.md`.
 
 ## Saving from a Cloud session (your phone, or claude.ai in a browser)
 

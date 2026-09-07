@@ -74,5 +74,7 @@ connections is in the setup guide instead, at `download/vera-setup.md`.
 ## Structure
 
 Each skill is a folder under `skills/`. `skills/index.md` lists everything with its version.
-`reference/how-we-work.md` is the rulebook every agent follows, and
-`reference/troubleshooting.md` is for you rather than for her.
+`reference/how-we-work.md` is the rulebook every agent follows,
+`reference/troubleshooting.md` is for you rather than for her, and
+`reference/why-this-stack.md` is for her: the reasoning behind these tool choices, and the honest
+answer on whether any of this replaces a person.

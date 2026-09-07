@@ -3,11 +3,12 @@
 Everything in the library, with the version your assistant compares against. One folder per skill
 under `skills/<name>/`, holding its `SKILL.md` plus anything it needs.
 
-Two files outside `skills/` are part of the system and are versioned the same way:
+Some files outside `skills/` are part of the system and are versioned the same way:
 
 | File | Version | What it is |
 |---|---|---|
 | `reference/how-we-work.md` | 4.3 | **The rulebook. The only copy.** Vera reads it every session; the specialists carry a short floor from it and nothing else |
+| `reference/troubleshooting.md` | 1.0 | **For the owner to read, not for you to recite.** Symptoms in the words an owner would use, what is usually behind each one, and the prompt they give their own assistant so they diagnose it themselves. Setup and first-connection problems are NOT here, they stay in `download/vera-setup.md`, and neither file repeats the other |
 | `templates/your-base.template.md` | 4.1 | The empty snapshot Vera copies into your own repo and fills in from your base |
 | `templates/repo-layout.template.md` | 1.1 | The standard folder layout and naming for your second brain. Vera copies it into your repo as `reference/repo-layout.md`; you may change it and she follows your copy |
 

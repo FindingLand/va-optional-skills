@@ -61,7 +61,17 @@ We never see your repo. What you build on top of these templates is yours.
 later, once you know what each piece does. Renaming early is the quickest way to end up with an
 assistant that cannot find your data, and it is a frustrating thing to debug in week one.
 
+## When something breaks
+
+**Ask your own assistant first.** She can see your machine and nobody else can, which makes her the
+best help available to you and she is already open.
+
+If that does not get there, `reference/troubleshooting.md` lists the things that go wrong, in the
+words you would use to describe them, along with what to ask her. Anything to do with your first
+connections is in the setup guide instead, at `download/vera-setup.md`.
+
 ## Structure
 
 Each skill is a folder under `skills/`. `skills/index.md` lists everything with its version.
-`reference/how-we-work.md` is the rulebook every agent follows.
+`reference/how-we-work.md` is the rulebook every agent follows, and
+`reference/troubleshooting.md` is for you rather than for her.

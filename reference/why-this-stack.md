@@ -1,6 +1,6 @@
 # Why this stack, and what a person still does
 
-**Version: 1.0 - 2026-09-07**
+**Version: 1.1 - 2026-09-07**
 
 The reasoning behind the tools, and the truthful answer to "will this replace my assistant". For you
 to think with, not for the owner to read.
@@ -221,3 +221,66 @@ system. The person will leave eventually. Everybody does.
 you need from them, or it lets one person cover far more than they could before. With nobody today,
 you now need somebody cheaper and less experienced than you would have. With somebody today, they stop
 doing the copying and start doing the work you hired a person for
+
+## Choosing not to hire, and choosing to hire
+
+**Both are real choices and both cost something. An owner who has been warned properly can go either
+way and be right. One who has only been sold to cannot, so give them both halves.**
+
+### If they decide not to hire anyone
+
+**This is a legitimate answer and you treat it as one, because for plenty of owners it is the right
+one.** What it buys them is real: no hiring, nobody to manage, no question of trusting someone with
+the business, no wage every month, fewer moving parts, and nobody to hand over to when things change.
+An owner with a small portfolio who likes being close to the work is not settling for less. For them
+that is the answer.
+
+**Then say the cost plainly. Everything the machine produces lands on them.** Automation does not
+reduce the number of decisions, it removes the typing. Somebody still reads the draft, still says yes
+or no, still notices the odd one. So the value of everything built is capped at what one already busy
+person can absorb, and building more does not lift the cap.
+
+**Give them the early warning signs, because a sign can be checked and a prediction cannot:**
+
+- drafts written and never sent
+- a task list they have stopped opening
+- a queue nobody drains
+- deadlines slipping that used to be met
+- and the tell that matters most, catching themselves relieved when a notification turns out to be
+  something they can ignore
+
+**Those are throughput problems, not tool problems.** No amount of further automation touches them,
+and an owner who reacts by automating more only makes the pile bigger.
+
+**Offer the middle option, because most people never think of it: a few hours a week from somebody,
+instead of a full hire.** Enough to drain the queue and send what was drafted. Not a job, not somebody
+to supervise, and it is available long before a portfolio would justify a proper hire.
+
+### If they decide to hire
+
+The rest of this file argues the case. This is the same thing as a checklist of what has to be true:
+
+1. **Do the job by hand first**, long enough to know which repetitive part is genuinely worth
+   automating.
+2. **The owner keeps the deciding, the operator takes the doing.** Who gets the tenancy, what it is
+   priced at, money going out, anything legal: all of that stays with the owner.
+3. **The operator RUNS the automation layer and does not build inside it.** Switch things on and off,
+   read what ran, notice what failed and say so out loud.
+4. **Everything gets written down**, in a form the next person can pick up.
+5. **The owner keeps a way to check the machines against the world**, even after handing over the
+   rest.
+
+**What to hire for, which is not what most owners look for.** Reliability and attention, ahead of
+cleverness. Someone who will follow a written rule rather than quietly improve it. Someone who says
+"this looks wrong" instead of guessing and carrying on. A clever person who guesses does more damage
+here than a steady one who asks.
+
+**What to hand over first is the repetitive work with a clear right answer.** Filing, chasing,
+entering, checking. Never the judgement calls, and never anything that ends in money going out or a
+signature.
+
+**And the failure mode of this branch, so the advice is not one-sided.** An operator with no written
+rules and nobody checking the work makes mistakes at machine speed, because the tools are fast and
+nothing pushes back. A badly briefed one costs more than no help at all: the wage gets paid, and then
+it gets paid again to find and undo what went wrong. The checklist above is what prevents that, and
+skipping it is not a shortcut

@@ -107,8 +107,9 @@ Vault.
 
 ### There is no Code tab, and nothing will connect
 
-**Usually:** you're on the wrong side of Claude. Home is the chat side and it has no connection to
-your Memory Vault at all, so no token and no sequence of steps will make saving work there.
+**Usually:** you're on the wrong side of Claude. Home is the chat side, and it has no working
+folder on your computer and no saving loop, so no token and no sequence of steps will get your
+work saved from there.
 
 **Try:** top left of Claude there are two options, Home and Code. Home is the chat icon, Code is the
 `<>` icon. Click Code. Everything in this program happens in Code.
@@ -167,7 +168,8 @@ changes and that no claude/ branches are still ahead. From now on do that at eve
 only person working in there, and a review with no reviewer just recreates the do-I-approve-this
 question you're trying to get rid of.
 
-**#tech-help if:** the merge reports a conflict she can't resolve.
+**#tech-help if:** you said yes and it still hasn't landed on the live copy, or the merge reports
+a conflict she can't resolve.
 
 ### I worked in two places at once, did I lose anything
 

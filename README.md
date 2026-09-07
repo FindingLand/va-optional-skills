@@ -63,8 +63,9 @@ assistant that cannot find your data, and it is a frustrating thing to debug in 
 
 ## When something breaks
 
-**Ask your own assistant first.** She can see your machine and nobody else can, which makes her the
-best help available to you and she is already open.
+**Ask your own assistant first.** In a session on your own computer she can see your machine and
+nobody else can, which makes her the best help available to you and she is already open. In a cloud
+session she cannot see your computer, so ask that kind of question from your own machine.
 
 If that does not get there, `reference/troubleshooting.md` lists the things that go wrong, in the
 words you would use to describe them, along with what to ask her. Anything to do with your first

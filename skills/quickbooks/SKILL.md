@@ -5,7 +5,7 @@ description: "Load before ANY work touching QuickBooks: reading the profit and l
 
 # QuickBooks
 
-**Version: 1.1 - 2026-09-07**
+**Version: 1.2 - 2026-09-07**
 
 QuickBooks is where the money story of the business is written down. Everything else can be rebuilt.
 This cannot, and it is what the owner's accountant, their lender and their tax filing all read.
@@ -23,10 +23,12 @@ QuickBooks itself to authorise it. It works from the desktop app, the web, and C
 once, and owners outside the United States have hit a flat refusal to connect rather than a helpful
 message. If it will not connect, that is worth checking before anyone spends an afternoon on it.
 
-**⛔⛔ AND AS OF 2026-09-07 IT OFTEN DOES NOT AUTHENTICATE AT ALL. STOP THE OWNER BEFORE THEY LOSE AN
-AFTERNOON TO IT.** The symptom is precise, so check it against theirs before saying anything: they
-press Connect, it finishes in a second or two, it reports itself connected, and **they are never sent
-to Intuit to sign in.** Every later request then fails on authentication.
+**⛔ SOME OWNERS CANNOT AUTHENTICATE IT AT ALL, AND THE FAILURE IS SPECIFIC. Match the symptom before
+you say anything, because it works fine for plenty of people and telling a working owner it is broken
+is its own damage.** The failing shape, seen 2026-09-07: they press Connect, it finishes in a second
+or two, it reports itself connected, and **they are never sent to Intuit to sign in.** Every later
+request then fails on authentication. If they DID reach an Intuit sign-in screen, this is not their
+problem and the rest of this block does not apply.
 
 - **It is not their machine and it is not a setting.** Disconnecting and reconnecting, restarting the
   app, signing out of QuickBooks first, a different browser and clearing cookies have all been tried
@@ -44,8 +46,61 @@ to Intuit to sign in.** Every later request then fails on authentication.
   "my QuickBooks file" is the phrase that gives it away), and it is **US only**.
 - The other route in is a developer app plus n8n. That is a real build, gated on Intuit's own review
   taking several days, so load `connect-quickbooks-to-n8n` before promising it is quick.
+- **⭐ It is NOT broken for everyone, and that matters when you answer someone.** A reference build on
+  2026-09-04 connected it normally and read a full profit and loss out of it. So the honest line is
+  "this specific failure is a known bug", never "the connector does not work".
 - **Re-check before repeating this.** It is an open bug with a fix expected, so try the connect once
   yourself; if the sign-in screen now appears, delete this block and date the correction.
+
+## Two things that bite AFTER it connects, and both look like your mistake
+
+**⛔ `profile_info_required`: the connector refuses to answer until the QuickBooks profile has an
+industry set (measured 2026-09-04).** It reads as a permissions or a connection failure and is
+neither. Fixing it WRITES to the owner's QuickBooks account, so **ask them first and let them choose
+the value.** Intuit's suggested list is short and often misses the real business: it offered
+brokerage, lending and a catch-all to a residential landlord, whose actual code is NAICS 531110,
+"Lessors of Residential Buildings and Dwellings". **Pick the accurate code rather than the closest one
+offered, and tell them what you set.**
+
+**⛔⛔ THE CONNECTOR'S OWN TOTALS ARE WRONG. READ THE NAMED ROWS, NEVER THE COMPUTED FIELDS (measured
+2026-09-04 on a real company).** Account-level detail comes back correct and the rollups on top of it
+do not. What was actually seen: top-level `totalExpenses` returned `0` for a period holding about
+$170k of real expenses; a month's `totalIncome` returned `582.49` while that same month's
+`incomeAccounts` showed `1 - Rental Income = 33004.04`; `grossProfit` and `netIncome` inherit the
+error because they are derived from those. The balance sheet and the profit and loss disagreed with
+each other on net income for the same books over the same period.
+
+- **Read instead, inside `monthlyBreakdown["<start> - <end>"]`:** money in is
+  `incomeAccountsAggregated["Income"]`, cost of goods sold is
+  `cogsAccountsAggregated["Cost of Goods Sold"]`, operating expenses is
+  `expenseAccountsAggregated["Expenses"]`, and money out is the last two added together.
+- **⛔ Never SUM those maps.** They flatten parent rows, "Total for X" subtotal rows and detail rows
+  into one object, so adding them up double counts. **Copy the named value. Do not compute it.**
+- The profit and loss response runs past 60,000 characters, so save it and pull the fields you need
+  rather than reading the whole thing.
+
+## ⛔ Before you believe any QuickBooks number: check the books are current
+
+**Run the profit and loss and look at the last three months before you report anything off it.** A
+report only ever shows POSTED transactions. Money the bank has downloaded but nobody has accepted and
+categorised yet sits in the **For Review** queue: it is inside QuickBooks, it has not hit an account,
+and it is invisible to every report. Money collected in a rent platform and never pushed across is
+invisible too. **The connector cannot see the For Review queue at all**, so that check happens on
+QuickBooks' own Banking screen, by the owner.
+
+This is not hypothetical. On a real portfolio at full occupancy with about $40k a month of rent, the
+profit and loss read $33k, $36k, $36k and $30k for January to April and then **$0 for June, July and
+August**, because roughly four months of income had never been categorised. Reported without the
+check, that is a confident, completely wrong number.
+
+**Two diagnostics that narrow it without leaving the connector:** accounts receivable aging empty AND
+income zero means they are not invoicing in QuickBooks at all, so income can only be arriving through
+categorised bank deposits and the deposits are what stalled. A coherent balance sheet, with deposit
+liabilities matching deposit bank balances and loan balances current, means the books are not
+abandoned and it is income categorisation specifically.
+
+**Say it plainly and stop.** Fixing the books is the owner's job and it comes first. Do not build on
+top of the gap and do not quietly render the zero.
 
 **⭐ On the first session, ask it what it can do rather than assuming.** This connector is new and
 what it exposes has been changing. Read a small report, then try the smallest possible write, and

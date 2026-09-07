@@ -5,7 +5,7 @@ description: "Load before connecting QuickBooks to n8n, before creating an Intui
 
 # Connect QuickBooks to n8n
 
-**Version: 1.0 - 2026-09-03**
+**Version: 1.1 - 2026-09-07**
 
 This is one job and one job only: get the owner's own n8n instance talking to the owner's own
 QuickBooks Online company, starting from nothing and finishing at a credential that provably works.
@@ -26,6 +26,18 @@ app store.** There is no lighter tier for "it is just for me". There is no way t
 **So do not start this on a Friday afternoon expecting a working connection by evening.** Set the
 expectation on day one: fill the forms, submit, and then wait. The connection cannot be finished in
 one sitting, and that is normal, not a sign anything went wrong.
+
+**⭐ One real measurement, so "several days" has a number next to it: submitted 2026-09-01, production
+keys granted 2026-09-03.** Two days, over a weekend, on a private one-company integration. **That is
+one data point and not a promise** - it is the only review this skill has watched end to end, and
+Intuit gives no service level. Quote it as "it took two days for one owner", never as "it takes two
+days".
+
+**⭐ And the part worth telling the owner up front, because it is the good news: once the keys landed,
+the credential connected on the FIRST attempt.** Not because that owner was lucky, but because every
+trap below had already been read before the forms were touched. **The whole cost of this job is the
+waiting plus about an hour of forms.** The failures people report are almost always someone meeting
+these traps live rather than reading them first.
 
 ## Go straight to production. The sandbox is a trap for this use
 
@@ -169,6 +181,28 @@ sandbox company and the connection is pointed at the wrong place. Not passed. Go
 reconnect against the real company.
 
 Only when the owner has recognized their own data is this done.
+
+## Now that it connects: do NOT reach for the native QuickBooks node
+
+**The first instinct after connecting is to drop n8n's built-in QuickBooks Online node onto the canvas.
+For real bookkeeping work it will not do the job, and you find out several nodes in.** Measured
+2026-09-02: its resources are Bill, Customer, Employee, Estimate, Invoice, Item, Payment, Purchase
+(read only), Transaction and Vendor. **There is no Class, no Account, and no way to CREATE a Purchase**,
+which is exactly what categorising an expense needs.
+
+**Use HTTP Request nodes instead, on the same credential.** Set the node's authentication to the
+predefined credential type and choose the QuickBooks OAuth2 credential. You keep n8n's token refresh,
+which is the only genuinely hard part of OAuth, and you get the whole REST API rather than the ten
+resources the node exposes.
+
+**⭐ Put the credential and the Company ID in ONE sub-flow, and have every other flow call it.** On the
+reference build that sub-flow is the single place either value appears; nothing else in the instance
+knows the Company ID. It is worth doing on day one for three reasons: a re-connect or a new Company ID
+is a one-node edit instead of a hunt, no future flow can quietly hardcode a realm ID, and the sub-flow
+is the natural place to pin the minor version once for everything.
+
+**Pin `minorversion` on the calls**, as Step 10 says, and pin it in that one sub-flow so every caller
+inherits it.
 
 ## What never goes into chat, this file, or the repo
 

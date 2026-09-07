@@ -5,7 +5,7 @@ description: "Load before ANY work touching QuickBooks: reading the profit and l
 
 # QuickBooks
 
-**Version: 1.0 - 2026-08-24**
+**Version: 1.1 - 2026-09-07**
 
 QuickBooks is where the money story of the business is written down. Everything else can be rebuilt.
 This cannot, and it is what the owner's accountant, their lender and their tax filing all read.
@@ -22,6 +22,30 @@ QuickBooks itself to authorise it. It works from the desktop app, the web, and C
 **⛔ Check availability before promising it.** The connector has not been available everywhere at
 once, and owners outside the United States have hit a flat refusal to connect rather than a helpful
 message. If it will not connect, that is worth checking before anyone spends an afternoon on it.
+
+**⛔⛔ AND AS OF 2026-09-07 IT OFTEN DOES NOT AUTHENTICATE AT ALL. STOP THE OWNER BEFORE THEY LOSE AN
+AFTERNOON TO IT.** The symptom is precise, so check it against theirs before saying anything: they
+press Connect, it finishes in a second or two, it reports itself connected, and **they are never sent
+to Intuit to sign in.** Every later request then fails on authentication.
+
+- **It is not their machine and it is not a setting.** Disconnecting and reconnecting, restarting the
+  app, signing out of QuickBooks first, a different browser and clearing cookies have all been tried
+  by other owners and none of them fixes it. Anthropic has it logged as an open bug (issue 334 on
+  `anthropics/claude-ai-mcp`, labelled `auth` and `bug`), with no confirmed workaround.
+- **The reported cause, and it is the reporter's reading rather than a vendor statement, so say it
+  that way:** the connector is registered as not requiring authentication, because it also supports
+  an owner with no subscription who just pastes their numbers in. That flag short-circuits the sign-in
+  step for everyone, including the owners who do hold a subscription and need live data.
+- **What to do meanwhile: export the report out of QuickBooks and hand over the file.** A CSV of the
+  profit and loss, or whichever report the question actually needs, answers nearly everything this
+  skill is for. Reading is where the value was anyway, and writing was never allowed unattended.
+- **Rule out the two dead ends first**, because both look identical from the owner's chair: it is
+  **QuickBooks Online only** (an installed QuickBooks Desktop company file will never connect, and
+  "my QuickBooks file" is the phrase that gives it away), and it is **US only**.
+- The other route in is a developer app plus n8n. That is a real build, gated on Intuit's own review
+  taking several days, so load `connect-quickbooks-to-n8n` before promising it is quick.
+- **Re-check before repeating this.** It is an open bug with a fix expected, so try the connect once
+  yourself; if the sign-in screen now appears, delete this block and date the correction.
 
 **⭐ On the first session, ask it what it can do rather than assuming.** This connector is new and
 what it exposes has been changing. Read a small report, then try the smallest possible write, and

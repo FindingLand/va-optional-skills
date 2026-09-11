@@ -19,13 +19,93 @@ wording from a real screen on 09-09-2026; keep to it). Vera's role here is ONLY 
 the student pastes the stuck prompt (`assets/prep-prompt.md`) with the step number and a screenshot,
 and Vera reads the screenshot and gives the next click. Vera does not narrate the steps unprompted.
 
-| Step | Depends on | The clicks, in the page's words |
-|---|---|---|
-| 1. Create the Cloudflare account | nothing | dash.cloudflare.com → Sign up, the email they check daily, confirm the verification email. Done when they can sign in. |
-| 2. Let Cloudflare see the memory vault | their GitHub repo (Week 1) | Sign in at dash.cloudflare.com → the **search box at the top**, type Workers, choose Workers & Pages (it is not in the left menu on a new account) → **Create application** → **Connect to GitHub** → a GitHub window: their own login if asked, pick their GitHub account → Repository access: **Only select repositories**, pick the memory vault → the bottom button reads **Install & Authorize or Save** depending on the screen (GitHub may re-ask the password) → they land back in Cloudflare on the **Create an application** screen. **Stop there**: no repository picked, nothing that says Deploy or Save; close the tab. Done when they are back on Create an application with GitHub connected. If they do not know the vault's name: github.com → profile picture → Your repositories → the one Vera set up in Week 1 (it holds folders like skills and wiki); or ask Vera. |
-| 3. Turn on the login gate (Zero Trust) | nothing | From the Cloudflare dashboard: **Zero Trust in the left-hand menu → Get Started** (or one.dash.cloudflare.com if they closed it) → team name (Cloudflare asks; anything works, do not make it a step) → Free plan → checkout: billing address, **credit card**, terms. Expect no charge at this size. Done when Zero Trust opens to its own dashboard. |
-| 4. Cloudflare API token → GitHub | nothing | Cloudflare: **profile icon top right → Profile → API Tokens → Create Token** → "Edit Cloudflare Workers" → Use template → **scroll down to Account Resources, open the dropdown after Include, select their account** → Zone Resources: All zones → Continue to summary (must list Workers Scripts: Edit) → Create Token → copy once. Then GitHub: open the memory vault ITSELF (profile picture → Your repositories → the vault), click the vault's **own Settings tab across the top of the repository page, not the profile Settings** → Secrets and variables → Actions → New repository secret → **paste the token into the Secret box FIRST, then type the name** `CLOUDFLARE_API_TOKEN` (copying the name from the page overwrites the clipboard and loses the token) → save. Done when the vault's Actions secrets page lists it. |
-| 5. Read-only Airtable token → save it, then GitHub | their Airtable | Airtable: account icon → Builder hub → Personal access tokens → Create token → name like command-center-read → **Access: only their operating base** → scope only `data.records:read` → create, copy once (starts with pat). **SAVE IT FIRST**: into their password manager or a locked phone note, before closing the Airtable window; this saved copy is what they come back to in the build session (a Cloudflare field needs the same token). Then GitHub: the vault's Actions secrets the same way as step 4, **token into the Secret box first, then the name** `AIRTABLE_TOKEN`. Never into a chat with Vera; a lost one is re-created in the session. The page no longer says "save it twice"; it says save it, use it, keep it. |
+One click per line, indented where a step has a sub-sequence, with where-on-the-screen cues, the
+same words for the same thing every time ("memory vault" = their GitHub repository; say "aka your
+GitHub repository" the first time and never again), and a "Done when" on every step. This mirrors
+the Week 4 page's `CommandCenterPrepCard` (rewritten 09-11-2026 from the dry-run feedback: Liz
+could not follow paragraphs, "the same way you did in step 4" sent her back to step 4, and no step
+said where on the screen to look). **Keep the two in step.**
+
+**1. Create the Cloudflare account** (depends on nothing)
+- Go to dash.cloudflare.com and choose Sign up.
+- Use the email they check every day; it is also the login for the finished page.
+- Confirm the verification email.
+- Done when: they can sign in and see the Cloudflare dashboard.
+
+**2. Let Cloudflare see the memory vault** (depends on the Week 1 GitHub repo)
+- **Say what this step does and does not do:** it only gives Cloudflare permission to look at the
+  memory vault. It creates no page, no Worker, no app, so the Workers & Pages list stays EMPTY after
+  it. The app is created in the session when Vera imports the vault. (Cheryl, 09-10: did the step,
+  saw no app, assumed it had failed.)
+- Sign in at dash.cloudflare.com.
+- Click the search box at the top of the page, type Workers, choose Workers & Pages.
+- Click the Create application button (top right of that page).
+- Click Connect to GitHub.
+- A GitHub window opens:
+  - if GitHub asks them to sign in, their own GitHub login
+  - where to install Cloudflare: their GitHub account
+  - Repository access: Only select repositories, open the dropdown, pick the memory vault (not All
+    repositories)
+  - the button at the bottom reads Install & Authorize or Save depending on the screen; GitHub may
+    re-ask the password
+- They land back in Cloudflare on the Create an application screen. **Stop there.** No repository
+  picked, nothing that says Deploy or Save. Close the tab.
+- Done when: they are back on Create an application and GitHub shows as connected.
+- If they do not know the vault's name: github.com → profile picture (top right) → Your
+  repositories → the one Vera set up in Week 1 (folders like skills and wiki); or ask Vera.
+
+**3. Turn on the login gate (Zero Trust)** (depends on nothing)
+- From the Cloudflare dashboard, click Zero Trust in the left-hand menu, then Get Started (or
+  one.dash.cloudflare.com if they closed it).
+- Team name: Cloudflare asks; anything works, not a step.
+- Choose the Free plan.
+- Checkout: billing address, credit card, terms. Expect no charge at this size.
+- Done when: Zero Trust opens to its own dashboard instead of asking for a plan.
+
+**4. Cloudflare API token → GitHub** (depends on nothing)
+- In Cloudflare, click the profile icon at the top right, then Profile.
+- In the left-hand menu of the profile page, click API Tokens.
+- Click the Create Token button (top right of the list).
+- Find the template Edit Cloudflare Workers and click Use template.
+- Scroll down to Account Resources; open the dropdown after Include; select their account.
+  (Empty by default and the form lets them create a useless token. Fill it.)
+- Under Zone Resources choose All zones.
+- Continue to summary; it must list Workers Scripts: Edit. Click Create Token.
+- Click the copy icon next to the token. Cloudflare shows it once.
+- In a new tab, github.com, open the memory vault itself (its name shows at the top of the page),
+  not the GitHub home page.
+- Click the Settings tab in the row across the top of the vault's page (Code, Issues, Pull
+  requests, ..., Settings). Not the Settings under the profile picture.
+- In the left-hand menu: Secrets and variables, then Actions.
+- Click the New repository secret button (top right).
+- Paste the token into the Secret box FIRST, then type the name `CLOUDFLARE_API_TOKEN`, then Add
+  secret. (Copying the name from the page overwrites the clipboard and loses the token.)
+- Done when: the vault's Actions secrets page lists CLOUDFLARE_API_TOKEN.
+
+**5. Read-only Airtable token → save it → GitHub** (depends on their Airtable)
+- In Airtable, click the account icon at the top right, then Builder hub.
+- In the left-hand menu, click Personal access tokens.
+- Click the Create token button (top right).
+- Name: something like command-center-read.
+- Access: add only their operating base. Not all bases.
+- Scopes: add only `data.records:read`.
+- Click Create token, then click the copy icon next to it. It starts with pat. Shown once.
+- **Save it before closing Airtable**: into their password manager or a locked phone note. They
+  use it again in the session.
+- Then GitHub, spelled out again (never "the same as step 4"):
+  - github.com, open the memory vault itself
+  - the Settings tab in the row across the top of the vault's page
+  - left-hand menu: Secrets and variables, then Actions
+  - New repository secret button (top right)
+  - paste the token into the Secret box FIRST, then type the name `AIRTABLE_TOKEN`, then Add
+    secret
+- Done when: the vault's Actions secrets page lists both AIRTABLE_TOKEN and CLOUDFLARE_API_TOKEN,
+  and the token is saved in their password manager or locked note.
+- **In the build session Vera ASKS for this token in chat and places it in Cloudflare herself**
+  (golden rule 1, Stephanie 09-09-2026). It is fine to paste it to Vera. It is read-only, locked to
+  one base, revocable in Airtable, and free to re-issue if lost. This replaces the old line "never
+  into a chat with Vera", which contradicted rule 1 and made a student's Vera refuse the token on
+  the 09-10 dry run.
 
 **Traps to say out loud:** Account Resources is empty by default and the form lets you create a
 useless token; a 404 on the GitHub secrets page means not signed into GitHub in that browser; the

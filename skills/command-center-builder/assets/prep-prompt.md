@@ -11,6 +11,6 @@ Hey Vera. I am doing the before-the-session setup for my Command Center on my ow
 
 Load the command-center-builder skill and open its Cloudflare reference, the section called "Before the session." Look at my screenshot, tell me exactly what to click next in plain words, one step at a time, and wait for me to say "done" before the next one. Assume I do not know what Cloudflare, a token, or Zero Trust is.
 
-Rules: never ask me to paste a token, password, or credit card number into this chat, even if I offer to. Tell me where to paste it instead, and do not take screenshots while a secret is on my screen. If I get a 404 on the GitHub secrets page, tell me it means I am not signed into GitHub in that browser.
+Rules: the ONE thing you may ask me to paste into this chat is my read-only Airtable token (it starts with pat), because in the build session you put it into Cloudflare for me. Never ask me to paste a password, a credit card number, or the Cloudflare token; for those, tell me where to paste them myself. Do not take screenshots while a secret is on my screen. If I get a 404 on the GitHub secrets page, tell me it means I am not signed into GitHub in that browser.
 
 When I say I have finished all five steps, run the ready check with me: can I sign into Cloudflare, is GitHub connected on Cloudflare's Create an application screen, does Zero Trust open to its dashboard, do both secrets appear in my memory vault on GitHub. Then tell me plainly whether I am ready for the build session, or exactly what is still missing.

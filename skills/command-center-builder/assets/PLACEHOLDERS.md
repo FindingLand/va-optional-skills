@@ -20,9 +20,9 @@ Never type a secret VALUE into any file — only secret NAMES appear in the repo
 ## 2. Data baker (`bake.mjs`)
 | Find | Replace with |
 |---|---|
-| `BASE = "appbDvSpJX6LKRkBc"` | their Airtable base id |
-| Table ids: Units, Properties, Leases `tbl5KW9x8Zu9H9WxE`, Tasks, Maintenance, Rent Payments, Reports | THEIR current table ids — pull the schema fresh; never trust field names |
-| Field ids (e.g. Tasks Due Date `fldssJhMEWkpcwYkF`, Immediate Need `fldataqIQDIrWaIhi`, Archive lookup `fldorXKZqCgsLRJFY`, Future Plans `fldTxxwSHGZfjL1fn`) | their field ids | keep `returnFieldsByFieldId=true` |
+| `BASE = "<YOUR_AIRTABLE_BASE_ID>"` (in `bake.mjs` AND `index.template.html`) | their Airtable base id (starts with `app`, from the base URL) |
+| Table ids `<TBL_UNITS>`, `<TBL_RENT_PAYMENTS>`, `<TBL_LEASES>`, `<TBL_TASKS>`, `<TBL_MAIL>`, `<TBL_MAINTENANCE>`, `<TBL_MONTHLY_KPI>` | THEIR current table ids — pull the schema fresh; never trust field names. Delete any table they do not have and the code that reads it |
+| Field ids `<FLD_<TABLE>_<NAME>>` (e.g. `<FLD_TASKS_DUE>`, `<FLD_TASKS_IMM>`, `<FLD_UNITS_ARCH>`, `<FLD_LEASES_PLANS>`) | their field ids, one per placeholder, from the same schema pull | keep `returnFieldsByFieldId=true` |
 | Occupancy exclusions (`NA` status, archived property) | whatever their base uses for inactive units |
 | Seed filter `/placeholder\|seed/i` | keep; extend if their seed rows are named differently |
 | Env var name `AIRTABLE_TOKEN` | keep (it's what the workflow + Cloudflare build var expect) |

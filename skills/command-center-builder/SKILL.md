@@ -19,7 +19,7 @@ metadata:
 
 # Command Center Builder
 
-**Version: 2.3 - 09-10-2026** (from the Week 4 dry run: every connected tool gets a SYNTHESIS,
+**Version: 2.4 - 09-11-2026** (pre-work rewritten to match the Week 4 page after the dry run: one click per line, indented sub-steps, on-screen cues, "memory vault" everywhere, step 2 says it creates NO app yet, step 5 repeats the GitHub clicks instead of "same as step 4"; the stuck prompt and the prep table now AGREE with golden rule 1 that Vera asks for the read-only Airtable token in chat — the old "never into a chat" line made Cheryl's Vera refuse it; and the reference baker, page template and PLACEHOLDERS carry `<YOUR_AIRTABLE_BASE_ID>` / `<TBL_…>` / `<FLD_…>` placeholders instead of the reference base's real ids.) (2.3 - 09-10-2026: from the Week 4 dry run: every connected tool gets a SYNTHESIS,
 never a list, unless the owner asks for a list — golden rule 7 and the routine prompt. Two students
 got a raw dump of every Todoist item and every CRM transaction because only Calendar, Slack and
 Email had synthesis instructions. And this skill now lives in the cohort library, so "no

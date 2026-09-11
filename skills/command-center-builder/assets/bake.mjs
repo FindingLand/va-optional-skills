@@ -1,29 +1,30 @@
 #!/usr/bin/env node
 /*
- * Sunrise Command Center — data baker.
- * Runs at build time (Cloudflare Pages, or locally). Reads the Sunrise Airtable
+ * Command Center — data baker (REFERENCE IMPLEMENTATION: every <PLACEHOLDER> below is
+ * remapped to the student's own base — see PLACEHOLDERS.md; pull their schema fresh).
+ * Runs at build time (Cloudflare, or locally). Reads the student's Airtable
  * base with a read-only PAT from env, aggregates, and writes data.json next to
  * index.html. The token is NEVER written into the output — only computed numbers are.
  *
- * Env: AIRTABLE_TOKEN  (Airtable Personal Access Token, scope data.records:read on base appbDvSpJX6LKRkBc)
+ * Env: AIRTABLE_TOKEN  (Airtable Personal Access Token, scope data.records:read on YOUR base only)
  * Run: node command-center/bake.mjs
  */
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-const BASE = "appbDvSpJX6LKRkBc";
+const BASE = "<YOUR_AIRTABLE_BASE_ID>"; // starts with app — from the base URL, airtable.com/<this>/...
 const TOKEN = process.env.AIRTABLE_TOKEN;
 if (!TOKEN) { console.error("Missing AIRTABLE_TOKEN env var"); process.exit(1); }
 
 const TABLES = {
-  units:    { id: "tblO59i4XHWhoUB2u", f: { occ:"fldgSCJfHm7R3ZJpD", rent:"fldxUHeDYlWrNM2yg", arch:"fldorXKZqCgsLRJFY" } },
-  payments: { id: "tblnYcPdtMNqI9fPB", f: { status:"fldSQlPWjO6YwKmxJ", due:"fldcuCnSvckHqZBvO", paid:"fldHtyqhAts7lhkYC", datePaid:"fldxCOGouaFK7gt9X", tenant:"fldwcCzMMjo7kJeJ0" } },
-  leases:   { id: "tbl5KW9x8Zu9H9WxE", f: { status:"fld9DC739pKFnVyEY", exp:"fldXQCxOQ27Ob3HvB", ltrId:"fldDfNt7dKd8gEj1s", plans:"fldTxxwSHGZfjL1fn", arch:"fldpAESWrnaCqzoxI" } },
-  tasks:    { id: "tblItFsQQGCjr0ffK", f: { title:"fldd0oGIrvq5pl8Kb", status:"fldq8CdWjNVJALazb", due:"fldssJhMEWkpcwYkF", pl:"fldkv8n20ZfbGnADd", imm:"fldataqIQDIrWaIhi" } },
-  mail:     { id: "tblGf6XHuUbQEtNU7", f: { received:"fldrDzHJj8vH93mlm", status:"fldjrKO0xaHtF8KUM" } },
-  maint:    { id: "tblFSoSciqwR9vhYI", f: { status:"fldXMmj8USBsnz7bR", completed:"fld7Or5knnKw52aV3", desc:"fldZyN5FlqOx2sCKd" } },
-  kpi:      { id: "tblLDo37PYGyXY0wH", f: { month:"flddHcIKUiUzXluRF", occ:"fldmLKgMFySl4RyLb", coll:"fldpc5BSThN7LUqUK", occU:"fldDSTkwSTNOP3zKZ", vacU:"fldTLTtg1G776keDM", tot:"fldnah1xVa5SeiEqY", roll:"fldi0LnQUueKpFBXu", due:"fldfMiiltlWZhlLiU", col:"fldUGW8BGXTu49A1u", notes:"fld8wcHbbcKS4Ps0B" } },
+  units:    { id: "<TBL_UNITS>", f: { occ:"<FLD_UNITS_OCC>", rent:"<FLD_UNITS_RENT>", arch:"<FLD_UNITS_ARCH>" } },
+  payments: { id: "<TBL_RENT_PAYMENTS>", f: { status:"<FLD_RENT_PAYMENTS_STATUS>", due:"<FLD_RENT_PAYMENTS_DUE>", paid:"<FLD_RENT_PAYMENTS_PAID>", datePaid:"<FLD_RENT_PAYMENTS_DATEPAID>", tenant:"<FLD_RENT_PAYMENTS_TENANT>" } },
+  leases:   { id: "<TBL_LEASES>", f: { status:"<FLD_LEASES_STATUS>", exp:"<FLD_LEASES_EXP>", ltrId:"<FLD_LEASES_LTRID>", plans:"<FLD_LEASES_PLANS>", arch:"<FLD_LEASES_ARCH>" } },
+  tasks:    { id: "<TBL_TASKS>", f: { title:"<FLD_TASKS_TITLE>", status:"<FLD_TASKS_STATUS>", due:"<FLD_TASKS_DUE>", pl:"<FLD_TASKS_PL>", imm:"<FLD_TASKS_IMM>" } },
+  mail:     { id: "<TBL_MAIL>", f: { received:"<FLD_MAIL_RECEIVED>", status:"<FLD_MAIL_STATUS>" } },
+  maint:    { id: "<TBL_MAINTENANCE>", f: { status:"<FLD_MAINTENANCE_STATUS>", completed:"<FLD_MAINTENANCE_COMPLETED>", desc:"<FLD_MAINTENANCE_DESC>" } },
+  kpi:      { id: "<TBL_MONTHLY_KPI>", f: { month:"<FLD_MONTHLY_KPI_MONTH>", occ:"<FLD_MONTHLY_KPI_OCC>", coll:"<FLD_MONTHLY_KPI_COLL>", occU:"<FLD_MONTHLY_KPI_OCCU>", vacU:"<FLD_MONTHLY_KPI_VACU>", tot:"<FLD_MONTHLY_KPI_TOT>", roll:"<FLD_MONTHLY_KPI_ROLL>", due:"<FLD_MONTHLY_KPI_DUE>", col:"<FLD_MONTHLY_KPI_COL>", notes:"<FLD_MONTHLY_KPI_NOTES>" } },
 };
 
 async function fetchAll(tableId) {

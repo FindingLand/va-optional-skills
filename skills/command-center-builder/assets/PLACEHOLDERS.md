@@ -30,14 +30,14 @@ Never type a secret VALUE into any file — only secret NAMES appear in the repo
 ## 3. Cloudflare (`wrangler.jsonc`)
 | Find | Replace with |
 |---|---|
-| `"name": "sunrise-command-center"` | their project name (becomes `<name>.<subdomain>.workers.dev`) |
+| `"name": "<PROJECT_NAME>"` | their project name, the same one typed in the Cloudflare import (becomes `<name>.<subdomain>.workers.dev`) |
 | `"assets": { "directory": "./command-center/public" }` | keep unless they used a different folder |
 | `compatibility_date` | today's date is fine |
 
 ## 4. GitHub Action (`refresh-data.yml`)
 | Find | Replace with |
 |---|---|
-| `CLOUDFLARE_ACCOUNT_ID: "e8629207788bf5bd56ab587ea0c84fe9"` | THEIR account id (Cloudflare dashboard → Workers & Pages → right rail "Account ID") — this one is Stephanie's |
+| `CLOUDFLARE_ACCOUNT_ID: "<CLOUDFLARE_ACCOUNT_ID>"` | THEIR account id (the 32 characters after dash.cloudflare.com/ in the dashboard URL, or Workers & Pages → right rail "Account ID") |
 | cron `0 */2 * * *` | keep (2h) or their cadence; min 1h is polite to free tiers |
 | secret names `AIRTABLE_TOKEN`, `CLOUDFLARE_API_TOKEN` | keep; the student pastes the values into GitHub → Settings → Secrets and variables → Actions |
 | `node command-center/bake.mjs` | path if their folder differs |
@@ -71,3 +71,13 @@ Never type a secret VALUE into any file — only secret NAMES appear in the repo
 - `feedHtml` 🔒 rendering of `{pending:true,note}` — the credential contract the routine relies on
 - `returnFieldsByFieldId=true` — field names are unstable, ids are not
 - Access policy "Cloudflare account members" — the safe default; broaden only on request
+
+## Pre-work assets (Phase P — the holding page)
+
+| Placeholder | Replace with |
+|---|---|
+| `holding-page.html`: `<STUDENT_NAME>`, `<BUSINESS_NAME>`, `<BUILT_AT>` | the owner's first name, their main business (or "your businesses"), the date/time of the first push |
+| `holding-page.html`: `<ACCENT>` `<INK>` `<CREAM>` `<LINE>` `<MUTED>` `<HEAD_BG>` | their brand hex values if ALREADY known; otherwise The Lean Landlord palette `#C4622D` `#1C1C1C` `#F9F7F4` `#E0DEDA` `#6B6B6B` `#fbf9f4` |
+| `wrangler.jsonc`: `<PROJECT_NAME>` | the project name typed in the Cloudflare import (e.g. `command-center`) |
+| `refresh-data.yml`: `<CLOUDFLARE_ACCOUNT_ID>` | the 32-character id in the dashboard URL after dash.cloudflare.com/ |
+| `bake.stub.mjs` | no placeholders; it is copied to `command-center/bake.mjs` as-is in the pre-work and REPLACED by the real baker in the session |

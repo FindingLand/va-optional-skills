@@ -19,7 +19,7 @@ metadata:
 
 # Command Center Builder
 
-**Version: 2.4.1 - 09-11-2026** (the pre-work page now opens with what Week 4 builds and why the pre-work exists; steps 4 and 5 explain WHY the two keys go to GitHub and why the Cloudflare copy of the Airtable token cannot be placed before the session.) (2.4 - 09-11-2026: pre-work rewritten to match the Week 4 page after the dry run: one click per line, indented sub-steps, on-screen cues, "memory vault" everywhere, step 2 says it creates NO app yet, step 5 repeats the GitHub clicks instead of "same as step 4"; the stuck prompt and the prep table now AGREE with golden rule 1 that Vera asks for the read-only Airtable token in chat — the old "never into a chat" line made Cheryl's Vera refuse it; and the reference baker, page template and PLACEHOLDERS carry `<YOUR_AIRTABLE_BASE_ID>` / `<TBL_…>` / `<FLD_…>` placeholders instead of the reference base's real ids.) (2.3 - 09-10-2026: from the Week 4 dry run: every connected tool gets a SYNTHESIS,
+**Version: 2.5 - 09-11-2026** (PHASE P: the import, the Airtable token, the login gate, the watch path and the first refresh run all move into the PRE-WORK as step 6, "Let Vera line it up", because Vera pushes a HOLDING PAGE first so the first build cannot fail — Stephanie, after asking why the import could not be pre-work. The student arrives at the session with a live address behind their own login showing "being built" and a Last-refreshed stamp that proves both keys work; the session is warm-up, intake, the real page and baker at the same paths, and the routine. New assets: `holding-page.html`, `bake.stub.mjs`, `lineup-prompt.md`. Also: the reference `refresh-data.yml` and `wrangler.jsonc` carry placeholders instead of the reference account id and project name.) (2.4.1 - 09-11-2026: the pre-work page now opens with what Week 4 builds and why the pre-work exists; steps 4 and 5 explain WHY the two keys go to GitHub and why the Cloudflare copy of the Airtable token cannot be placed before the session.) (2.4 - 09-11-2026: pre-work rewritten to match the Week 4 page after the dry run: one click per line, indented sub-steps, on-screen cues, "memory vault" everywhere, step 2 says it creates NO app yet, step 5 repeats the GitHub clicks instead of "same as step 4"; the stuck prompt and the prep table now AGREE with golden rule 1 that Vera asks for the read-only Airtable token in chat — the old "never into a chat" line made Cheryl's Vera refuse it; and the reference baker, page template and PLACEHOLDERS carry `<YOUR_AIRTABLE_BASE_ID>` / `<TBL_…>` / `<FLD_…>` placeholders instead of the reference base's real ids.) (2.3 - 09-10-2026: from the Week 4 dry run: every connected tool gets a SYNTHESIS,
 never a list, unless the owner asks for a list — golden rule 7 and the routine prompt. Two students
 got a raw dump of every Todoist item and every CRM transaction because only Calendar, Slack and
 Email had synthesis instructions. And this skill now lives in the cohort library, so "no
@@ -186,16 +186,24 @@ from **`references/cloudflare.md` → "Before the session"**. They arrive with:
 4. A Cloudflare API token ("Edit Cloudflare Workers" template, scoped to their account) already
    pasted into their GitHub repo as the Actions secret `CLOUDFLARE_API_TOKEN`.
 5. A read-only token for their database (Airtable: `data.records:read`, that base only) pasted into
-   the same repo as the Actions secret `AIRTABLE_TOKEN`, and kept in their password manager so
-   they can paste it once more into Cloudflare during the session.
+   the same repo as the Actions secret `AIRTABLE_TOKEN`, and kept (or re-issued) so they can paste
+   it to Vera once more in step 6.
+6. **Step 6 — "Let Vera line it up" (Phase P, Vera drives, about ten minutes, LOCAL session only).**
+   The student pastes `assets/lineup-prompt.md` into a new Vera chat on their own computer. Vera
+   pushes the holding page skeleton into the vault, imports it into Cloudflare, asks for the
+   Airtable token and places it, turns on the login gate, narrows the watch path, runs the refresh
+   job once, and hands over the address. Full order in `references/cloudflare.md` → "Lining it up".
+   They arrive at the session with a live page at their own address, behind their own login, that
+   says "being built" and shows when it last refreshed itself.
 
-**First thing in the session, verify the prep** (two minutes): they can open dash.cloudflare.com;
-Workers & Pages → Create → Continue with GitHub shows their repo; the Access tab of any Worker no
-longer says "Set up Zero Trust"; the repo's Actions secrets list shows both names. Anything missing
-is done right then, before Phase 0, using the same checklist. **What cannot be done ahead:**
-importing the repo and deploying, because Cloudflare builds what is on GitHub and the page does
-not exist until Phase 2. A pre-session import would fail its first build, which is the confusing
-moment this checklist exists to avoid.
+**First thing in the session, verify the prep** (two minutes): the holding page opens at their
+address behind the Cloudflare login, its "Last refreshed" is within the last two hours, and its
+`data.json` says `airtableTokenPresent: true`. If all three hold, steps 1 to 6 are proven at once.
+If there is no address, step 6 was skipped: run Phase P now, from `references/cloudflare.md` →
+"Lining it up" (ten minutes if steps 1 to 5 were done, closer to forty if not). **Why the import
+CAN be pre-work now (2.5):** Cloudflare builds what is on GitHub, and Phase P pushes a holding page
+and a stub baker first, so the first build succeeds. Before 2.5 nothing was in the vault yet and a
+pre-session import failed, which is why the import used to wait for the session.
 
 ### Phase 0a — WARM-UP: everything Vera can find out on her own (do this FIRST, before any teaching)
 **Trigger:** the student pastes `assets/warmup-prompt.md`, or says "get me set up for the command
@@ -209,11 +217,14 @@ have to stop and look up, and to arrive at the teaching with the student's own f
 1. **Make sure the skill is here.** If `command-center-builder` is not installed, install it:
    sync it from the student's memory vault (`skills/command-center-builder/`), or install the
    `.skill` file they were given. Say which version loaded.
-2. **Verify the prep** (`references/cloudflare.md` → "Before the session"), four checks: they can
-   sign into Cloudflare; GitHub shows as connected on Cloudflare's Create an application screen;
-   Zero Trust opens to its own dashboard; both `CLOUDFLARE_API_TOKEN` and `AIRTABLE_TOKEN` are in
-   the memory vault's Actions secrets. Report each as done or missing. **A missing one is a fact,
-   not a lecture** — say what to do and move on.
+2. **Verify the prep** — the fast way first: open their Command Center address (it is in the
+   vault's `wrangler.jsonc` name plus their workers.dev subdomain, or ask). If the holding page
+   opens behind the login, "Last refreshed" is within two hours and `data.json` shows
+   `airtableTokenPresent: true`, all six pre-work steps are proven; say so in one line. If there is
+   no address, fall back to the four checks in `references/cloudflare.md` → "Before the session"
+   (Cloudflare sign-in, GitHub connected, Zero Trust on, both Actions secrets) and report each as
+   done or missing, plus "step 6 not run: Phase P will happen at the start of the build". **A
+   missing one is a fact, not a lecture** — say what to do and move on.
 3. **Inventory the connectors AND the accounts behind them, then stop there.** Not just "Gmail is
    connected" — **which Gmail addresses, which Slack workspaces, which calendar, which QuickBooks
    company**. That list is what question 4 of the intake is built from, and you cannot guess it
@@ -312,7 +323,8 @@ These are decided by rule, not by conversation. Do not spend intake questions on
   repo. `references/architecture.md` has the reasoning against the alternatives.
 
 ### Phase 1 — The page (`index.html`)
-Build the page. Use `assets/index.template.html` as the starting point — it already has HQ +
+Build the page **at the same path as the holding page, `command-center/public/index.html`**, so the
+push replaces it in place at the address the student already saved. Use `assets/index.template.html` as the starting point — it already has HQ +
 per-company tabs, the palette tokens, the render logic, the 🔒 "add credential" states, and
 the charts. Fill in the student's companies, brand tokens, and database field IDs. For a
 single-business student, collapse HQ and the company into one page (no tab bar). **There is
@@ -324,14 +336,17 @@ token list: `references/architecture.md` → "Building the page."
 
 ### Phase 2 — The database baker (structured metrics)
 If a company has a real database, write/adapt the baker that reads it and writes
-`data.json`. The reference build reads Airtable via REST with a read-only token and does
+`data.json`. **It replaces the stub at the same path, `command-center/bake.mjs`**, so neither the
+Cloudflare build command nor the refresh job changes. The reference build reads Airtable via REST with a read-only token and does
 all aggregation in the baker. Use `assets/bake.mjs` as the reference implementation and
 `references/architecture.md` → "The baker" for how to remap it to the student's own base,
 tables, and fields. Key discipline: the baker owns `data.json` and nothing else; it runs
 in the cloud build with the token as a build env var; `data.json` is git-ignored.
 
-### Phase 3 — Deploy on Cloudflare (about ten minutes, you drive nearly all of it)
-With the prep done, this phase is: import the repo (Workers "Import a repository" flow), set
+### Phase 3 — Deploy on Cloudflare (already done in Phase P; here only if step 6 was skipped)
+**If the holding page is live, this phase is one push.** Commit the real page and baker, push, watch
+Cloudflare rebuild, Visit, verify each tab. Nothing to import, no token to ask for, the gate and the
+watch path are already set. **Only if there is no address** do the full phase, which is: import the repo (Workers "Import a repository" flow), set
 the build and deploy commands, add `NODE_VERSION` and the database token (ask the student for the
 read-only Airtable token in chat, then type the name AND paste the value yourself and click
 **Encrypt**), deploy, visit, protect the Worker behind Access (policy: Cloudflare account
@@ -455,6 +470,13 @@ and never sum the account maps.
 - `references/gotchas.md` — the traps we hit and how to avoid them.
 
 ## Asset templates (copy and fill in)
+
+- `assets/holding-page.html` — the PRE-WORK page (Phase P): "your Command Center is being built",
+  what is already working, the four intake questions, Last refreshed. Replaced in place in Phase 1.
+- `assets/bake.stub.mjs` — the PRE-WORK baker: writes a pending `data.json` and reports whether the
+  Airtable token is present, exits 0 either way. Replaced in place in Phase 2.
+- `assets/lineup-prompt.md` — the prompt behind the Week 4 pre-work page's step 6 button; a student
+  pastes it into a local Vera chat to run Phase P.
 
 - `assets/index.template.html` — the dashboard page (HQ + per-company tabs, palette tokens,
   render logic, 🔒 states, charts).

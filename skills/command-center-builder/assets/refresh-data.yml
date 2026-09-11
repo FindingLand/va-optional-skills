@@ -7,7 +7,7 @@ name: Refresh Command Center
 # Required repository secrets (Settings > Secrets and variables > Actions):
 #   AIRTABLE_TOKEN        - the read-only Airtable PAT (same value used in Cloudflare)
 #   CLOUDFLARE_API_TOKEN  - a Cloudflare API token with "Edit Cloudflare Workers" permission
-# The Cloudflare account id is not secret and is set inline below.
+# The Cloudflare account id is not secret and is set inline below (Vera fills it from the dashboard URL).
 
 on:
   schedule:
@@ -34,5 +34,5 @@ jobs:
       - name: Deploy to Cloudflare
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: "e8629207788bf5bd56ab587ea0c84fe9"
+          CLOUDFLARE_ACCOUNT_ID: "<CLOUDFLARE_ACCOUNT_ID>"   # from the Cloudflare dashboard URL: dash.cloudflare.com/<this>/...
         run: npx --yes wrangler@4 deploy

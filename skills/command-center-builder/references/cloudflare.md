@@ -124,7 +124,7 @@ Loom video under each step; point a stuck student at the video before anything e
 
 ### In the session — you drive, the student pastes one value
 
-| Step | Who | Why |
+| Step (Phase P, or the session fallback) | Who | Why |
 |---|---|---|
 | Verify the prep (sign in works; Continue with GitHub shows the repo; Zero Trust is on; both Actions secrets exist) | **You** | two minutes; anything missing is done now from the table above |
 | "Create application" → "Continue with GitHub" → select the repo | **You** | navigation |
@@ -140,9 +140,47 @@ Loom video under each step; point a stuck student at the video before anything e
 | Settings → Builds → narrow the watch path to `command-center/*` | **You** | configuration |
 | `gh workflow run` the refresh Action and watch it go green | **You** | proves the two secrets from the prep work |
 
-**What cannot move ahead:** importing and deploying. Cloudflare builds what is on GitHub; before
-Phase 2 there is no `wrangler.jsonc`, no baker and no page, so a pre-session import fails its first
-build. Ten minutes in the session is the right price.
+**Since 2.5 (09-11-2026) the import, the token, the gate and the watch path all happen in the
+PRE-WORK, as Phase P, because Vera pushes a holding page first so the first build cannot fail.** The
+table above is what Phase P does; it also stays the fallback for a student who arrives without
+having run step 6. See "Lining it up" below.
+
+### Lining it up — Phase P (pre-work step 6, Vera drives, about ten minutes)
+
+Trigger: the student pastes `assets/lineup-prompt.md` in a LOCAL Claude Code session on their own
+computer with Cloudflare and GitHub signed in. A cloud or phone session cannot do this; say so and
+stop. Order:
+
+1. **Verify steps 1 to 5** (the four checks in the "Before the session" list above, plus the Airtable
+   secret). Anything missing is done now from the bullets above, before anything else.
+2. **Put the skeleton in the memory vault**, in one commit, message "Command Center: holding page":
+   - `command-center/public/index.html` ← `assets/holding-page.html` with every placeholder
+     filled (name, business, palette if already known else the Lean Landlord defaults, built-at).
+   - `command-center/bake.mjs` ← `assets/bake.stub.mjs`, unchanged. Same path the real baker takes
+     in the session, so the build command never changes.
+   - `wrangler.jsonc` at the repo root ← `assets/wrangler.jsonc` with `<PROJECT_NAME>` filled
+     (use `command-center` unless it clashes).
+   - `.github/workflows/refresh-data.yml` ← `assets/refresh-data.yml` with `<CLOUDFLARE_ACCOUNT_ID>`
+     filled from the dashboard URL.
+   - `.gitignore` line `command-center/public/data.json` (the stub writes it at build time).
+   Push, and verify the commit is on GitHub before touching Cloudflare.
+3. **Import and deploy** — section 1 below, exactly. Project name = the `wrangler.jsonc` name. Build
+   command `node command-center/bake.mjs`. Variables: `NODE_VERSION` = 20, then ASK for the
+   read-only Airtable token in chat and paste it as `AIRTABLE_TOKEN`, Encrypt. Deploy. The log's
+   Building step prints "holding page data.json written ... AIRTABLE_TOKEN present"; "MISSING"
+   means the variable did not save, fix it before going on.
+4. **Visit.** The holding page renders with their name and "Last refreshed" a minute ago.
+5. **Lock it down** — section 2. Verify from a browser that is not logged in.
+6. **Narrow the watch path** — section 3.
+7. **Run the refresh job once**: GitHub → the vault → Actions tab → "Refresh Command Center" → Run
+   workflow. Green means both secrets from steps 4 and 5 work. Reload the holding page: "Last
+   refreshed" moves. That is the receipt the student could never get before.
+8. **Hand off in their words**: the address (say it and paste it), log in with the Cloudflare email,
+   save it to the phone's home screen, "on the session this page becomes your Command Center at
+   the same address", and one plain line: ready, or exactly what is still missing.
+
+The token sits in the chat history; say so in one line when you ask for it, and that it is revocable
+in Airtable. Nothing else of theirs is typed by Vera.
 
 ## Prerequisite: the files are on GitHub
 Cloudflare builds from what is *on GitHub*, not the student's disk. Before connecting,
@@ -152,7 +190,7 @@ usually has the `workflow` scope that a note-syncing tool like Obsidian's git pl
 a `.github/workflows/*.yml` push fails without it). Commit **only** the command-center
 files; don't sweep unrelated changes.
 
-## 1. Import the repo (Workers flow) — in the session
+## 1. Import the repo (Workers flow) — in Phase P (or in the session if step 6 was skipped)
 1. dash.cloudflare.com → **Workers & Pages** (on a new account it is not in the left menu; use the
    top search box, type Workers, pick Workers & Pages) → **Create application**. (A tiny link at the
    bottom, "Need to use the legacy Pages workflow? Continue to Pages," still exists — don't

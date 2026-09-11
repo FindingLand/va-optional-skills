@@ -63,6 +63,10 @@ said where on the screen to look). **Keep the two in step.**
 - Done when: Zero Trust opens to its own dashboard instead of asking for a plan.
 
 **4. Cloudflare API token → GitHub** (depends on nothing)
+- Why (say it if asked): the every-two-hours clock lives in GitHub, next to the memory vault. A small
+  job there wakes up, rebuilds the numbers and publishes to Cloudflare, and Cloudflare only accepts a
+  publish from a key it issued. So the key is made in Cloudflare and handed to GitHub: GitHub gets
+  permission to update the page.
 - In Cloudflare, click the profile icon at the top right, then Profile.
 - In the left-hand menu of the profile page, click API Tokens.
 - Click the Create Token button (top right of the list).
@@ -83,6 +87,12 @@ said where on the screen to look). **Keep the two in step.**
 - Done when: the vault's Actions secrets page lists CLOUDFLARE_API_TOKEN.
 
 **5. Read-only Airtable token → save it → GitHub** (depends on their Airtable)
+- Why (say it if asked): the same GitHub job has to READ the numbers out of Airtable before it can
+  publish them, so it needs an Airtable key in the same secrets list. Cloudflare needs a copy of the
+  same key when it builds the page, but the Cloudflare app does not exist until the session import,
+  so that copy cannot be placed in the pre-work: Vera asks for it in the session (golden rule 1).
+  Vera cannot hold it between chats either (secrets do not live inside Claude). Saved copy OR a
+  fresh token in the session, both fine, both free.
 - In Airtable, click the account icon at the top right, then Builder hub.
 - In the left-hand menu, click Personal access tokens.
 - Click the Create token button (top right).

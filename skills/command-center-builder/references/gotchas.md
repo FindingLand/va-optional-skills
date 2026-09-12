@@ -34,6 +34,19 @@
   tool's token usually lacks it — push workflows yourself with `gh`.
 
 ## Cloudflare
+
+### ⛔ A CLOUD session cannot reach Cloudflare at all (09-12-2026, proven with a control)
+
+Cloudflare's API and every `pages.dev` / `workers.dev` address return 403 at the cloud
+environment's network proxy. A student's session proved it properly: her own live `gmail-mcp`
+Worker failed identically from there. **This is environment, not configuration, and no amount of
+retrying or re-authorizing fixes it.**
+
+Phase P and Phase 3 are LOCAL-session-only for this reason, plus the browser driving. If a cloud
+session is asked to do either, say so in the first line and stop, rather than building something
+else and discovering it at the end. A cloud session CAN still write files and push to the repo;
+what it cannot do is deploy or configure Cloudflare.
+
 - **Workers & Pages is not in the left menu on a fresh account.** A student following "click Workers
   & Pages in the menu" gets stuck at step one. Use the search box at the top of the dashboard: type
   Workers, choose Workers & Pages. (Stephanie, 09-09-2026, from a real screen.)
@@ -55,6 +68,43 @@
   account; set Zone Resources to All zones; the summary must list Workers Scripts:Edit.
 
 ## GitHub
+
+### ⛔ "Cannot find module '/opt/buildhome/repo/command-center/bake.mjs'" means THE REPO DOES NOT HAVE IT (09-12-2026, from a real student)
+
+Cloudflare clones the repo and runs the build command against what it finds. This error is not a
+Node problem, a path problem or a Cloudflare problem. **It is the repo telling you the push never
+landed.** Open github.com, look in the repo for `command-center/`, and believe your eyes.
+
+The student who hit this had been told twice — by a session's own summary and by a human helping
+her — that "the code is already on GitHub." Neither had opened GitHub. It was not there, because
+every local session on her Mac had been unable to push for days, and one commit had already been
+lost entirely when its folder was deleted. Days went into deploying a page that did not exist.
+
+**So before ANY Cloudflare import or deploy, and before telling anyone else the code is ready:
+read the remote.** `git ls-remote`, or just open the repo in a browser and look. The build log is
+a terrible place to discover this and it is where it always gets discovered.
+
+### ⛔ Prove you can push BEFORE you build anything (same incident)
+
+A local session that cannot authenticate to GitHub can still clone, edit, run tests and commit. It
+looks completely healthy right up to the push. **Run `GIT_TERMINAL_PROMPT=0 git push --dry-run` (or
+make one trivial commit and push it) as the FIRST thing in any session whose output has to reach the
+repo.** If it fails, say so in the first line and stop; do not build for an hour and report the
+work stranded at the end.
+
+The student-facing fix is GitHub Desktop: install it, sign in there, and every local session
+inherits working credentials. No token goes through a chat. It is hers to do and it takes minutes.
+
+### ⛔ Several clones of the same vault is its own failure (same incident)
+
+That Mac had `~/Projects/Cheryls-Second-Brain` (later deleted, taking a commit with it), a `- Old`
+folder that was an empty git shell, and an `- old 2` folder stopping at an earlier commit. Different
+sessions ran in different folders and each had a different, confident view of the truth.
+
+**Say which folder you are in, in your first line, and if there is more than one candidate clone,
+name them all and ask which is real rather than picking.** Never assume the folder you landed in is
+the one the last session used.
+
 - **404 on a private repo's settings = not signed in** in that browser. Open the link in
   the logged-in browser.
 - `gh workflow run` + `gh run watch --exit-status` proves the Action end to end. A "Node

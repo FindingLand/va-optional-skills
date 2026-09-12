@@ -57,7 +57,6 @@ said where on the screen to look). **Keep the two in step.**
 **3. Turn on the login gate (Zero Trust)** (depends on nothing)
 - From the Cloudflare dashboard, click Zero Trust in the left-hand menu, then Get Started (or
   one.dash.cloudflare.com if they closed it).
-- Team name: Cloudflare asks; anything works, not a step.
 - Choose the Free plan.
 - Checkout: billing address, credit card, terms. Expect no charge at this size.
 - Done when: Zero Trust opens to its own dashboard instead of asking for a plan.
@@ -176,8 +175,25 @@ stop. Order:
    workflow. Green means both secrets from steps 4 and 5 work. Reload the holding page: "Last
    refreshed" moves. That is the receipt the student could never get before.
 8. **Hand off in their words**: the address (say it and paste it), log in with the Cloudflare email,
-   save it to the phone's home screen, "on the session this page becomes your Command Center at
-   the same address", and one plain line: ready, or exactly what is still missing.
+   save it to the phone's home screen, "in the session we build out your actual pages — your
+   businesses, your numbers, your briefing — and this page becomes that, at this same address",
+   and one plain line: ready, or exactly what is still missing.
+
+   **⛔ DO NOT TELL THEM THE PHRASE THAT STARTS THE BUILD, OR ANY OTHER NEXT STEP TOWARD IT
+   (Stephanie, 09-12-2026, from a real Phase P run).** A run ended with "NEXT: on session day, say
+   'build my command center' — Vera runs the warm-up, asks her four intake questions, and the real
+   page replaces the holding page at this same address." Every word of that is true, and it is
+   exactly the wrong thing to say. **A student handed the trigger will use it**, alone, before the
+   session, without Stephanie there to run the intake with them — and they arrive at the session
+   with the thing the session exists to build already half-done, badly, and nothing left to teach.
+   The pre-work's job is to end READY, not to end STARTED.
+   - Say what the session produces, never how to start it. "In the session we will build out your
+     actual pages" is the whole of it.
+   - Do not name the skill, the warm-up, the intake questions, or the build prompt. Naming the
+     steps is the same leak, one degree removed.
+   - If they ask outright how it gets built, say it takes you and them working through it together
+     and that it is what the session is for. Do not hand over the phrase, even on request.
+   - This applies to the written hand-off, the run report, and any chat that follows it.
 
 The token sits in the chat history; say so in one line when you ask for it, and that it is revocable
 in Airtable. Nothing else of theirs is typed by Vera.

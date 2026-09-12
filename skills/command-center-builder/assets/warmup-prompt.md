@@ -10,7 +10,7 @@ Hey Vera, get me set up for the Command Center build. Load the command-center-bu
 
 Then find out everything you can on your own, and do not ask me anything yet:
 
-1. Check my prep: can I sign into Cloudflare, is GitHub connected on Cloudflare's Create an application screen, does Zero Trust open to its own dashboard, and are both CLOUDFLARE_API_TOKEN and AIRTABLE_TOKEN in my memory vault's Actions secrets. Tell me which are done and which are missing.
+1. Check my prep: can I sign into Cloudflare, does Zero Trust open to its own dashboard, and are both CLOUDFLARE_API_TOKEN and AIRTABLE_TOKEN in my memory vault's Actions secrets. If I already ran the line-up step, the fastest check is just to open my Command Center address and see whether the holding page loads. Tell me which are done and which are missing.
 2. List which of Airtable, Google Calendar, Slack, Gmail and QuickBooks I have connected right now, and which I do not. Just the list, no suggestions yet.
 3. Read my Week 1 foundational skills and my vault so you know what my business actually does and how it makes money.
 4. Look at my Airtable base: which tables exist, and which of them hold real data rather than being empty or seeded.

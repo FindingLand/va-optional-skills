@@ -19,6 +19,13 @@ wording from a real screen on 09-09-2026; keep to it). Vera's role here is ONLY 
 the student pastes the stuck prompt (`assets/prep-prompt.md`) with the step number and a screenshot,
 and Vera reads the screenshot and gives the next click. Vera does not narrate the steps unprompted.
 
+**FOUR student steps, then Phase P as step 5 (Stephanie, 09-12-2026).** The old step 2, where the
+student opened Cloudflare's Create an application screen purely to authorize GitHub and then backed
+out without deploying, is DELETED. That authorization now happens inside Phase P, in Cloudflare's own
+import flow, with Vera driving and the student clicking the GitHub popup. The back-out was the single
+most confusing instruction in the pre-work and it left students staring at an empty Workers & Pages
+list wondering what had failed.
+
 One click per line, indented where a step has a sub-sequence, with where-on-the-screen cues, the
 same words for the same thing every time ("memory vault" = their GitHub repository; say "aka your
 GitHub repository" the first time and never again), and a "Done when" on every step. This mirrors
@@ -32,43 +39,21 @@ said where on the screen to look). **Keep the two in step.**
 - Confirm the verification email.
 - Done when: they can sign in and see the Cloudflare dashboard.
 
-**2. Let Cloudflare see the memory vault** (depends on the Week 1 GitHub repo)
-- **Say what this step does and does not do:** it only gives Cloudflare permission to look at the
-  memory vault. It creates no page, no Worker, no app, so the Workers & Pages list stays EMPTY after
-  it. The app is created in the session when Vera imports the vault. (Cheryl, 09-10: did the step,
-  saw no app, assumed it had failed.)
-- Sign in at dash.cloudflare.com.
-- Click the search box at the top of the page, type Workers, choose Workers & Pages.
-- Click the Create application button (top right of that page).
-- Click Connect to GitHub.
-- A GitHub window opens:
-  - if GitHub asks them to sign in, their own GitHub login
-  - where to install Cloudflare: their GitHub account
-  - Repository access: Only select repositories, open the dropdown, pick the memory vault (not All
-    repositories)
-  - the button at the bottom reads Install & Authorize or Save depending on the screen; GitHub may
-    re-ask the password
-- They land back in Cloudflare on the Create an application screen. **Stop there.** No repository
-  picked, nothing that says Deploy or Save. Close the tab.
-- Done when: they are back on Create an application and GitHub shows as connected.
-- If they do not know the vault's name: github.com → profile picture (top right) → Your
-  repositories → the one Vera set up in Week 1 (folders like skills and wiki); or ask Vera.
-
-**3. Turn on the login gate (Zero Trust)** (depends on nothing)
+**2. Turn on the login gate (Zero Trust)** (depends on nothing)
 - From the Cloudflare dashboard, click Zero Trust in the left-hand menu, then Get Started (or
   one.dash.cloudflare.com if they closed it).
 - Choose the Free plan.
 - Checkout: billing address, credit card, terms. Expect no charge at this size.
 - Done when: Zero Trust opens to its own dashboard instead of asking for a plan.
 
-**4. Cloudflare API token → GitHub** (depends on nothing)
+**3. Cloudflare API token → GitHub** (depends on nothing)
 - Why (say it if asked): the every-two-hours clock lives in GitHub, next to the memory vault. A small
   job there wakes up, rebuilds the numbers and publishes to Cloudflare, and Cloudflare only accepts a
   publish from a key it issued. So the key is made in Cloudflare and handed to GitHub: GitHub gets
   permission to update the page.
 - In Cloudflare, click the profile icon at the top right, then Profile.
 - In the left-hand menu of the profile page, click API Tokens.
-- Click the Create Token button (top right of the list).
+- Click the Create Token button. It is in the MIDDLE of the screen, not a corner (Stephanie, 09-12-2026).
 - Find the template Edit Cloudflare Workers and click Use template.
 - Scroll down to Account Resources; open the dropdown after Include; select their account.
   (Empty by default and the form lets them create a useless token. Fill it.)
@@ -85,7 +70,7 @@ said where on the screen to look). **Keep the two in step.**
   secret. (Copying the name from the page overwrites the clipboard and loses the token.)
 - Done when: the vault's Actions secrets page lists CLOUDFLARE_API_TOKEN.
 
-**5. Read-only Airtable token → save it → GitHub** (depends on their Airtable)
+**4. Read-only Airtable token → keep it reachable → GitHub** (depends on their Airtable)
 - Why (say it if asked): the same GitHub job has to READ the numbers out of Airtable before it can
   publish them, so it needs an Airtable key in the same secrets list. Cloudflare needs a copy of the
   same key when it builds the page, but the Cloudflare app does not exist until the session import,
@@ -99,8 +84,9 @@ said where on the screen to look). **Keep the two in step.**
 - Access: add only their operating base. Not all bases.
 - Scopes: add only `data.records:read`.
 - Click Create token, then click the copy icon next to it. It starts with pat. Shown once.
-- **Save it before closing Airtable**: into their password manager or a locked phone note. They
-  use it again in the session.
+- **Keep it reachable for step 5**, two blessed ways: leave the Airtable tab open (the token stays
+  on screen, best when they do the whole pre-work in one sitting), or save it to a password manager
+  or locked phone note. Losing it costs a minute; a fresh one is free.
 - Then GitHub, spelled out again (never "the same as step 4"):
   - github.com, open the memory vault itself
   - the Settings tab in the row across the top of the vault's page
@@ -150,8 +136,12 @@ Trigger: the student pastes `assets/lineup-prompt.md` in a LOCAL Claude Code ses
 computer with Cloudflare and GitHub signed in. A cloud or phone session cannot do this; say so and
 stop. Order:
 
-1. **Verify steps 1 to 5** (the four checks in the "Before the session" list above, plus the Airtable
-   secret). Anything missing is done now from the bullets above, before anything else.
+1. **Verify steps 1 to 4**: they can sign into Cloudflare; Zero Trust opens to its own dashboard;
+   both `CLOUDFLARE_API_TOKEN` and `AIRTABLE_TOKEN` are in the memory vault's Actions secrets; and
+   they can lay hands on the Airtable token itself (open tab or saved copy). Anything missing is
+   done now from the bullets above, before anything else. **Do NOT check whether GitHub shows as
+   connected in Cloudflare** — that is no longer a pre-work step; you do it yourself in step 3
+   below, and the student clicks the GitHub popup when it appears.
 2. **Put the skeleton in the memory vault**, in one commit, message "Command Center: holding page":
    - `command-center/public/index.html` ← `assets/holding-page.html` with every placeholder
      filled (name, business, palette if already known else the Lean Landlord defaults, built-at).
@@ -163,7 +153,11 @@ stop. Order:
      filled from the dashboard URL.
    - `.gitignore` line `command-center/public/data.json` (the stub writes it at build time).
    Push, and verify the commit is on GitHub before touching Cloudflare.
-3. **Import and deploy** — section 1 below, exactly. Project name = the `wrangler.jsonc` name. Build
+3. **Import and deploy** — section 1 below, exactly. **The GitHub authorization happens HERE, not in
+   the pre-work**: at "Connect to GitHub" a GitHub window opens and the student clicks through it
+   (their account, Only select repositories, the memory vault, Install & Authorize). That is an OAuth
+   grant, so it is theirs by golden rule 2 — tell them exactly what to click and wait. If GitHub is
+   already connected from a previous attempt, the screen shows a green dot and there is no popup. Project name = the `wrangler.jsonc` name. Build
    command `node command-center/bake.mjs`. Variables: `NODE_VERSION` = 20, then ASK for the
    read-only Airtable token in chat and paste it as `AIRTABLE_TOKEN`, Encrypt. Deploy. The log's
    Building step prints "holding page data.json written ... AIRTABLE_TOKEN present"; "MISSING"

@@ -16,6 +16,6 @@ Then find out everything you can on your own, and do not ask me anything yet:
 4. Look at my Airtable base: which tables exist, and which of them hold real data rather than being empty or seeded.
 5. If QuickBooks is connected, run my P&L and check whether the last three months have income posted. Keep what you find for later; do not bring up money yet.
 
-Then report back in about eight lines: the skill version, the four prep checks, what is connected and what is not, one line on what my business does, which tables hold real data, and the books finding if there is one. Facts only, no suggestions and no questions.
+Then report back in about eight lines: the skill version, the prep checks, what is connected and what is not, one line on what my business does, which tables hold real data, and the books finding if there is one. Facts only, no suggestions and no questions.
 
 Then stop. Do not start building. I will say "build my command center" when I am ready.

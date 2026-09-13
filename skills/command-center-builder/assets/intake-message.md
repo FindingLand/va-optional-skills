@@ -24,7 +24,11 @@ skipped the warm-up.
 > I suggest [four to six], because each is one you would do something about TODAY if it moved the
 > wrong way: [name each with a half-line of why]. [If one has nothing feeding it: "[X] matters to
 > your business but nothing feeds it yet, so it will show a padlock naming what it needs — that is
-> your to-do list rather than a gap."] Swap any?
+> your to-do list rather than a gap."] [If the base is EMPTY, which is common: say it plainly and
+> positively — "your base is empty today, so I picked these from what your business actually needs
+> rather than from what is in there. Each one will show a padlock naming the table and field it is
+> waiting for, so this page doubles as your Airtable to-do list, and every panel lights up by itself
+> the first morning after you start filling it in."] Swap any?
 >
 > **3. Money in and out.**
 > [Books current] Your books look current, income posts through [month], so money in and out will

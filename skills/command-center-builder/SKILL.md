@@ -19,7 +19,7 @@ metadata:
 
 # Command Center Builder
 
-**Version: 2.9 - 09-12-2026** (three diagnostics from a student stuck for days, all in `references/gotchas.md`: (1) `Cannot find module '/opt/buildhome/repo/command-center/bake.mjs'` means THE REPO DOES NOT HAVE THE FILE — she was told twice that her code was on GitHub by people who never opened GitHub; (2) prove you can PUSH before you build anything, because a session with broken git credentials looks healthy until the push and hers lost a commit outright; (3) a cloud session cannot reach Cloudflare AT ALL, 403 at the proxy, proven with a control. Plus: several clones of the same vault on one machine is its own failure mode, so name the folder you are in.) (2.8 - 09-12-2026: THE PRE-WORK IS FOUR STUDENT STEPS PLUS PHASE P, not five plus Phase P. The old step 2 — open Cloudflare's Create an application screen, authorize GitHub, then STOP and close the tab without deploying — is deleted. It was the single most confusing instruction in the pre-work, it fought Cloudflare's own flow, and it left students staring at an empty Workers & Pages list assuming they had failed (Cheryl, 09-10). The GitHub authorization now happens inside Phase P, in the import flow where Cloudflare wants it, with Vera driving and the student clicking the popup. Phase P therefore has TWO student stops, the GitHub popup and the Airtable token. Also: Cloudflare's Create Token button is in the MIDDLE of the screen, and leaving the Airtable tab open is a blessed alternative to saving the token.) (2.7 - 09-12-2026: two fixes from the first real Phase P run: (1) the hand-off must NEVER give the student the phrase that starts the build — a run ended by telling them to say "build my command center" on session day, and a student handed the trigger will use it alone and arrive with the session's whole lesson already half-done; say what the session produces, never how to start it. (2) Getting the Airtable token into Cloudflare now has two blessed routes, the student pasting into the field on screen or handing it over in chat, because the real run did the first and the rule only allowed the second.) (2.6 - 09-12-2026: a PARKED design note, `references/writing-back.md`, for the day the page has to SAVE something a person types — a journal, a daily gratitude line, a hand-typed metric. Stephanie asked for the pre-work token to be made write-capable now; the answer is no, because the page is static and has nothing running to receive a write, so a bigger token buys nothing and a write-capable key in a browser can delete her tenants. The note records the shape instead: the Worker gains a script beside its assets, the write token becomes a Worker secret, entries land in Airtable and are read back live rather than from the two-hourly bake. Nothing in it is built or proven.) (2.5 - 09-11-2026: PHASE P: the import, the Airtable token, the login gate, the watch path and the first refresh run all move into the PRE-WORK as step 6, "Let Vera line it up", because Vera pushes a HOLDING PAGE first so the first build cannot fail — Stephanie, after asking why the import could not be pre-work. The student arrives at the session with a live address behind their own login showing "being built" and a Last-refreshed stamp that proves both keys work; the session is warm-up, intake, the real page and baker at the same paths, and the routine. New assets: `holding-page.html`, `bake.stub.mjs`, `lineup-prompt.md`. Also: the reference `refresh-data.yml` and `wrangler.jsonc` carry placeholders instead of the reference account id and project name.) (2.4.1 - 09-11-2026: the pre-work page now opens with what Week 4 builds and why the pre-work exists; steps 4 and 5 explain WHY the two keys go to GitHub and why the Cloudflare copy of the Airtable token cannot be placed before the session.) (2.4 - 09-11-2026: pre-work rewritten to match the Week 4 page after the dry run: one click per line, indented sub-steps, on-screen cues, "memory vault" everywhere, step 2 says it creates NO app yet, step 5 repeats the GitHub clicks instead of "same as step 4"; the stuck prompt and the prep table now AGREE with golden rule 1 that Vera asks for the read-only Airtable token in chat — the old "never into a chat" line made Cheryl's Vera refuse it; and the reference baker, page template and PLACEHOLDERS carry `<YOUR_AIRTABLE_BASE_ID>` / `<TBL_…>` / `<FLD_…>` placeholders instead of the reference base's real ids.) (2.3 - 09-10-2026: from the Week 4 dry run: every connected tool gets a SYNTHESIS,
+**Version: 3.1 - 09-13-2026** (how the warm-up reads a base, after the live test on Stephanie's: pull table NAMES only, pick the six or eight that carry the business, then read a few real RECORDS from just those — a full schema dump blew the response limit at nearly 300,000 characters, and a schema never tells you whether a field is actually filled in. "Which tables hold real data" must be read, never inferred from table names. Plus Stephanie's point that a student's base is quite likely EMPTY on the day: that is the normal case, it is never raised as a gap, and the metric suggestions come from what their business needs on the assumption the fields get filled in later, each one naming the table and field it waits on.) (3.0 - 09-12-2026: THE WARM-UP NOW DRAFTS THE INTAKE QUESTIONS AND HOLDS THEM, so "build my command center" fires them in seconds instead of after a long silence Stephanie watched from the outside on the dry run. The warm-up's "facts only, no suggestions" was suppressing the THINKING as well as the display, so all the expensive work — choosing metrics from their base, drafting the routing map, framing the money question — landed after the student said go. It now happens in the warm-up, held unshown. Two supporting fixes: the warm-up must collect the ACCOUNTS behind each connector and not just the service names, because question 4 cannot be drafted without them and the pasted prompt was only asking for services; and the prep check collapses to one thing, opening the holding page, now that Phase P proves the rest.) (2.9 - 09-12-2026: three diagnostics from a student stuck for days, all in `references/gotchas.md`: (1) `Cannot find module '/opt/buildhome/repo/command-center/bake.mjs'` means THE REPO DOES NOT HAVE THE FILE — she was told twice that her code was on GitHub by people who never opened GitHub; (2) prove you can PUSH before you build anything, because a session with broken git credentials looks healthy until the push and hers lost a commit outright; (3) a cloud session cannot reach Cloudflare AT ALL, 403 at the proxy, proven with a control. Plus: several clones of the same vault on one machine is its own failure mode, so name the folder you are in.) (2.8 - 09-12-2026: THE PRE-WORK IS FOUR STUDENT STEPS PLUS PHASE P, not five plus Phase P. The old step 2 — open Cloudflare's Create an application screen, authorize GitHub, then STOP and close the tab without deploying — is deleted. It was the single most confusing instruction in the pre-work, it fought Cloudflare's own flow, and it left students staring at an empty Workers & Pages list assuming they had failed (Cheryl, 09-10). The GitHub authorization now happens inside Phase P, in the import flow where Cloudflare wants it, with Vera driving and the student clicking the popup. Phase P therefore has TWO student stops, the GitHub popup and the Airtable token. Also: Cloudflare's Create Token button is in the MIDDLE of the screen, and leaving the Airtable tab open is a blessed alternative to saving the token.) (2.7 - 09-12-2026: two fixes from the first real Phase P run: (1) the hand-off must NEVER give the student the phrase that starts the build — a run ended by telling them to say "build my command center" on session day, and a student handed the trigger will use it alone and arrive with the session's whole lesson already half-done; say what the session produces, never how to start it. (2) Getting the Airtable token into Cloudflare now has two blessed routes, the student pasting into the field on screen or handing it over in chat, because the real run did the first and the rule only allowed the second.) (2.6 - 09-12-2026: a PARKED design note, `references/writing-back.md`, for the day the page has to SAVE something a person types — a journal, a daily gratitude line, a hand-typed metric. Stephanie asked for the pre-work token to be made write-capable now; the answer is no, because the page is static and has nothing running to receive a write, so a bigger token buys nothing and a write-capable key in a browser can delete her tenants. The note records the shape instead: the Worker gains a script beside its assets, the write token becomes a Worker secret, entries land in Airtable and are read back live rather than from the two-hourly bake. Nothing in it is built or proven.) (2.5 - 09-11-2026: PHASE P: the import, the Airtable token, the login gate, the watch path and the first refresh run all move into the PRE-WORK as step 6, "Let Vera line it up", because Vera pushes a HOLDING PAGE first so the first build cannot fail — Stephanie, after asking why the import could not be pre-work. The student arrives at the session with a live address behind their own login showing "being built" and a Last-refreshed stamp that proves both keys work; the session is warm-up, intake, the real page and baker at the same paths, and the routine. New assets: `holding-page.html`, `bake.stub.mjs`, `lineup-prompt.md`. Also: the reference `refresh-data.yml` and `wrangler.jsonc` carry placeholders instead of the reference account id and project name.) (2.4.1 - 09-11-2026: the pre-work page now opens with what Week 4 builds and why the pre-work exists; steps 4 and 5 explain WHY the two keys go to GitHub and why the Cloudflare copy of the Airtable token cannot be placed before the session.) (2.4 - 09-11-2026: pre-work rewritten to match the Week 4 page after the dry run: one click per line, indented sub-steps, on-screen cues, "memory vault" everywhere, step 2 says it creates NO app yet, step 5 repeats the GitHub clicks instead of "same as step 4"; the stuck prompt and the prep table now AGREE with golden rule 1 that Vera asks for the read-only Airtable token in chat — the old "never into a chat" line made Cheryl's Vera refuse it; and the reference baker, page template and PLACEHOLDERS carry `<YOUR_AIRTABLE_BASE_ID>` / `<TBL_…>` / `<FLD_…>` placeholders instead of the reference base's real ids.) (2.3 - 09-10-2026: from the Week 4 dry run: every connected tool gets a SYNTHESIS,
 never a list, unless the owner asks for a list — golden rule 7 and the routine prompt. Two students
 got a raw dump of every Todoist item and every CRM transaction because only Calendar, Slack and
 Email had synthesis instructions. And this skill now lives in the cohort library, so "no
@@ -215,9 +215,20 @@ pre-session import failed, which is why the import used to wait for the session.
 center build". On a live call this runs at the top, while Stephanie is still setting up, so the
 build later is short. It works just as well solo, minutes or days before the build.
 
-**In this phase Vera gathers and reports. She makes NO suggestions, asks NO questions, and writes
-NO files.** The point is to arrive at the build already knowing the answers she would otherwise
-have to stop and look up, and to arrive at the teaching with the student's own facts on screen.
+**In this phase Vera gathers, DRAFTS, and reports. She makes no suggestions ON SCREEN, asks NO
+questions, and writes NO files.** The point is to arrive at the build with the intake message
+already written, so that "build my command center" produces the questions in seconds instead of
+after a long silence while she thinks.
+
+**⛔ WHAT "NO SUGGESTIONS" MUST NOT SUPPRESS (Stephanie, 09-12-2026, from the dry run).** It means
+nothing recommended is *displayed*. It does NOT mean the thinking is deferred. Choosing four to six
+metrics out of their base with a reason for each, drafting the routing map, and framing the money
+question is the expensive part of this whole build, and on the dry run every bit of it happened
+AFTER the student said go, while they watched a blank screen. **Do all of it here, in step 7, and
+hold it.** The student sees only the eight factual lines.
+
+**The warm-up and the build are the SAME CHAT.** The held draft lives in the conversation and
+nothing is written to disk. The warm-up prompt tells the student to stay put.
 
 1. **Make sure the skill is here.** If `command-center-builder` is not installed, install it:
    sync it from the student's memory vault (`skills/command-center-builder/`), or install the
@@ -240,17 +251,40 @@ have to stop and look up, and to arrive at the teaching with the student's own f
    positioning, ideal client, programs and offers, brand voice) plus their vault. You are learning
    how they actually make money and what they chase, because that is what makes your metric
    suggestions theirs instead of a copy of somebody else's dashboard.
-5. **Read their Airtable base.** List the tables and note which hold real data versus which are
-   empty or seeded. Many students have barely used Airtable; an empty base is normal and is NOT
-   a problem to raise here. It just means more of their metrics will start as 🔒 placeholders.
+5. **Read their database in three cheap steps. Never pull the whole schema.** A full schema dump on
+   a real base is enormous: Stephanie's forty tables came back at nearly 300,000 characters and blew
+   the response limit outright, costing the warm-up several of the minutes it exists to save.
+   - **a. Table NAMES only.** Fast at any size.
+   - **b. Pick the six or eight that plausibly carry the business**, from the names alone. Operating
+     tables are named obviously — Units, Leases, Rent Payments, Maintenance. Skip the other thirty.
+   - **c. Read a few real records from just those.** This gives you field names AND proves those
+     fields are POPULATED, which a schema never tells you. **A field existing is not a field anyone
+     fills in.** "Which tables hold real data" is the most load-bearing fact in the whole warm-up,
+     because it decides which metrics ship live and which ship as padlocks. **Read it. Never infer
+     it from table names** — that inference is safe only on a base you already know, and on a
+     student's base you have no basis for it at all.
+
+   **⛔ AN EMPTY BASE IS THE NORMAL CASE, NOT A PROBLEM (Stephanie, 09-13-2026).** There is a good
+   chance a student's base has not been filled in at all yet. Do NOT raise it as a gap, do not treat
+   it as a blocker, and above all **do not fall back to a generic dashboard** — that is the failure
+   this whole intake exists to prevent. Instead: **suggest the metrics their BUSINESS needs, on the
+   assumption the fields will be filled in later**, and name the table and field each one is waiting
+   on. Every one ships as a 🔒 placeholder saying what it needs, so the page doubles as their
+   Airtable to-do list, and each panel lights itself up the first morning after they start filling
+   it in. An empty base changes where your suggestions come FROM; it never changes how specific they
+   are.
 6. **If QuickBooks is connected, check whether the books are current** — run the P&L and look at
    the last three months (`references/quickbooks.md`). Hold the finding; you will use it in the
    intake. Do not raise money yet.
-7. **Report back in about eight lines, facts only.** Skill and version, prep four checks, what is
+7. **Write the intake message in full, and HOLD it.** All four questions from Phase 0b, with your
+   recommendation already filled in on every line, drawn from what you just read. This is the step
+   that makes the build feel instant. Do not display it, do not summarise it, do not hint at what
+   is in it.
+8. **Report back in about eight lines, facts only.** Skill and version, the prep check, what is
    connected and what is not, one line on what their business does, the tables that hold real
    data, and the books finding if there is one. End with one sentence: "That is everything I can
-   work out on my own. When you are ready, say build my command center and I will ask you three
-   questions." **Then stop.** Do not roll into the build.
+   work out on my own. When you are ready, say build my command center here and I will ask you
+   four questions." **Then stop.** Do not roll into the build.
 
 ### Phase 0b — THE INTAKE: one message, four questions, one reply
 **⛔ HARD GATE: you may not create a file, a repo entry, a Cloudflare project or a routine until
@@ -262,7 +296,16 @@ or whether to put money on the page, so the student got a copy of somebody else'
 opposite failure is just as bad: an open-ended design conversation that never reaches a live page.
 One message with your recommendation already on each line solves both. The student replies once.
 
-**Send ONE message, in this shape** (full template with worked examples in
+**⛔ SEND THE MESSAGE YOU ALREADY WROTE IN THE WARM-UP. Do not compose it now.** The questions are
+the FIRST thing out of your mouth after "build my command center" — no preamble, no "let me take a
+look", no re-reading their base. On the dry run that stretch was long enough that Stephanie noticed
+it from the outside, and every second of it was work the warm-up should already have done.
+
+**If there is no held draft** (the warm-up was skipped, or this is a fresh chat), say so in one line
+— "I need two minutes to read your base first, the warm-up was not run in this chat" — and then do
+it. Never leave them watching silence without telling them why.
+
+**The message, in this shape** (full template with worked examples in
 `assets/intake-message.md`):
 
 > Before I build, four things. My pick is on each, so reply "go" to take them all, or tell me

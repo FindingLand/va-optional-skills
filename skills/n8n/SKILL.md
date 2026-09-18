@@ -5,7 +5,7 @@ description: "Load before building, changing or debugging anything in n8n, and B
 
 # n8n
 
-**Version: 1.5 - 2026-09-17**
+**Version: 1.6 - 2026-09-18**
 
 n8n runs automations on a schedule or on an event, with nobody watching. It is the right tool for a
 narrow band of jobs and the wrong tool for most of what an owner will ask for, so the first section
@@ -420,3 +420,28 @@ outside. Use it for diagnosis. Keep building in your own hands.
 | A flow refuses to call another flow, saying it limits who may call it | The calling flow was created by a tool and landed in your personal space, not the shared one | Move the caller into the same shared space as the flow it calls |
 | A step reads a column that does not exist, and the name looks right | The step is showing a saved copy of your columns from whenever it was set up; the column was renamed since | Check the name in the database itself, not in the step's list |
 | The first real run of a new sequence messages everyone you have ever dealt with | The condition is a permanent state rather than a moving date window | Run the search by hand and count it BEFORE switching anything on |
+
+## An assertion that reads your own comments lies in both directions
+
+When you check your own edit by searching the code for a string, remember that comments are part of
+that code. Two opposite failures came out of this in one session.
+
+**A false PASS.** A hardcoded block of text was replaced by anchoring on the line that declared it.
+The six comment lines directly above it, explaining the design being removed, survived and now
+described code that no longer existed. Anyone reading that node afterwards would be misled by an
+explanation that was confidently wrong.
+
+**Anchor a removal at the top of its COMMENT BLOCK, not at the declaration.** A diff shows you what
+changed. It cannot show you that what did NOT change is still true.
+
+**A false FAIL.** A later check asserted that a node no longer read a particular variable. It failed,
+on a COMMENT that said the variable had been removed. The code was correct and the assertion was
+reading prose, which sent the next few minutes into fixing something that was already right.
+
+**So strip comments before asserting on code**, and when an assertion fails, look at what actually
+matched before you believe it. The check is exactly as likely to be wrong as the code, and a false
+failure is more expensive than no check, because it moves you to edit working code.
+
+**What went right and is worth copying:** both assertions ran BEFORE the change was saved, so
+nothing bad was ever written. Assert first, save second, every time.
+

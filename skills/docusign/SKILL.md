@@ -5,7 +5,7 @@ description: "Load before ANY work involving getting something signed: sending a
 
 # DocuSign
 
-**Version: 1.0 - 2026-08-24**
+**Version: 1.1 - 2026-09-18**
 
 This is the point where a draft becomes a binding document. Everything before it is reversible.
 Everything after it is not, and it is visible to a tenant.
@@ -123,3 +123,31 @@ A document sitting unsigned is a tenancy not starting.
 | The lease and the hub disagree | Somebody edited the hub after signing | The signed document wins. Correct the hub |
 | It has been outstanding for weeks | Nobody is watching the outstanding list | Put chasing on a routine |
 | Nobody can find the signed copy | It was never filed | File it the day it completes, with the completion record |
+
+## A draft envelope is still editable, and that is where the safety is
+
+Everything below was proven on a real envelope to a real contractor, corrected while still a draft,
+then sent.
+
+**Build it as a draft first.** Create the envelope with a draft status rather than sending, check it,
+then send. The gap between the two is the only place a mistake is free.
+
+**A prefilled field's VALUE can still be changed on a draft.** Read the envelope's recipients with
+tabs included, take the id of the field you want, and update that field by id. The update is refused
+or silently ignored when you do not pass the field's own id, which is the usual reason people believe
+a draft is frozen.
+
+**Set the message body, not just the subject.** E-signature platforms have a separate field for the
+note the recipient reads in the email. Leave it empty and they get a bare "please sign this" with no
+context from you. It can also be set at the moment of sending, which means anything time-sensitive in
+it can be recomputed then rather than baked in when the draft was built.
+
+**Verify by reading the envelope back, never by looking at the preview.** A draft's document preview
+renders the EMPTY form: the values you prefilled are stored alongside the document, not drawn into
+it, and only appear when the signer opens it. **Tell the owner that before they open the draft**, or
+they will report that everything is blank and you will both go looking for a bug that is not there.
+Read the values back through the API instead, where each one comes back with what it was set to.
+
+**Look a template up by NAME, not by a stored id.** Rebuilding a template mints a new id while
+editing one keeps it, so an id written into an automation is a time bomb. Names survive rebuilds.
+

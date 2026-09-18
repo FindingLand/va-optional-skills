@@ -5,7 +5,7 @@ description: "Load before ANY work that reads from or writes to the hub: looking
 
 # Airtable
 
-**Version: 1.4 - 2026-09-18** (adds: read what an existing automation WRITES before adding one
+**Version: 1.5 - 2026-09-18** (adds: read what an existing automation WRITES before adding one
 beside it, because a name is not a description and a clobbering automation looks correct from the
 grid; adding to a multi-value field without wiping it; why a value that can arrive two ways needs two
 automations; and the four tests a copy-a-value automation should pass before you trust it.)
@@ -322,3 +322,22 @@ is the one that was mentioned first.
 | An automation works when you edit a record but never on new ones | Record-updated triggers do not fire on creation | Add the create-time half as a second automation |
 | The record looks unchanged straight after you changed it | The automation runs a second or two behind | Read it again, then check the run history before assuming it broke |
 | A base someone shared has no automations in it | It was taken through a share link, which never carries them | Ask them to invite you to a duplicate by email with Creator permission, then duplicate that into your own workspace |
+
+## Reading a field off a found record: one property at a time
+
+When an automation searches for a record and then uses a value from it, the natural shape is to ask
+for the whole path at once. That is rejected, with an error about a function parameter mismatch that
+does not mention paths at all.
+
+**Step down one level at a time instead**, mapping once per level: first to the record's values,
+then to the single field you want. The result is always an array even when you asked for one record,
+so it goes through a map rather than an index; **numeric indexes into a result are rejected too.**
+
+Two things that make this cheap rather than annoying:
+
+- **A rejected automation saves nothing.** The previous configuration is untouched, so a failed
+  attempt costs one call. Read the error and retry; do not rebuild from scratch.
+- **Match the record you are looking for on something STABLE**, an id or a code, never its name.
+  Names get tidied, and a lookup matched on a name breaks silently the first time someone renames
+  the thing.
+

@@ -5,7 +5,8 @@ description: "Load before ANY work that reads from or writes to the hub: looking
 
 # Airtable
 
-**Version: 1.1 - 2026-08-25**
+**Version: 1.2 - 2026-09-18** (adds: fill the unit as well as the property, using the
+owner's own building-wide unit, and check what downstream reads a field you have started filling.)
 
 Airtable is the hub. It holds the properties, the units, the leases, the tenants, the tasks and the
 routines. Almost everything else in this system either reads from it or writes to it, so a mistake
@@ -170,6 +171,44 @@ the **Automations** tab and look for anything that points at the SENDER'S system
 recipient's: webhooks, scripts, connected accounts, and anything whose name is really an internal
 note. An automation the recipient innocently switches on can start sending their own records somewhere
 they never chose.
+
+## Fill the unit as well as the property
+
+A record that points at a property but leaves the unit blank looks finished and is not. **When a
+table offers both a property link and a unit link, fill both.**
+
+The objection people reach for is "this job is not about any one unit, it is the whole building" -
+a roof, the siding, the driveway, the foundation, a fire-code citation on the building. That is
+real, and it is not a reason to leave the unit empty. **Most owners keep one unit per property that
+stands for the building itself**, named something like "Property Level", for exactly this case. Ask
+the owner what theirs is called once, write it down in their own base file, and use it from then on.
+
+**Why it matters, and it is not neatness.** The unit link is what the base counts, groups and
+reports by. A row with no unit drops out of every view and rollup built on units, so the job
+disappears from the very screens meant to surface it. A unit that looks slightly wrong is visible
+and gets corrected. A blank one is invisible.
+
+**Find it with one read** rather than a lookup per property: filter the units table on the unit-name
+field containing the building-wide name, pull the property link, and match. That hands you every
+property's row in a single call.
+
+**If a property has not got one, say so, do not improvise.** Leaving the unit blank hides the job,
+and inventing a differently-worded unit ("Whole Building", "Common Area") quietly creates a second
+convention that nothing filters on. Adding the row is an ordinary record write, but the NAME has to
+match what the owner already uses, so confirm the spelling with them.
+
+### Check what reads a field before you start filling it
+
+Filling this field correctly is the right thing to do, and it can still change what something else
+prints. On the portfolio this rule came from, an e-signature automation built its job-location line
+by joining street address, unit, town and state. The moment property-wide jobs carried a unit, that
+line began reading "12 Example St., Property Level, Sometown, ST" on a legal release. The data was
+right and the sentence was wrong.
+
+**A rule that starts populating a field that used to be blank reaches every automation that reads
+that field.** So when you begin filling one, go and look at what consumes it and check what it now
+produces. This is the same habit as reading an automation's own filter before citing it as a
+precedent: the change usually travels further than the reason for it.
 
 ## Diagnosis
 

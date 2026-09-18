@@ -5,8 +5,10 @@ description: "Load before ANY work that reads from or writes to the hub: looking
 
 # Airtable
 
-**Version: 1.2 - 2026-09-18** (adds: fill the unit as well as the property, using the
-owner's own building-wide unit, and check what downstream reads a field you have started filling.)
+**Version: 1.3 - 2026-09-18** (adds: fill the unit as well as the property, using the
+owner's own building-wide unit; exclude archived records before calling anything a gap; check what
+downstream reads a field you have started filling; and keep a job's contract total separate from the
+payment a document is about.)
 
 Airtable is the hub. It holds the properties, the units, the leases, the tenants, the tasks and the
 routines. Almost everything else in this system either reads from it or writes to it, so a mistake
@@ -192,10 +194,17 @@ and gets corrected. A blank one is invisible.
 field containing the building-wide name, pull the property link, and match. That hands you every
 property's row in a single call.
 
-**If a property has not got one, say so, do not improvise.** Leaving the unit blank hides the job,
-and inventing a differently-worded unit ("Whole Building", "Common Area") quietly creates a second
-convention that nothing filters on. Adding the row is an ordinary record write, but the NAME has to
-match what the owner already uses, so confirm the spelling with them.
+**If an ACTIVE property has not got one, say so, do not improvise.** Leaving the unit blank hides
+the job, and inventing a differently-worded unit ("Whole Building", "Common Area") quietly creates a
+second convention that nothing filters on. Adding the row is an ordinary record write, but the NAME
+has to match what the owner already uses, so confirm the spelling with them.
+
+**⚠ Exclude archived properties BEFORE you call anything a gap.** Most owners keep sold or
+no-longer-managed properties in the table behind an archive flag rather than deleting them. On the
+portfolio this rule came from, the first pass counted every property row, found seven with no
+building-wide unit, and reported a seven-property gap to the owner. All seven were archived. There
+was no gap, and the owner had to say so. **Filter the archive flag out first, on any count, any
+audit, and any "this record is missing" claim.**
 
 ### Check what reads a field before you start filling it
 
@@ -209,6 +218,26 @@ right and the sentence was wrong.
 that field.** So when you begin filling one, go and look at what consumes it and check what it now
 produces. This is the same habit as reading an automation's own filter before citing it as a
 precedent: the change usually travels further than the reason for it.
+
+## A job's total cost and the payment a document is about are two different numbers
+
+When a job is paid in stages, a deposit then a balance, there are two figures and they are not
+interchangeable:
+
+- **what the job cost in total**, and
+- **the amount of the specific payment the document in front of you concerns.**
+
+**Give them separate fields.** One field cannot carry both jobs, and the moment it tries, whichever
+meaning the reader assumes is the one that ends up on paper.
+
+This is not bookkeeping fussiness. A conditional lien release on final payment releases the
+contractor's claim in exchange for that check, so the amount printed on it has to BE that check. Put
+the contract total on it instead and the release says the owner paid more on that payment than they
+did. The automation reads whichever field it was pointed at and will not notice.
+
+**So before writing any money value, say which field you are writing and why.** And when a document
+needs an amount, ask which of the two it wants rather than reaching for the bigger number because it
+is the one that was mentioned first.
 
 ## Diagnosis
 

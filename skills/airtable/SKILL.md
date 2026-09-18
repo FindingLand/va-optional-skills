@@ -5,10 +5,14 @@ description: "Load before ANY work that reads from or writes to the hub: looking
 
 # Airtable
 
-**Version: 1.3 - 2026-09-18** (adds: fill the unit as well as the property, using the
-owner's own building-wide unit; exclude archived records before calling anything a gap; check what
-downstream reads a field you have started filling; and keep a job's contract total separate from the
-payment a document is about.)
+**Version: 1.4 - 2026-09-18** (adds: read what an existing automation WRITES before adding one
+beside it, because a name is not a description and a clobbering automation looks correct from the
+grid; adding to a multi-value field without wiping it; why a value that can arrive two ways needs two
+automations; and the four tests a copy-a-value automation should pass before you trust it.)
+
+Earlier: 1.3 fill the unit as well as the property, using the owner's own building-wide unit; exclude
+archived records before calling anything a gap; check what downstream reads a field you have started
+filling; and keep a job's contract total separate from the payment a document is about.
 
 Airtable is the hub. It holds the properties, the units, the leases, the tenants, the tasks and the
 routines. Almost everything else in this system either reads from it or writes to it, so a mistake
@@ -117,6 +121,69 @@ record, that is not an automation at all, it is a default, and it is the cheapes
 
 **Automations inside a base are invisible unless you go looking.** When something changes by itself
 and nobody knows why, check them before assuming a bug.
+
+### Read what an existing automation WRITES before you add one beside it
+
+**A base collects automations over years, and a name is not a description.** Before you build
+something that touches a field, list the base's automations and open any that already write to that
+same field. Read the action itself, not the title.
+
+This is not a tidiness rule. An automation named as though it keeps two fields in step may in fact be
+overwriting one with the other, and nobody will have noticed, because the damage only shows on
+records where the two were ever different. If every record so far happened to hold a single value,
+a clobbering automation and a correct one look identical from the grid. **The owner asks you to add
+the missing half; the real work is often that the existing half has been destroying data quietly.**
+Say so plainly when you find it, and fix it in the same pass.
+
+### Adding a value to a multi-value field without wiping what is there
+
+**An automation that writes a field REPLACES it.** There is no "add to" write. So copying one field
+into a multi-value field (a multi-select, or a link field holding several records) destroys anything
+already selected there, unless you deliberately write the old values back alongside the new one.
+
+To add rather than replace, the write has to be *existing values, then the new value*, joined into a
+single value list. Three things make that fiddly, and all three are worth knowing before you start:
+
+- **There is no merge or combine function.** You join the two sides into one comma separated list of
+  record identifiers.
+- **So it takes two branches, not one.** If either side is empty, a comma join leaves a stray empty
+  half in the middle of the value. Split it: one branch for "both sides have something", which joins
+  them, and one for "the field is empty", which writes the new value on its own.
+- **An empty source should fall through both branches and write nothing.** Then clearing the source
+  field never touches the destination, which is almost always what the owner wants.
+
+Re-adding a value that is already in the list is safe: the field de-duplicates, so nothing doubles up.
+
+**Say out loud that it adds but never removes.** Change the source from A to B and the destination
+ends up holding both. That is usually right, but it means a genuine mistake has to be taken out by
+hand, and the owner should hear that from you rather than discover it.
+
+### A value can arrive two ways, so it usually takes two automations
+
+**"When a record is created" does not fire on later edits, and "when a record is updated" does not
+fire on creation.** If the field you are reacting to can be filled in either at creation or
+afterwards, one automation covers only half the cases.
+
+There is a wrinkle worth warning the owner about. **A row typed straight into the grid is created
+empty**, so at the instant the create-time automation looks, the field is still blank and nothing
+happens. It fills a second later, and the update-time one catches it. The create-time half earns its
+place on records that arrive complete: a form submission, an import, anything another system writes.
+
+### Test it with a throwaway record, and test the awkward cases
+
+Name a scratch record so it is obviously disposable, run it through every path, then delete it. For a
+copy-a-value automation that is four tests, and the last two are the ones people skip:
+
+1. The value arrives on a record where the destination is empty.
+2. The value changes on a record where the destination already has other values. **Those other values
+   must survive.**
+3. The value is set to something already in the destination. Nothing should double up.
+4. The source is cleared. The destination should not be touched.
+
+**Give it a moment before reading the result.** These run a second or two behind the change, and a
+read taken immediately shows the old value and looks like a failure. If it still looks wrong, check
+the automation's own run history before changing anything: it records whether it ran at all, and
+whether the run failed or simply did nothing.
 
 ## Working with a lot of records at once
 
@@ -251,4 +318,7 @@ is the one that was mentioned first.
 | A value looks right in the grid but arrives as gibberish elsewhere | It is a lookup showing a friendly label while passing along an identity | Add a lookup of the value you actually want |
 | Records changed and nobody did it | An automation inside the base | List the base's automations before assuming a bug |
 | The result came back cut off | Too many rows, or too many columns asked for | Filter on the Airtable side and name the fields you need |
+| A field you expected to gain a value instead lost its other values | An automation is writing that field, and a write replaces | Read that automation's action. Rebuild it as existing values plus the new one |
+| An automation works when you edit a record but never on new ones | Record-updated triggers do not fire on creation | Add the create-time half as a second automation |
+| The record looks unchanged straight after you changed it | The automation runs a second or two behind | Read it again, then check the run history before assuming it broke |
 | A base someone shared has no automations in it | It was taken through a share link, which never carries them | Ask them to invite you to a duplicate by email with Creator permission, then duplicate that into your own workspace |

@@ -5,7 +5,7 @@ description: "Load before building, changing or debugging anything in n8n, and B
 
 # n8n
 
-**Version: 1.4 - 2026-09-02**
+**Version: 1.5 - 2026-09-17**
 
 n8n runs automations on a schedule or on an event, with nobody watching. It is the right tool for a
 narrow band of jobs and the wrong tool for most of what an owner will ask for, so the first section
@@ -263,6 +263,124 @@ after. People remember to resend the message and forget the rest.
 record saying a code was created is a claim about the past. The lock, the account, the door is the
 only thing that actually knows.
 
+## Which system should do it: keeping data current, or moving a process along
+
+You will often have a choice. The same small job can be done by a native automation inside
+your database, or by a flow. The line that holds up:
+
+- **Keeping data current belongs in the database.** Filling a blank from a linked record,
+  copying a default onto a new row, keeping two fields in step. Housekeeping.
+- **Moving a process along belongs in a flow.** Deciding that a customer now enters a
+  sequence, that a job is ready for someone, that a request has started. Even when it is a
+  single field being written.
+
+The test is not "is this small" or "can the database do it". It is: **is this tidying
+information, or is this a step in something that happens to people?**
+
+The flow route usually costs more to set up. Take that cost with your eyes open, because
+the payoff is that every step of a process lives in one place, where you can read it, test
+it and see its history.
+
+## Before you switch a filter on, run it and read what it matches TODAY
+
+The most expensive near-miss in building any sequence is the first run sweeping your whole
+history in one burst.
+
+It usually happens the moment you move a flow from a DATE test to a STATE test. Compare:
+
+- **"the move-out date is 7 days from today"** is a moving window. Yesterday's matches fall
+  out of it on their own, so history can never pile up inside it.
+- **"the job is finished"** is permanent. It is true of every record it has ever been true
+  of, going back years.
+
+Both look equally reasonable in the builder. Only one is self-limiting. **Whenever you
+swap a date condition for a state condition, you have quietly removed the thing that was
+protecting you**, and the only way to find out is to run the search by hand and count what
+comes back. Do that before you switch anything on, every time.
+
+If it returns your history, you have two options, and the second is much better:
+
+1. Mark the old records as already handled, so only new ones qualify.
+2. **Design the filter so the flow's own action removes the record from it.** Look for
+   records at "waiting", act, then write "done". The set empties itself, cannot re-grow
+   from history, and cannot act on the same record twice. No extra guard needed.
+
+## A status field is the cheapest timer and the cheapest off switch you own
+
+Two rules for naming the values, and the second one decides whether the thing works at all.
+
+**1. If an automation writes it, it should read as a state, not an order.** "Send" is an
+instruction a person issues. Sitting in a field nobody typed into, it reads as an order
+from someone who does not exist. "Pending" describes where the record got to. Keep
+action-style wording for the fields YOU toggle to make something happen.
+
+**2. Every value names what HAPPENED, never what is NEEDED next.** Two tempting names that
+both break:
+
+- **"Follow Up Needed"** is not true yet. Right after the first message, a follow-up is not
+  needed for another week, so something has to come along later and change it. That is a
+  whole extra automation existing to maintain a word.
+- **"Waiting For Reply"** is true after the first message AND after the second. One word
+  covering two different situations means your follow-up cannot tell which records still
+  owe one.
+- **"First Message Sent"** is a fact. Nothing has to maintain it, and the timing is decided
+  separately by a date you already have.
+
+**So: the status says what happened, a date says what is due.** Two jobs, two columns.
+
+**What you get for free when every value is a fact:** the finished values become an off
+switch. Mark a record "done" or "not wanted" and it stops matching every search in the
+sequence, so the remaining messages simply never happen. Nothing to cancel, no timer to
+clear, nothing left running in the background.
+
+**And leave your history blank.** Records that existed before you added the field should
+sit at blank, outside the sequence, not at the starting value. Blank is what keeps years of
+old records out of a live sequence. Do not backfill them to the starting value to make the
+column look tidy.
+
+**One practical warning:** when you change your mind about a value's wording, RENAME the
+option. Do not delete it and add a new one. A rename carries every existing record across;
+delete-and-re-add empties those cells silently and you will not be told.
+
+## A waiting step cannot watch anything while it waits
+
+Sooner or later you will want "send this, then wait a week, but stop if they reply". The
+obvious build is a step that pauses for a week.
+
+It does not do what you want. **A paused run is parked. It is not watching anything.** It
+wakes a week later and only THEN can it look — which is exactly what a daily check's filter
+already does. So the pause buys you nothing, and it costs:
+
+- a run held open per record, for the whole week
+- nothing visible in your data, so you cannot see what is pending or step in
+- a week of restarts and edits it has to survive
+- the message it eventually sends may be a version you have since rewritten
+
+**Prefer a status on the record plus your existing daily check.** Cancelling then costs
+nothing at all: change the status and the record stops matching. This is the same idea as
+the off-switch above, and it is why a two-message sequence a week apart can be built with
+no waiting step anywhere.
+
+## Copying a flow copies its spare copy of the message too
+
+Building a second, similar message by copying the first is the right way to do it. Just
+know what comes with it.
+
+Most well-built message flows keep their wording in a row in your database, so you can
+reword them without opening the flow. But they usually also carry a **hidden spare copy**
+inside the flow itself, used only if that row is ever empty. Copy the flow and you copy the
+spare — so your second message is carrying the first message's words.
+
+It will never show up in testing, because the row is filled in. It surfaces on the day
+somebody clears a cell, and then the wrong message goes out.
+
+**When you copy a message flow, repoint its spare copy at the new message**, and leave a
+note saying which row it is supposed to match.
+
+**One more thing that travels with a copy:** if any step refers to another step BY NAME,
+renaming that step in the copy breaks it at run time, with everything above it still green.
+Keep the names, or fix every reference.
+
 ## Debugging
 
 Reading a broken run through the interface is slow. Be systematic instead of clicking around.
@@ -299,3 +417,6 @@ outside. Use it for diagnosis. Keep building in your own hands.
 | Every reply appears as a new message instead of underneath the first one | The step is pointed at a name that does not exist, so the value saying which conversation to reply to is empty | Look at what the earlier step really produced, then read the conversation back to confirm where the reply landed |
 | An approval flow only ever asks about the first record and the rest go quiet | The waiting step pauses the whole run, so the others are never asked | One run per conversation: a sweep that starts a separate run for each record |
 | Nobody knows what a flow does | It has no row in the automations list | Write the row. A flow nobody wrote down cannot be maintained |
+| A flow refuses to call another flow, saying it limits who may call it | The calling flow was created by a tool and landed in your personal space, not the shared one | Move the caller into the same shared space as the flow it calls |
+| A step reads a column that does not exist, and the name looks right | The step is showing a saved copy of your columns from whenever it was set up; the column was renamed since | Check the name in the database itself, not in the step's list |
+| The first real run of a new sequence messages everyone you have ever dealt with | The condition is a permanent state rather than a moving date window | Run the search by hand and count it BEFORE switching anything on |

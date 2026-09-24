@@ -19,7 +19,7 @@ You talk to Vera. She loads first and hands work to the other three.
 
 | Folder | Version | What it does |
 |---|---|---|
-| `vera/` | 5.1 | Chief of staff. Loads first every session, keeps your skills current, runs the daily routines pass, routes work to the other three, holds anything legal. 5.0: genericized for the library. Every operating rule and hard-won lesson is kept; the owner-specific identity, base/table/field ids, real names and portfolio facts are gone, and the version now matches the file header again.
+| `vera/` | 5.2 | Chief of staff. Loads first every session, keeps your skills current, runs the daily routines pass, routes work to the other three, holds anything legal. 5.0: genericized for the library. Every operating rule and hard-won lesson is kept; the owner-specific identity, base/table/field ids, real names and portfolio facts are gone, and the version now matches the file header again. 5.2: cloud sessions spend the account's cloud session credit automatically, with no alert in the session. Vera says so before a long cloud job, offers local instead, and recommends extra usage OFF or capped.
 | `tessa/` | 4.2 | Tenants and applicants: enquiries, applications, leases, tenancy messages, renewals, move-out, listings  **v5.1: reading a rule is not applying it** - three rules broken in one session were all in skills read in full that same session, and the owner caught every one because they built the system. Three mechanical self-checks before shipping, plus what the rule must not suppress |
 | `fiona/` | 4.2 | Money: rent and arrears, deposits, part months, charges, your own insurance renewals |
 | `owen/` | 4.2 | Property: repairs, contractors, turnovers, seasonal work, post, access codes, filing |

@@ -5,7 +5,7 @@ description: "Read a self-managing landlord's email inbox and triage the landlor
 
 # Landlord Inbox Handler
 
-**Version: 1.2 - 2026-08-24**
+**Version: 1.3 - 2026-09-29** (drafts read your written policies first, look up the facts first, never say yes to changing an agreement, never reply to a no-reply address, and every "I'll look into it" comes with a proposed solution in the brief. Examples adapt to YOUR industry.) v1.2 - 2026-08-24.
 
 ## Where this sits, and the two skills it is confused with
 
@@ -51,9 +51,49 @@ This skill uses YOUR email account through YOUR connector. Claude never holds yo
    - Where your properties, units and tenants are recorded, so mail can be matched to the right place. If Vera has written your base file, read that instead of keeping a second list here, because two lists drift apart.
    - Your preferred vendors (plumber, electrician, handyman) so vendor mail is recognized.
    - Your emergency line: what YOU consider drop-everything urgent (default list is in the Urgent category below).
+   - **What business this inbox serves**, in one line (rentals, coaching, an agency, a course, a service trade). Most owners run more than one. The drafts and the brief use that business's words, and the examples in "Before drafting any reply" are picked from it.
+   - **Where your written policies live, one file per business.** The rules you already apply without thinking: who can come off an agreement and how, refunds, what is included, who pays for what, how people reach you. If you have no such file yet, Claude starts one per business and adds a rule ONLY after you approve it. A policy that lives only in your head cannot be followed by anything else.
 3. **Optional: a "Landlord" label/folder.** If you want Claude to also label triaged mail (Gmail labels or Outlook categories/folders), say so during setup. Labeling is off by default; the brief works without it.
 
 No properties list yet? The skill still works. Claude will infer property context from the emails themselves and ask you when it cannot tell.
+
+---
+
+## Before drafting any reply (v1.3)
+
+**Why this exists.** A customer on a shared agreement wrote in to be taken off it. An auto-drafted
+reply said "I can help get you removed" and promised to fix a co-customer's portal access. The owner's
+real rule was that nobody comes off unless the people who stay can qualify on their own, and it was
+written down nowhere the drafter could read. So it guessed, and it guessed yes. The same draft was
+addressed to the platform's no-reply address, and it had not checked who was actually on the
+agreement. Five rules, in order:
+
+1. **Read your policy file for that business first.** If the answer is there, draft from it. If it is
+   not, do not invent one: write a holding reply and list the question in the brief with a proposed
+   rule for you to approve.
+2. **Look up the facts before writing a word.** Who is on the agreement, what they bought, what they
+   owe, what is already open for them. A draft that does not match your records is wrong however well
+   it reads.
+3. **Never draft a "yes" to changing an agreement.** Taking someone off, adding someone, a refund, a
+   waiver, an extension, a price or scope change. The draft states your written policy or holds, and
+   the decision comes to you in the brief.
+4. **Reply to a real address.** Never to a notification sender (`no-reply@`, `notifications@`, a
+   platform's alert address). That reply goes nowhere. Answer inside the platform's own messaging, or
+   at the person's real email from your records.
+5. **Promise only what is done or assigned.** "I'll get that fixed" only if it is already fixed or
+   someone owns it. Otherwise say what happens next and by when, and the brief carries a proposed
+   solution (see "The daily brief").
+
+**The same five rules in your industry.** Claude picks the row that matches the business you named in
+setup, and writes the drafts in those words:
+
+| Rule | Landlord | Coach / course creator | Agency / service business | Trades / home services |
+|---|---|---|---|---|
+| Policy first | Who can come off a lease, and how | Refunds, pausing, how long access lasts | What a retainer covers, revision limits | Warranty terms, deposit and cancellation |
+| Facts first | Who is on the lease, is rent current | What they bought, where they are in the program | The signed proposal, what is invoiced | The quote they signed, job status, payments |
+| No yes to changes | Removing a tenant, adding a pet | Refund, extension, switching cohorts | Extra scope, lower price, new deadline | Free callback outside warranty, price change |
+| Real address | Tenant's email, not the rent platform's no-reply | Student's email, not the course platform notice | Client contact, not the project-tool alert | Customer's email, not the booking app alert |
+| Holding reply + proposed fix | "Can't see the lease in the portal: add them to it, send the invite" | "Can't log in: resend the invite, check the email on file" | "File missing: re-share the folder, confirm access" | "Missed appointment: offer two new slots, flag the tech" |
 
 ---
 
@@ -117,7 +157,8 @@ URGENT (1)
    -> Draft ack ready. Suggest calling Reyes Plumbing (your water-heater vendor). Say "approve 1" to keep the ack draft ready in your Drafts.
 
 NEEDS YOUR DECISION (2)
-2. [456 Oak - Marcus T.] Asks to add a roommate to the lease. Lease sec. 14 requires your written approval. Your call - want me to draft a yes-with-application reply or a follow-up question?
+2. [456 Oak - Marcus T.] Asks to add a roommate to the lease. Lease sec. 14 requires your written approval.
+   -> PROPOSED: your policy file says a new occupant applies like any applicant. Draft ready saying so, with the application link. Approve, edit, or tell me your rule if it differs.
 3. [Vendor - ACME Roofing] Quote came in: $2,850 for the flat-roof patch. Approve, negotiate, or get a second quote?
 
 HANDLED - DRAFTS WAITING (3)
@@ -133,7 +174,7 @@ FYI - NO ACTION (3)
 (11 other emails, nothing landlord-related.)
 ```
 
-Rules for the brief: urgent always first; every item names the property and person; every draft is announced, never silently created; "needs your decision" items ask a clear either/or question; money items always show the amount and date. After the brief, you reply in plain English ("approve 1 and 4, hold 5, get a second roof quote") and Claude executes - still creating drafts, never sending.
+Rules for the brief: urgent always first; every item names the property and person; every draft is announced, never silently created; "needs your decision" items ask a clear either/or question AND carry a PROPOSED solution (the likely cause if Claude could check it, the fix, who does it, and the reply that goes out once you approve), because a bare "your call" hands you the thinking; every holding reply ("I'll look into it") is listed with its proposed solution too; money items always show the amount and date. After the brief, you reply in plain English ("approve 1 and 4, hold 5, get a second roof quote") and Claude executes - still creating drafts, never sending.
 
 ---
 

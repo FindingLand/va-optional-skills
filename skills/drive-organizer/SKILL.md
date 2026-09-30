@@ -5,7 +5,7 @@ description: "One-time cleanup that takes ANY messy Google Drive folder and rebu
 
 # Drive Organizer (general purpose, any use case)
 
-**Version: 1.1 - 2026-08-19**
+**Version: 1.2 - 2026-09-11** (Step 5 forbade handing over a script but assumed browser control, leaving a session without it with no permitted path. Adds: check whether the Drive connector alone does the job, otherwise walk them through it a click at a time.) (1.1 - 2026-08-19)
 
 This is the big first cleanup for a Google Drive folder. Point it at a folder where files are
 dumped with names like `Scan_0423.pdf`, `raw file.xlsx`, or `final FINAL v2`, and it builds a
@@ -153,6 +153,14 @@ in place by ID, so every link survives.
 ## Step 5: Run It For Them (browser-driven, the proven model)
 
 **RUN IT FOR THEM in the browser. Do NOT hand a non-technical user a script plus written steps.**
+
+**⚠️ If you cannot drive a browser in this session, that is not permission to hand over a script, and
+it is not a reason to send them to a different session.** Two things to try first, in order.
+**Check whether you need a script at all:** the Drive connector renames and moves files on its own,
+so a reorganisation of a few dozen files is often just you doing it, with no script anywhere.
+**If the job really is too big for that,** walk them through it one click at a time and read the
+screenshots they send back, rather than handing over the whole thing at once. The rule below is about
+never dumping a script and a wall of steps on someone. It is not about who is holding the mouse.
 Most users have zero coding background and little patience, so drive script.google.com yourself
 with the Claude-in-Chrome tools. The user's ONLY step is the one-time Google permission grant
 (Google gates account consent; Claude cannot click it for them). Exact flow:

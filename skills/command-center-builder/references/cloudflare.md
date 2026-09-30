@@ -29,7 +29,7 @@ list wondering what had failed.
 One click per line, indented where a step has a sub-sequence, with where-on-the-screen cues, the
 same words for the same thing every time ("memory vault" = their GitHub repository; say "aka your
 GitHub repository" the first time and never again), and a "Done when" on every step. This mirrors
-the Week 4 page's `CommandCenterPrepCard` (rewritten 09-11-2026 from the dry-run feedback: Liz
+the Week 4 page's `CommandCenterPrepCard` (rewritten 09-11-2026 from the dry-run feedback: a student
 could not follow paragraphs, "the same way you did in step 4" sent her back to step 4, and no step
 said where on the screen to look). **Keep the two in step.**
 
@@ -199,6 +199,23 @@ confirm the repo contains `wrangler.jsonc` (repo root), `command-center/bake.mjs
 usually has the `workflow` scope that a note-syncing tool like Obsidian's git plugin lacks —
 a `.github/workflows/*.yml` push fails without it). Commit **only** the command-center
 files; don't sweep unrelated changes.
+
+### ⛔ So the 403 moves the CLICKS, never the build (09-21-2026)
+
+**No session ever needs to reach Cloudflare's API.** The deploy is a dashboard import of what is
+already on GitHub, and pushing to GitHub is the one session-dependent step, which a cloud session
+does well. So when a cloud session hits the 403 (see `gotchas.md`), what moves to the local session
+is the Cloudflare clicks, nothing else.
+
+- **Before sending the student anywhere, open GitHub and say what is already there.** Name the files
+  that are pushed. Whatever is on GitHub is the hand-over; the local session picks up from it and
+  rebuilds nothing.
+- **The local session proves it can push before it touches anything** (`gotchas.md`, "Prove you can
+  push BEFORE you build anything").
+- **⛔ Never bounce a student between sessions.** It cost one student two days: the cloud session
+  sent her local, the local session could not push to GitHub, and she went back and forth between
+  them while her code sat on GitHub ready to import the whole time. One line saying which half
+  happens where, then the next click.
 
 ## 1. Import the repo (Workers flow) — in Phase P (or in the session if step 6 was skipped)
 1. dash.cloudflare.com → **Workers & Pages** (on a new account it is not in the left menu; use the

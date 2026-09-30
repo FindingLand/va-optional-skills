@@ -5,7 +5,7 @@ description: "Load before posting anything to Slack, setting up a channel for au
 
 # Slack
 
-**Version: 1.0 - 2026-08-24**
+**Version: 1.1 - 2026-09-11** (the one-workspace-at-a-time limit is on the connector, not on Slack. A second workspace takes automated messages through its own incoming webhook, so "plan for it" is replaced by the actual route.) (1.0 - 2026-08-24)
 
 Slack is where a team already talks. **If the owner does not already live in Slack, do not introduce
 it.** A one-person business does not need a chat tool to talk to itself, and a channel nobody opens
@@ -36,7 +36,14 @@ screen.**
 
 Worth knowing: **an owner in more than one workspace can usually only have one connected at a time.**
 Switching quietly disconnects the other, so anything that was posting to the first stops without
-saying so. If somebody works across two workspaces, plan for it rather than discovering it.
+saying so.
+
+**That limit is on the CONNECTOR, not on Slack, so an owner in two workspaces is not stuck.** The
+connected workspace is the one you read and work in conversationally. **A second workspace receives
+automated messages through its own incoming webhook**, a single address that posts to one channel and
+belongs to that workspace alone. Nothing about it disturbs the connected one, and the automation
+layer sends to it directly. So the answer to "we live in two workspaces" is which one you connect and
+which one gets a webhook, never "you can only have one".
 
 ## How many channels
 

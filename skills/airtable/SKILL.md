@@ -5,12 +5,15 @@ description: "Load before ANY work that reads from or writes to the hub: looking
 
 # Airtable
 
-**Version: 1.5 - 2026-09-18** (adds: read what an existing automation WRITES before adding one
-beside it, because a name is not a description and a clobbering automation looks correct from the
-grid; adding to a multi-value field without wiping it; why a value that can arrive two ways needs two
-automations; and the four tests a copy-a-value automation should pass before you trust it.)
+**Version: 1.6 - 2026-09-21** (adds: building an automation FOR someone when the API refuses the one
+step that does the work. Airtable will not create a "Run a script" action through the API, and that
+refusal was being read as "the automation cannot be built". It can: build the shell over the API and
+finish it in the browser, or walk the owner through the clicks, and never fall back on a schedule.)
 
-Earlier: 1.3 fill the unit as well as the property, using the owner's own building-wide unit; exclude
+Earlier: 1.5 and 1.4 read what an existing automation WRITES before adding one beside it; adding to
+a multi-value field without wiping it; why a value that can arrive two ways needs two automations;
+the four tests a copy-a-value automation should pass; and reading a field off a found record one
+level at a time. 1.3 fill the unit as well as the property, using the owner's own building-wide unit; exclude
 archived records before calling anything a gap; check what downstream reads a field you have started
 filling; and keep a job's contract total separate from the payment a document is about.
 
@@ -185,6 +188,51 @@ read taken immediately shows the old value and looks like a failure. If it still
 the automation's own run history before changing anything: it records whether it ran at all, and
 whether the run failed or simply did nothing.
 
+### Building one FOR someone, and the one step the API refuses
+
+You can create most of an automation through the API: the name, the trigger, which fields it watches,
+and the ordinary actions like create a record or send an email. **You cannot create the "Run a
+script" action.** Airtable rejects it outright, every time, even with an empty script. The same
+refusal blocks editing any automation that already contains one, so once a script exists, every
+change to that automation is a browser job.
+
+**That refusal is not a dead end, and it must never be reported as one.** The script step is usually
+the only part that does real work, so "the API won't make it" reads like "it can't be built". It can.
+Take these in order.
+
+**1. Build the shell over the API, then finish it in the browser yourself.** Create the automation
+with the real trigger and the real watched fields, plus a harmless "Find records" placeholder as its
+action. Then in the browser: open the action, change its type to Run script, add the input variable
+the script needs, set the script, and switch the automation on.
+
+- **The placeholder needs a real filter or a named view. "All records" is rejected**, so point it at
+  a condition that never matches and it will sit there doing nothing until you replace it.
+- **Set the script in one go rather than typing it.** Typing a long script into the editor is slow and
+  the editor's own autocomplete can corrupt it while you work. Putting the whole text in at once
+  avoids both. Then prove it: read the script back and compare it to what you meant to send, or press
+  Airtable's own Test button and check the result. **Do not verify a script by looking at it**, a long
+  line runs off the edge of the screen and you cannot see the end of it.
+- **Everything is created switched OFF.** Turning it on is a click, and until someone makes it the
+  automation does nothing at all.
+- **Editing one that is already on shows "unpublished changes".** Until someone clicks Update, the old
+  version is still the one running.
+
+**2. If you cannot drive the browser, walk the owner through the same clicks.** That is still you
+building it, one step removed. **Write the finishing steps and the exact script into the automation's
+own description** so whoever clicks has everything in front of them and does not need the
+conversation you had.
+
+**⛔ What NOT to fall back on: a schedule.** It is tempting to give up on the change-triggered
+automation and run something every few minutes instead. **Do not.** A five minute schedule is
+thousands of runs a day, almost all of them finding nothing, and it will exhaust whatever plan it
+runs on. A schedule is a once-a-day safety net behind a real trigger, never the main path. If the
+trigger genuinely cannot be built, say so plainly and let the owner decide.
+
+**⚠️ And do not trust the automation API's own instructions document on this.** It does not list the
+script action among the things it cannot create, and it points at a section that is not in the
+document. The server's refusal is the only reliable answer, so read what comes back rather than what
+the catalog promised.
+
 ## Working with a lot of records at once
 
 - **Writes go in batches, and there is a limit per batch.** A long job is several batches, not one.
@@ -321,6 +369,7 @@ is the one that was mentioned first.
 | A field you expected to gain a value instead lost its other values | An automation is writing that field, and a write replaces | Read that automation's action. Rebuild it as existing values plus the new one |
 | An automation works when you edit a record but never on new ones | Record-updated triggers do not fire on creation | Add the create-time half as a second automation |
 | The record looks unchanged straight after you changed it | The automation runs a second or two behind | Read it again, then check the run history before assuming it broke |
+| Creating an automation fails the moment it includes a script step | The API never creates a "Run a script" action, nor edits an automation holding one | Build the shell with a placeholder action over the API, then finish the script step in the browser, or walk the owner through it |
 | A base someone shared has no automations in it | It was taken through a share link, which never carries them | Ask them to invite you to a duplicate by email with Creator permission, then duplicate that into your own workspace |
 
 ## Reading a field off a found record: one property at a time

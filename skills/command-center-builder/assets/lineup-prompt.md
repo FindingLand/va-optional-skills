@@ -22,6 +22,6 @@ Stop for two things only, and tell me exactly what to click each time: the GitHu
 
 Everything else, do yourself and tell me in one line as you go.
 
-When you are done, give me the address, tell me how to log in, and tell me plainly whether everything is ready for the session or exactly what is still missing. Do not tell me how to build the real thing or what to do next toward it — that is what the session is for, so just tell me I am ready for it.
+When you are done, give me the address, tell me how to log in, and tell me plainly whether everything is ready for the session or exactly what is still missing. Do not tell me how to build the real thing or what to do next toward it. That is what the session is for, so just tell me I am ready for it.
 
 I am on my own computer and signed into Cloudflare and GitHub in Chrome. If you are not in a session that can open my browser, say so first and stop.

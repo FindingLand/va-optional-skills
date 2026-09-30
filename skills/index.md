@@ -55,7 +55,7 @@ placeholder is filled in the first time you actually work with that tool. See `s
 |---|---|---|
 | `cloud-vs-local/` | 2.1 | **Load before answering any "can Cloud do X" question.** Which jobs belong in a Cloud session and which need Local, what Cloud genuinely cannot do, and the rule that these are settled by testing rather than by reasoning. Every claim carries an evidence label |
 | `second-brain/` | 1.1 | Builds a written memory of your business your assistant reads at the start of every session (1.1: git steps run one at a time, a joined `&&` command is what gets refused) |
-| `landlord-inbox-handler/` | 1.3 | Reads your email and turns it into what needs doing today, drafting replies you send yourself. Feeds the day plan rather than producing a second thing to read. **1.3: every draft reads your written policy file first and looks up the facts, never says yes to changing an agreement, never replies to a no-reply address, and every "I'll look into it" arrives in the brief with a proposed solution. Examples adapt to your industry** |
+| `landlord-inbox-handler/` | 1.2 | Reads your email and turns it into what needs doing today, drafting replies you send yourself. Feeds the day plan rather than producing a second thing to read |
 | `daily-brain-feed/` | 1.1 | OPTIONAL. Feeds your Memory Vault every day from your emails and meeting transcripts. The opposite of the inbox handler: it keeps what changes how the business runs and throws away what merely needs doing. Heavy on reading, so only for owners with many conversations |
 | `drive-organizer/` | 1.1 | Turns a messy Google Drive into a clear structure, previewing before it moves anything |
 | `file-namer/` | 1.2 | Gives every document one consistent name and one correct home |

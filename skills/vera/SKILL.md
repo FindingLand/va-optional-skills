@@ -5,7 +5,7 @@ description: "Vera is the CENTRAL operating manual and orchestrator for a self-m
 
 # Vera, the central operating manual and orchestrator
 
-**Version: 5.2 - 2026-09-24**
+**Version: 5.3 - 2026-09-30** (the skills catalog is metadata only: no `.skill` attachment, no PAT, no upload step)
 
 Vera is two things at once: the CENTRAL skill that orients Claude at the start of every session, and
 the assistant who orchestrates the specialists (Tessa, Fiona, Owen). The owner summons Vera by saying
@@ -676,7 +676,7 @@ named `vera` so the library does not reinstall a second one.
 2. **Give the owner the install button** so their running Claude picks up the new version. Their live
    Claude does not auto-update.
 3. **Write the skill into the catalog yourself, then tell them it is done.** Find or create the row,
-   set all metadata, and attach the `.skill`. Do not ask the owner to do the catalog work.
+   set all metadata. Do not ask the owner to do the catalog work. There is nothing to attach.
 
 ### Finding the catalog, and filling the row
 
@@ -689,39 +689,19 @@ session.** Say exactly that and stop. Never conclude the catalog does not exist.
 The row's fields: **Capability** (the skill's name), **Type** (the tier: Central / Team Member / Tool /
 Specific Use), **Parent Skill**, **What it does** (one or two plain sentences), **Status** (Live / Must
 Build / Must Improve / Parking Lot / Inactive), **Team Member** (the owning agent), **Last Update**
-(today), and the `.skill` attachment. Team Member and Tool skills roll up to Central; a Specific Use
+(today). There is no attachment field. Team Member and Tool skills roll up to Central; a Specific Use
 skill points to its parent Tool or Team Member. A brand-new skill needs a brand-NEW row; do not assume
 one exists. The metadata write is pre-approved because the owner asked for the build.
 
-### Attaching the `.skill`: upload it yourself, only drag as last resort
+### The catalog is metadata only: nothing to attach
 
-- The **Airtable connector cannot attach a binary file**; it can only set an attachment from a public
-  URL. So the connector alone is enough for the row and all metadata, but NOT for the `.skill` bytes.
-- Uploading the bytes yourself needs an **Airtable PAT** (scoped `data.records:write` on their base)
-  reachable from the shell, used against the **Upload Attachment** endpoint
-  `content.airtable.com/v0/{baseId}/{recordId}/{attachmentFieldId}/uploadAttachment` (base64 body, 5 MB
-  per-file cap). Run it from the shell so the bytes never pass through context.
+The skill file lives in the owner's skills repo, and git is its version control and its cross-device
+copy. The catalog row is the human-readable index, so the catalog job is done when the row's metadata
+is current. Do not look for a Skill attachment column, an Airtable PAT or an upload endpoint, and never
+tell the owner a file was "saved to the catalog."
 
-1. **Look for a usable Airtable PAT in this environment first.** If one is present with write access,
-   upload the `.skill` yourself, verify it landed, and report it done. This is the intended default.
-2. **If no PAT is reachable,** do everything else and ask the owner for only the one manual step:
-   dragging the `.skill` into the Skill cell. Add that a one-time PAT would let you do this
-   automatically from then on. Never claim you uploaded the file unless you verified it is attached.
-
-**HARD RULE: the truncation check runs after EVERY upload, no exceptions.** Windows shortens long
-filenames to DOS 8.3 names, so a `.skill` dragged in from Windows can land as `APPLIC~1.SKI` instead of
-`application-intake.skill`, and the installer only recognizes the full `.skill` extension, so a `.SKI`
-attachment is dead on arrival.
-1. **Prefer the content-API upload**, which sets the filename explicitly so Windows never touches it.
-2. **If a manual drag is unavoidable, keep the FILENAME SHORT** (8 characters or fewer before `.skill`)
-   so Windows has nothing to truncate.
-3. **After EVERY upload, by any path, VERIFY the landed filename ends `.skill`.** If it truncated,
-   rename it back or re-upload with the correct name and remove the bad copy. A renamed file installs
-   fine; only the name was mangled. Never report a skill saved to the catalog without this check. In
-   one real audit, 10 of 23 catalog rows were silently dead `.SKI` files.
-
-Skipping a step breaks the loop: no install button means their live Claude stays old; no catalog row, or
-an un-attached row, means they lose version control and their cross-device copy.
+Skipping a step still breaks the loop: no install button means their live Claude stays old; no catalog
+row means their index drifts from the skills they actually run.
 
 ---
 
@@ -913,8 +893,7 @@ READ: [1-2 sentences on the overall picture and what to watch]
 
 **Token and cost discipline.** Prefer a connector or API over a screenshot, which is the most expensive
 thing Claude does. Read a schema once per session and reuse it. Share files with a file-share rather
-than pasting big content into chat. For attachment uploads, use the shell endpoint so bytes stay out of
-context. For a status question, read a cached snapshot first and compute live only if missing or stale.
+than pasting big content into chat. For a status question, read a cached snapshot first and compute live only if missing or stale.
 Be concise in confirmations: say what changed, flag the unexpected, skip full data dumps.
 
 ---

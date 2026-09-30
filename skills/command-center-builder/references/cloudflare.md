@@ -153,7 +153,7 @@ stop. Order:
      filled from the dashboard URL.
    - `.gitignore` line `command-center/public/data.json` (the stub writes it at build time).
    Push, and verify the commit is on GitHub before touching Cloudflare.
-3. **Import and deploy** — section 1 below, exactly. **The GitHub authorization happens HERE, not in
+3. **Import and deploy** — section 1 below, exactly. **Workers only: never the "Continue to Pages" link, never a Pages project.** **The GitHub authorization happens HERE, not in
    the pre-work**: at "Connect to GitHub" a GitHub window opens and the student clicks through it
    (their account, Only select repositories, the memory vault, Install & Authorize). That is an OAuth
    grant, so it is theirs by golden rule 2 — tell them exactly what to click and wait. If GitHub is
@@ -163,6 +163,12 @@ stop. Order:
    Building step prints "holding page data.json written ... AIRTABLE_TOKEN present"; "MISSING"
    means the variable did not save, fix it before going on.
 4. **Visit.** The holding page renders with their name and "Last refreshed" a minute ago.
+   **⛔ Check the address before anything else: it must end in `.workers.dev`.** If it ends in
+   `.pages.dev`, the import went through Cloudflare's legacy Pages flow, which this build does not
+   support (the refresh job deploys with `wrangler deploy` and a Workers Scripts:Edit token, so a
+   Pages site can silently stop updating; inferred, not tested). Redo step 3 on Workers, delete the
+   Pages project so only one address exists, and only then go on. Nothing in the vault changes.
+   (09-15-2026 Week 4 session: a student arrived on pages.dev and nothing had caught it.)
 5. **Lock it down** — section 2. Verify from a browser that is not logged in.
 6. **Narrow the watch path** — section 3.
 7. **Run the refresh job once**: GitHub → the vault → Actions tab → "Refresh Command Center" → Run

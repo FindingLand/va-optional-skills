@@ -20,7 +20,7 @@
  *    at "Finished". The skill writes a memory index of every change so anything can be
  *    reverted. Set DRY_RUN = true only if you want a no-change preview first.
  *
- * Claude fills the four sections marked FILLED IN BY CLAUDE.
+ * Claude fills the sections marked FILLED IN BY CLAUDE.
  */
 
 // =========================== FILLED IN BY CLAUDE ============================
@@ -33,6 +33,13 @@ var BACKUP_ENABLED = false;         // true = copy each FILE to _Backup-Original
 var FOLDERS = [
   // "01_Legal", "02_Finance", "02_Finance/Lending", "03_Operations",
   // "04_Properties", "05_Archive"
+];
+
+// Folders (paths relative to ROOT) to share as "Anyone with the link: Viewer".
+// Used for the catch-all "To File" folder, so anything dropped into it is
+// visible to the assistant. Viewer only, never Editor. Leave empty otherwise.
+var SHARE_WITH_LINK = [
+  // "0_To File"
 ];
 
 // One row per item to rename and/or move.
@@ -57,6 +64,16 @@ function organizeDrive() {
     var path = FOLDERS[f];
     if (DRY_RUN) { Logger.log((folderExistsByPath(root, path) ? "exists  " : "CREATE  ") + path); }
     else { getOrCreateFolderByPath(root, path); Logger.log("folder ready  " + path); }
+  }
+
+  for (var s = 0; s < SHARE_WITH_LINK.length; s++) {
+    var sp = SHARE_WITH_LINK[s];
+    if (DRY_RUN) { Logger.log("WOULD SHARE (anyone with link, viewer)  " + sp); continue; }
+    try {
+      var sf = getOrCreateFolderByPath(root, sp);
+      sf.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      Logger.log("SHARED (anyone with link, viewer)  " + sp + "  " + sf.getUrl());
+    } catch (e) { Logger.log("SHARE FAILED  " + sp + "  :  " + e + "  (share it by hand: right click, Share, Anyone with the link, Viewer)"); }
   }
 
   var backup = (!DRY_RUN && BACKUP_ENABLED) ? getOrCreateChild(root, "_Backup-Original") : null;

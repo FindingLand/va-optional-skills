@@ -61,7 +61,8 @@ placeholder is filled in the first time you actually work with that tool. See `s
 | `file-namer/` | 1.3 | Gives every document one consistent name and one correct home (1.3: folder setups include a shared `To File` folder at the top) |
 | `document-to-template/` | 1.0 | Turns a document you send repeatedly into a signature-ready template: `{{tags}}` where the data goes, numbered anchors where the signing fields go, and the tag-to-field map your automation needs. It never asks which field feeds a tag — it proposes one and shows you a real value, because recognizing a number is easy and recalling a field name is not. Carries the two failures that ruin finished documents: tags styled to stand out hand their formatting to every filled value, and an anchor whose party has no recipient produces no field and no error |
 | `skill-creator/` | 1.0 | Turning a repeatable process into a skill, the placeholder pattern for a tool you have not started using yet, and filling that placeholder in while the work is actually happening |
-| `prompt-architect/` | 1.0 | Turns a vague request into a reusable, properly built prompt |
+| `prompt-writer/` | 1.0 | Turns a vague request into a reusable, properly built prompt |
+| `prompt-architect/` | RENAMED | Renamed to `prompt-writer/` on 08-31-2026. If you already have a `prompt-architect/` folder from an earlier pull, delete it so it does not compete with the new one |
 
 ## Building things for yourself
 

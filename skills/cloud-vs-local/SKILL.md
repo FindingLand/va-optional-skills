@@ -5,7 +5,7 @@ description: "Decides whether a piece of work should run in a Cloud session or a
 
 # Cloud or Local
 
-**Version: 2.2 - 2026-08-31**
+**Version: 2.3 - 2026-10-01** (Lovable work is LOCAL, enforced; cloud only on your explicit choice. Previous: 2.2 - 2026-08-31)
 
 Claude can run in two places and they are not equally capable. Picking the wrong one is the most
 common cause of "it said it worked and nothing happened", and of a session burning an hour
@@ -34,6 +34,27 @@ session on the same branch and do only the browser steps there. **Deciding that 
 discovering it halfway through**, because a cloud session cannot hand over to a local one mid-flight.
 
 ---
+
+## ⛔ Lovable (and any tool you drive in a signed-in browser): LOCAL, ENFORCED (Peter, 2026-10-01)
+
+**Start every Lovable session LOCAL, on the computer where you are signed in to Lovable.** Why, in Peter's words: everyone
+hates starting a cloud session away from home, it starts making changes in Lovable, and then one of the tasks turns out to
+need the local machine. A half-finished Lovable change (a prompt sent, a database change applied, the matching piece not
+done) is worse than not starting, because whoever opens the project next finds it neither the old version nor the new one.
+
+| Lovable step | Cloud session? |
+|---|---|
+| Send a prompt, approve a plan, Publish | ❌ needs the signed-in Lovable browser |
+| Database changes in the SQL editor (new tables, functions, user roles) | ❌ same |
+| Click-testing the preview while signed in | ❌ same |
+| Reading or writing data through an API the project already exposes | ✅ works from anywhere |
+
+- **Default: local, always**, even when the first task looks small. Tasks grow mid-session.
+- **You may still choose cloud.** Then Claude says the consequence ONCE, before any change: *"From a cloud session I can do
+  the data work, but I cannot send Lovable prompts, publish, use the SQL editor or click-test. If a task needs one of
+  those I stop there and it waits for a local session."* It continues only on your yes, and stops cleanly at the first
+  step that needs local, saying exactly where.
+- **Never** start a Lovable change in a cloud session that cannot be finished there.
 
 ## ⛔ How a "can Cloud do X?" question gets answered
 

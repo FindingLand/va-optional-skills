@@ -1,5 +1,5 @@
 {
-  "base": "appbDvSpJX6LKRkBc",
+  "base": true,
   "tables": [
     {
       "placeholder": "TBL::Properties",

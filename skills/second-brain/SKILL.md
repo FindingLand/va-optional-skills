@@ -15,7 +15,7 @@ description: >
 ---
 # AI Second Brain Skill
 
-**Version: 1.1 - 2026-09-03 (git steps run one at a time, never joined with `&&`). Every save in this
+**Version: 1.2 - 2026-09-11 (a cloud run CAN reach the vault, because the vault is a private GitHub repo it clones; only unpushed local changes are out of its reach. The old line said the vault was desktop only and sent every vault job back to the computer.) (1.1 - 2026-09-03: git steps run one at a time, never joined with `&&`). Every save in this
 file used to be one chained command, which is the exact shape a permission system refuses, and the
 Auto-Commit Rule made it standing policy and told you to do it silently. A real owner lost a day to
 that: nothing was wrong with git or their repo, the command shape was simply always refused. Layered
@@ -875,7 +875,9 @@ One more thing: want me to create the auto-save script so GitHub syncs every 60 
 If yes, walk them through auto-save from references/setup-guide.md (Part 5B for Mac, Part 5C for PC).
 
 **Note on scheduling, and it matters more than it looks:**
-Scheduled runs are capped per day by your Claude plan, and the cap is low enough that one schedule per job runs out fast. So do not create a schedule for each of these. **Add them as rows to your routines table instead**, and your assistant runs them as part of the one daily pass. One schedule, many jobs. A run on your own machine can reach your files; a run in the cloud cannot, so anything touching the vault belongs in a session on your computer.
+Scheduled runs are capped per day by your Claude plan, and the cap is low enough that one schedule per job runs out fast. So do not create a schedule for each of these. **Add them as rows to your routines table instead**, and your assistant runs them as part of the one daily pass. One schedule, many jobs.
+
+**On where a run happens, and be precise about this, because getting it wrong sends work to the wrong place.** A run in the cloud cannot see files sitting on your computer. It CAN see your vault, because your vault is a private GitHub repository: a cloud run clones it, works on it and pushes back. The only thing out of its reach is a change you have made locally and not yet pushed. So the rule is **push before you rely on a cloud run**, not "the vault is desktop only". What genuinely does need your own computer is a file that was never in the vault, a browser you are signed in to, and anything on your disk.
 
 ---
 

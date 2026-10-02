@@ -14,12 +14,14 @@ Hey Vera. I have finished steps 1 to 4 of the Week 4 pre-work. Load the command-
 
 In plain words: check my steps, put the holding page into my memory vault, connect Cloudflare to my vault and deploy it, put my read-only Airtable token where it goes, turn on the login gate for the page, run the refresh once, and give me my address.
 
+Deploy it as a Worker, never with Cloudflare's older Pages option. My address must end in workers.dev. If it ends in pages.dev, fix that before we go on.
+
 Do not build my Command Center yet. That is for the session.
 
 Stop for two things only, and tell me exactly what to click each time: the GitHub window where I authorize Cloudflare, and my Airtable token. For the token, either bring the box up on screen and let me paste it in myself, or ask me for it in the chat and put it in for me. Tell me which one you want.
 
 Everything else, do yourself and tell me in one line as you go.
 
-When you are done, give me the address, tell me how to log in, and tell me plainly whether everything is ready for the session or exactly what is still missing. Do not tell me how to build the real thing or what to do next toward it — that is what the session is for, so just tell me I am ready for it.
+When you are done, give me the address, tell me how to log in, and tell me plainly whether everything is ready for the session or exactly what is still missing. Do not tell me how to build the real thing or what to do next toward it. That is what the session is for, so just tell me I am ready for it.
 
 I am on my own computer and signed into Cloudflare and GitHub in Chrome. If you are not in a session that can open my browser, say so first and stop.

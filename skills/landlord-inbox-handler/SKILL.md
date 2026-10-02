@@ -5,7 +5,7 @@ description: "Read a self-managing landlord's email inbox and triage the landlor
 
 # Landlord Inbox Handler
 
-**Version: 1.3 - 2026-09-29** (drafts read your written policies first, look up the facts first, never say yes to changing an agreement, never reply to a no-reply address, and every "I'll look into it" comes with a proposed solution in the brief. Examples adapt to YOUR industry.) v1.2 - 2026-08-24.
+**Version: 1.3 - 2026-09-29** (drafts read your written policies first, look up the facts first, read every earlier conversation with the person on every channel (email incl. Sent, texts, the platform thread), never say yes to changing an agreement, never reply to a no-reply address, and every "I'll look into it" comes with a proposed solution in the brief. Examples adapt to YOUR industry.) v1.2 - 2026-08-24.
 
 ## Where this sits, and the two skills it is confused with
 
@@ -66,7 +66,7 @@ reply said "I can help get you removed" and promised to fix a co-customer's port
 real rule was that nobody comes off unless the people who stay can qualify on their own, and it was
 written down nowhere the drafter could read. So it guessed, and it guessed yes. The same draft was
 addressed to the platform's no-reply address, and it had not checked who was actually on the
-agreement. Five rules, in order:
+agreement. Six rules, in order:
 
 1. **Read your policy file for that business first.** If the answer is there, draft from it. If it is
    not, do not invent one: write a holding reply and list the question in the brief with a proposed
@@ -74,23 +74,31 @@ agreement. Five rules, in order:
 2. **Look up the facts before writing a word.** Who is on the agreement, what they bought, what they
    owe, what is already open for them. A draft that does not match your records is wrong however well
    it reads.
-3. **Never draft a "yes" to changing an agreement.** Taking someone off, adding someone, a refund, a
+3. **Read what has already been said to them, on every channel, before drafting.** Your email in both
+   directions (including Sent, and every mailbox you use for this business), your texts if your setup
+   lets Claude read them on your computer, and the platform's own message thread. If you already
+   answered by text, made a promise, or the facts changed, the draft follows that and the brief says
+   where it came from. If two channels disagree, the draft holds and the brief shows the conflict with
+   a proposed resolution. A run that could not see a channel (texts from a cloud run, for example)
+   says so in the brief, rather than implying there was nothing there.
+4. **Never draft a "yes" to changing an agreement.** Taking someone off, adding someone, a refund, a
    waiver, an extension, a price or scope change. The draft states your written policy or holds, and
    the decision comes to you in the brief.
-4. **Reply to a real address.** Never to a notification sender (`no-reply@`, `notifications@`, a
+5. **Reply to a real address.** Never to a notification sender (`no-reply@`, `notifications@`, a
    platform's alert address). That reply goes nowhere. Answer inside the platform's own messaging, or
    at the person's real email from your records.
-5. **Promise only what is done or assigned.** "I'll get that fixed" only if it is already fixed or
+6. **Promise only what is done or assigned.** "I'll get that fixed" only if it is already fixed or
    someone owns it. Otherwise say what happens next and by when, and the brief carries a proposed
    solution (see "The daily brief").
 
-**The same five rules in your industry.** Claude picks the row that matches the business you named in
+**The same six rules in your industry.** Claude picks the row that matches the business you named in
 setup, and writes the drafts in those words:
 
 | Rule | Landlord | Coach / course creator | Agency / service business | Trades / home services |
 |---|---|---|---|---|
 | Policy first | Who can come off a lease, and how | Refunds, pausing, how long access lasts | What a retainer covers, revision limits | Warranty terms, deposit and cancellation |
 | Facts first | Who is on the lease, is rent current | What they bought, where they are in the program | The signed proposal, what is invoiced | The quote they signed, job status, payments |
+| Read every channel first | You already texted the tenant the plumber comes Tuesday | You told the student on a call they could pause | The client approved the change by text | You promised the customer a callback on the phone |
 | No yes to changes | Removing a tenant, adding a pet | Refund, extension, switching cohorts | Extra scope, lower price, new deadline | Free callback outside warranty, price change |
 | Real address | Tenant's email, not the rent platform's no-reply | Student's email, not the course platform notice | Client contact, not the project-tool alert | Customer's email, not the booking app alert |
 | Holding reply + proposed fix | "Can't see the lease in the portal: add them to it, send the invite" | "Can't log in: resend the invite, check the email on file" | "File missing: re-share the folder, confirm access" | "Missed appointment: offer two new slots, flag the tech" |

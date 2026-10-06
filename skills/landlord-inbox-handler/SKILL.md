@@ -5,7 +5,7 @@ description: "Read a self-managing landlord's email inbox and triage the landlor
 
 # Landlord Inbox Handler
 
-**Version: 1.3 - 2026-09-29** (drafts read your written policies first, look up the facts first, read every earlier conversation with the person on every channel (email incl. Sent, texts, the platform thread), never say yes to changing an agreement, never reply to a no-reply address, and every "I'll look into it" comes with a proposed solution in the brief. Examples adapt to YOUR industry.) v1.2 - 2026-08-24.
+**Version: 1.4 - 2026-10-06** (mail addressed to someone else on your team is theirs to answer, so Claude drafts nothing for it from your mailbox; and every run starts by listing the earlier drafts that someone has since answered, so your Drafts folder never fills with stale replies). v1.3 - 2026-09-29 (drafts read your written policies first, look up the facts first, read every earlier conversation with the person on every channel (email incl. Sent, texts, the platform thread), never say yes to changing an agreement, never reply to a no-reply address, and every "I'll look into it" comes with a proposed solution in the brief. Examples adapt to YOUR industry.) v1.2 - 2026-08-24.
 
 ## Where this sits, and the two skills it is confused with
 
@@ -66,7 +66,7 @@ reply said "I can help get you removed" and promised to fix a co-customer's port
 real rule was that nobody comes off unless the people who stay can qualify on their own, and it was
 written down nowhere the drafter could read. So it guessed, and it guessed yes. The same draft was
 addressed to the platform's no-reply address, and it had not checked who was actually on the
-agreement. Six rules, in order:
+agreement. Eight rules, in order (7 and 8 were added in v1.4, see below):
 
 1. **Read your policy file for that business first.** If the answer is there, draft from it. If it is
    not, do not invent one: write a holding reply and list the question in the brief with a proposed
@@ -91,7 +91,25 @@ agreement. Six rules, in order:
    someone owns it. Otherwise say what happens next and by when, and the brief carries a proposed
    solution (see "The daily brief").
 
-**The same six rules in your industry.** Claude picks the row that matches the business you named in
+7. **Check whose conversation it is.** Read the To and Cc, not just the From. If the message was
+   written to a teammate (your VA, a partner, a shared address such as `leasing@`) and you only got a
+   copy, it is their conversation. Claude drafts nothing for it from your mailbox, because they will
+   usually answer it themselves within hours. The brief lists it in one line under **Your team's
+   threads** so you still see it. If setup told Claude it can open that teammate's mailbox, it checks
+   their Sent folder first and, if a reply is still needed, drafts it there under their name.
+8. **Clear up after yourself.** Before reading new mail, Claude looks at the drafts it made on earlier
+   runs and checks your Sent folder (and any teammate mailbox it can open) for a reply sent after the
+   draft, on the same thread or to the same person. It reads that reply's body, because a reply about
+   something else does not count. A draft that has already been answered is listed in the brief under
+   **Already answered, delete this draft**, with who replied and when. Claude does not delete it
+   itself: deleting your mail is always your call.
+
+**Why 7 and 8 exist (v1.4).** A tenant wrote to the owner's assistant, and a copy landed in the
+owner's inbox. The early morning run drafted a reply from the owner's mailbox, in the owner's name. The
+assistant answered the tenant a few hours later, and the draft sat in Drafts looking like unfinished
+work. It happened twice in one week before anyone noticed.
+
+**The same rules in your industry.** Claude picks the row that matches the business you named in
 setup, and writes the drafts in those words:
 
 | Rule | Landlord | Coach / course creator | Agency / service business | Trades / home services |
@@ -182,7 +200,7 @@ FYI - NO ACTION (3)
 (11 other emails, nothing landlord-related.)
 ```
 
-Rules for the brief: urgent always first; every item names the property and person; every draft is announced, never silently created; "needs your decision" items ask a clear either/or question AND carry a PROPOSED solution (the likely cause if Claude could check it, the fix, who does it, and the reply that goes out once you approve), because a bare "your call" hands you the thinking; every holding reply ("I'll look into it") is listed with its proposed solution too; money items always show the amount and date. After the brief, you reply in plain English ("approve 1 and 4, hold 5, get a second roof quote") and Claude executes - still creating drafts, never sending.
+Rules for the brief: urgent always first; every item names the property and person; every draft is announced, never silently created; drafts that someone has since answered are listed for you to delete; mail written to a teammate is listed in one line, never drafted; "needs your decision" items ask a clear either/or question AND carry a PROPOSED solution (the likely cause if Claude could check it, the fix, who does it, and the reply that goes out once you approve), because a bare "your call" hands you the thinking; every holding reply ("I'll look into it") is listed with its proposed solution too; money items always show the amount and date. After the brief, you reply in plain English ("approve 1 and 4, hold 5, get a second roof quote") and Claude executes - still creating drafts, never sending.
 
 ---
 

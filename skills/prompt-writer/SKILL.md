@@ -1,21 +1,27 @@
 ---
-name: prompt-architect
-description: Turn vague requests into engineered, role-based prompts ready to copy into any LLM. Use when the user wants a prompt generated for them to use elsewhere, not when they want Claude to do a task directly. Triggers on the slash command "/prompt" and on phrases like "write me a prompt for...", "engineer a prompt that...", "help me prompt Claude to...", "I need a prompt for...", "generate/build/draft/craft a prompt...". Do NOT trigger when the user is asking Claude to do the task itself, when "prompt" appears in a non-LLM context (login prompt, command prompt, modal prompt), when the user wants existing non-prompt copy rewritten, or when asking a conceptual question about prompt engineering.
+name: prompt-writer
+description: Turn a rough request into an engineered, role-based prompt, then RUN it straight away (or show it for approval first, whichever the owner prefers), so the owner gets a far better answer for one extra sentence. Can also hand the prompt back to copy into another LLM. Triggers on the slash command "/prompt" and on phrases like "use the prompt writer", "prompt writer:", "write a prompt", "write me a prompt for...", "i need a prompt", "I need a prompt for...", "make this prompt better", "improve my prompt", "engineer a prompt that...", "help me prompt Claude to...", "generate/build/draft/craft a prompt...". Do NOT trigger when the owner just asks for a task with no mention of a prompt (do the task), when "prompt" appears in a non-LLM context (login prompt, command prompt, modal prompt), when the owner wants existing non-prompt copy rewritten, or when asking a conceptual question about prompt engineering.
 ---
-# Prompt Architect
+# Prompt Writer
 
-**Version: 1.0 - 2026-08-10**
+**Version: 1.1 - 10-07-2026** (renamed from prompt-architect; now RUNS the prompt it writes, or shows it for approval first, per the owner's preference; new trigger phrases "write a prompt", "i need a prompt", "use the prompt writer", "improve my prompt")
 
 ## Overview
 
-This skill converts vague user requests into production-ready, role-based prompts that pull the best possible output from Claude or any capable LLM. Every generated prompt opens with a precise role assignment, includes the context and constraints the model needs, and returns as a single copy-ready code block. Built for operators who use LLMs daily across marketing, technical work, strategy, hiring, and operations and need the prompt to do the heavy lifting the first time.
+This skill converts vague user requests into production-ready, role-based prompts that pull the best possible output from Claude or any capable LLM. Every generated prompt opens with a precise role assignment, includes the context and constraints the model needs, and is shown in a single code block, then run on the spot (or held for the owner's approval, or handed back to copy elsewhere). Built for operators who use LLMs daily across marketing, technical work, strategy, hiring, and operations and need the prompt to do the heavy lifting the first time.
 
 ## When to Use
 
-Fire this skill when the user wants a prompt they can copy and paste into Claude, ChatGPT, Gemini, or another LLM later.
+Fire this skill when the owner wants their request turned into a strong prompt. By default the skill then RUNS that prompt for them in this same chat. It can also hand the prompt back to copy into ChatGPT, Gemini, or another LLM if they ask for that.
+
+The usual way an owner uses it is to put the trigger in front of a rough request:
+"Use the prompt writer: draft a renewal email for a tenant whose rent is going up."
 
 Trigger examples:
 - `/prompt`
+- "Use the prompt writer: [their request]"
+- "Write a prompt for..." / "I need a prompt for..."
+- "Make this prompt better: [their prompt]"
 - "Write me a prompt for generating weekly content ideas"
 - "Engineer a prompt that audits my Airtable base structure"
 - "Help me prompt Claude to draft listing descriptions"
@@ -27,24 +33,30 @@ Trigger examples:
 ## When NOT to Use
 
 Do not fire when:
-- The user is asking Claude to do the task directly. "Write me a blog post about X" means write the post, not build a prompt about writing the post.
+- The owner asks for a task with no mention of a prompt or the prompt writer. "Write me a blog post about X" means write the post.
 - "Prompt" appears in passing in a non-LLM context. "The login prompt isn't firing" or "at the command prompt, type..." is not a prompt request.
 - The user wants existing copy, an SOP, or a document rewritten or improved (and it is not itself a prompt).
 - The user is asking a conceptual question about prompt engineering. "What makes a good prompt structure?" deserves a direct answer, not a generated prompt.
 
-When in doubt, confirm once: "Do you want a prompt to use somewhere else, or should I just do the task for you now?"
+When in doubt, confirm once: "Want me to build a proper prompt for this first, or just do it?"
 
 ## Workflow
 
 1. **Confirm intent** if it is ambiguous whether the user wants a prompt generated or the task done directly. Ask once, then proceed.
 
-2. **Ask 2 to 4 clarifying questions** using the question bank below. Use `ask_user_input_v0` with tappable button options when the environment supports it. Free-text only as a fallback. Target the highest-leverage unknowns first: audience, tone, output format, constraints, success criteria, scope.
+2. **Ask 2 to 4 clarifying questions** using the question bank below. Use the tappable question tool when the environment has one. Free-text only as a fallback. Target the highest-leverage unknowns first: audience, tone, output format, constraints, success criteria, scope.
 
 3. **Engineer the prompt** using the six framework rules. Build on what the user said. Do not just repeat it back in fancier language.
 
 4. **Self-audit** against the seven quality criteria before returning.
 
-5. **Return the prompt** inside a single code block with one or two sentences of framing. No long explanations. No postamble beyond a single line on how to use it if needed.
+5. **Run it, or show it first, per the owner's preference.**
+   - **Check the preference.** Look in your memory for the owner's prompt-writer preference. If there is none yet, ask once: "When I write you a prompt, should I run it straight away, or show it to you first so you can approve or tweak it?" Save the answer to memory and do not ask again.
+   - **"Run it" (the default if they shrug):** show the finished prompt in a single code block so they can see what improved, then immediately carry it out yourself in this chat as your instructions. Fill every [BRACKET] you can from their answers and what you already know about their business; drop the prompt's "ask me clarifying questions" line, because you already asked. If a bracket genuinely needs material only they have (a transcript, a document), ask for that one thing, then run.
+   - **"Show me first":** show the prompt in a single code block and stop with one line: "Say go and I'll run it, or tell me what to change." Run it only on their yes.
+   - **"Copy it elsewhere":** if they say they want it for ChatGPT or another tool, return the prompt in a code block with one line on where to paste their material, and do not run it.
+   - **They can switch any time** by saying "just run it" or "show me the prompt first". Update the saved preference when they do.
+   - **Every normal rule still applies when you run it.** Anything that sends, posts, charges, or changes a record still waits for the owner's yes exactly as it would if they had asked you directly. A better prompt is never permission.
 
 ## Framework Rules (Non-Negotiable)
 
@@ -58,7 +70,7 @@ Not: "Act as a consultant."
 Yes: "Act as a revenue operations consultant with direct experience scaling bootstrapped SaaS from zero to one million in ARR without a sales team."
 
 ### 2. Always ask 2 to 4 clarifying questions before drafting
-Never skip this step, even when the request seems clear. Use the question bank below. When possible, ask via tappable buttons via `ask_user_input_v0` instead of free-text.
+Never skip this step, even when the request seems clear. Use the question bank below. When possible, ask via tappable buttons instead of free-text.
 
 ### 3. Build on the request, never just repeat it
 The engineered prompt must add context, constraints, role precision, and specificity the user did not mention but a strong output requires. If the generated prompt only restates the request, it has failed.
@@ -75,12 +87,12 @@ Every generated prompt must explicitly include:
 - Quality criteria or success definition
 - Examples or references when they would help
 
-### 6. Return inside a single code block, ready to copy
-One or two sentences of framing before or after the block. No long explanations. No breakdown of your reasoning.
+### 6. Show the prompt inside a single code block
+One or two sentences of framing before or after the block. No long explanations. No breakdown of your reasoning. Then run it or wait, per workflow step 5.
 
 ## Clarifying Question Bank
 
-Pull the 2 to 4 highest-leverage questions from the relevant category. Present as tappable options via `ask_user_input_v0` whenever possible.
+Pull the 2 to 4 highest-leverage questions from the relevant category. Present as tappable options whenever possible.
 
 ### Content and Copywriting
 - Who is the reader and what do they already believe or know about this topic?

@@ -118,6 +118,12 @@ top of the gap and do not quietly render the zero.
 **When the owner asks you to help clear that backlog (added v1.5, 10-07-2026)**, these are the traps
 measured on a real catch-up of several months of deposits:
 
+**⛔ Read this first: the Claude QuickBooks connector cannot create or edit a transaction.** It reads.
+Everything below applies in two cases only: the owner posts the entries by hand from your draft, or
+the owner has built their own Intuit app connection through n8n (see `connect-quickbooks-to-n8n`) and
+has approved each batch of writes. With the connector alone, you draft and the owner posts.
+
+
 - **Name the source of every deposit before proposing anything.** Rent platform deposits usually carry
   a short tenant code in the bank description, and the platform's own "payment received" emails list
   the exact split (rent, pet rent, utilities, late fee, deposit). Use that split, never a guess from

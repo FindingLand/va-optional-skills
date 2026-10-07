@@ -5,7 +5,7 @@ description: "Load before connecting QuickBooks to n8n, before creating an Intui
 
 # Connect QuickBooks to n8n
 
-**Version: 1.3 - 2026-09-07**
+**Version: 1.4 - 2026-10-07**
 
 This is one job and one job only: get the owner's own n8n instance talking to the owner's own
 QuickBooks Online company, starting from nothing and finishing at a credential that provably works.
@@ -238,6 +238,24 @@ is the natural place to pin the minor version once for everything.
 
 **Pin `minorversion` on the calls**, as Step 10 says, and pin it in that one sub-flow so every caller
 inherits it.
+
+**⛔ Split reads and writes inside that sub-flow (added v1.4, 10-07-2026).** The tempting build is one
+HTTP Request node with the method as an expression and the Send Body toggle as an expression such as
+"method is not GET". n8n ignores an expression on that toggle, so every write goes out with an empty
+body and QuickBooks answers `Unsupported Operation ... SAXParseException; Premature end of file`. Reads
+keep working, so the fault hides until the first create, and a flow that creates expenses or vendors
+fails on every run. Build it as an IF on the method: a read node with Send Body off, and a write node
+with Send Body on, body type JSON, passing the body through unchanged (stringify it only if it is not
+already a string). Proof that the body now arrives, with the owner's OK: a write QuickBooks refuses on
+validation, such as `Required param missing`, is a field-level answer, which means the body was read.
+
+**Two update rules that cost an hour each if unknown.** A sparse update still needs the parent
+account: the deposit account on a Deposit, and the paying account plus payment type on an expense. A
+Transfer takes no sparse update at all, so resend its amount and both accounts along with the change.
+
+**If the sub-flow only accepts callers from its own n8n project**, a new caller built elsewhere fails
+with "cannot be called by this workflow". Move the caller into that project rather than loosening the
+sub-flow's setting.
 
 ## What never goes into chat, this file, or the repo
 

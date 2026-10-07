@@ -5,7 +5,7 @@ description: "Load before ANY work touching QuickBooks: reading the profit and l
 
 # QuickBooks
 
-**Version: 1.4 - 2026-09-07**
+**Version: 1.5 - 2026-10-07**
 
 QuickBooks is where the money story of the business is written down. Everything else can be rebuilt.
 This cannot, and it is what the owner's accountant, their lender and their tax filing all read.
@@ -114,6 +114,32 @@ abandoned and it is income categorisation specifically.
 
 **Say it plainly and stop.** Fixing the books is the owner's job and it comes first. Do not build on
 top of the gap and do not quietly render the zero.
+
+**When the owner asks you to help clear that backlog (added v1.5, 10-07-2026)**, these are the traps
+measured on a real catch-up of several months of deposits:
+
+**⛔ Read this first: the Claude QuickBooks connector cannot create or edit a transaction.** It reads.
+Everything below applies in two cases only: the owner posts the entries by hand from your draft, or
+the owner has built their own Intuit app connection through n8n (see `connect-quickbooks-to-n8n`) and
+has approved each batch of writes. With the connector alone, you draft and the owner posts.
+
+
+- **Name the source of every deposit before proposing anything.** Rent platform deposits usually carry
+  a short tenant code in the bank description, and the platform's own "payment received" emails list
+  the exact split (rent, pet rent, utilities, late fee, deposit). Use that split, never a guess from
+  the amount.
+- **A security deposit paid into the operating account looks exactly like rent.** Book it as that
+  property's deposit liability, never as income, and tell the owner so the cash can move to the
+  deposit-holding account. A transfer between the deposit-holding account and the operating account is
+  a transfer, never income and never a deposit return by itself.
+- **Any entry created for the owner to match must carry the bank date shown on the Banking screen.**
+  Raw bank feed data can store a date as the evening before, so a script that reads it lands every
+  entry one day early, and a deposit that hit on the 1st gets booked in the previous month. Read the
+  date off the screen, or add the day back.
+- **Put a memo of the owner's choosing on every entry you create**, so the owner can filter for them.
+- **QuickBooks' top Match suggestion is often wrong when two entries share an amount** on nearby
+  dates. Pairing two of your own same-amount entries changes nothing in the books, but the owner must
+  never click Add on a line that already has an entry waiting, because that is a duplicate.
 
 **⭐ On the first session, ask it what it can do rather than assuming.** This connector is new and
 what it exposes has been changing. Read a small report and learn it that way. **⛔ Do NOT probe its

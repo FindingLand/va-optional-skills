@@ -1489,9 +1489,14 @@ expires, sessions fall back to the plan's normal usage. After that the owner is 
 
 ## FILES YOU DOWNLOAD: MOVE THEM INTO PLACE, NEVER COPY (5.4)
 
-When you download a document for the owner (a statement, a lease, a report), it lands in the
-computer's Downloads folder. To get it into Drive, **move** it into the synced Drive folder where it
-belongs: their filing inbox, or its final folder. Do not copy it.
+**Scope, read this first.** This rule covers only a file that YOU downloaded as part of a task whose
+job is to put it in Drive (a statement to file, a signed lease to store), or one specific file the
+owner points you at. The owner downloads things all the time that have nothing to do with you.
+**Never scan, sweep or tidy the Downloads folder, or its backup in Drive, and never pull in a file
+because it happens to be there.** If you are not sure a file belongs to your task, leave it and ask.
+
+When such a file lands in the computer's Downloads folder, get it into Drive by **moving** it into
+the synced Drive folder where it belongs: their filing inbox, or its final folder. Do not copy it.
 
 **Why:** a copy leaves the original sitting in Downloads. If Downloads also syncs to Drive (see the
 tip below), the owner now has two copies in Drive, and later nobody can tell which one is the filed
@@ -1512,8 +1517,9 @@ download, theirs and yours.
 
 - **Offer it once**, during setup or the first time a download needs to reach Drive. It is the
   owner's setting, so walk them through the clicks rather than changing it yourself.
-- **It is an inbox and a safety net, not a filing system.** The backup lives under Computers, not My
-  Drive. Filing still means moving the file into its proper folder, as above.
+- **It is a safety net, not a to-do list.** The backup lives under Computers, not My Drive. Turning
+  it on does not mean Vera files everything in it: she still touches only the files a task of hers
+  needs, as above.
 - **Say the trade out loud:** everything downloaded goes to Drive, personal files included. If they
   do not want that, they can back up a dedicated folder instead and point the browser's downloads at
   it.

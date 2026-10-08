@@ -5,7 +5,7 @@ description: "Load before ANY work involving getting something signed: sending a
 
 # DocuSign
 
-**Version: 1.1 - 2026-09-18**
+**Version: 1.2 - 2026-10-08**
 
 This is the point where a draft becomes a binding document. Everything before it is reversible.
 Everything after it is not, and it is visible to a tenant.
@@ -112,10 +112,27 @@ A document sitting unsigned is a tenancy not starting.
 - **After two chases, the question is whether they still want it**, and that is a conversation, not
   another reminder.
 
+## "Has it been signed?" is answered per signer, never by the envelope
+
+An envelope's overall status stays "sent" until the LAST signer finishes. With two signers, where the
+other party signs first and the owner countersigns, the envelope still says "sent" after the first
+signature. The first signature does not show at that level, so it looks as if nobody has signed.
+
+The moment one signer finishes, the platform hands the envelope to the next one, and the envelope's
+sent date moves forward. That looks exactly like a resend. It is not one.
+
+- **Read each signer's own status** (on DocuSign, list the envelope's recipients) and its signed
+  date. A signer marked completed with a signed date HAS signed, whatever the envelope says.
+- **Report it person by person:** "They signed yesterday at 11:59am. It is waiting on your
+  countersignature."
+- **If it is waiting on the owner, say so plainly.** Do not suggest chasing the other party for a
+  signature they have already given.
+
 ## Diagnosis
 
 | What you see | What it usually is | What to do |
 |---|---|---|
+| It looks unsigned but they say they signed | The envelope is waiting on the next signer, often the owner | Check each signer's own status, then tell the owner whose turn it is |
 | They say they never received it | A typo in the address, or it went to spam | Check the address character by character before assuming anything |
 | It went out with a mistake in it | It was not checked against the hub before sending | Withdraw, correct, resend, and tell them plainly |
 | Signatures landed in the wrong places | The underlying document changed after the template was built | Re-check every field position after any document change |

@@ -1,7 +1,8 @@
-# Time-blocks profile
+# My Perfect Week
 
-Copy this to `reference/time-blocks-profile.md` in your second brain. Your assistant reads it
-before every plan, and it wins over the defaults in the skill. Write OPEN next to anything you
+Copy this to `reference/perfect-week.md` in your second brain. It is the one rulebook for your
+calendar: the weekly planner (`weekly-time-blocks`) and your scheduling assistant
+(`calendar-assistant`) both read it, and it wins over the defaults in either skill. Write OPEN next to anything you
 have not decided; the plan will say which default it used.
 
 Last updated: YYYY-MM-DD
@@ -47,3 +48,24 @@ Last updated: YYYY-MM-DD
 - Admin buffer (every weekday, never pre-filled):
 - Weekly priorities (90 minutes or less):
 - Weekly shutdown:
+
+## Slot lookup (what goes where)
+| Request | Where it goes | Never |
+|---|---|---|
+| Team meeting, one-to-one | | |
+| Sales or discovery call (booking pages) | | |
+| Podcast, interview, outside meeting | | |
+| Personal appointment | Wherever it must be (a fixed anchor) | |
+| In-the-business work (tenants, vendors) | | |
+| Email and messages | | |
+| Social media | | |
+| Anything urgent | The admin buffer that day | |
+
+## Protected (never offered to anyone)
+-
+
+## Optional calls (plan over them)
+-
+
+## Approval
+- Calendar changes and messages: ask me first (change this line when you trust it more)

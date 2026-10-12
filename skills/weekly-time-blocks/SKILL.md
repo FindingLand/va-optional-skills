@@ -7,6 +7,8 @@ description: "Builds the owner's time-blocked plan for the coming week and for a
 
 **Version: 1.0 - 2026-10-11**
 
+Day-to-day scheduling between Sundays (booking, rescheduling, travel) belongs to `calendar-assistant/`.
+
 Plans the owner's week the way Dan Martell's *Buy Back Your Time* describes a Perfect Week: a
 template that gets reused, with similar work stacked together so the owner switches gears as few
 times as possible. The assistant proposes, the owner approves, and only then does anything reach
@@ -15,9 +17,11 @@ the calendar.
 ## First run: the intake
 
 Nothing in this skill is the owner's actual schedule. Every time, day and minimum below is a
-starting suggestion. The owner's answers live in one profile file in their second brain,
-`reference/time-blocks-profile.md`, copied from `profile-template.md` in this folder. **Their file
-wins over everything written here.** Ask one short question at a time, in this order, and write each
+starting suggestion. The owner's answers live in ONE file in their second brain,
+`reference/perfect-week.md`, copied from `perfect-week-template.md` in this folder. It is their
+Perfect Week: their hours and anchors plus a slot lookup saying what goes where. `calendar-assistant/`
+reads the same file, so the rules never live in two places. **Their file wins over everything
+written here.** Ask one short question at a time, in this order, and write each
 answer down as it comes:
 
 1. **When it runs.** Which day and time the draft should arrive, and where (a private chat channel
@@ -58,6 +62,10 @@ answer down as it comes:
    the meeting-day windows (see below).
 9. **Review-only first.** The draft never writes to the calendar until they switch it on, after a
    few weeks of drafts they would have approved as they were.
+
+10. **Write the slot lookup.** From the answers above, fill the "Slot lookup", "Protected" and
+    "Optional calls" sections of their Perfect Week file, then play it back as one short table for a
+    yes. This is the part `calendar-assistant/` uses every time someone asks for their time.
 
 Anything left unanswered gets a sensible default, written in the file as OPEN, and the draft says
 which defaults it used.
@@ -121,7 +129,7 @@ pages so they offer slots ONLY inside the meeting-day windows.
 
 ## Building the weekly plan
 
-Each run reads, in this order: the profile; each company's `goals.md` in the vault; the calendar
+Each run reads, in this order: `reference/perfect-week.md`; each company's `goals.md` in the vault; the calendar
 for the planning window; open tasks from their task boards (their database's tasks table, plus any
 other board they use); email that needs them (through `landlord-inbox-handler/`); anything that
 changed in their vault that week; and their Command Center briefing if they have one. Each goal
@@ -136,7 +144,7 @@ block gets the single most useful task for that goal, with a one-line reason and
    timed rehearsal block.
 2. **Name the week's ONE thing.** One outcome that makes the rest of the week easier, in one
    sentence at the top.
-3. **Fill the peak with goal blocks.** Meet each business's minimum from the profile. The priority
+3. **Fill the peak with goal blocks.** Meet each business's minimum from `reference/perfect-week.md`. The priority
    business gets the ONE thing and the first block on at least three days. One time-critical item
    from another business may jump ahead when it has a hard deadline inside the week; say why.
 4. **Stack the meeting days**, then place the selling hour every weekday.

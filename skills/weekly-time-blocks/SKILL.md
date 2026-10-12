@@ -128,6 +128,12 @@ changed in their vault that week; and their Command Center briefing if they have
 block gets the single most useful task for that goal, with a one-line reason and its source.
 
 1. **Lay the anchors.** Sleep, the workout, meals, and every booked event.
+   **Upcoming appearances count too.** Read wherever the owner's vault keeps talks, podcasts,
+   panels and guest calls, for the next three weeks. Each must be a booked event; if one is
+   missing, flag it and ask to add it. Plan its prep backward from the date: if someone else builds
+   the slides, the content and a slide-by-slide skeleton go to them about two weeks ahead, in a goal
+   block, with the slot length confirmed first. The week of the talk gets a review block and a
+   timed rehearsal block.
 2. **Name the week's ONE thing.** One outcome that makes the rest of the week easier, in one
    sentence at the top.
 3. **Fill the peak with goal blocks.** Meet each business's minimum from the profile. The priority

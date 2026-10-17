@@ -131,7 +131,7 @@ pages so they offer slots ONLY inside the meeting-day windows.
 
 Each run reads, in this order: `reference/perfect-week.md`; each company's `goals.md` in the vault; the calendar
 for the planning window; open tasks from their task boards (their database's tasks table, plus any
-other board they use); email that needs them (through `landlord-inbox-handler/`); anything that
+other board they use); email that needs them (through `inbox-handler/`); anything that
 changed in their vault that week; and their Command Center briefing if they have one. Each goal
 block gets the single most useful task for that goal, with a one-line reason and its source.
 

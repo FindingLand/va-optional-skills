@@ -1,62 +1,74 @@
 ---
 name: daily-brain-feed
-description: "OPTIONAL. Feeds the owner's Memory Vault every day from what happened: the day's emails and meeting transcripts (Fathom, Fireflies, Otter or any recorder), reduced to lessons, decisions and updates and written into the right folders. Runs as ONE row in the routines table inside Vera's daily pass, never as its own schedule. Trigger when the owner says 'daily brain feed', 'feed my second brain', 'feed my memory vault from my emails', 'set up the daily feed', 'brain feed', or asks Vera to learn from their emails or meetings every day. Vera offers it once after the Memory Vault, Airtable and the daily pass are working; never installs it unasked."
+description: "OPTIONAL. Feeds the owner's Memory Vault every day from what happened: everything the inbox handler read that morning (email, and texts, Slack and meeting recordings when connected), reduced to lessons, decisions and updates and written into the right folders. Runs as ONE row in the routines table inside Vera's daily pass, never as its own schedule. Trigger when the owner says 'daily brain feed', 'feed my second brain', 'feed my memory vault from my emails', 'set up the daily feed', 'brain feed', or asks Vera to learn from their emails or meetings every day. Vera offers it once after the Memory Vault, Airtable and the daily pass are working; never installs it unasked."
 ---
 
 # Daily brain feed (optional)
 
-**Version: 1.1 - 2026-08-24**
+**Version: 1.2 - 2026-10-17** (learns from everything the inbox handler read that morning, not only email and meeting recordings, so a rule agreed by text or a decision made in Slack reaches the vault too. Asks up to three times instead of once, and the owner can turn it on any time by asking. Runs only in the morning run, never on its own cloud schedule. Points at the renamed `inbox-handler`.) v1.1 - 2026-08-24.
+
+**What's new for you (1.2):** If you have the brain feed on, it now learns from your texts, your Slack and your meeting recordings too, not just your email, because it works from everything the inbox handler read that morning. If you said no to it before, Vera may ask you again, up to three times in all, and you can turn it on yourself any time by saying "turn on the brain feed."
 
 ## Where this sits, and why it is not the inbox handler
 
 **This skill is the MEMORY lane. It keeps what changes how the business runs, and throws away
 everything that merely needs doing today.**
 
-`landlord-inbox-handler` is the opposite: it keeps what needs doing and throws away everything else.
+`inbox-handler` is the opposite: it keeps what needs doing and throws away everything else.
 **Each one's output is the other's rubbish, which is exactly why they are two files.** They also stay
 separate because that one is core and this one is optional and heavy: an owner should be able to run
 their inbox every day and never turn this on.
 
-**They do share the reading, and reading the same mailbox twice in one morning is pure waste.**
+**They do share the reading, and reading the same messages twice in one morning is pure waste.**
 
 - **The inbox handler runs first in the pass and does the reading.**
-- **This runs later and works from what that pass already read**, rather than going back to the
-  mailbox. It goes to a source directly only for things the inbox pass does not cover, which in
-  practice means meeting transcripts.
-- **If the inbox handler is not installed or did not run**, this reads the mailbox itself, exactly as
-  described below. It never depends on the other skill being there.
+- **This runs later and works from everything that pass already read**: email, and texts, Slack and
+  meeting recordings when the owner connected them. It does not go back to any of those sources.
+- **If the inbox handler is not installed or did not run**, this reads the sources the owner named
+  itself, exactly as described below. It never depends on the other skill being there.
 
 **Neither of them produces its own morning report.** Everything reaches the owner through the day
 plan. Three morning messages means one gets read.
 
-**What it is.** Once a day, Vera reads what happened yesterday (emails, meeting transcripts), keeps
+**What it is.** Once a day, Vera reads what happened yesterday (email, texts, Slack, meeting recordings), keeps
 only what changes how the business runs, and writes it into the Memory Vault. The vault stops being a
 thing the owner has to remember to update.
 
 **What it costs.** This is the heaviest thing Vera does: it reads a lot of text every day. Say that
 before setting it up. Two rules keep it sane: it reads only the sources the owner named, and it runs
-inside the daily pass as a routine row, so it obeys the owner's per-day cap like everything else. If
-the owner has a cloud routine available, prefer running the daily pass there so the feed does not
-occupy their machine.
+inside the daily pass as a routine row, so it obeys the owner's per-day cap like everything else. It
+runs in the morning run on the owner's computer, like the inbox handler, and never gets its own cloud
+schedule: cloud runs come out of a limited allowance.
 
 **Who wants it.** Owners with many conversations a day. Owners with few will find it noise: tell
 them so and let them decide.
 
 ---
 
-## Offer it, do not install it
+## Ask before turning it on, up to three times
 
-Only after all three are true: the Memory Vault is saving, Airtable is connected with the routines
-table, and "Good morning, Vera" has run at least once. Then, once:
+It is optional, so it is off until the owner says yes. Ask only after all three are true: the Memory
+Vault is saving, Airtable is connected with the routines table, and "Good morning, Vera" has run at
+least once. Then:
 
-> "I can also feed your Memory Vault every day from your emails and meeting notes, so it learns
-> without you telling me. It reads a lot of text every day. Want it? If not, I will not ask again."
+> "I can also save what you decide and learn to your Memory Vault every day, from your email, your
+> texts, your Slack and your meeting recordings, so I learn your business without you having to tell
+> me. It's the heaviest reading I do. Want me to turn it on?"
 
-If no, log it in `log.md` and never offer again. If yes, set it up as below.
+- **Yes:** set it up as below.
+- **No:** log the date in `log.md`. Ask again about 30 days later, and if that is a no, about 90 days
+  after that. Each later ask adds one line on what it would have caught since the last ask, taken
+  from what the inbox handler read. **After the third no, stop asking for good.**
+- **Any time, on request:** "turn on the brain feed" or "set up the daily feed" sets it up, whatever
+  was said before. A no never locks the owner out.
+
+Log every ask and answer with its date, so the count survives across sessions.
 
 ## Setting it up (one conversation, three questions)
 
-1. **Which sources?** Email (which mailbox), and which recorder: Fathom, Fireflies, Otter, or none.
+1. **Which sources?** By default, everything the inbox handler reads, so there is nothing to ask. Only
+   if the owner runs this without the inbox handler: email (which mailbox), and which recorder:
+   Fathom, Fireflies, Otter, or none.
    Ask how Vera should reach each: the connector already on (Gmail connector, Google Drive folder the
    recorder saves into), or a folder or forwarding rule the owner sets up. Never ask for a password.
    If a source cannot be reached from where Vera runs, drop it and say so.
@@ -87,15 +99,17 @@ the skill's row to the skills table.
 
 1. Read `config.md`. Read `log.md` for the last feed timestamp.
 2. **Collect** everything new from each source since then, capped at the lookback.
-   - **If the inbox pass already ran this morning, take the mail from what it read. Do not read the
-     mailbox again.** That pass has already been through every message and knows which ones carry
-     anything. Re-reading them is the single biggest avoidable cost in this skill.
-   - For sources the inbox pass does not cover, read them here: the transcript summary first, and the
-     full transcript only when the summary shows a decision, a rule, a number or a name that matters.
-   - **If the inbox pass did not run**, read the mailbox yourself: subject and body.
+   - **If the inbox pass already ran this morning, take everything it read: email, texts, Slack and
+     meeting recordings. Do not read any of those sources again.** That pass has already been through
+     every message and knows which ones carry anything. Re-reading them is the single biggest avoidable
+     cost in this skill.
+   - **If the inbox pass did not run**, read the sources the owner named yourself: mail by subject and
+     body, and for a recording the summary first, the full transcript only when the summary shows a
+     decision, a rule, a number or a name that matters.
 3. **Reduce, hard.** Keep only: decisions made, rules stated, facts that changed, lessons learned,
    commitments with a date, and open threads that need a person. Drop pleasantries, newsletters,
-   notifications, anything already in the vault (check before writing), and anything that is only a
+   notifications, anything already in the vault (check before writing, including a people file a text
+   already updated, so nothing is written twice), and anything that is only a
    record update (that becomes a proposed task instead).
 4. **Write** each kept item to its folder per `config.md`, one item per file or one dated feed note
    with headed sections, in the naming rules of `reference/repo-layout.md`. Quote the source in one

@@ -34,7 +34,7 @@ You talk to Vera. She decides who does the work.
 
 | Skill | What it does for you |
 |---|---|
-| `landlord-inbox-handler` | Reads your email once a day, gives you a short priority brief, and drafts replies you send yourself |
+| `inbox-handler` | Reads what came in once a day, on every channel you connected (email, texts, Slack, meeting recordings), gives you a short priority brief, and drafts replies you send yourself |
 | `drive-organizer` | Turns a messy Google Drive into a clear structure, previewing before it moves anything |
 | `file-namer` | Gives every document one consistent name and one correct home |
 | `second-brain` | Builds a written memory of your business your assistant reads at the start of every session |

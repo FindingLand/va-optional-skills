@@ -5,12 +5,16 @@ description: "One-time cleanup that takes ANY messy Google Drive folder and rebu
 
 # Drive Organizer (general purpose, any use case)
 
-**Version: 1.3 - 2026-10-02** (Every structure it builds now includes a shared `To File` folder at the top, the one place new documents get dropped so the assistant can see and file them. Reuses one the owner already made instead of creating a second.) (1.2 - 2026-09-11: Step 5 forbade handing over a script but assumed browser control, leaving a session without it with no permitted path. Adds: check whether the Drive connector alone does the job, otherwise walk them through it a click at a time.) (1.1 - 2026-08-19)
+**Version: 1.4 - 2026-10-17** (no more moved-files index: "where did you put X?" is answered with a live Drive search, and an undo works from the approved plan table, the run summary and Drive's own Activity panel, trash and version history.)
+
+**What's new for you (1.4):** After a cleanup, Vera no longer keeps a separate log of everything she moved. Ask her where something went and she searches your Drive; every cleanup still ends with a summary of what moved where, so anything can be put back. Nothing for you to do.
+
+(1.3 - 2026-10-02: Every structure it builds now includes a shared `To File` folder at the top, the one place new documents get dropped so the assistant can see and file them. Reuses one the owner already made instead of creating a second.) (1.2 - 2026-09-11: Step 5 forbade handing over a script but assumed browser control, leaving a session without it with no permitted path. Adds: check whether the Drive connector alone does the job, otherwise walk them through it a click at a time.) (1.1 - 2026-08-19)
 
 This is the big first cleanup for a Google Drive folder. Point it at a folder where files are
 dumped with names like `Scan_0423.pdf`, `raw file.xlsx`, or `final FINAL v2`, and it builds a
 clean numbered structure, then renames and refiles everything consistently. It works **in
-place**, so existing links keep working, and it writes an index of what moved where so nothing
+place**, so existing links keep working, and it ends with a summary of what moved where so nothing
 ever feels lost.
 
 It is **not** limited to real estate. The same engine organizes a client/agency drive, a
@@ -21,7 +25,7 @@ best-practice principles below, then build it.
 
 It bundles the renamer. Organizing without fixing names is half a job, and one Apps Script run
 can do both at once (rename + move = one permission grant), so the wizard asks whether to also
-clean up names and, by default, does both. It applies changes directly (no forced test run); the memory index it writes is the revert net if anything is wrong.
+clean up names and, by default, does both. It applies changes directly (no forced test run); the plan table you approved and the run summary are the revert net if anything is wrong.
 
 ---
 
@@ -190,8 +194,9 @@ b. Click into the `Code.gs` editor, select all, delete, then **PASTE** the fille
    will corrupt typed code.
 c. Save (Ctrl/Cmd+S). Confirm the function dropdown shows `organizeDrive`.
 d. **Run directly to apply** (the script ships with `DRY_RUN = true`, so the first run always previews). After the preview, set `DRY_RUN = false` and run again to apply. The skill does NOT force a second
-   dry-run preview step, because the real safety net is the memory index in Step 6: it logs every
-   old name, new name, file ID, and original parent, so any wrong move can be reverted. You already
+   dry-run preview step, because the real safety net is the approved plan table plus the run summary
+   in Step 6: together they record every old name, new name and destination, so any wrong move can
+   be reverted. You already
    showed the plan table in Step 4 and the user approved it, so apply for real. Offer a `DRY_RUN =
    true` preview only when the user asks, or for a very large or high-risk reorg where a dry log is
    worth the extra step.
@@ -208,7 +213,7 @@ g. **Verify, and tell the user first WHY.** Before checking, say something like 
    any mistake while it's still easy to fix." Then re-list the parent recursively via Drive
    search and confirm each target shows its new name and home (IDs unchanged, so links still
    work). Report the result.
-h. **Write the memory index so nothing is ever lost** (Step 6).
+h. **End with the run summary** (Step 6).
 
 Hand over the script + written steps ONLY as a fallback when the browser tools are unavailable.
 
@@ -217,30 +222,32 @@ user's old folders.
 
 ---
 
-## Step 6: The Moved-Files Index (and "where did you put X?")
+## Step 6: The run summary (and "where did you put X?")
 
-After the run, write the index so nothing feels lost:
-- Append every item to `references/file-index.md` with: `Date | Original name | New name |
-  Destination path | File link | Notes/Code`.
+**An older install may still have a `references/file-index.md` with entries in it.** That is the owner's
+own history: leave it in place, never delete it during an update, and simply stop writing to it.
+It can still answer an old "where did you put X?" if the Drive search comes up empty.
+
+There is no moved-files index (retired in 1.4). After the run:
+- Report the summary: every item's original name, new name and destination.
 - Remind the user the **link is unchanged** for in-place moves (the item kept its ID), so any
   bookmarks or shared links still work.
 
-When the user later asks "where is the pricing sheet?" or "what did you rename raw file.xlsx
-to?", answer from `references/file-index.md` (match on original name or destination). If it is
-missing, do a live Drive title search.
+When the user later asks "where is the pricing sheet?", search Drive by title and give the link.
+For "what did you rename raw file.xlsx to?", use the run summary, or the file's Activity panel in
+Drive, which shows every rename and move.
 
 ---
 
 ## Notes
 
 - This is a one-time job per folder; for ongoing single-file naming, use the file-namer skill.
-- Large folders: chunk the work. It is fine to organize one section per script run and append to
-  the index each time, rather than one giant run.
+- Large folders: chunk the work. It is fine to organize one section per script run, with a summary
+  for each, rather than one giant run.
 - Never delete anything. The strongest version of "organize" here still leaves the originals'
   folders in place (empty) and, in backup mode, the originals themselves.
-- Reverting: because every move is logged in the index with the file ID, a later run can move
-  things back. If the user wants to undo, build an OPERATIONS list from the index (swap
-  original/new) and run the same engine.
+- Reverting: build an OPERATIONS list from the approved plan table or the run summary (swap
+  original/new) and run the same engine. Every item kept its id, so it moves back cleanly.
 
 ---
 
@@ -265,5 +272,5 @@ is what the file-namer skill documents in full; read it for naming codes and sho
 
 For real estate, also collect the **company shortcode** and per-property shortcodes, and name
 files `[DESCRIPTOR]-v[N]-[PARTY]-[SCOPE]-[CATEGORY]-[MMDDYYYY].[ext]` per the file-namer skill.
-Everything else (the run model, the index, the in-place guarantee) is identical to the general
+Everything else (the run model, the run summary, the in-place guarantee) is identical to the general
 flow above.

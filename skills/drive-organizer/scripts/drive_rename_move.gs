@@ -17,7 +17,7 @@
  * 2. In the function dropdown choose "organizeDrive".
  * 3. Run (ships with DRY_RUN = false = apply directly). Approve the one-time Google
  *    permission prompt (Advanced -> Go to project -> Allow). It applies + verifies; done
- *    at "Finished". The skill writes a memory index of every change so anything can be
+ *    at "Finished". The skill ends with a summary of every change so anything can be
  *    reverted. Set DRY_RUN = true only if you want a no-change preview first.
  *
  * Claude fills the sections marked FILLED IN BY CLAUDE.

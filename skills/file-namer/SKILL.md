@@ -5,7 +5,11 @@ description: "Name, rename, audit, and file documents in Google Drive with total
 
 # File Namer (general purpose, any use case)
 
-**Version: 1.3 - 2026-10-02** (When it sets up folders, it now includes a shared `To File` folder at the top for new documents, and reuses one the owner already made.) (1.2 - 2026-08-19)
+**Version: 1.4 - 2026-10-17** (no more file index: "where is X?" is answered with a live Drive search, and an undo works from the run summary and Drive's own Activity panel, trash and version history. The running list of short codes moves into the owner's naming convention in their repo.)
+
+**What's new for you (1.4):** Vera no longer keeps a separate log of every file she renames or moves. When you ask where something is, she searches your Drive for it, and every filing run still ends with a summary of what was renamed and where it went, so anything can be put back. Nothing for you to do.
+
+(1.3 - 2026-10-02: When it sets up folders, it now includes a shared `To File` folder at the top for new documents, and reuses one the owner already made.) (1.2 - 2026-08-19)
 
 > ## ⛔ HARD RULE: never just suggest a name. Execute the rename and the move.
 > **A few files: use the Drive connector directly.** It renames and moves files AND folders in a
@@ -160,8 +164,8 @@ and a one-time permission grant, so it is a Local job.
       PASTE, never type it: the editor auto-closes brackets/quotes and corrupts typed code.
    c. Save (Ctrl/Cmd+S). Confirm the function dropdown shows `organizeDrive`.
    d. **Run directly to apply** (the script ships with `DRY_RUN = true`, so the first run always previews). After the preview, set `DRY_RUN = false` and run again to apply. Do NOT force a further dry-run
-      preview: you already showed the plan in step 3, and the memory index in the next section is
-      the real revert net. Offer a `DRY_RUN = true` preview only if the user asks or for a large,
+      preview: you already showed the plan in step 3, and that approved plan plus the run summary are
+      the revert net (see "Finding a file later, and undoing a move"). Offer a `DRY_RUN = true` preview only if the user asks or for a large,
       high-risk run.
    e. **The one user step:** approve Google's popup: *Review permissions -> their account ->
       "Google hasn't verified this app". This appears because YOU are the author of this script and Google has not reviewed it. Read the screen, confirm the project is the one you just created, then Advanced -> Go to <project> -> Allow.*
@@ -170,8 +174,8 @@ and a one-time permission grant, so it is a Local job.
    g. **Verify, and tell the user first WHY.** Say something like "I'll re-list the folder to
       confirm each item got its new name, so we catch any mistake while it's easy to fix," then
       re-list via Drive search and confirm. Report the result.
-   h. **Write the memory index** (next section) so nothing is ever lost and any change can be
-      reverted.
+   h. **End with the run summary:** every item's original name, new name and destination, so any
+      change can be found or reversed later.
    Hand over the script + written steps ONLY as a fallback when browser tools are unavailable.
 
 Why in place and not copy-then-delete: `moveTo` and `setName` keep the file's original ID, so
@@ -180,16 +184,22 @@ offer copy-based handling if the user explicitly wants a duplicate.
 
 ---
 
-## The Index (so you can answer "where did you put X?" and revert)
+## Finding a file later, and undoing a move
 
-Memory lives in a bundled markdown file, `references/file-index.md` (create if missing). Each
-run, append a row: `Date | Original name | New name | Destination path | File ID/link | Notes`.
-Record the file ID and original location so any change can be reverted (build a reversing
-OPERATIONS list from the index and run the same engine).
+**There is no file index.** Keeping a running log of every rename was retired in 1.4: it went stale,
+it was one more file to maintain, and Drive already answers both questions.
 
-When the user later asks "where is the Doe lease?" or "what did you rename Scan_0423 to?", answer
-from the index (match on original name, party, or destination). If it is not there, fall back to
-a live Drive title search.
+**An older install may still have a `references/file-index.md` with entries in it.** That is the owner's
+own history: leave it in place, never delete it during an update, and simply stop writing to it.
+It can still answer an old "where did you put X?" if the Drive search comes up empty.
+
+- **"Where is the Doe lease?"** Search Drive by title, the way the owner would describe it. Because
+  every name follows the convention, the search finds it. Give the link.
+- **"What did you rename Scan_0423 to?" or "put that back":** every run ends with a summary listing
+  each item's original name, new name and destination, and the plan table the owner approved shows
+  the same. To undo, reverse that table and run the same engine. Drive's own Activity panel (the
+  file's details) also shows every rename and move, and its trash and version history cover the rest.
+  Rename and move in place keeps each file's id, so nothing is ever lost while you undo.
 
 ---
 
@@ -224,4 +234,4 @@ RENO, PERMIT, WARRANTY, PHOTO (property); APP, LEASE, NOTICE, COMM (tenant).
 
 Examples: `SignedLease-v1-Doe-123MAIN-LEASE-02152026.pdf`,
 `Statement-Mar2026-v1-123MAIN-MORT-04012026.pdf`, `W9-v1-ABCPlumbing-ACME-VENDOR-03012026.pdf`.
-Keep a running shortcode list in `references/file-index.md` so the same property reuses one code.
+Keep the running shortcode list with the naming convention in the owner's repo (`reference/repo-layout.md`, or the file their layout names for conventions), so the same property reuses one code.

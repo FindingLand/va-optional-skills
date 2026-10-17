@@ -1,18 +1,20 @@
 ---
-name: landlord-inbox-handler
-description: "Read a self-managing landlord's email inbox and triage the landlord mail: produce a prioritized daily brief, draft replies for routine items (drafts only, never auto-send), and flag anything urgent. Covers tenant requests, maintenance reports, lease questions, payment and utility notices, and vendor mail. Trigger when the user says 'check my inbox', 'run my inbox', 'triage my email', 'daily brief', 'anything urgent in my email', 'handle my landlord mail', or when a scheduled daily routine invokes this skill. Works with Gmail or Outlook through the user's own email connector. Never sends email and never makes rental decisions about applicants or tenants."
+name: inbox-handler
+description: "Read everything new that came in for the business, on every channel the owner connected (email always; texts, Slack and meeting recordings when connected), and triage it: a prioritized brief folded into the day plan, drafted replies for routine items (drafts only, never sent on any channel), and anything urgent flagged. Works for any business, landlord or not, in the owner's own industry words. Covers customer and tenant requests, repairs and service problems, agreement questions, money notices, vendor mail, new leads, and promises made on calls. Trigger when the owner says 'check my inbox', 'run my inbox', 'triage my email', 'what came in', 'daily brief', 'anything urgent', 'check my texts', 'anything in Slack', 'handle my mail', or when the morning run or a routines row invokes it. Formerly named landlord-inbox-handler: any routines row or request that still says landlord-inbox-handler means THIS skill. Never sends anything and never makes rental decisions about applicants or tenants."
 ---
 
-# Landlord Inbox Handler
+# Inbox Handler
 
-**Version: 1.4 - 2026-10-06** (mail addressed to someone else on your team is theirs to answer, so Claude drafts nothing for it from your mailbox; and every run starts by listing the earlier drafts that someone has since answered, so your Drafts folder never fills with stale replies). v1.3 - 2026-09-29 (drafts read your written policies first, look up the facts first, read every earlier conversation with the person on every channel (email incl. Sent, texts, the platform thread), never say yes to changing an agreement, never reply to a no-reply address, and every "I'll look into it" comes with a proposed solution in the brief. Examples adapt to YOUR industry.) v1.2 - 2026-08-24.
+**Version: 1.5 - 2026-10-17** (renamed from `landlord-inbox-handler`, because it was never only for landlords. It now reads every channel the owner connected, not just email: texts, Slack and meeting recordings, each sorted into the same categories and run through the same rules. When texts cannot be read it uses the owner's people files if they exist, and every brief opens by naming the channels it read and the ones it could not.) v1.4 - 2026-10-06 (mail addressed to someone else on your team is theirs to answer, so Claude drafts nothing for it from your mailbox; and every run starts by listing the earlier drafts that someone has since answered, so your Drafts folder never fills with stale replies). v1.3 - 2026-09-29 (drafts read your written policies first, look up the facts first, read every earlier conversation with the person on every channel (email incl. Sent, texts, the platform thread), never say yes to changing an agreement, never reply to a no-reply address, and every "I'll look into it" comes with a proposed solution in the brief. Examples adapt to YOUR industry.) v1.2 - 2026-08-24.
+
+**What's new for you (1.5):** This skill has a new name, the inbox handler, because it was never only for landlords. It now reads more than email: your texts, your Slack and your meeting recordings too, when you have them connected, and your morning brief tells you which ones it read. Nothing is ever sent on any channel. To get the most from it, connect Slack and your meeting recorder (in Claude: Customize, then Connectors), then tell Vera which Slack channels matter.
 
 ## Where this sits, and the two skills it is confused with
 
-**This skill is the ACTION lane. It reads today's mail and turns it into things to do today.** That is
+**This skill is the ACTION lane. It reads what came in since the last run, on every channel, and turns it into things to do today.** That is
 its whole job, and everything below serves it.
 
-It gets confused with `daily-brain-feed`, because both read the same mailbox once a day as a routine
+It gets confused with `daily-brain-feed`, because both read the same morning's messages once a day as a routine
 row. **They are not the same job and neither replaces the other:**
 
 - **This skill keeps what needs doing.** A leak, a quote, a question, a decision. Its output is
@@ -26,18 +28,37 @@ An owner should be able to run this and never turn that on.
 
 **What they DO share is the reading, and reading the same mailbox twice in one morning is pure
 waste.** So: **this skill runs first in the pass and does the reading. `daily-brain-feed` runs later
-and works from what this pass already read, rather than going back to the mailbox.** It only reaches
-the mailbox directly for sources this skill does not cover, such as meeting transcripts.
+and works from what this pass already read, on every channel, rather than going back to the sources.** It only
+reads a source directly on a morning when this pass did not run.
 
 **And the brief does not go to the owner as its own message.** See "Running this every morning".
 
-Your inbox is where your rental business actually happens: tenants report leaks, ask about their lease, vendors send quotes, banks and utilities send notices. This skill makes Claude your inbox first-responder. Once a day (or whenever you ask), Claude reads the new mail, sorts the landlord items from the noise, writes you a short prioritized brief, drafts replies for the routine stuff, and flags anything that cannot wait.
+Your inbox is where your business actually happens, and for most owners it is not one inbox. Email, texts, Slack and the calls you recorded all carry requests, promises and problems. This skill makes Claude your first-responder across all of them. Once a day (or whenever you ask), Claude reads what is new on every channel you connected, sorts the business items from the noise, writes you a short prioritized brief, drafts replies for the routine stuff, and flags anything that cannot wait. For a landlord that is the leak, the lease question and the vendor quote. For a coach it is the refund request and the student who is stuck.
 
 **Three hard promises this skill keeps, always:**
 
-1. **Drafts only, never auto-send.** Every reply Claude writes lands in your Drafts folder or in the chat for you to review. You are the only one who ever hits Send.
+1. **Drafts only, never auto-send, on any channel.** Every email reply Claude writes lands in your Drafts folder or in the chat for you to review. A reply to a text or a Slack message is written out in the brief for you to copy and send yourself. You are the only one who ever hits Send.
 2. **No rental decisions.** Claude never decides, recommends, or implies who should get, keep, or lose a rental (see the Fair Housing / FCRA guardrail below).
-3. **Read and draft, nothing destructive.** Claude never deletes, archives, or forwards your mail unless you explicitly ask in the moment.
+3. **Read and draft, nothing destructive.** Claude never deletes, archives, or forwards your mail, and never sends, deletes or reacts to a text or a Slack message, unless you explicitly ask in the moment.
+
+---
+
+## The channels it reads (v1.5)
+
+**Email is always on. Everything else is read only if you connected it, and the brief says which ones it read.** Every item from every channel goes through the same categories and the same "Before drafting any reply" rules below. A leak reported by text is the same leak as one reported by email, and a promise made on a call is as real as one made in writing.
+
+| Channel | What it reads | What you get | When it cannot read it |
+|---|---|---|---|
+| **Email** | New mail since the last run, plus your Sent folder | Drafts in your Drafts folder | Stops and says so, because email is the core of this skill |
+| **Texts** (SMS / iMessage) | New texts with people you do business with, when your setup lets Claude read them on your computer | The suggested reply, written in the brief for you to send | Reads your people files in the vault if you have them; otherwise one line: "texts not read today" |
+| **Slack** | The workspaces, channels and direct messages you named in setup | The suggested reply, written in the brief | One line saying so |
+| **Meeting recordings** | Summaries of calls recorded since the last run (Fathom, Fireflies, Otter or whatever recorder you connected). The full transcript only when a summary shows a promise, a decision or a deadline | Every follow-up you promised, as an item. A draft email when you promised to send something | One line saying so |
+
+**Texts can only be read on your computer.** That is one more reason this skill runs as a row in your morning run, which runs there. If your texts are not connected, nothing breaks: it reads what it can and the brief names what it skipped.
+
+**People files are optional.** They are written by the optional texts feed. If you do not have it, there are none, and the brief says texts were not read rather than implying there was nothing there.
+
+**Nothing leaves on any channel.** No text or Slack message is ever sent, and nothing from a call recording is quoted to anyone without you seeing it first.
 
 ---
 
@@ -49,6 +70,7 @@ This skill uses YOUR email account through YOUR connector. Claude never holds yo
 2. **Tell Claude your setup** the first time you run the skill. It will ask for and remember:
    - Which mailbox to watch (your main inbox, or a dedicated folder/label like "Rentals" if you already filter).
    - Where your properties, units and tenants are recorded, so mail can be matched to the right place. If Vera has written your base file, read that instead of keeping a second list here, because two lists drift apart.
+   - **Which other channels to read:** your texts, which Slack workspaces, channels and direct messages, and your meeting recorder. Each one is optional. Claude never asks for a password; anything not connected is skipped and named in the brief.
    - Your preferred vendors (plumber, electrician, handyman) so vendor mail is recognized.
    - Your emergency line: what YOU consider drop-everything urgent (default list is in the Urgent category below).
    - **What business this inbox serves**, in one line (rentals, coaching, an agency, a course, a service trade). Most owners run more than one. The drafts and the brief use that business's words, and the examples in "Before drafting any reply" are picked from it.
@@ -136,7 +158,7 @@ Every new email in the watch window gets exactly one primary category. When two 
 | 5 | **Payment and money notices** | Rent received/failed notices from your payment platform, tenant messages about paying late, bank and mortgage notices, utility bills, insurance notices, tax documents. | Brief item with the amount and due date extracted. For a tenant writing about a late payment: a neutral acknowledgment draft that confirms receipt of their message and states you will follow up - never a draft that waives, threatens, or negotiates. Platform/bank/utility notices are summarized only (no reply needed). |
 | 6 | **Vendor mail** | Quotes, invoices, scheduling confirmations, follow-ups from contractors and service companies. | Brief item with the number that matters (quote amount, invoice total, appointment time). Draft simple logistics replies (confirm a time, request an itemized quote, ask for COI/W-9). Approving a quote or paying an invoice is always yours - Claude drafts the acceptance only after you say yes in the brief conversation. |
 | 7 | **Prospective tenants / listing inquiries** | Someone asking about an advertised unit: availability, viewing, application questions. | Brief item only, plus (if you have given Claude your listing facts) a draft that shares ONLY objective listing information: rent, deposit, availability date, viewing process, how to apply. See the Fair Housing guardrail - these drafts never comment on the person, never pre-screen, never discourage or encourage anyone. |
-| 8 | **Everything else** | Newsletters, promotions, personal mail, anything not landlord business. | One collapsed line at the bottom of the brief ("14 other emails, nothing landlord-related") unless you asked Claude to handle your whole inbox. |
+| 8 | **Everything else** | Newsletters, promotions, personal mail, anything that is not business. | One collapsed line at the bottom of the brief ("14 other emails, nothing landlord-related") unless you asked Claude to handle your whole inbox. |
 
 **Matching rules:** match sender addresses against your tenant/vendor lists first, then property mentions in the subject/body, then context. If Claude cannot tell which property or tenant an email belongs to, it says so in the brief and asks - it never guesses silently.
 
@@ -176,7 +198,8 @@ Every draft Claude writes follows these:
 The brief is one message, scannable in under a minute:
 
 ```
-INBOX BRIEF - Tue Jul 16 - 9 landlord emails since yesterday
+INBOX BRIEF - Tue Jul 16 - 9 business items since yesterday
+Read: email, texts, Slack, 1 meeting recording. Could not read: none.
 
 URGENT (1)
 1. [123 Main, Unit 2 - Dana R.] Water heater leaking into closet, sent 7:42am.
@@ -200,7 +223,7 @@ FYI - NO ACTION (3)
 (11 other emails, nothing landlord-related.)
 ```
 
-Rules for the brief: urgent always first; every item names the property and person; every draft is announced, never silently created; drafts that someone has since answered are listed for you to delete; mail written to a teammate is listed in one line, never drafted; "needs your decision" items ask a clear either/or question AND carry a PROPOSED solution (the likely cause if Claude could check it, the fix, who does it, and the reply that goes out once you approve), because a bare "your call" hands you the thinking; every holding reply ("I'll look into it") is listed with its proposed solution too; money items always show the amount and date. After the brief, you reply in plain English ("approve 1 and 4, hold 5, get a second roof quote") and Claude executes - still creating drafts, never sending.
+Rules for the brief: the first line names the channels read and any that could not be read; urgent always first; every item names the property and person; every draft is announced, never silently created; drafts that someone has since answered are listed for you to delete; mail written to a teammate is listed in one line, never drafted; "needs your decision" items ask a clear either/or question AND carry a PROPOSED solution (the likely cause if Claude could check it, the fix, who does it, and the reply that goes out once you approve), because a bare "your call" hands you the thinking; every holding reply ("I'll look into it") is listed with its proposed solution too; money items always show the amount and date. After the brief, you reply in plain English ("approve 1 and 4, hold 5, get a second roof quote") and Claude executes - still creating drafts, never sending.
 
 ---
 
@@ -218,7 +241,7 @@ separate schedule for each job you will run out within a week.
 1. Frequency daily, and a priority that puts it where you want it in the morning order.
 2. Set its instructions to exactly this (adjust the mailbox or time window if you customized setup):
 
-   > Use the landlord-inbox-handler skill. Read my connected inbox for everything new since the last run (default: the past 24 hours), triage per the skill, create the reply drafts in my Drafts folder, and deliver the daily brief. Do not send anything. If there is at least one URGENT item, put URGENT and the property in the first line.
+   > Use the inbox-handler skill. Read every channel I connected (email, and texts, Slack and meeting recordings if connected) for everything new since the last run (default: the past 24 hours), triage per the skill, create the reply drafts in my Drafts folder, and deliver the daily brief. Do not send anything. If there is at least one URGENT item, put URGENT and the property in the first line.
 
 3. **The brief is NOT a separate thing you read. It folds into Vera's day plan.** This is the part
    people get wrong, and it is worth being blunt about: if the morning produces a day plan AND an
@@ -243,13 +266,13 @@ separate schedule for each job you will run out within a week.
 **Routine hygiene:**
 - One run per day is the sweet spot. Urgent items do not wait for the routine anyway once real-time triage exists (see roadmap below); until then, the daily run plus your phone's normal notifications cover it.
 - The routine must run with the SAME connector permissions as an interactive session: read + create-draft, no send.
-- If a run finds zero landlord mail, the brief is one line ("Nothing today - 6 emails, none landlord-related"). No news is a valid brief.
+- If a run finds nothing for the business, the brief is one line ("Nothing today - 6 emails, none business-related"). No news is a valid brief.
 
 ---
 
 ## What this skill deliberately does NOT do (v1)
 
-- **No sending.** Not even "safe" ones. Version 1 has no auto-send and no send-after-timeout.
+- **No sending, on any channel.** Not even "safe" ones. Version 1 has no auto-send and no send-after-timeout.
 - **No real-time monitoring.** It runs when scheduled or asked. Instant triage of incoming mail (n8n watching the mailbox) and instant pings (Slack/SMS "URGENT: leak at 123 Main") are the planned v2, built on the same categories and guardrails in this file.
 - **No tenant screening, no applications processing, no consumer reports** (guardrail above).
 - **No payment actions.** It reads money notices; it never pays, charges, or moves money.
